@@ -34,6 +34,6 @@ namespace Neadm.Models
         
         [Newtonsoft.Json.JsonProperty("alunos")]
         [NotMappedAttribute]
-        public List<Usuario> Alunos {get; private set;}
+        public IList<Usuario> Alunos {get; private set;}
     }
 }

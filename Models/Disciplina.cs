@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Neadm.Models
 {
@@ -23,6 +24,8 @@ namespace Neadm.Models
         [MaxLength(10)]
         public string Codigo { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("alunos")]
+        [NotMappedAttribute]
         public List<Usuario> Alunos {get; private set;}
 
         public Curso Curso { get; set; }

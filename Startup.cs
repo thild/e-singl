@@ -17,9 +17,17 @@ namespace Neadm
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
             
+                        
+            if (System.IO.File.Exists("neadm.sqlite"))
+            {
+                System.Console.WriteLine("Deleted neadm.sqlite");
+                System.IO.File.Delete("neadm.sqlite");
+            }
+
              using(var context = new NeadmDbContext())
             {
                 context.Database.EnsureCreated();
+                context.Populate();
             }
         }
 

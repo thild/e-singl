@@ -12,7 +12,7 @@ namespace Neadm.Models
       
         public string Enunciado { get; set; }
 
-        public RelatorioEvasao RelatorioEvasao { get; set; }
+        public Enquete RelatorioEvasao { get; set; }
 
         public List<Alternativa> Alternativas { get; set; }
     }
