@@ -1,13 +1,19 @@
-﻿namespace Neadm.Models
+﻿using System;
+
+namespace Neadm.Models
 {
     public class PapelUsuario
     {
-        public int UsuarioId { get; set; }
-        public int PapelId { get; set; }
+        public Guid Id { get; set; }
+        
+        public Usuario Usuario { get; set; }
+        
+        public Papel Papel { get; set; }
+        
         //Se não for nulo o role é em nível de disciplina
-        public int DisciplinaId { get; set; }
+        public Disciplina Disciplina { get; set; }
         
         //Se não for nulo o role é em nível de curso
-        public int CursoId { get; set; }
+        public Curso Curso { get; set; }        
     }
 }

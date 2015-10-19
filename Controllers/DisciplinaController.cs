@@ -1,7 +1,11 @@
 using System;
 using System.Linq;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.Rendering;
 using Neadm.Models;
+using Neadm.ViewModels;
 
 namespace Neadm.Controllers
 {
@@ -62,27 +66,33 @@ namespace Neadm.Controllers
                 return new HttpStatusCodeResult(404);
             }
 
-            Disciplina disciplina = db.Disciplinas.Single(m => m.Id == id);
+            var disciplina = db.Disciplinas.Project().To<DisciplinaEditViewModel>().Single(m => m.Id == id);
+            System.Console.WriteLine(disciplina);
             if (disciplina == null)
             {
                 return new HttpStatusCodeResult(404);
             }
-
             return View(disciplina);
         }
 
         // POST: Disciplina/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Disciplina disciplina)
+        public IActionResult Edit(DisciplinaEditViewModel disciplina)
         {
+            Console.WriteLine(disciplina.CursoId);
             if (ModelState.IsValid)
             {
-                db.Update(disciplina);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var c = db.Cursos.Single(m => m.Id == disciplina.CursoId);
+                if (c != null)
+                {
+                    var d = Mapper.Map<Disciplina>(disciplina);
+                    d.Curso = c;
+                    db.Update(d);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
             return View(disciplina);
         }
 

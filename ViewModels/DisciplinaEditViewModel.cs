@@ -1,13 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
+using Neadm.Models;
 
-namespace Neadm.Models
+namespace Neadm.ViewModels
 {
-    public class Disciplina
+    public class DisciplinaEditViewModel
     {
-        public Disciplina() {
-            Id = Guid.NewGuid();
+        public DisciplinaEditViewModel() {
         }
         
         [Required]
@@ -23,8 +22,8 @@ namespace Neadm.Models
         [MaxLength(10)]
         public string Codigo { get; set; }
 
-        [ForeignKey("CursoId")]
-        public Curso Curso { get; set; }
         public Guid CursoId { get; set; }
+        
+        
     }
 }

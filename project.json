@@ -1,8 +1,8 @@
 {
   "webroot": "wwwroot",
   "version": "1.0.0-*",
-
   "dependencies": {
+    "AutoMapper": "4.0.4",
     "EntityFramework": "7.0.0-*",
     "EntityFramework.SQLite": "7.0.0-*",
     "EntityFramework.Commands": "7.0.0-*",
@@ -17,10 +17,11 @@
     "Microsoft.AspNet.Server.WebListener": "1.0.0-*",
     "Microsoft.AspNet.StaticFiles": "1.0.0-*",
     "Microsoft.AspNet.Tooling.Razor": "1.0.0-*",
+    "Microsoft.AspNet.Hosting": "1.0.0-*",
     "Microsoft.Framework.Configuration.Json": "1.0.0-*",
     "Microsoft.Framework.Logging": "1.0.0-*",
     "Microsoft.Framework.Logging.Console": "1.0.0-*",
-    "Kestrel": "1.0.0-*",
+    "Microsoft.Framework.Logging.Debug": "1.0.0-*",
     "Microsoft.Framework.CodeGenerators.Mvc": "1.0.0-*",
     "Microsoft.Framework.Configuration.CommandLine": "1.0.0-*",
     "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-*",
@@ -28,8 +29,8 @@
   },
 
   "commands": {
-    "kestrel": "Microsoft.AspNet.Hosting --server Kestrel --config hosting.ini",
-    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --config hosting.ini",
+    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5001",
+    "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://*:5004",
     "ef": "EntityFramework.Commands",
     "gen": "Microsoft.Framework.CodeGeneration"
   },
@@ -38,11 +39,15 @@
     "dnx451": {},
     "dnxcore50": {}
   },
-
   "exclude": [
     "wwwroot",
     "node_modules",
     "bower_components"
+  ],
+  "packExclude": [
+      "**.kproj",
+      "**.user",
+      "**.vspscc"
   ],
   "publishExclude": [
     "node_modules",

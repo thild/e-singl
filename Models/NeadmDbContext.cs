@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Infrastructure;
 
 using Neadm.Models;
 
@@ -12,14 +13,12 @@ namespace Neadm
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Papel> Papeis { get; set; }
+        public DbSet<PapelUsuario> PapeisUsuarios { get; set; }
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Polo> Polos { get; set; }
         public DbSet<Questao> Questoes { get; set; }
         public DbSet<Alternativa> Alternativas { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
-        public DbSet<PapelUsuario> PapeisUsuarios { get; set; }
-        public DbSet<AlunoCurso> AlunosCursos { get; set; }
-        public DbSet<AlunoDisciplina> AlunosDisciplinas { get; set; }
 
         public DbSet<Enquete> RelatoriosEvasao { get; set; }
 
@@ -135,6 +134,7 @@ CREATE TABLE "RelatorioEvasao" (
 
             var re = new Enquete
             {
+                /*
                 Aluno = aluno,
                 Coordenador = coordenador,
                 Curso = curso,
@@ -142,6 +142,7 @@ CREATE TABLE "RelatorioEvasao" (
                 Disciplina = disciplina,
                 Relator = relator,
                 Polo = polo
+                */
             };
 
             RelatoriosEvasao.Add(re);
@@ -213,11 +214,11 @@ CREATE TABLE "RelatorioEvasao" (
             builder.Entity<Usuario>()
                 .Ignore(m => m.Papeis)
                 .Ignore(m => m.NomeCompleto)
-                .Key(m => m.Id);
+                .HasKey(m => m.Id);
 
             builder.Entity<Usuario>()
                 .Property(m => m.NomeUsuario)
-                .MaxLength(20);
+                .HasMaxLength(20);
 
             builder.Entity<Usuario>()
                 .Index(m => m.Email)
@@ -225,8 +226,8 @@ CREATE TABLE "RelatorioEvasao" (
 
             builder.Entity<Usuario>()
                 .Property(m => m.Email)
-                .MaxLength(100)
-                .Required();
+                .HasMaxLength(100)
+                .IsRequired();
 
 
             //Papel
@@ -239,7 +240,7 @@ CREATE TABLE "RelatorioEvasao" (
                 .ToTable("Curso");
 
             builder.Entity<Curso>()
-                .Key(m => m.Id);
+                .HasKey(m => m.Id);
 
             builder.Entity<Curso>()
                 .Index(m => m.Codigo)
@@ -247,8 +248,8 @@ CREATE TABLE "RelatorioEvasao" (
 
             builder.Entity<Curso>()
                 .Property(m => m.Codigo)
-                    .MaxLength(10)
-                    .Required();
+                    .HasMaxLength(10)
+                    .IsRequired();
 
             builder.Entity<Curso>()
                 .Index(m => m.Nome)
@@ -256,19 +257,17 @@ CREATE TABLE "RelatorioEvasao" (
 
             builder.Entity<Curso>()
                 .Property(m => m.Nome)
-                    .MaxLength(100)
-                    .Required();
+                    .HasMaxLength(100)
+                    .IsRequired();
 
-            builder.Entity<Curso>().Collection(m => m.Disciplinas);
-
-            builder.Entity<Curso>().Ignore(m => m.Alunos);
+            builder.Entity<Curso>().HasMany(m => m.Disciplinas);
 
             //Polo
             builder.Entity<Polo>()
                 .ToTable("Polo");
 
             builder.Entity<Polo>()
-                .Key(m => m.Id);
+                .HasKey(m => m.Id);
 
             builder.Entity<Polo>()
                 .Index(m => m.Nome)
@@ -280,7 +279,7 @@ CREATE TABLE "RelatorioEvasao" (
                 .ToTable("Disciplina");
 
             builder.Entity<Disciplina>()
-                .Key(m => m.Id);
+                .HasKey(m => m.Id);
 
             builder.Entity<Disciplina>()
                 .Index(m => m.Codigo)
@@ -288,107 +287,56 @@ CREATE TABLE "RelatorioEvasao" (
 
             builder.Entity<Disciplina>()
                 .Property(m => m.Codigo)
-                    .MaxLength(10)
-                    .Required();
+                    .HasMaxLength(10)
+                    .IsRequired();
 
             builder.Entity<Disciplina>()
                 .Property(m => m.Nome)
-                    .MaxLength(100)
-                    .Required();
+                    .HasMaxLength(100)
+                    .IsRequired();
 
             builder.Entity<Disciplina>()
-                .Reference<Curso>(m => m.Curso)
-                .InverseCollection(m => m.Disciplinas)
-                .ForeignKey(m => m.Id);
-
-            //builder.Entity<Disciplina>().Collection(m => m.Alunos);
-            builder.Entity<Disciplina>().Ignore(m => m.Alunos);
+                .HasOne<Curso>(m => m.Curso)
+                .WithMany(m => m.Disciplinas)
+                .ForeignKey(m => m.CursoId);
 
             //RelatorioEvasao
             builder.Entity<Enquete>()
                 .ToTable("RelatorioEvasao");
 
             builder.Entity<Enquete>()
-                .Key(m => m.Id);
+                .HasKey(m => m.Id);
 
             //Questao
             builder.Entity<Questao>()
                 .ToTable("Questao");
 
             builder.Entity<Questao>()
-                .Key(m => m.Id);
+                .HasKey(m => m.Id);
 
             builder.Entity<Questao>()
                 .Property(m => m.Enunciado)
-                    .MaxLength(300)
-                    .Required();
+                    .HasMaxLength(300)
+                    .IsRequired();
 
             //Alternativa            
             builder.Entity<Alternativa>()
                 .ToTable("Alternativa");
 
             builder.Entity<Alternativa>()
-                .Key(m => m.Id);
+                .HasKey(m => m.Id);
 
             builder.Entity<Alternativa>()
                 .Property(m => m.Texto)
-                    .MaxLength(300)
-                    .Required();
-/*
-            builder.Entity<Alternativa>()
-                .Reference<Questao>(m => m.Questao)
-                .InverseCollection(m => m.Alternativas)
-                .ForeignKey(m => m.Id);*/
+                    .HasMaxLength(300)
+                    .IsRequired();
+           
 
-
-            //PapelUsuario    
-            builder.Entity<PapelUsuario>()
-               .Key(k => new
-               {
-                   k.UsuarioId,
-                   k.PapelId
-               });
-
-            //AlunoCurso    
-            builder.Entity<AlunoCurso>()
-               .Key(k => new
-               {
-                   k.AlunoId,
-                   k.CursoId
-               });
-
-            //AlunoDisciplina    
-            builder.Entity<AlunoDisciplina>()
-               .Key(k => new
-               {
-                   k.AlunoId,
-                   k.DisciplinaId
-               });
-
-            //   builder.Entity<UserRole>()
-            //      .Reference(m => m.User)
-            //      .InverseCollection()
-            //      .ForeignKey(m => m.User);
-            //  
-            //   builder.Entity<UserRole>()
-            //      .Reference(m => m.Role)
-            //      .InverseCollection()
-            //      .ForeignKey(m => m.Role);
-            //  
-            //   builder.Entity<UserRole>()
-            //      .Reference(m => m.Disciplina)
-            //      .InverseCollection()
-            //      .ForeignKey(m => m.Disciplina);
-            //  
-
-
-            //builder.Entity<User>().Collection(x => x.Roles);
-
-            //one-to-many
-            //  builder.Entity<User>()
-            //              .HasMany<Role>(s => s.Roles)
-            //              .WithRequired(s => s.Standard)
-            //              .HasForeignKey(s => s.StdId);
+//              builder.Entity<PapelUsuario>()
+//                 .Property(k => k.Usuario);
+//  
+            //  builder.Entity<PapelUsuario>()
+            //     .Property(k => k.Papel);
 
             base.OnModelCreating(builder);
         }
