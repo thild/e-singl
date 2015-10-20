@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace Neadm.ViewModels
 {
-    public class DisciplinaEditViewModel
+    public class DisciplinaCreateViewModel
     {
-        public DisciplinaEditViewModel() {
+        public DisciplinaCreateViewModel() {
             var cursos = (new NeadmDbContext()).Cursos.OrderBy(m => m.Nome).ToList();
              
             Cursos = new SelectList(cursos, "Id", "Nome");

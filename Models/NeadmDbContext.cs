@@ -31,36 +31,57 @@ namespace Neadm
         internal void Populate()
         {
 
+            //Cursos
 
-            /*
-CREATE TABLE "Curso" (
-    "Id" BLOB NOT NULL PRIMARY KEY,
-    "Codigo" TEXT NOT NULL,
-    "Nome" TEXT NOT NULL
-)
-            */
-            var curso = new Curso
+            var filosofia = new Curso
             {
-                Codigo = "t-123",
-                Nome = "Teste"
+                Codigo = "1000",
+                Nome = "Ensino de Filosofia no Ensino Médio"
             };
-            Cursos.Add(curso);
-            /*
-CREATE TABLE "Disciplina" (
-    "Id" BLOB NOT NULL PRIMARY KEY,
-    "Codigo" TEXT NOT NULL,
-    "Nome" TEXT NOT NULL,
-    CONSTRAINT "FK_Disciplina_Curso_Id" FOREIGN KEY ("Id") REFERENCES "Curso" ("Id")
-)            
-            */
+            Cursos.Add(filosofia);
+            
+            var atividade_fisica = new Curso
+            {
+                Codigo = "1001",
+                Nome = "Atividade Física e Saúde"
+            };
+            Cursos.Add(atividade_fisica);
+            
+            //Disciplinas
 
-            var disciplina = new Disciplina
-            {
-                Codigo = "d-teste",
-                Nome = "Disciplina Teste",
-                Curso = curso
-            };
-            Disciplinas.Add(disciplina);
+            Disciplinas.Add(new Disciplina { Codigo = "1000-2000", Nome = "Introdução a EAD", Curso = filosofia });
+            Disciplinas.Add(new Disciplina { Codigo = "1000-2001", Nome = "Didática do ensino de filosofia", Curso = filosofia });
+            Disciplinas.Add(new Disciplina { Codigo = "1000-2002", Nome = "Ensino de lógica, ontologia e filosofia da linguagem", Curso = filosofia });
+            Disciplinas.Add(new Disciplina { Codigo = "1000-2003", Nome = "Ensino de ética e filosofia política", Curso = filosofia });
+            Disciplinas.Add(new Disciplina { Codigo = "1000-2004", Nome = "Estética e filosofia da arte e seu ensino", Curso = filosofia });
+            Disciplinas.Add(new Disciplina { Codigo = "1000-2005", Nome = "Filosofia do ensino de filosofia", Curso = filosofia });
+            Disciplinas.Add(new Disciplina { Codigo = "1000-2006", Nome = "História, temas e problemas da filosofia em sala de aula: como ler os clássicos", Curso = filosofia });
+            Disciplinas.Add(new Disciplina { Codigo = "1000-2007", Nome = "Introdução à prática de ensino de filosofia", Curso = filosofia });
+            Disciplinas.Add(new Disciplina { Codigo = "1000-2008", Nome = "Introdução às ferramentas para EaD - Filosofia", Curso = filosofia });
+            Disciplinas.Add(new Disciplina { Codigo = "1000-2009", Nome = "Metodologia do Ensino de Filosofia", Curso = filosofia });
+            Disciplinas.Add(new Disciplina { Codigo = "1000-2010", Nome = "Pesquisa em filosofia na sala de aula", Curso = filosofia });
+            Disciplinas.Add(new Disciplina { Codigo = "1000-2011", Nome = "Teoria do conhecimento e filosofia da ciência e seu ensino", Curso = filosofia });
+
+
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2000", Nome = "Introdução a EAD", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2001", Nome = "Antropologia do corpo e saúde", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2002", Nome = "Aspectos biomecânicos da atividade física", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2003", Nome = "Atividade Física para Populações Especiais", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2004", Nome = "Bioestatística", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2005", Nome = "Conceitos de Atividade Física e Saúde", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2006", Nome = "Epidemiologia da atividade física e saúde pública", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2007", Nome = "Fisiologia da Atividade Física", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2008", Nome = "Medidas e Avaliação em Atividade Física", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2009", Nome = "Metodologia da Pesquisa", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2010", Nome = "Metodologia do Ensino Superior", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2011", Nome = "Nutrição e atividade física e saúde", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2012", Nome = "Políticas Públicas na Saúde e Qualidade de Vida", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2013", Nome = "Psicologia aplicada a atividade física", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2014", Nome = "Seminários de Pesquisa", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2015", Nome = "Tecnologias da Informação e Comunicação", Curso = atividade_fisica });
+            Disciplinas.Add(new Disciplina { Codigo = "1001-2016", Nome = "Trabalho de Conclusão de Curso (TCC)", Curso = atividade_fisica });
+
+
 
             /*
 CREATE TABLE "Polo" (
@@ -164,42 +185,42 @@ CREATE TABLE "RelatorioEvasao" (
 
             Questoes.Add(q2);
 
-/*
-            var alternativas = new List<Alternativa> {
-                new Alternativa {Texto = "Residência distante do Polo", Questao = q1},
-                new Alternativa {Texto = "Está realizando,no momento, outro curso.", Questao = q1},
-                new Alternativa {Texto = "O curso não atendeu as expectativas do aluno.", Questao = q1},
-                new Alternativa {Texto = "Por motivo de doença.", Questao = q1},
-                new Alternativa {Texto = "Mudança de cidade.", Questao = q1},
-                new Alternativa {Texto = "Dificuldade de compatibilizar horários de trabalho e estudos.", Questao = q1},
-                new Alternativa {Texto = "Problemas familiares.", Questao = q1},
-                new Alternativa {Texto = "Falta de conhecimento de informática.", Questao = q1},
-                new Alternativa {Texto = "Falta de orientação para o uso da plataforma moodle.", Questao = q1},
-                new Alternativa {Texto = "Dificuldade de locomoção ao polo presencial.", Questao = q1},
-                new Alternativa {Texto = "Outro", Questao = q1},
-                new Alternativa {Texto = "Curso muito difícil", Questao = q1},
-                new Alternativa {Texto = "A matriz curricular do curso não atendeu a expectativa dos alunos.", Questao = q1},
-                new Alternativa {Texto = "A organização da disciplina não foi satisfatória.", Questao = q1},
-                new Alternativa {Texto = "O cronograma das atividades do Curso não foi disponibilizado no momento da inscrição ou da matrícula.", Questao = q1},
-                new Alternativa {Texto = "As ferramentas do moodle não são bem orientadas.", Questao = q1},
-                new Alternativa {Texto = "Não participação no processo de imersão.", Questao = q1},
-                new Alternativa {Texto = "O professor não dá o retorno sobre os questionamentos dos alunos", Questao = q1},
-                new Alternativa {Texto = "Falta de respostas dos tutores.", Questao = q1},
-                new Alternativa {Texto = "Fracasso em situações avaliativas", Questao = q1},
-                new Alternativa {Texto = "Falta de acompanhamento da disciplina por parte dos professores e da coordenação.", Questao = q1},
-                new Alternativa {Texto = "As transmissões de webconferência não são satisfatórias", Questao = q1},
-                new Alternativa {Texto = "As webconferencias não atendem aos conteúdos das disciplinas", Questao = q1},
-                new Alternativa {Texto = "O horário das webconferencias não está coerente com a disponibilidade de tempo dos alunos.", Questao = q1},
-                new Alternativa {Texto = "As webconferências não estão articuladas com as dúvidas dos acadêmicos;", Questao = q1},
-                new Alternativa {Texto = "Falta de estrutura do Polo para atendimento às necessidades dos alunos.", Questao = q1},
-                new Alternativa {Texto = "Falta de acesso a internet nos laboratórios no Polo.", Questao = q1},
-                new Alternativa {Texto = "Outro", Questao = q1},
-            };
-            
-            Alternativas.AddRange(alternativas);
-            */
-            Alternativas.Add(new Alternativa {Texto = "Residência distante do Polo", Questao = q1});
-            Alternativas.Add(new Alternativa {Texto = "A organização da disciplina não foi satisfatória", Questao = q2});
+            /*
+                        var alternativas = new List<Alternativa> {
+                            new Alternativa {Texto = "Residência distante do Polo", Questao = q1},
+                            new Alternativa {Texto = "Está realizando,no momento, outro curso.", Questao = q1},
+                            new Alternativa {Texto = "O curso não atendeu as expectativas do aluno.", Questao = q1},
+                            new Alternativa {Texto = "Por motivo de doença.", Questao = q1},
+                            new Alternativa {Texto = "Mudança de cidade.", Questao = q1},
+                            new Alternativa {Texto = "Dificuldade de compatibilizar horários de trabalho e estudos.", Questao = q1},
+                            new Alternativa {Texto = "Problemas familiares.", Questao = q1},
+                            new Alternativa {Texto = "Falta de conhecimento de informática.", Questao = q1},
+                            new Alternativa {Texto = "Falta de orientação para o uso da plataforma moodle.", Questao = q1},
+                            new Alternativa {Texto = "Dificuldade de locomoção ao polo presencial.", Questao = q1},
+                            new Alternativa {Texto = "Outro", Questao = q1},
+                            new Alternativa {Texto = "Curso muito difícil", Questao = q1},
+                            new Alternativa {Texto = "A matriz curricular do curso não atendeu a expectativa dos alunos.", Questao = q1},
+                            new Alternativa {Texto = "A organização da disciplina não foi satisfatória.", Questao = q1},
+                            new Alternativa {Texto = "O cronograma das atividades do Curso não foi disponibilizado no momento da inscrição ou da matrícula.", Questao = q1},
+                            new Alternativa {Texto = "As ferramentas do moodle não são bem orientadas.", Questao = q1},
+                            new Alternativa {Texto = "Não participação no processo de imersão.", Questao = q1},
+                            new Alternativa {Texto = "O professor não dá o retorno sobre os questionamentos dos alunos", Questao = q1},
+                            new Alternativa {Texto = "Falta de respostas dos tutores.", Questao = q1},
+                            new Alternativa {Texto = "Fracasso em situações avaliativas", Questao = q1},
+                            new Alternativa {Texto = "Falta de acompanhamento da disciplina por parte dos professores e da coordenação.", Questao = q1},
+                            new Alternativa {Texto = "As transmissões de webconferência não são satisfatórias", Questao = q1},
+                            new Alternativa {Texto = "As webconferencias não atendem aos conteúdos das disciplinas", Questao = q1},
+                            new Alternativa {Texto = "O horário das webconferencias não está coerente com a disponibilidade de tempo dos alunos.", Questao = q1},
+                            new Alternativa {Texto = "As webconferências não estão articuladas com as dúvidas dos acadêmicos;", Questao = q1},
+                            new Alternativa {Texto = "Falta de estrutura do Polo para atendimento às necessidades dos alunos.", Questao = q1},
+                            new Alternativa {Texto = "Falta de acesso a internet nos laboratórios no Polo.", Questao = q1},
+                            new Alternativa {Texto = "Outro", Questao = q1},
+                        };
+
+                        Alternativas.AddRange(alternativas);
+                        */
+            Alternativas.Add(new Alternativa { Texto = "Residência distante do Polo", Questao = q1 });
+            Alternativas.Add(new Alternativa { Texto = "A organização da disciplina não foi satisfatória", Questao = q2 });
 
             this.SaveChanges();
 
@@ -330,11 +351,11 @@ CREATE TABLE "RelatorioEvasao" (
                 .Property(m => m.Texto)
                     .HasMaxLength(300)
                     .IsRequired();
-           
 
-//              builder.Entity<PapelUsuario>()
-//                 .Property(k => k.Usuario);
-//  
+
+            //              builder.Entity<PapelUsuario>()
+            //                 .Property(k => k.Usuario);
+            //  
             //  builder.Entity<PapelUsuario>()
             //     .Property(k => k.Papel);
 

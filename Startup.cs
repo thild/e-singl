@@ -100,6 +100,8 @@ namespace Neadm
         {
             AM.Mapper.CreateMap<Disciplina, DisciplinaEditViewModel>();
             AM.Mapper.CreateMap<DisciplinaEditViewModel,Disciplina>();
+            AM.Mapper.CreateMap<Disciplina, DisciplinaCreateViewModel>();
+            AM.Mapper.CreateMap<DisciplinaCreateViewModel,Disciplina>();
         }
     }
 }

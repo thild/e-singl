@@ -1,15 +1,14 @@
 @model Neadm.ViewModels.DisciplinaEditViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar disciplina";
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Editar disciplina</h2>
 <div>
     <form asp-controller="Disciplina" asp-action="Edit" method="post">
         <div class="form-horizontal">
-            <h4>Disciplina</h4>
             <hr />
             <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
             <input asp-for="Id" type="hidden" />
@@ -23,8 +22,7 @@
             <div class="form-group">
                 <label asp-for="CursoId" class="control-label col-md-2"></label>
                 <div class="col-md-10">
-                    <select asp-for="CursoId" class="form-control">
-                        <option value="7dad49a5-04e8-494c-bc19-0ac5c907faf6">Teste</option>
+                    <select asp-for="CursoId" asp-items="Model.Cursos" class="form-control">
                     </select>
                     <span asp-validation-for="CursoId" class="text-danger"></span>
                 </div>
@@ -39,13 +37,13 @@
     
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Salvar" class="btn btn-default" />
                 </div>
             </div>
         </div>
     </form>
     <div>
-        <a asp-controller="Disciplina"  asp-action="Index">Back to List</a>
+        <a asp-controller="Disciplina"  asp-action="Index">Voltar à lista</a>
     </div>
 </div>
 @section Scripts {

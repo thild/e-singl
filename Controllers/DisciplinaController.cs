@@ -39,20 +39,29 @@ namespace Neadm.Controllers
         // GET: Disciplina/Create
         public IActionResult Create()
         {
-            return View();
+                Console.WriteLine("Teste1");
+            
+            return View(new DisciplinaCreateViewModel());
         }
 
         // POST: Disciplina/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Disciplina disciplina)
+        public IActionResult Create(DisciplinaCreateViewModel disciplina)
         {
+            Console.WriteLine("Teste2");
+            
             if (ModelState.IsValid)
             {
-                disciplina.Id = Guid.NewGuid();
-                db.Disciplinas.Add(disciplina);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var c = db.Cursos.Single(m => m.Id == disciplina.CursoId);
+                if (c != null)
+                {
+                    var d = Mapper.Map<Disciplina>(disciplina);
+                    d.Curso = c;
+                    db.Disciplinas.Add(d);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(disciplina);
@@ -67,7 +76,6 @@ namespace Neadm.Controllers
             }
 
             var disciplina = db.Disciplinas.Project().To<DisciplinaEditViewModel>().Single(m => m.Id == id);
-            System.Console.WriteLine(disciplina);
             if (disciplina == null)
             {
                 return new HttpStatusCodeResult(404);
@@ -80,7 +88,6 @@ namespace Neadm.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(DisciplinaEditViewModel disciplina)
         {
-            Console.WriteLine(disciplina.CursoId);
             if (ModelState.IsValid)
             {
                 var c = db.Cursos.Single(m => m.Id == disciplina.CursoId);

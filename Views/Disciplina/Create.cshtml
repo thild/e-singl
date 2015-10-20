@@ -1,15 +1,14 @@
-@model Neadm.Models.Disciplina
+@model Neadm.ViewModels.DisciplinaCreateViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Criar disciplina";
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Criar disciplina</h2>
 <div>
     <form asp-controller="Disciplina" asp-action="Create" method="post">
         <div class="form-horizontal">
-            <h4>Disciplina</h4>
             <hr />
             <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -20,10 +19,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Curso.Id" class="control-label col-md-2"></label>
+                <label asp-for="CursoId" class="control-label col-md-2"></label>
                 <div class="col-md-10">
-                    <input asp-for="Curso.Id" class="form-control" />
-                    <span asp-validation-for="Curso.Id" class="text-danger"></span>
+                    <select asp-for="CursoId" asp-items="Model.Cursos" class="form-control"></select>
+                    <span asp-validation-for="CursoId" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
@@ -36,13 +35,13 @@
     
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Criar" class="btn btn-default" />
                 </div>
             </div>
         </div>
     </form>
     <div>
-        <a asp-controller="Disciplina"  asp-action="Index">Back to List</a>
+        <a asp-controller="Disciplina"  asp-action="Index">Voltar à lista</a>
     </div>
 </div>
 
