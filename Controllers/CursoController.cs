@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
 using Neadm.Models;
 
 namespace Neadm.Controllers
@@ -23,7 +24,24 @@ namespace Neadm.Controllers
                 return new HttpStatusCodeResult(404);
             }
 
-            Curso curso = db.Cursos.Single(m => m.Id == id);
+            Curso curso = db.Cursos.Include(m => m.Disciplinas).Single(m => m.Id == id);
+            if (curso == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+
+            return View(curso);
+        }
+
+        // GET: Curso/Details/5
+        public IActionResult Info(System.Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+
+            Curso curso = db.Cursos.Include(m => m.Disciplinas).Single(m => m.Id == id);
             if (curso == null)
             {
                 return new HttpStatusCodeResult(404);
