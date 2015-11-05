@@ -2,6 +2,7 @@
     "name": "e-Singl",
     "description": "e-Singl - Education easy",
     "env": {
-	"BUILDPACK_URL": "https://github.com/thild/dotnet-buildpack.git"
+	"BUILDPACK_URL": "https://github.com/thild/dotnet-buildpack.git",
+	"UNSTABLE_TOOLCHAIN":true
     }
 }
