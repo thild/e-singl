@@ -66,13 +66,8 @@
     "postrestore": [
     ],
     "prepare": [
-      "bower install",
-      "gulp build"
     ],
     "prepublish": [
-      "npm install",
-      "bower install",
-      "gulp build" 
     ]
   }
 }
