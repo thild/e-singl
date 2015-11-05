@@ -35,7 +35,7 @@
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.WebListener",
+    "web": "Microsoft.AspNet.Server.Kestrel",
     "kestrel": "Microsoft.AspNet.Hosting --ASPNET_ENV development --server Microsoft.AspNet.Server.Kestrel --server.urls http://*:5004",
     "ef": "EntityFramework.Commands",
     "gen": "Microsoft.Extensions.CodeGeneration"
