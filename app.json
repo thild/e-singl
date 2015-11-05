@@ -10,13 +10,7 @@
 		}
 	],
 	"env": {
-		"BUILDPACK_URL": {
-			"description": "The buildpack url.",
-			"value": "https://github.com/thild/dotnet-buildpack.git"
-		},
-		"UNSTABLE_TOOLCHAIN": {
-			"description": "Use unstable toolchain?",
-			"value": "true"
-		}
-	}	
+		"BUILDPACK_URL": "https://github.com/thild/dotnet-buildpack.git",
+		"UNSTABLE_TOOLCHAIN": "true"
+	}
 }
