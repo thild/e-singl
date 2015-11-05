@@ -1,6 +1,14 @@
 {
     "name": "e-Singl",
     "description": "e-Singl - Education easy",
+	"buildpacks": [
+		{
+		"url": "https://github.com/heroku/dotnet-buildpack.git"
+		},
+		{
+		"url": "https://github.com/thild/dotnet-buildpack.git"
+		}
+	],
     "env": {
 	"BUILDPACK_URL": "https://github.com/thild/dotnet-buildpack.git",
 	"UNSTABLE_TOOLCHAIN":"true"
