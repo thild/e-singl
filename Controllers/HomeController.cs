@@ -1,4 +1,5 @@
 using Microsoft.AspNet.Mvc;
+using Neadm.ViewModels;
 
 namespace Neadm.Controllers
 {
@@ -6,7 +7,7 @@ namespace Neadm.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View(new HomeIndexViewModel());
         }
 
         public IActionResult About()

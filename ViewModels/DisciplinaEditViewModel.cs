@@ -10,7 +10,7 @@ namespace Neadm.ViewModels
     {
         public DisciplinaEditViewModel() {
             var cursos = (new NeadmDbContext()).Cursos.OrderBy(m => m.Nome).ToList();
-             
+            
             Cursos = new SelectList(cursos, "Id", "Nome");
         }
         
@@ -22,7 +22,7 @@ namespace Neadm.ViewModels
         [MaxLength(20)]
         public string Nome { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Insra um código entre 4 e 10 caracteres alfanuméricos.")]
         [MinLength(4)]
         [MaxLength(10)]
         public string Codigo { get; set; }

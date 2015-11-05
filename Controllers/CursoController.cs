@@ -24,7 +24,7 @@ namespace Neadm.Controllers
                 return new HttpStatusCodeResult(404);
             }
 
-            Curso curso = db.Cursos.Include(m => m.Disciplinas).Single(m => m.Id == id);
+            var curso = db.Cursos.Include(m => m.Disciplinas).Single(m => m.Id == id);
             if (curso == null)
             {
                 return new HttpStatusCodeResult(404);

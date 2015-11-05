@@ -27,7 +27,7 @@ namespace Neadm.Controllers
                 return new HttpStatusCodeResult(404);
             }
 
-            Disciplina disciplina = db.Disciplinas.Single(m => m.Id == id);
+            var disciplina = db.Disciplinas.Single(m => m.Id == id);
             if (disciplina == null)
             {
                 return new HttpStatusCodeResult(404);
@@ -112,7 +112,7 @@ namespace Neadm.Controllers
                 return new HttpStatusCodeResult(404);
             }
 
-            Disciplina disciplina = db.Disciplinas.Single(m => m.Id == id);
+            var disciplina = db.Disciplinas.Single(m => m.Id == id);
             if (disciplina == null)
             {
                 return new HttpStatusCodeResult(404);
@@ -124,13 +124,13 @@ namespace Neadm.Controllers
         // POST: Disciplina/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(System.Guid id)
+        public IActionResult DeleteConfirmed(Guid id)
         {
-            Disciplina disciplina = db.Disciplinas.Single(m => m.Id == id);
+            var disciplina = db.Disciplinas.Single(m => m.Id == id);
             db.Disciplinas.Remove(disciplina);
             db.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Curso", new {id = disciplina.CursoId});
         }
     }
 }

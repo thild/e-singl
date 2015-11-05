@@ -11,6 +11,10 @@
     "font-awesome": "*",
     "animate.css": "*",
     "wow.js": "*",
-    "fittext": "*"
+    "fittext": "*",
+    "classie": "*",
+    "jquery-easing": "*",
+    "jquery-fittext.js": "*",
+    "modernizr": "*"
   }
 }

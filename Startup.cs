@@ -1,10 +1,12 @@
+using System;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
-using Microsoft.Dnx.Runtime;
-using Microsoft.Framework.Configuration;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Extensions.Configuration;
 using Neadm.Models;
+using Neadm.Settings;
 using Neadm.ViewModels;
 using AM = AutoMapper;
 
@@ -20,9 +22,13 @@ namespace Neadm
             var builder = new ConfigurationBuilder()
                 .SetBasePath(appEnv.ApplicationBasePath)
                 .AddJsonFile("config.json")
+                .AddJsonFile($"config.{env.EnvironmentName}.json", optional: true)                
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
             
+            // Add configuration from an optional config.development.json, config.staging.json or 
+            // config.production.json file, depending on the environment. These settings override the ones in the 
+            // config.json file.
                         
             if (System.IO.File.Exists("neadm.sqlite"))
             {
@@ -39,10 +45,11 @@ namespace Neadm
 
 
         // This method gets called by the runtime.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            //services.Configure<ApplicationConfiguration>(Configuration.GetSection("ApplicationConfiguration"));
- 
+            
+            ConfigureOptionsServices(services, this.Configuration);
+            
             // Register Entity Framework
             services.AddEntityFramework()
                 .AddSqlite()
@@ -54,6 +61,8 @@ namespace Neadm
             // Uncomment the following line to add Web API services which makes it easier to port Web API 2 controllers.
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
             // services.AddWebApiConventions();
+            
+            return services.BuildServiceProvider();
         }
 
         // Configure is called after ConfigureServices is called.
@@ -103,5 +112,22 @@ namespace Neadm
             AM.Mapper.CreateMap<Disciplina, DisciplinaCreateViewModel>();
             AM.Mapper.CreateMap<DisciplinaCreateViewModel,Disciplina>();
         }
+        
+        /// <summary>
+        /// Configures the settings by binding the contents of the config.json file to the specified Plain Old CLR 
+        /// Objects (POCO) and adding <see cref="IOptions{}"/> objects to the services collection.
+        /// </summary>
+        /// <param name="services">The services collection or IoC container.</param>
+        /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are 
+        /// stored.</param>
+        private void ConfigureOptionsServices(IServiceCollection services, IConfiguration configuration)
+        {
+            // Adds IOptions<AppSettings> to the services container.
+            services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
+
+            // Adds IOptions<CacheProfileSettings> to the services container.
+            //  services.Configure<CacheProfileSettings>(configuration.GetSection(nameof(CacheProfileSettings)));
+        }
+        
     }
 }

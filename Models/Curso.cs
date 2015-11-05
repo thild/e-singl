@@ -28,6 +28,12 @@ namespace Neadm.Models
         [Display(Name = "Código")]
         public string Codigo { get; set; }
         
+        [Display(Name = "Tipo")]
+        public TipoCurso Tipo {get; set;}
+        
+        [Display(Name = "Perfil do egresso")]
+        public string PerfilEgresso { get; set; }
+        
         [Newtonsoft.Json.JsonProperty("disciplinas")]
         [NotMappedAttribute]
         public IList<Disciplina> Disciplinas { get; set; }
@@ -35,5 +41,6 @@ namespace Neadm.Models
         [Newtonsoft.Json.JsonProperty("alunos")]
         [NotMappedAttribute]
         public IList<Usuario> Alunos {get; private set;}
+
     }
 }

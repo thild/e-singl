@@ -1,0 +1,11 @@
+dd {
+  border-top: 1px solid #ddd;
+}
+hr.light {
+  border-width: 1px 0px 0px;
+}
+hr.hard {
+  border-width: 4px 0px 0px;
+}
+
+/*# sourceMappingURL=admin.css.map */

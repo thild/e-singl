@@ -18,13 +18,15 @@
     "Microsoft.AspNet.StaticFiles": "1.0.0-*",
     "Microsoft.AspNet.Tooling.Razor": "1.0.0-*",
     "Microsoft.AspNet.Hosting": "1.0.0-*",
-    "Microsoft.Framework.Configuration.Json": "1.0.0-*",
-    "Microsoft.Framework.Logging": "1.0.0-*",
-    "Microsoft.Framework.Logging.Console": "1.0.0-*",
-    "Microsoft.Framework.Logging.Debug": "1.0.0-*",
-    "Microsoft.Framework.CodeGenerators.Mvc": "1.0.0-*",
-    "Microsoft.Framework.Configuration.CommandLine": "1.0.0-*",
-    "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-*",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-*",
+    "Microsoft.Extensions.Logging": "1.0.0-*",
+    "Microsoft.Extensions.Logging.Console": "1.0.0-*",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-*",
+    "Microsoft.Extensions.CodeGenerators.Mvc": "1.0.0-*",
+    "Microsoft.Extensions.Configuration.CommandLine": "1.0.0-*",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-*",
+    "Microsoft.Extensions.CodeGeneration": "1.0.0-*",
+    "Microsoft.Dnx.Compilation.Abstractions": "1.0.0-*",
     "System.Net.Http": "4.0.0-*"
   },
 
@@ -32,7 +34,7 @@
     "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5001",
     "kestrel": "Microsoft.AspNet.Hosting --ASPNET_ENV development --server Microsoft.AspNet.Server.Kestrel --server.urls http://*:5004",
     "ef": "EntityFramework.Commands",
-    "gen": "Microsoft.Framework.CodeGeneration"
+    "gen": "Microsoft.Extensions.CodeGeneration"
   },
 
   "frameworks": {
@@ -57,11 +59,17 @@
     "**.vspscc"
   ],
   "scripts": {
+    "postrestore": [
+      "npm install"
+    ],
+    "prepare": [
+      "bower install",
+      "gulp build"
+    ],
     "prepublish": [
       "npm install",
-      "bower install", 
-      "gulp clean",
-      "gulp min"
+      "bower install",
+      "gulp build" 
     ]
   }
 }
