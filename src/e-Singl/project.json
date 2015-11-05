@@ -35,7 +35,7 @@
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel",
+    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5001",
     "kestrel": "Microsoft.AspNet.Hosting --ASPNET_ENV development --server Microsoft.AspNet.Server.Kestrel --server.urls http://*:5004",
     "ef": "EntityFramework.Commands",
     "gen": "Microsoft.Extensions.CodeGeneration"
@@ -64,10 +64,16 @@
   ],
   "scripts": {
     "postrestore": [
+      "npm install"
     ],
     "prepare": [
+      "bower install",
+      "gulp build"
     ],
     "prepublish": [
+      "npm install",
+      "bower install",
+      "gulp build" 
     ]
   }
 }
