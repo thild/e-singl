@@ -4,7 +4,7 @@
   ],
   "description": "e-Singl - Education easy",
   "webroot": "wwwroot",
-  "version": "1.0.0-*",
+  "version": "0.0.1-*",
   "dependencies": {
     "AutoMapper": "4.0.4",
     "EntityFramework": "7.0.0-*",
