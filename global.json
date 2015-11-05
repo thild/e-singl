@@ -2,7 +2,7 @@
     "projects": [ "src" ],
     "sdk": {
         "version": "1.0.0-rc1-*",
-        "runtime": "mono",
+        "runtime": "clr",
         "architecture": "x86"
     }    
 }
