@@ -1,2 +1,3 @@
 [config]
 project = src/e-Singl/project.json
+stable = false
