@@ -15,7 +15,7 @@
 			"value": "https://github.com/thild/dotnet-buildpack.git"
 		},
 		"UNSTABLE_TOOLCHAIN": {
-			"description": "Use unstable toolchain?",
+			"description": "Use unstable toolchain",
 			"value": "true"
 		}
 	}	
