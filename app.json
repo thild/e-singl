@@ -3,6 +3,6 @@
     "description": "e-Singl - Education easy",
     "env": {
 	"BUILDPACK_URL": "https://github.com/thild/dotnet-buildpack.git",
-	"UNSTABLE_TOOLCHAIN":true
+	"UNSTABLE_TOOLCHAIN":"true"
     }
 }
