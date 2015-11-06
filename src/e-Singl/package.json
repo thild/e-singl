@@ -36,6 +36,9 @@
     "npm": "2.14.7"
   },  
   "scripts": {
-    "postinstall": "npm install  && bower install && gulp build"
+    "postinstall": "npm install",
+    "preinstall": "echo installing...",
+    "start": "echo starting app...",
+    "build": "bower install && gulp build"
   }  
 }
