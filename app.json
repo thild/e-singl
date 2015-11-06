@@ -11,6 +11,7 @@
 	],
 	"env": {
 		"BUILDPACK_URL": "https://github.com/thild/dotnet-buildpack.git",
-		"UNSTABLE_TOOLCHAIN": "true"
+		"UNSTABLE_TOOLCHAIN": "true",
+		"ASPNET_ENV": "Production"
 	}
 }
