@@ -1,7 +1,8 @@
 {
   "name": "e-singl",
   "version": "0.0.1",
-  "devDependencies": {
+  "dependencies": {
+    "bower": "1.6.5",
     "gulp": "3.9.0",
     "gulp-autoprefixer": "2.3.1",
     "gulp-concat": "2.6.0",
@@ -36,7 +37,6 @@
     "npm": "2.14.7"
   },  
   "scripts": {
-    "postinstall": "npm install",
     "preinstall": "echo installing...",
     "start": "echo starting app...",
     "build": "bower install && gulp build"
