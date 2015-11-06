@@ -22,6 +22,8 @@ bld/
 [Bb]in/
 [Oo]bj/
 wwwroot/lib/
+wwwroot/css/
+wwwroot/js/
 
 # Visual Studio 2015 cache/options directory
 .vs/
