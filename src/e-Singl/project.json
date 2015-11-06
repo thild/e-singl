@@ -64,10 +64,16 @@
   ],
   "scripts": {
     "postrestore": [
+      "npm install"
     ],
     "prepare": [
+      "bower install",
+      "gulp build"
     ],
     "prepublish": [
+      "npm install",
+      "bower install",
+      "gulp build" 
     ]
   }
 }
