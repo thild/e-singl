@@ -71,9 +71,6 @@
       "gulp build"
     ],
     "prepublish": [
-      "npm install",
-      "bower install",
-      "gulp build" 
     ]
   }
 }
