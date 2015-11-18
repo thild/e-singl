@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Neadm.Models
+namespace Singl.Models
 {
     public class Usuario
     {

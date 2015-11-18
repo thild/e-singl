@@ -1,4 +1,4 @@
-namespace Neadm.Models
+namespace Singl.Models
 {
     public enum Modalidade
     {

@@ -2,8 +2,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using Singl.Extensions;
 
-namespace Neadm.Models
+namespace Singl.Models
 {
     //Curriculo
     public class Curriculo
@@ -36,7 +37,13 @@ namespace Neadm.Models
         [Display(Name="Prazo de conclusão máximo")]
         public int PrazoConclusaoMaximo { get; set; }
         
-        [ForeignKey("CursoId")]
+        [Display(Name="Tipo do prazo")]
+        public TipoPrazo TipoPrazo { get; set; }
+        
+        [Display(Name="Situação")]
+        public SituacaoCurriculo SituacaoCurriculo { get; set; }
+
+        //[ForeignKey("CursoId")]
         public Curso Curso { get; set; }
         public Guid CursoId { get; set; }
         
@@ -44,6 +51,27 @@ namespace Neadm.Models
         [NotMappedAttribute]
         public IList<Disciplina> Disciplinas { get; set; }
         
+        [NotMappedAttribute]
+        [Display(Name="Prazo de conclusão")]
+        public string PrazoConclusao {
+             get 
+             {
+                 return $"{PrazoConclusaoIdeal}-{PrazoConclusaoMaximo} {FormatTipoPrazo()}"; 
+             }
+         }        
+         
+         private string FormatTipoPrazo() {
+             var gt1 = PrazoConclusaoMaximo > 1;
+             switch (TipoPrazo)
+             {
+                case TipoPrazo.Hora : return gt1 ? "horas" : "hora";
+                case TipoPrazo.Semana : return gt1 ? "semanas" : "semana";
+                case TipoPrazo.Mes : return  gt1 ? "meses" : "mês";
+                case TipoPrazo.Semestre : return gt1 ? "semestres" : "semestre";
+                case TipoPrazo.Ano : return gt1 ? "anos" : "ano";
+             }
+             return "";
+         }
     }
 
 }

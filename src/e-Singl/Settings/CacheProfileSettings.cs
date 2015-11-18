@@ -1,4 +1,4 @@
-﻿namespace Neadm.Settings
+﻿namespace Singl.Settings
 {
     using System.Collections.Generic;
     using Microsoft.AspNet.Mvc;

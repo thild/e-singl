@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
 
-namespace Neadm.Models
+namespace Singl.Models
 {
     //Turma
     public class Turma

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Neadm.Models
+namespace Singl.Models
 {
     public class PapelUsuario
     {

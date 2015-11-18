@@ -1,7 +1,7 @@
 using Microsoft.AspNet.Mvc;
-using Neadm.ViewModels;
+using Singl.ViewModels;
 
-namespace Neadm.Controllers
+namespace Singl.Controllers
 {
     public class HomeController : Controller
     {

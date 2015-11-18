@@ -1,0 +1,71 @@
+@model Singl.Models.Curriculo
+
+@{
+    ViewBag.Title = "Excluir currículo";
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="section-heading">@ViewBag.Title</h2>
+                <hr class="hard">
+                <h4>Tem certeza que deseja excluir o currículo "@Model.Nome"?</h4>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ano)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Ano)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PrazoConclusaoIdeal)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.PrazoConclusaoIdeal)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PrazoConclusaoMaximo)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.PrazoConclusaoMaximo)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Regime)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Regime)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Series)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Series)
+                        </dd>
+                    </dl>
+                    <hr class="hard">
+                    <form asp-controller="Curriculo" asp-action="Delete" method="post">
+                        <div class="form-actions no-color pull-right">
+                            <button type="submit" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"> Excluir
+                            </button>   
+                        </div>
+                        <div>
+                            <a asp-controller="Curriculo" asp-action="Index" asp-route-cursoId="@Model.CursoId" >Voltar à lista</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

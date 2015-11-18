@@ -1,15 +1,15 @@
 using System.Linq;
 using Microsoft.AspNet.Mvc;
-using Neadm;
-using Neadm.Models;
+using Singl;
+using Singl.Models;
 
-namespace neadm.Controllers
+namespace Singl.Controllers
 {
     public class InstituicaoController : Controller
     {
-        private NeadmDbContext _context;
+        private DatabaseContext _context;
 
-        public InstituicaoController(NeadmDbContext context)
+        public InstituicaoController(DatabaseContext context)
         {
             _context = context;    
         }

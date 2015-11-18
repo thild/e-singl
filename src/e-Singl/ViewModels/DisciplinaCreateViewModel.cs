@@ -1,17 +1,17 @@
 using System.ComponentModel.DataAnnotations;
 using System;
-using Neadm.Models;
+using Singl.Models;
 using Microsoft.AspNet.Mvc.Rendering;
 using System.Linq;
 
-namespace Neadm.ViewModels
+namespace Singl.ViewModels
 {
     public class DisciplinaCreateViewModel
     {
         public DisciplinaCreateViewModel() {
-            var cursos = (new NeadmDbContext()).Cursos.OrderBy(m => m.Nome).ToList();
+            var curriculos = (new DatabaseContext()).Curriculos.OrderBy(m => m.Nome).ToList();
              
-            Cursos = new SelectList(cursos, "Id", "Nome");
+            Curriculos = new SelectList(curriculos, "Id", "Nome");
         }
         
         [Required]
@@ -27,8 +27,8 @@ namespace Neadm.ViewModels
         [MaxLength(10)]
         public string Codigo { get; set; }
 
-        public Guid CursoId { get; set; }
+        public Guid CurriculoId { get; set; }
         
-        public SelectList Cursos { get; set; }
+        public SelectList Curriculos { get; set; }
     }
 }
