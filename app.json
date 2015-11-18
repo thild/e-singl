@@ -1,6 +1,6 @@
 {
-	"name": "e-Singl",
-	"description": "e-Singl - Education easy",
+	"name": "Singl",
+	"description": "Singl - Education easy",
 	"buildpacks": [
 		{
 		"url": "https://github.com/heroku/dotnet-buildpack.git"

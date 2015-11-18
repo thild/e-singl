@@ -1,1 +1,1 @@
-# e-Singl - Education easy
+# Singl - Education easy
