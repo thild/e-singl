@@ -1,12 +1,12 @@
 using System.Linq;
-using Neadm.Models;
+using Singl.Models;
 
-namespace Neadm.ViewModels
+namespace Singl.ViewModels
 {
     public class HomeIndexViewModel
     {
         public HomeIndexViewModel() {
-            Instituicao = (new NeadmDbContext()).Instituicao.First();
+            Instituicao = (new DatabaseContext()).Instituicao.First();
         }
         public Instituicao Instituicao { get; set; }
     }

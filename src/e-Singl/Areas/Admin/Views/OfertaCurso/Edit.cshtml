@@ -1,0 +1,70 @@
+@model Singl.Models.OfertaCurso
+
+@{
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>OfertaCurso</h4>
+        <hr />
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger" />
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Codigo" class="control-label col-md-2" />
+            <div class="col-md-10">
+                <input asp-for="Codigo" class="form-control" />
+                <span asp-validation-for="Codigo" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CursoId" class="control-label col-md-2">CursoId</label>
+            <div class="col-md-10">
+                <select asp-for="CursoId" class="form-control" />
+                <span asp-validation-for="CursoId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Fim" class="control-label col-md-2" />
+            <div class="col-md-10">
+                <input asp-for="Fim" class="form-control" />
+                <span asp-validation-for="Fim" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Inicio" class="control-label col-md-2" />
+            <div class="col-md-10">
+                <input asp-for="Inicio" class="form-control" />
+                <span asp-validation-for="Inicio" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Situacao" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="Situacao" class="form-control"></select>
+                <span asp-validation-for="Situacao" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

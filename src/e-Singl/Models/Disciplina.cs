@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Neadm.Models
+namespace Singl.Models
 {
     public class Disciplina
     {
@@ -30,6 +30,9 @@ namespace Neadm.Models
         [DataType(DataType.Url)]
         public string UrlImagem { get; set; }
         
+        [DataType(DataType.Url)]
+        public string UrlAva { get; set; }
+        
         public bool Optativa { get; set; }
         
         public int Semestre { get; set; }
@@ -42,9 +45,9 @@ namespace Neadm.Models
         
         public string Objetivos { get; set; }
 
-        [ForeignKey("CursoId")]
-        public Curso Curso { get; set; }
-        public Guid CursoId { get; set; }
+        [ForeignKey("CurriculoId")]
+        public Curriculo Curriculo { get; set; }
+        public Guid CurriculoId { get; set; }
         
     }
 }

@@ -1,13 +1,13 @@
 using System;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
-using Neadm.Models;
+using Singl.Models;
 
-namespace Neadm.Controllers
+namespace Singl.Controllers
 {
     public class PoloController : Controller
     {
-        private NeadmDbContext db = new NeadmDbContext();
+        private DatabaseContext db = new DatabaseContext();
 
         // GET: Polo
         public IActionResult Index()

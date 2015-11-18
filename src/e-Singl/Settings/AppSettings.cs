@@ -1,4 +1,4 @@
-﻿namespace Neadm.Settings
+﻿namespace Singl.Settings
 {
     /// <summary>
     /// The settings for the current application.

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Neadm.Models
+namespace Singl.Models
 {
     public class Questao
     {

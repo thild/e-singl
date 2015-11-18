@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Neadm.Models
+namespace Singl.Models
 {
     public enum TipoCurso
     {
@@ -9,7 +9,7 @@ namespace Neadm.Models
         Mestrado,
         Doutorado,
         [Display(Name="Especialização")]
-        Especialiacao
+        Especializacao
 
     }
 }

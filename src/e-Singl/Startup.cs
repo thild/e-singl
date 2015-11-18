@@ -5,12 +5,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.Configuration;
-using Neadm.Models;
-using Neadm.Settings;
-using Neadm.ViewModels;
+using Singl.Models;
+using Singl.Settings;
+using Singl.ViewModels;
 using AM = AutoMapper;
 
-namespace Neadm
+namespace Singl
 {
     public class Startup
     {
@@ -30,13 +30,13 @@ namespace Neadm
             // config.production.json file, depending on the environment. These settings override the ones in the 
             // config.json file.
                         
-            if (System.IO.File.Exists("neadm.sqlite"))
+            if (System.IO.File.Exists("esingl.sqlite"))
             {
-                System.Console.WriteLine("Deleted neadm.sqlite");
-                System.IO.File.Delete("neadm.sqlite");
+                System.Console.WriteLine("Deleted esingl.sqlite");
+                System.IO.File.Delete("esingl.sqlite");
             }
 
-             using(var context = new NeadmDbContext())
+             using(var context = new DatabaseContext())
             {
                 context.Database.EnsureCreated();
                 context.Populate();
@@ -53,10 +53,12 @@ namespace Neadm
             // Register Entity Framework
             services.AddEntityFramework()
                 .AddSqlite()
-                .AddDbContext<NeadmDbContext>();
+                .AddDbContext<DatabaseContext>();
                 
             // Add MVC services to the services container.
-            services.AddMvc();
+            services.AddMvc(); 
+            
+            services.AddTransient<Singl.Services.IDisciplinaService, Singl.Services.DisciplinaService>();
 
             // Uncomment the following line to add Web API services which makes it easier to port Web API 2 controllers.
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
@@ -96,10 +98,25 @@ namespace Neadm
             // Add MVC to the request pipeline.
             app.UseMvc(routes =>
             {
+                //routes.MapRoute("areaRoute", "{area:exists}/{controller}/{action}");
                 routes.MapRoute(
-                    name: "default",
+                    name: "areaRoute",
+                    template: "{area:exists}/{controller}/{action}/{id?}",
+                    defaults: new { controller = "Home", action = "Index" },
+                    constraints: null,
+                    dataTokens: new { NameSpace = "default" });
+              
+                routes.MapRoute(
+                    name: "controllerActionRoute",
                     template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" });
+                    defaults: new { controller = "Home", action = "Index" },
+                    constraints: null,
+                    dataTokens: new { NameSpace = "default" });
+                    
+                routes.MapRoute(
+                    "controllerRoute",
+                    "{controller}",
+                    new { controller = "Home" });                    
 
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");

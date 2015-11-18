@@ -2,13 +2,13 @@ using System;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
-using Neadm.Models;
+using Singl.Models;
 
-namespace Neadm.Controllers
+namespace Singl.Controllers
 {
     public class CursoController : Controller
     {
-        private NeadmDbContext db = new NeadmDbContext();
+        private DatabaseContext db = new DatabaseContext();
 
         // GET: Curso
         public IActionResult Index()
@@ -24,7 +24,11 @@ namespace Neadm.Controllers
                 return new HttpStatusCodeResult(404);
             }
 
-            var curso = db.Cursos.Include(m => m.Disciplinas).Single(m => m.Id == id);
+            var curso = db.Cursos
+                .Include(m => m.Curriculos)
+                .ThenInclude(m => m.Disciplinas)
+                .Single(m => m.Id == id);
+                
             if (curso == null)
             {
                 return new HttpStatusCodeResult(404);
@@ -41,7 +45,10 @@ namespace Neadm.Controllers
                 return new HttpStatusCodeResult(404);
             }
 
-            Curso curso = db.Cursos.Include(m => m.Disciplinas).Single(m => m.Id == id);
+            var curso = db.Cursos
+                .Include(m => m.Curriculos)
+                .ThenInclude(m => m.Disciplinas)
+                .Single(m => m.Id == id);
             if (curso == null)
             {
                 return new HttpStatusCodeResult(404);
@@ -80,7 +87,10 @@ namespace Neadm.Controllers
                 return new HttpStatusCodeResult(404);
             }
 
-            Curso curso = db.Cursos.Single(m => m.Id == id);
+            var curso = db.Cursos
+                .Include(m => m.Curriculos)
+                .ThenInclude(m => m.Disciplinas)
+                .Single(m => m.Id == id);
             if (curso == null)
             {
                 return new HttpStatusCodeResult(404);
@@ -94,6 +104,13 @@ namespace Neadm.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Curso curso)
         {
+            foreach(var i in ModelState)
+            {
+                Console.WriteLine(i.Key);
+                foreach(var e in i.Value.Errors) 
+                    Console.WriteLine(e.ErrorMessage);
+            }
+                    
             if (ModelState.IsValid)
             {
                 db.Update(curso);

@@ -2,7 +2,7 @@
   "authors": [
       "Tony Alexander Hild"
   ],
-  "description": "e-Singl - Education easy",
+  "description": "Singl - Education easy",
   "webroot": "wwwroot",
   "version": "0.0.1-*",
   "dependencies": {
@@ -15,7 +15,9 @@
     "Microsoft.AspNet.Diagnostics.Entity": "7.0.0-*",
     "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-*", 
     "Microsoft.AspNet.Mvc": "6.0.0-*",
+    "Microsoft.AspNet.Mvc.DataAnnotations": "6.0.0-*",
     "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-*",
+    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-*",
     "Microsoft.AspNet.Server.IIS": "1.0.0-*",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-*",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-*",

@@ -206,11 +206,11 @@ var sources = {
             paths: paths.bower + "jquery/dist/jquery.js"
         },
         {
-            name: "jquery-validate.js",
+            name: "jquery.validate.js",
             paths: paths.bower + "jquery-validation/dist/jquery.validate.js"
         },
         {
-            name: "jquery-validate-unobtrusive.js",
+            name: "jquery.validate.unobtrusive.js",
             paths: paths.bower + "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
         },
         {

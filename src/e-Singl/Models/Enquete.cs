@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Neadm.Models
+namespace Singl.Models
 {
     public class Enquete
     {

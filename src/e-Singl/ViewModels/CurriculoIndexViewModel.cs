@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Neadm.Models;
+using Singl.Models;
 
-namespace Neadm.ViewModels
+namespace Singl.ViewModels
 {
     public class CurriculoIndexViewModel
     {

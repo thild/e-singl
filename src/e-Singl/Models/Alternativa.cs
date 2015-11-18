@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Neadm.Models
+namespace Singl.Models
 {
     public class Alternativa
     {
