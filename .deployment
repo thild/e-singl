@@ -1,5 +1,5 @@
 [config]
-project = src/e-Singl/project.json
+project = src/Singl/project.json
 stable = false
 coreclr = false
 bla = bla
