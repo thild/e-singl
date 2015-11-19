@@ -22,12 +22,15 @@ namespace Singl
         public DbSet<Questao> Questoes { get; set; }
         public DbSet<Alternativa> Alternativas { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
+        public DbSet<SetorAdministrativo> SetoresAdministrativos { get; set; }
+        public DbSet<SetorPedagogico> SetoresPedagogicos { get; set; }
+        public DbSet<Departamento> Departamentos { get; set; }
 
         public DbSet<Enquete> RelatoriosEvasao { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=esingl.sqlite");
+            optionsBuilder.UseSqlite("Data Source=singl.sqlite");
         }
 
 
@@ -45,17 +48,27 @@ namespace Singl
                 Sobre = @"O Núcleo de Educação a Distância é um órgão vinculado à Reitoria, criado por meio da Resolução 086/2005 – Cepe/Unicentro, com competência para implementar políticas e diretrizes para a EAD (Educação a Distância) em todos os níveis de ensino no âmbito da Unicentro (Universidade Estadual do Centro-Oeste), incluindo a oferta e a execução de cursos e programas de Educação Profissional, dentre outros, nos termos da legislação vigente.
 A estrutura organizacional para os cursos ofertados na modalidade de Educação a Distância da Unicentro é composta de um Núcleo de Educação a Distância, localizado no Campus Sede da Universidade, pela estrutura advinda da Parceria do Sistema Aberta do Brasil – UAB e por Polos de Apoio Presenciais de Educação a Distância, localizados em diversos municípios."
             });
+            
+            //Departamentos
+            var depFilosofia = new Departamento {Nome = "Departamento de Filosofia",
+                                                 Sigla = "DEFIL"};
+            var depEducaaoFisica = new Departamento {Nome = "Departamento de Educação Física",
+                                                     Sigla = "DEDUF"};
+            
+            Departamentos.AddRange(depEducaaoFisica, depFilosofia);
+            
             //Cursos
 
-            var filosofia = new Curso
+            var esp_filosofia = new Curso
             {
                 Id = Guid.Parse("c38e9d6e-dcdf-4fea-8fce-88e338e6c74a"),
                 Codigo = "1000",
                 Nome = "Ensino de Filosofia no Ensino Médio",
+                Departamento = depFilosofia,
                 Tipo = TipoCurso.Especializacao,
                 PerfilEgresso = @"O Bacharel em Filosofia é o profissional que auxilia na formulação e na proposição de soluções de problemas nos diversos campos do conhecimento e, em especial, na educação, área em que colabora na formulação e na execução de projetos de desenvolvimento dos conteúdos curriculares, bem como na utilização de tecnologias da informação, da comunicação e de metodologias, estratégias e materiais de apoio inovadores."
             };
-            Cursos.Add(filosofia);
+            Cursos.Add(esp_filosofia);
             
             var cur_filosofia = new Curriculo{
                 Id = Guid.Parse("24356e45-33ca-42f2-a605-393cf7408906"),
@@ -65,21 +78,22 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
                 Series = 1,
                 PrazoConclusaoMaximo = 30,
                 PrazoConclusaoIdeal = 18,
-                Curso = filosofia,
-                CursoId = filosofia.Id
+                Curso = esp_filosofia,
+                CursoId = esp_filosofia.Id
             };
             
             Curriculos.Add(cur_filosofia);
 
-            var atividade_fisica = new Curso
+            var esp_atividade_fisica = new Curso
             {
                 Id = Guid.Parse("8b15ca5a-cbaf-460e-ba26-bd38652c7c55"),
                 Codigo = "1001",
+                Departamento = depEducaaoFisica,
                 Nome = "Atividade Física e Saúde",
                 Tipo = TipoCurso.Especializacao,
                 PerfilEgresso = @"A Educação Física possui um grande campo de atuação que engloba o treinamento esportivo de iniciação e de rendimento, a prescrição e orientação de atividades físicas para saúde e estética, a gestão esportiva, a preparação e reabilitação física, a recreação e o lazer. Para estar qualificado a intervir nessas diferentes áreas, o egresso receberá uma formação generalista, estabelecida por um currículo que abrange temáticas variadas e pertinentes ao mercado profissional de Belo Horizonte e região. Espera-se que o egresso do Curso de Bacharelado em Educação Física seja capaz de analisar as demandas sociais e utilizar as diferentes manifestações e expressões do movimento humano como ferramenta de trabalho, visando proporcionar à sociedade a possibilidade de adoção de um estilo de vida fisicamente ativo e saudável."
             };
-            Cursos.Add(atividade_fisica);
+            Cursos.Add(esp_atividade_fisica);
             
             var cur_atividade_fisica = new Curriculo{
                 Id = Guid.Parse("b3b786b1-80a9-41e6-93eb-578d69a539f7"),
@@ -89,8 +103,8 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
                 Series = 1,
                 PrazoConclusaoMaximo = 30,
                 PrazoConclusaoIdeal = 18,
-                Curso = atividade_fisica,
-                CursoId = atividade_fisica.Id
+                Curso = esp_atividade_fisica,
+                CursoId = esp_atividade_fisica.Id
             };
             
             Curriculos.Add(cur_atividade_fisica);
@@ -312,7 +326,32 @@ CREATE TABLE "RelatorioEvasao" (
             builder.Entity<Papel>()
                 .ToTable("Papel");
 
+            //SetorAdministrativo
+            builder.Entity<SetorAdministrativo>()
+                .HasKey(m => m.Id);
 
+                
+            //SetorPedagogico
+            builder.Entity<SetorPedagogico>()
+                .HasKey(m => m.Id);
+                            
+
+            //Departamento
+            builder.Entity<Departamento>()
+                .HasKey(m => m.Id);
+
+            builder.Entity<Departamento>()
+                .HasMany(m => m.Cursos)
+                .WithOne(m => m.Departamento);
+                
+            builder.Entity<Departamento>()
+                .HasIndex(m => m.Nome)
+                .IsUnique();
+                
+            builder.Entity<Departamento>()
+                .Property(m => m.Nome)
+                .IsRequired();
+                
             //Curso
             builder.Entity<Curso>()
                 .ToTable("Curso");

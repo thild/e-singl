@@ -32,6 +32,8 @@ namespace Singl.Models
         [Display(Name = "Código")]
         public string Codigo { get; set; }
 
+        public Departamento Departamento { get; set; }
+
         [Display(Name = "Tipo")]
         public TipoCurso Tipo { get; set; }
 
