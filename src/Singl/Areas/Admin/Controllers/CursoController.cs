@@ -18,7 +18,7 @@ namespace Singl.Areas.Admin.Controllers
         }
 
         // GET: Curso/Details/5
-        public IActionResult Details(System.Guid? id)
+        public IActionResult Details(string id)
         {
             if (id == null)
             {
@@ -28,28 +28,8 @@ namespace Singl.Areas.Admin.Controllers
             var curso = db.Cursos
                 .Include(m => m.Curriculos)
                 .ThenInclude(m => m.Disciplinas)
-                .Single(m => m.Id == id);
+                .Single(m => m.Codigo == id);
                 
-            if (curso == null)
-            {
-                return new HttpStatusCodeResult(404);
-            }
-
-            return View(curso);
-        }
-
-        // GET: Curso/Details/5
-        public IActionResult Info(System.Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(404);
-            }
-
-            var curso = db.Cursos
-                .Include(m => m.Curriculos)
-                .ThenInclude(m => m.Disciplinas)
-                .Single(m => m.Id == id);
             if (curso == null)
             {
                 return new HttpStatusCodeResult(404);

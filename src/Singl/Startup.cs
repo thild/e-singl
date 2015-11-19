@@ -101,17 +101,11 @@ namespace Singl
                 //routes.MapRoute("areaRoute", "{area:exists}/{controller}/{action}");
                 routes.MapRoute(
                     name: "areaRoute",
-                    template: "{area:exists}/{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" },
-                    constraints: null,
-                    dataTokens: new { NameSpace = "default" });
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
               
                 routes.MapRoute(
                     name: "controllerActionRoute",
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" },
-                    constraints: null,
-                    dataTokens: new { NameSpace = "default" });
+                    template: "{controller=Home}/{action=Index}/{id?}");
                     
                 routes.MapRoute(
                     "controllerRoute",
