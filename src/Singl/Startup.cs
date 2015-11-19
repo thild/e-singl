@@ -30,10 +30,10 @@ namespace Singl
             // config.production.json file, depending on the environment. These settings override the ones in the 
             // config.json file.
                         
-            if (System.IO.File.Exists("esingl.sqlite"))
+            if (System.IO.File.Exists("singl.sqlite"))
             {
-                System.Console.WriteLine("Deleted esingl.sqlite");
-                System.IO.File.Delete("esingl.sqlite");
+                System.Console.WriteLine("Deleted singl.sqlite");
+                System.IO.File.Delete("singl.sqlite");
             }
 
              using(var context = new DatabaseContext())

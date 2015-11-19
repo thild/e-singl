@@ -1,7 +1,7 @@
 ﻿{
     "projects": [ "src" ],
     "sdk": {
-        "version": "1.0.0-rc1-16048",
+        "version": "1.0.0-rc1-final",
         "runtime": "mono",
         "architecture": "x64"
     }    

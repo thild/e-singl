@@ -1,28 +1,20 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Singl.Models
 {
-    public class SetorPedagogico : ISetorPedagogico
+    public class SetorPedagogico
     {
         public SetorPedagogico()
         {
         }
 
-        public string Nome
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        [Required]
+        public Guid Id { get; set; }
+        public IList<Departamento> Departamentos { get; set; }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public string Nome { get; set; }
     }
     
     public interface ISetor
@@ -30,15 +22,5 @@ namespace Singl.Models
         string Nome { get; set; }
         
     }
-    
-    public interface ISetorPedagogico : ISetor
-    {
-        
-    } 
-   
-   public interface ISetorAdministrativo : ISetor
-   {
-       
-   }
    
 }

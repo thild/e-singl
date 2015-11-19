@@ -1,24 +1,18 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Singl.Models
 {
-    public class SetorAdministrativo : ISetorAdministrativo
+    public class SetorAdministrativo
     {
         public SetorAdministrativo()
         {
         }
 
-        public string Nome
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        [Required]
+        public Guid Id { get; set; }
+        public string Nome { get; set; }
+        
+        public SetorAdministrativo SetorPai { get; set; }
     }
 }
