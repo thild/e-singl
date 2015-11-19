@@ -21,7 +21,7 @@ namespace Singl.Controllers
         }
 
         // GET: Disciplina/Details/5
-        public IActionResult Details(System.Guid? id)
+        public IActionResult Details(string id)
         {
             if (id == null)
             {
@@ -31,7 +31,7 @@ namespace Singl.Controllers
             var disciplina = db.Disciplinas
                 .Include(m => m.Curriculo)
                 .ThenInclude(m => m.Curso)
-                .Single(m => m.Id == id);
+                .Single(m => m.Codigo == id);
             if (disciplina == null)
             {
                 return new HttpStatusCodeResult(404);
