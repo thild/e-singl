@@ -71,7 +71,7 @@
                                         @Html.DisplayFor(modelItem => item.Codigo)
                                     </td>
                                     <td>
-                                        <a asp-controller="Disciplina" asp-action="Details" asp-route-id="@item.Id">@item.Nome</a>
+                                        <a asp-controller="Disciplina" asp-action="Details" asp-route-id="@item.Codigo">@item.Nome</a>
                                     </td>
                                     <td>
                                         <a href="@item.UrlAva" class="btn btn-success"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> AVA</a>
