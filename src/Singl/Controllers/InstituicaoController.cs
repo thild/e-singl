@@ -1,6 +1,5 @@
 using System.Linq;
 using Microsoft.AspNet.Mvc;
-using Singl;
 using Singl.Models;
 
 namespace Singl.Controllers

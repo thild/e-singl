@@ -1,8 +1,7 @@
-using System.ComponentModel.DataAnnotations;
 using System;
-using Singl.Models;
-using Microsoft.AspNet.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace Singl.ViewModels
 {

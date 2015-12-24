@@ -6,7 +6,7 @@ using System;
 namespace Singl.Models
 {
     //Turma
-    public class Turma
+    public class Turma : IModel<Guid>
     {
         
         public Turma()

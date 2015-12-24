@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Singl.Models
 {
-    public class Enquete
+    public class Enquete : IModel<Guid>
     {
         public Enquete()
         {

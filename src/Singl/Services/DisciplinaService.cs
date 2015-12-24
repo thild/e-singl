@@ -1,10 +1,7 @@
-using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Singl.Models;
-using System.Linq;
 
 namespace Singl.Services
 {

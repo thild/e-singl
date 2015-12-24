@@ -9,7 +9,7 @@ namespace Singl.Models
 {
     //Curso
     [CursoValidator]
-    public class Curso
+    public class Curso : IModel<Guid>
     {
 
         public Curso()
@@ -33,12 +33,17 @@ namespace Singl.Models
         public string Codigo { get; set; }
 
         public Departamento Departamento { get; set; }
+        public Guid DepartamentoId { get; set; }
 
         [Display(Name = "Tipo")]
         public TipoCurso Tipo { get; set; }
 
         [Display(Name = "Perfil do egresso")]
         public string PerfilEgresso { get; set; }
+
+        public Campus Campus { get; set;}
+         
+        public Guid CampusId { get; set;} 
 
         [Display(Name = "Currículos")]
         public IList<Curriculo> Curriculos { get; set; }
@@ -73,7 +78,5 @@ namespace Singl.Models
                 return Curriculo?.Disciplinas;
             }
         }
-
-
     }
 }

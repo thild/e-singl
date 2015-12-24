@@ -1,0 +1,77 @@
+@model Singl.Models.Campus
+@{ Singl.Models.SetorConhecimento setorConhecimento = null; }
+
+@{
+    ViewBag.Title = $"Detalhes do campus \"{@Model.Nome}\"";
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="section-heading">@ViewBag.Title</h2>
+                <hr class="hard"/>
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Sigla)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Sigla)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                        <dt>Lista de setores de conhecimento</dt>
+                        <dd>
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => setorConhecimento.Sigla)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => setorConhecimento.Nome)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            @foreach (var item in Model.SetoresConhecimento) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sigla)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td>
+                                        <div class="pull-right">
+                                            <a href="/admin/setoresconhecimento/@item.Sigla/@Model.Cidade.Sigla" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
+                                            <a href="/admin/setoresconhecimento/edit/@item.Sigla/@Model.Cidade.Sigla" class="btn btn-warning"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a>
+                                            <a href="/admin/setoresconhecimento/delete/@item.Sigla/@Model.Cidade.Sigla" class="btn btn-danger">
+                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Excluir</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            </table>
+                        </dd>                        
+                    </dl>
+                </div>
+                <hr class="hard"/>
+                <div class="pull-right">
+                    <a href="/admin/campus/edit/@Model.Sigla" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a>
+                    <!--<a href="/admin/setoresconhecimento?campus=@Model.Sigla" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Listar setoresconhecimento</a> -->
+                </div>
+                <div>
+                    <a asp-controller="Campus" asp-action="Index">Voltar à lista</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

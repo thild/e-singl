@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Singl.Models
 {
-    public class Papel
+    public class Papel : IModel<Guid>
     {
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -14,5 +14,10 @@
         /// Gets or sets the full name of the application.
         /// </summary>
         public string SiteTitle { get; set; }
+
+        public string DefaultAdminUserName { get; set; }
+
+        public string DefaultAdminPassword { get; set; }
+
     }
 }

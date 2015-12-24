@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Singl.Models
 {
-    public class Disciplina
+    public class Disciplina : IModel<Guid>
     {
         public Disciplina() {
             Id = Guid.NewGuid();

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Singl.Models
 {
-    public class Questao
+    public class Questao : IModel<Guid>
     {
         [Required]
         public Guid Id { get; set; }

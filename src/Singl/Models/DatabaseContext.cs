@@ -1,42 +1,157 @@
 ﻿//http://mvc.readthedocs.org/en/latest/tutorials/mvc-with-entity-framework.html
 using System;
-using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Infrastructure;
-
+using Microsoft.Extensions.Configuration;
 using Singl.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Singl
 {
-    public class DatabaseContext : DbContext
+    //public class ApplicationUser : IdentityUser { }
+
+    public class DatabaseContext : IdentityDbContext<Usuario>
     {
 
         public DbSet<Instituicao> Instituicao { get; set; }
         public DbSet<Curriculo> Curriculos { get; set; }
 
-        public DbSet<Usuario> Usuarios { get; set; }
+        //public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Papel> Papeis { get; set; }
         public DbSet<PapelUsuario> PapeisUsuarios { get; set; }
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Polo> Polos { get; set; }
+        public DbSet<Cidade> Cidades { get; set; }
+        public DbSet<Campus> Campi { get; set; }
         public DbSet<Questao> Questoes { get; set; }
         public DbSet<Alternativa> Alternativas { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
         public DbSet<SetorAdministrativo> SetoresAdministrativos { get; set; }
-        public DbSet<SetorPedagogico> SetoresPedagogicos { get; set; }
+        public DbSet<SetorConhecimento> SetoresConhecimento { get; set; }
         public DbSet<Departamento> Departamentos { get; set; }
+        public DbSet<ProjetoPesquisa> ProjetosPesquisa { get; set; }
+        public DbSet<PesquisadorProjetoPesquisa> PesquisadoresProjetosPesquisa { get; set; }
+        public DbSet<ProjetoExtensao> ProjetosExtensao { get; set; }
+        public DbSet<ProgramaExtensao> ProgramasExtensao { get; set; }
+        public DbSet<PropostaExtensionista> PropostasExtensionista { get; set; }
+
+
+        //Model metadata
+        public DbSet<MetadataUI> MetadataUI { get; set; }
 
         public DbSet<Enquete> RelatoriosEvasao { get; set; }
 
+        public DbSet<OfertaCurso> OfertasCurso { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=singl.sqlite");
         }
 
+        const string imgUrl = "~/Images/placeholder.png";
+        const string defaultAdminUserName = "DefaultAdminUserName";
+        const string defaultAdminPassword = "DefaultAdminPassword";
 
-        internal void Populate()
+        public async Task InitializeStoreDatabaseAsync(IServiceProvider serviceProvider, bool createUsers = true)
+        {
+            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var db = serviceScope.ServiceProvider.GetService<DatabaseContext>();
+
+                if (await db.Database.EnsureCreatedAsync())
+                {
+                    if (createUsers)
+                    {
+                        await CreateAdminUser(serviceProvider);
+                    }
+                    Populate();
+                }
+            }
+        }
+
+        private Usuario coordenador = null;
+        private Usuario aluno = null;
+        private Usuario relator = null;
+     
+
+        /// <summary>
+        /// Creates a store manager user who can manage the inventory.
+        /// </summary>
+        /// <param name="serviceProvider"></param>
+        /// <returns></returns>
+        private async Task CreateAdminUser(IServiceProvider serviceProvider)
+        {
+            var appEnv = serviceProvider.GetService<IApplicationEnvironment>();
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(appEnv.ApplicationBasePath)
+                .AddJsonFile("config.json")
+                .AddEnvironmentVariables();
+            var configuration = builder.Build();
+
+            //const string adminRole = "Administrator";
+
+            var userManager = serviceProvider.GetService<UserManager<Usuario>>();
+            // TODO: Identity SQL does not support roles yet
+            //var roleManager = serviceProvider.GetService<ApplicationRoleManager>();
+            //if (!await roleManager.RoleExistsAsync(adminRole))
+            //{
+            //    await roleManager.CreateAsync(new IdentityRole(adminRole));
+            //}
+
+            var user = await userManager.FindByNameAsync("admin"/*configuration[defaultAdminUserName]*/);
+            if (user == null)
+            {
+                user = new Usuario { UserName = "admin"/*configuration[defaultAdminUserName]*/ };
+                await userManager.CreateAsync(user, "Admin!@#123" /*configuration[defaultAdminPassword]*/);
+                //await userManager.AddToRoleAsync(user, adminRole);
+                //await userManager.AddClaimAsync(user, new Claim("ManageStore", "Allowed"));
+            }
+            
+            aluno = new Usuario
+            {
+                Email = "teste@teste.com",
+                // Nome = "Aluno",
+                // NomeUsuario = "aluno",
+                // Sobrenome = "Teste",
+                UserName = "aluno"
+            };
+            await userManager.CreateAsync(aluno, "Admin!@#123" /*configuration[defaultAdminPassword]*/);
+            //await userManager.AddClaimAsync(aluno, new Claim("ManageStore", "Allowed"));
+            
+            coordenador = new Usuario
+            {
+                Email = "coordenador@teste.com",
+                // Nome = "Coordenador",
+                // NomeUsuario = "coordenador",
+                // Sobrenome = "Teste",
+                UserName = "coordenador"
+            };
+            await userManager.CreateAsync(coordenador, "Admin!@#123" /*configuration[defaultAdminPassword]*/);
+            //await userManager.AddClaimAsync(coordenador, new Claim("ManageStore", "Allowed"));
+
+            relator = new Usuario
+            {
+                Email = "relator@teste.com",
+                // Nome = "Relator",
+                // NomeUsuario = "relator",
+                // Sobrenome = "Teste",
+                UserName = "relator"
+            };
+            await userManager.CreateAsync(relator, "Admin!@#123" /*configuration[defaultAdminPassword]*/);
+            //await userManager.AddClaimAsync(relator, new Claim("ManageStore", "Allowed"));
+            
+            await this.SaveChangesAsync();
+        }
+        
+        private void Populate()
         {
 
+            
+            
             Instituicao.Add(new Instituicao {
                 Nome = "NEAD - Núcleo de Educação a Distância",
                 Vinculo = "Universidade Estadual do Centro-Oeste",
@@ -49,24 +164,211 @@ namespace Singl
 A estrutura organizacional para os cursos ofertados na modalidade de Educação a Distância da Unicentro é composta de um Núcleo de Educação a Distância, localizado no Campus Sede da Universidade, pela estrutura advinda da Parceria do Sistema Aberta do Brasil – UAB e por Polos de Apoio Presenciais de Educação a Distância, localizados em diversos municípios."
             });
             
-            //Departamentos
-            var depFilosofia = new Departamento {Nome = "Departamento de Filosofia",
-                                                 Sigla = "DEFIL"};
-            var depEducaaoFisica = new Departamento {Nome = "Departamento de Educação Física",
-                                                     Sigla = "DEDUF"};
+            //Cidade
+            var guarapuava = new Cidade {Id = Guid.Parse("bd38f703-ebec-4f7e-a6ec-f333c28f36e4"), Nome = "Guarapuava", Sigla = "G"};
+            var irati = new Cidade {Id = Guid.Parse("aef0aa2a-e4c9-432e-b26f-43c0f93f37fe"), Nome = "Irati", Sigla = "I"};
             
-            Departamentos.AddRange(depEducaaoFisica, depFilosofia);
+            var chopinzinho = new Cidade {Id = Guid.Parse("c266f0a5-0ff8-4324-9da2-c3c322199cd0"), Nome = "Chopinzinho", Sigla = "CH"};
+            var laranjeirasSul = new Cidade {Id = Guid.Parse("5182c404-fc3d-4a82-881d-c4b59051c641"), Nome = "Laranjeiras do Sul", Sigla = "LS"};
+            var pitanga = new Cidade {Id = Guid.Parse("4ede2654-16d4-43b8-8b7f-b175d7918bb4"), Nome = "Pitanga", Sigla = "PI"};
+            var prudentopolis = new Cidade {Id = Guid.Parse("cb0988c3-fabd-4aaf-8082-e99637523ce1"), Nome = "Prudentópolis", Sigla = "PR"};
+            Cidades.AddRange(guarapuava, irati, chopinzinho, laranjeirasSul, pitanga, prudentopolis);
+            
+            //Campus
+            var campusSantaCruz = new Campus {Id = Guid.Parse("0894e92c-d0b5-4a65-8154-7fc7a30adaf6"), Nome = "Santa Cruz", Cidade = guarapuava, Sigla = "SC", Sede = true};
+            var campusCedeteg = new Campus {Id = Guid.Parse("5329ca07-f91e-488b-bb39-a48afb6f5182"), Nome = "CEDETEG", Cidade = guarapuava, Sigla = "C"};
+            var campusIrati = new Campus {Id = Guid.Parse("637a4db0-8ebe-482f-9165-79a71c7c2ecb"), Nome = "Irati", Cidade = irati, Sigla = "I"};
+            
+            var campusChopinzinho = new Campus {Id = Guid.Parse("daa993e7-0434-4aa5-9b8b-f43bffd786e5"), Nome = "Chopinzinho", Cidade = chopinzinho, Sigla = "CH", Avancado = true};
+            var campusLaranjeirasSul = new Campus {Id = Guid.Parse("2daef512-79b9-4f76-a5e9-ab37ca76e49d"), Nome = "Laranjeiras do Sul", Cidade = laranjeirasSul, Sigla = "LS", Avancado = true};
+            var campusPitanga = new Campus {Id = Guid.Parse("8cb7875a-3df3-49b0-9a3d-0235a9e7ae3e"), Nome = "Pitanga", Sigla = "PI", Cidade = pitanga, Avancado = true};
+            var campusPrudentopolis = new Campus {Id = Guid.Parse("bb9124cb-b492-482e-a7ef-345e86926c55"), Nome = "Prudentópolis", Sigla = "PR", Cidade = prudentopolis, Avancado = true};
+            Campi.AddRange(campusSantaCruz, campusCedeteg, campusIrati, campusChopinzinho, campusLaranjeirasSul, campusPitanga,
+                           campusPrudentopolis);
+            
+            //Setores administrativos
+            var saNead = new SetorAdministrativo {Id = Guid.Parse("8facb2e5-855b-457c-a98f-0d48cbee8a1d"), Nome = "Núcleo de Educação à Distância", Sigla = "NEAD", Campus = campusSantaCruz};
+            var saNeadVideos = new SetorAdministrativo {Id = Guid.Parse("b4ff3410-fcbc-4895-b958-ae10818fa01e"), Nome = "NEAD - Vídeos", Sigla = "NEADV", SuperSetor = saNead, Campus = campusSantaCruz};
+            var saNeadMulti = new SetorAdministrativo {Id = Guid.Parse("01d69cfb-f49b-41d4-9062-f0e97bae9136"), Nome = "NEAD - Multidisciplinar", Sigla = "NEADM", SuperSetor = saNead, Campus = campusSantaCruz};
+            SetoresAdministrativos.AddRange(saNead,saNeadMulti,saNeadVideos); 
+            
+            
+// ea0c1b9d-6740-4613-929a-114bc8a322cb
+// 16143be8-8722-4b6f-99c8-a91eb5125f67
+// f9449eaf-cbe4-4efc-aa2b-9288e5ea53b5
+// af11b6eb-0c31-484c-99e2-5c2832b38350
+// d593fee9-31e2-4ed5-8c5a-c0971ffd71a2
+// 2027a141-93ad-468a-9f62-78c9b076e900
+            
+            //Setores de conhecimento
+            var seaa_g = new SetorConhecimento {Id = Guid.Parse("d33795a5-e364-48df-a3a7-2fd57245e019"), Nome = "Setor de Ciências Agrárias e Ambientais", Sigla = "SEAA", Campus = campusCedeteg, Cidade = guarapuava};
+            var seet_g = new SetorConhecimento {Id = Guid.Parse("cff44bd2-3199-4adc-8786-b677b6f89500"), Nome = "Setor de Ciências Exatas e de Tecnologia", Sigla = "SEET", Campus = campusCedeteg, Cidade = guarapuava};
+            var sehla_g = new SetorConhecimento {Id = Guid.Parse("fa8e2635-3ae1-4d29-857a-6eed65b89851"), Nome = "Setor de Ciências Humanas, Letras e Artes", Sigla = "SEHLA", Campus = campusSantaCruz, Cidade = guarapuava};
+            var ses_g = new SetorConhecimento {Id = Guid.Parse("e120b519-bd0c-48c4-b744-6fc57798c491"), Nome = "Setor de Ciências da Saúde", Sigla = "SES", Campus = campusCedeteg, Cidade = guarapuava};
+            var ses_i = new SetorConhecimento {Id = Guid.Parse("ac47aca3-973e-44a3-bcd2-cbe076202043"), Nome = "Setor de Ciências da Saúde", Sigla = "SES", Campus = campusIrati, Cidade = irati};
+            var sesa_g = new SetorConhecimento {Id = Guid.Parse("70c6f0f5-66db-472a-a2db-317b49c1f54a"), Nome = "Setor de Ciências Sociais Aplicadas", Sigla = "SESA", Campus = campusSantaCruz, Cidade = guarapuava};
+            SetoresConhecimento.Add(seaa_g); 
+            SetoresConhecimento.Add(seet_g); 
+            SetoresConhecimento.Add(sehla_g); 
+            SetoresConhecimento.Add(ses_g); 
+            SetoresConhecimento.Add(ses_i); 
+            SetoresConhecimento.Add(sesa_g); 
+            
+            //Departamentos
+            //SEHLA
+            var deart_g = new Departamento {
+                                                 Id = Guid.Parse("8fba4dcf-ba5e-4b66-99de-5efc45861b75"),
+                                                 Nome = "Departamento de Arte-Educação",
+                                                 Sigla = "DEART",
+                                                 SetorConhecimento = sehla_g,
+                                                 Campus = campusSantaCruz};
+
+            var decs_g = new Departamento {
+                                                 Id = Guid.Parse("8b2f4950-f81a-4ecb-88af-2d9e406aac51"),
+                                                 Nome = "Departamento de Comunicação Social",
+                                                 Sigla = "DECS",
+                                                 SetorConhecimento = sehla_g,
+                                                 Campus = campusSantaCruz};
+
+            var defil_g = new Departamento {
+                                                 Id = Guid.Parse("8e67838c-d190-4cc2-ac06-cd78412673b2"),
+                                                 Nome = "Departamento de Filosofia",
+                                                 Sigla = "DEFIL",
+                                                 SetorConhecimento = sehla_g,
+                                                 Campus = campusSantaCruz};
+
+            var dehis_g = new Departamento {
+                                                 Id = Guid.Parse("e10976e2-aed6-40ca-8445-541995fae372"),
+                                                 Nome = "Departamento de História",
+                                                 Sigla = "DEHIS",
+                                                 SetorConhecimento = sehla_g,
+                                                 Campus = campusSantaCruz};
+
+
+            var delet_g = new Departamento {
+                                                 Id = Guid.Parse("060df4b9-75a5-4089-90b5-dda46e093f3b"),
+                                                 Nome = "Departamento de Letras",
+                                                 Sigla = "DELET",
+                                                 SetorConhecimento = sehla_g,
+                                                 Campus = campusSantaCruz};
+
+            var deped_g = new Departamento {
+                                                 Id = Guid.Parse("ab3eb3dd-8a31-4098-9fab-080c61014a4c"),
+                                                 Nome = "Departamento de Pedagogia",
+                                                 Sigla = "DEPED",
+                                                 SetorConhecimento = sehla_g,
+                                                 Campus = campusSantaCruz};
+
+            //SES                                                 
+            var deduf_g = new Departamento {
+                                                Id = Guid.Parse("344f0e65-3c6c-4bcf-9c4b-9aac6312a544"),
+                                                Nome = "Departamento de Educação Física",
+                                                Sigla = "DEDUF",
+                                                SetorConhecimento = ses_g,
+                                                Campus = campusCedeteg};
+
+            var deduf_i = new Departamento {
+                                                Id = Guid.Parse("a4ba85b4-1611-4473-adbc-f3fa08b8912a"),
+                                                Nome = "Departamento de Educação Física",
+                                                Sigla = "DEDUF",
+                                                SetorConhecimento = ses_i,
+                                                Campus = campusIrati};
+
+            var denf_g = new Departamento {
+                                                Id = Guid.Parse("1d74b2ff-8e6f-4ac6-9e67-5bc8f4d35e17"),
+                                                Nome = "Departamento de Enfermagem",
+                                                Sigla = "DENF",
+                                                SetorConhecimento = ses_g,
+                                                Campus = campusCedeteg};
+
+            var defar_g = new Departamento {
+                                                Id = Guid.Parse("1a8a5f1b-35ea-45c9-969c-9bd9e2e0bb58"),
+                                                Nome = "Departamento de Farmácia",
+                                                Sigla = "DEFAR",
+                                                SetorConhecimento = ses_g,
+                                                Campus = campusCedeteg};
+
+
+            var defisio_g = new Departamento {
+                                                Id = Guid.Parse("32d28159-7253-42a1-828b-a5862ce1429a"),
+                                                Nome = "Departamento de Fisioterapia",
+                                                Sigla = "DEFISIO",
+                                                SetorConhecimento = ses_g,
+                                                Campus = campusCedeteg};
+
+            var denut_g = new Departamento {
+                                                Id = Guid.Parse("c7924683-f28f-46c7-94f9-085bdf30d6cb"),
+                                                Nome = "Departamento de Nutrição",
+                                                Sigla = "DENUT",
+                                                SetorConhecimento = ses_g,
+                                                Campus = campusCedeteg};
+
+            var depsi_i = new Departamento {
+                                                Id = Guid.Parse("a108571c-29e6-4cc6-a29a-21f8b6134039"),
+                                                Nome = "Departamento de Psicologia",
+                                                Sigla = "DEPSI",
+                                                SetorConhecimento = ses_i,
+                                                Campus = campusIrati};
+
+            var defono_i = new Departamento {
+                                                Id = Guid.Parse("d037a3c9-7c0b-43cd-9a67-ce3ffbef46e9"),
+                                                Nome = "Departamento de Fonoaudiologia",
+                                                Sigla = "DEFONO",
+                                                SetorConhecimento = ses_i,
+                                                Campus = campusIrati};
+
+            //SEET
+            var decomp_g = new Departamento {
+                                                Id = Guid.Parse("ebfcea0b-ead3-4295-9714-3ed05218fdbf"),
+                                                Nome = "Departamento de Ciência da Computação",
+                                                Sigla = "DECOMP",
+                                                SetorConhecimento = seet_g,
+                                                Campus = campusCedeteg};
+                                                     
+            var deali_g = new Departamento {
+                                                Id = Guid.Parse("65591b25-191e-410a-8e06-b9214bd8d4a9"),
+                                                Nome = "Departamento de Engenharia de Alimentos",
+                                                Sigla = "DEALI",
+                                                SetorConhecimento = seet_g,
+                                                Campus = campusCedeteg};
+                                                     
+            var defis_g = new Departamento {
+                                                Id = Guid.Parse("7331f8cd-5c92-4988-a21c-878f37ef0a23"),
+                                                Nome = "Departamento de Física",
+                                                Sigla = "DEFIS",
+                                                SetorConhecimento = seet_g,
+                                                Campus = campusCedeteg};
+                                                     
+            var demat_g = new Departamento {
+                                                Id = Guid.Parse("370cb2d6-6734-4dd5-9d1d-745df7455d7e"),
+                                                Nome = "Departamento de Matemática",
+                                                Sigla = "DEMAT",
+                                                SetorConhecimento = seet_g,
+                                                Campus = campusCedeteg};
+                                                     
+            var deq_g = new Departamento {
+                                                Id = Guid.Parse("7ef8c48c-b028-4c04-a3e4-c382845c9b1b"),
+                                                Nome = "Departamento de Química",
+                                                Sigla = "DEQ",
+                                                SetorConhecimento = seet_g,
+                                                Campus = campusCedeteg};
+                                                     
+            Departamentos.AddRange(deart_g, decs_g, defil_g, dehis_g, delet_g, deped_g, 
+                                   deduf_g, deduf_i, denf_g, defar_g, defisio_g, denut_g, 
+                                   depsi_i, defono_i,
+                                   decomp_g, deali_g, defis_g, demat_g, deq_g);
+            
             
             //Cursos
-
             var esp_filosofia = new Curso
             {
                 Id = Guid.Parse("c38e9d6e-dcdf-4fea-8fce-88e338e6c74a"),
                 Codigo = "1000",
                 Nome = "Ensino de Filosofia no Ensino Médio",
-                Departamento = depFilosofia,
+                Departamento = defil_g,
                 Tipo = TipoCurso.Especializacao,
-                PerfilEgresso = @"O Bacharel em Filosofia é o profissional que auxilia na formulação e na proposição de soluções de problemas nos diversos campos do conhecimento e, em especial, na educação, área em que colabora na formulação e na execução de projetos de desenvolvimento dos conteúdos curriculares, bem como na utilização de tecnologias da informação, da comunicação e de metodologias, estratégias e materiais de apoio inovadores."
+                PerfilEgresso = @"O Bacharel em Filosofia é o profissional que auxilia na formulação e na proposição de soluções de problemas nos diversos campos do conhecimento e, em especial, na educação, área em que colabora na formulação e na execução de projetos de desenvolvimento dos conteúdos curriculares, bem como na utilização de tecnologias da informação, da comunicação e de metodologias, estratégias e materiais de apoio inovadores.",
+                Campus = campusSantaCruz
             };
             Cursos.Add(esp_filosofia);
             
@@ -88,10 +390,11 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
             {
                 Id = Guid.Parse("8b15ca5a-cbaf-460e-ba26-bd38652c7c55"),
                 Codigo = "1001",
-                Departamento = depEducaaoFisica,
+                Departamento = deduf_g,
                 Nome = "Atividade Física e Saúde",
                 Tipo = TipoCurso.Especializacao,
-                PerfilEgresso = @"A Educação Física possui um grande campo de atuação que engloba o treinamento esportivo de iniciação e de rendimento, a prescrição e orientação de atividades físicas para saúde e estética, a gestão esportiva, a preparação e reabilitação física, a recreação e o lazer. Para estar qualificado a intervir nessas diferentes áreas, o egresso receberá uma formação generalista, estabelecida por um currículo que abrange temáticas variadas e pertinentes ao mercado profissional de Belo Horizonte e região. Espera-se que o egresso do Curso de Bacharelado em Educação Física seja capaz de analisar as demandas sociais e utilizar as diferentes manifestações e expressões do movimento humano como ferramenta de trabalho, visando proporcionar à sociedade a possibilidade de adoção de um estilo de vida fisicamente ativo e saudável."
+                PerfilEgresso = @"A Educação Física possui um grande campo de atuação que engloba o treinamento esportivo de iniciação e de rendimento, a prescrição e orientação de atividades físicas para saúde e estética, a gestão esportiva, a preparação e reabilitação física, a recreação e o lazer. Para estar qualificado a intervir nessas diferentes áreas, o egresso receberá uma formação generalista, estabelecida por um currículo que abrange temáticas variadas e pertinentes ao mercado profissional de Belo Horizonte e região. Espera-se que o egresso do Curso de Bacharelado em Educação Física seja capaz de analisar as demandas sociais e utilizar as diferentes manifestações e expressões do movimento humano como ferramenta de trabalho, visando proporcionar à sociedade a possibilidade de adoção de um estilo de vida fisicamente ativo e saudável.",
+                Campus = campusSantaCruz
             };
             Cursos.Add(esp_atividade_fisica);
             
@@ -143,8 +446,38 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
             Disciplinas.Add(new Disciplina { Codigo = "1001-2015", Nome = "Tecnologias da Informação e Comunicação", Curriculo = cur_atividade_fisica });
             Disciplinas.Add(new Disciplina { Codigo = "1001-2016", Nome = "Trabalho de Conclusão de Curso (TCC)", Curriculo = cur_atividade_fisica });
 
-
-
+            //Projeto de pesquisa
+            var pp = new ProjetoPesquisa {
+                Coordenador = coordenador, 
+                Inicio = DateTime.Now, 
+                Termino = DateTime.Now.AddYears(1),
+                Titulo = "Projeto de pesquisa teste",
+                Descricao = "Descrição do projeto de pesquisa teste",
+                Objetivos = "Objetivos do projeto de pesquisa teste",
+                Departamento = defil_g,
+                Tipo = TipoPesquisa.PqC,
+                };
+            pp.Pesquisadores.Add (aluno);
+            pp.Pesquisadores.Add (relator);
+            ProjetosPesquisa.Add(pp);
+            
+            var ppp = new PesquisadorProjetoPesquisa {
+                Pesquisador = coordenador,
+                ProjetoPesquisa = pp
+            };
+            PesquisadoresProjetosPesquisa.Add(ppp);
+// 
+//         public DateTimeOffset Inicio { get; set; }
+//         public DateTimeOffset Termino { get; set; }
+//         public string Titulo { get; set; }
+//         public string Descricao { get; set; }
+//         public string Objetivos { get; set; }
+//         public Departamento Departamento { get; set; }
+//         public Guid DepartamentoId { get; set; }
+//         public SetorAdministrativo SetorAdministrativo { get; set; }
+//         public Guid SetorAdministrativoId { get; set; }
+//         public TipoPesquisa Tipo { get; set; }
+//         public IList<Usuario> Pesquisadores { get; set; }
             /*
 CREATE TABLE "Polo" (
     "Id" BLOB NOT NULL PRIMARY KEY,
@@ -169,32 +502,7 @@ CREATE TABLE "Usuario" (
 )
             */
 
-            var aluno = new Usuario
-            {
-                Email = "teste@teste.com",
-                Nome = "Aluno",
-                NomeUsuario = "aluno",
-                Sobrenome = "Teste"
-            };
-            Usuarios.Add(aluno);
-
-            var coordenador = new Usuario
-            {
-                Email = "coordenador@teste.com",
-                Nome = "Coordenador",
-                NomeUsuario = "coordenador",
-                Sobrenome = "Teste"
-            };
-            Usuarios.Add(coordenador);
-
-            var relator = new Usuario
-            {
-                Email = "relator@teste.com",
-                Nome = "Relator",
-                NomeUsuario = "relator",
-                Sobrenome = "Teste"
-            };
-            Usuarios.Add(relator);
+          
             /*
 CREATE TABLE "RelatorioEvasao" (
     "Id" BLOB NOT NULL PRIMARY KEY,
@@ -299,27 +607,27 @@ CREATE TABLE "RelatorioEvasao" (
                 .Property(m => m.Sobre)
                 .HasMaxLength(2000);
             
-            //Usuario
-            builder.Entity<Usuario>()
-                .ToTable("Usuario");
-
-            builder.Entity<Usuario>()
-                .Ignore(m => m.Papeis)
-                .Ignore(m => m.NomeCompleto)
-                .HasKey(m => m.Id);
-
-            builder.Entity<Usuario>()
-                .Property(m => m.NomeUsuario)
-                .HasMaxLength(20);
-
-            builder.Entity<Usuario>()
-                .HasIndex(m => m.Email)
-                .IsUnique();
-
-            builder.Entity<Usuario>()
-                .Property(m => m.Email)
-                .HasMaxLength(100)
-                .IsRequired();
+//             //Usuario
+//             builder.Entity<Usuario>()
+//                 .ToTable("Usuario");
+// 
+//             builder.Entity<Usuario>()
+//                 .Ignore(m => m.Papeis)
+//                 .Ignore(m => m.NomeCompleto)
+//                 .HasKey(m => m.Id);
+// 
+//             builder.Entity<Usuario>()
+//                 .Property(m => m.NomeUsuario)
+//                 .HasMaxLength(20);
+// 
+//             builder.Entity<Usuario>()
+//                 .HasIndex(m => m.Email)
+//                 .IsUnique();
+// 
+//             builder.Entity<Usuario>()
+//                 .Property(m => m.Email)
+//                 .HasMaxLength(100)
+//                 .IsRequired();
 
 
             //Papel
@@ -329,12 +637,50 @@ CREATE TABLE "RelatorioEvasao" (
             //SetorAdministrativo
             builder.Entity<SetorAdministrativo>()
                 .HasKey(m => m.Id);
-
                 
-            //SetorPedagogico
-            builder.Entity<SetorPedagogico>()
-                .HasKey(m => m.Id);
+            builder.Entity<SetorAdministrativo>()
+                .HasMany(m => m.SubSetores)
+                .WithOne(m => m.SuperSetor)
+                .HasForeignKey(m => m.SuperSetorId)
+                .IsRequired(false);
                             
+            builder.Entity<SetorAdministrativo>()
+                .HasOne(m => m.SuperSetor)
+                .WithMany(m => m.SubSetores)
+                .HasForeignKey(m => m.SuperSetorId)
+                .IsRequired(false);
+
+            builder.Entity<SetorAdministrativo>()
+                .HasIndex(m => new {Nome = m.Nome, CampusId = m.CampusId})
+                .IsUnique();                
+
+            builder.Entity<SetorAdministrativo>()
+                .HasIndex(m => new {Sigla = m.Sigla, CampusId = m.CampusId})
+                .IsUnique();                
+
+            //SetorConhecimento
+            builder.Entity<SetorConhecimento>()
+                .HasKey(m => m.Id);
+                
+            builder.Entity<SetorConhecimento>()
+                .HasIndex(m => new {Nome = m.Nome, CidadeId = m.CidadeId})
+                .IsUnique();                
+
+            builder.Entity<SetorConhecimento>()
+                .HasIndex(m => new {Sigla = m.Sigla, CidadeId = m.CidadeId})
+                .IsUnique();                
+                
+                            
+            //ProjetoPesquisa
+            // builder.Entity<ProjetoPesquisa>()
+            //     .HasOne(m => m.Departamento)
+            //     .WithMany(m => m.ProjetosPesquisa)
+            //     .HasForeignKey(m => m.DepartamentoId)
+            //     .IsRequired(false);                                        
+
+            //ProjetoPesquisa
+            builder.Entity<PesquisadorProjetoPesquisa>()
+                .HasKey(m => new {m.PesquisadorId, m.ProjetoPesquisaId});
 
             //Departamento
             builder.Entity<Departamento>()
@@ -345,13 +691,21 @@ CREATE TABLE "RelatorioEvasao" (
                 .WithOne(m => m.Departamento);
                 
             builder.Entity<Departamento>()
-                .HasIndex(m => m.Nome)
+                .HasIndex(m => new {Nome = m.Nome, CampusId = m.CampusId})
                 .IsUnique();
                 
             builder.Entity<Departamento>()
                 .Property(m => m.Nome)
                 .IsRequired();
                 
+            builder.Entity<Departamento>()
+                .Property(m => m.Sigla)
+                .IsRequired();
+                
+            builder.Entity<Departamento>()
+                .HasIndex(m => new {Sigla = m.Sigla, CampusId = m.CampusId})
+                .IsUnique();
+
             //Curso
             builder.Entity<Curso>()
                 .ToTable("Curso");
@@ -456,6 +810,10 @@ CREATE TABLE "RelatorioEvasao" (
                 .Property(m => m.Texto)
                     .HasMaxLength(300)
                     .IsRequired();
+                    
+            //Model metadata
+            builder.Entity<MetadataUI>()
+                .HasKey(m => m.Id);                    
 
 
             //              builder.Entity<PapelUsuario>()
@@ -466,8 +824,6 @@ CREATE TABLE "RelatorioEvasao" (
 
             base.OnModelCreating(builder);
         }
-
-        public DbSet<OfertaCurso> OfertaCurso { get; set; }
 
     }
 }

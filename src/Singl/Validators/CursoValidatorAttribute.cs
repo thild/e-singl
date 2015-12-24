@@ -1,10 +1,8 @@
-using System.ComponentModel.DataAnnotations;
-using Singl.ViewModels;
-using Singl.Models;
-using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Mvc.ModelBinding.Validation;
+using Microsoft.Extensions.Localization;
 
 namespace Singl.Models.Validators
 {

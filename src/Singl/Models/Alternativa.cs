@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Singl.Models
 {
-    public class Alternativa
+    public class Alternativa : IModel<Guid>
     {
         [Required]
         public Guid Id { get; set; }

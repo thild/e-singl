@@ -2,12 +2,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
-using Singl.Extensions;
 
 namespace Singl.Models
 {
     //Curriculo
-    public class Curriculo
+    public class Curriculo : IModel<Guid>
     {
         
         public Curriculo()

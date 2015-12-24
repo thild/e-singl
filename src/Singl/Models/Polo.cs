@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Singl.Models
 {
-    public class Polo
+    public class Polo : IModel<Guid>
     {
         
         public Polo() {

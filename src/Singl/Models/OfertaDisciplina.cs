@@ -1,12 +1,11 @@
 using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
 
 namespace Singl.Models
 {
     //Oferta
-    public class OfertaDisciplina
+    public class OfertaDisciplina : IModel<Guid>
     {
         
         public OfertaDisciplina()

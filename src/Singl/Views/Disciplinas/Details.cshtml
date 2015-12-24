@@ -1,0 +1,38 @@
+@model Singl.Models.Disciplina
+
+@{
+    ViewBag.Title = "Detalhes da disciplina";
+    Layout = "/Views/Shared/_InfoLayout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="section-heading">@ViewBag.Title</h2>
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Codigo)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Codigo)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                    </dl>
+                </div>
+                <hr class="hard"/>
+                <div>
+                    <a href="javascript:history.go(-1)">Voltar</a>
+                </div>      
+            </div>
+        </div>
+    </div>
+</section>
+
+

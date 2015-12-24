@@ -1,9 +1,8 @@
+using System;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
-using Singl;
-using System;
 using Singl.Models;
 
 namespace Singl.Areas.Admin.Controllers
@@ -15,13 +14,13 @@ namespace Singl.Areas.Admin.Controllers
 
         public OfertaCursoController(DatabaseContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: OfertaCurso
         public IActionResult Index()
         {
-            var ofertaCurso = _context.OfertaCurso.Include(o => o.Curso);
+            var ofertaCurso = _context.OfertasCurso.Include(o => o.Curso);
             return View(ofertaCurso.ToList());
         }
 
@@ -33,7 +32,7 @@ namespace Singl.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
-            var ofertaCurso = _context.OfertaCurso.Single(m => m.Id == id);
+            var ofertaCurso = _context.OfertasCurso.Single(m => m.Id == id);
             if (ofertaCurso == null)
             {
                 return HttpNotFound();
@@ -57,7 +56,7 @@ namespace Singl.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 ofertaCurso.Id = Guid.NewGuid();
-                _context.OfertaCurso.Add(ofertaCurso);
+                _context.OfertasCurso.Add(ofertaCurso);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -73,7 +72,7 @@ namespace Singl.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
-            OfertaCurso ofertaCurso = _context.OfertaCurso.Single(m => m.Id == id);
+            OfertaCurso ofertaCurso = _context.OfertasCurso.Single(m => m.Id == id);
             if (ofertaCurso == null)
             {
                 return HttpNotFound();
@@ -106,7 +105,7 @@ namespace Singl.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
-            OfertaCurso ofertaCurso = _context.OfertaCurso.Single(m => m.Id == id);
+            OfertaCurso ofertaCurso = _context.OfertasCurso.Single(m => m.Id == id);
             if (ofertaCurso == null)
             {
                 return HttpNotFound();
@@ -120,8 +119,8 @@ namespace Singl.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(Guid id)
         {
-            OfertaCurso ofertaCurso = _context.OfertaCurso.Single(m => m.Id == id);
-            _context.OfertaCurso.Remove(ofertaCurso);
+            OfertaCurso ofertaCurso = _context.OfertasCurso.Single(m => m.Id == id);
+            _context.OfertasCurso.Remove(ofertaCurso);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
