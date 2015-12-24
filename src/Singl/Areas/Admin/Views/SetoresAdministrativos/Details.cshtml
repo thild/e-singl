@@ -1,0 +1,78 @@
+@model Singl.Models.SetorAdministrativo
+
+@{
+    ViewBag.Title = $"Detalhes do setor administrativo \"{@Model.Nome}\"";
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="section-heading">@ViewBag.Title</h2>
+                <hr class="hard"/>
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Sigla)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Sigla)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                    @if(Model.SubSetores.Count != 0) {
+                        <dt>Lista de subsetores administrativos</dt>
+                        <dd>
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Sigla)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Nome)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            @foreach (var item in Model.SubSetores) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sigla)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td>
+                                        <div class="pull-right">
+                                            <a href="/admin/setoresadministrativos/@item.Sigla" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
+                                            <a href="/admin/setoresadministrativos/edit/@item.Sigla" class="btn btn-warning"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a>
+                                            <a href="/admin/setoresadministrativos/delete/@item.Sigla" class="btn btn-danger">
+                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Excluir</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            </table>
+                        </dd>                        
+                    }
+                    </dl>
+                </div>
+                <hr class="hard"/>
+                <div class="pull-right">
+                    <a href="/admin/setoresadministrativos/edit/@Model.Sigla" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a>
+                    <!--<a href="/admin/setoresadministrativos?departamento=@Model.Sigla" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Listar setoresadministrativos</a> -->
+                </div>
+                <div>
+                    <a asp-controller="SetoresAdministrativos" asp-action="Index">Voltar à lista</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

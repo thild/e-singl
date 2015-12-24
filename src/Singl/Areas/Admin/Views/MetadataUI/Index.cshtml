@@ -1,0 +1,95 @@
+@model  Singl.Areas.Admin.ViewModels.MetadataUIViewModel
+@{ Singl.Models.MetadataUI metadataUI = null; }
+
+@{
+    ViewBag.Title = $"Novo metadado para {@Model.Metadata.ModelId}";
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="section-heading">@ViewBag.Title</h2>
+                <hr class="hard">
+                <div>
+                    <form asp-controller="MetadataUI" asp-action="Create" method="post">
+                        <div class="form-horizontal">
+                            <hr />
+                            <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+                            <input asp-for="Metadata.Id" type="hidden" />
+                            <input asp-for="Metadata.ModelId" type="hidden" />
+                            <div class="form-group">
+                                <label asp-for="Metadata.Property" class="control-label col-md-2"></label>
+                                <div class="col-md-10">
+                                    <input asp-for="Metadata.Property" class="form-control" />
+                                    <span asp-validation-for="Metadata.Property" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Metadata.Value" class="control-label col-md-2"></label>
+                                <div class="col-md-10">
+                                    <input asp-for="Metadata.Value" class="form-control" />
+                                    <span asp-validation-for="Metadata.Value" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Metadata.Description" class="control-label col-md-2"></label>
+                                <div class="col-md-10">
+                                    <input asp-for="Metadata.Description" class="form-control" />
+                                    <span asp-validation-for="Metadata.Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr class="hard">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-save" aria-hidden="true"> Salvar</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="javascript:history.go(-1)">Voltar</a>
+                        </div>
+                    </form>
+                @if(Model.MetadataList.Count() != 0) {
+                    <hr class="hard">
+                    <h3>Lista de metadados</h3>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => metadataUI.Property)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => metadataUI.Value)
+                            </th>
+                            <th></th>
+                        </tr>
+                    @foreach (var item in Model.MetadataList) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Property)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Value)
+                            </td>
+                            <td>
+                                <div class="pull-right">
+                                    <form action="/Admin/MetadataUI/Delete" method="post">
+                                        <input asp-for="Metadata.ModelId" type="hidden" />
+                                        <a href="/admin/metadataui/?modelId=@item.ModelId&id=@item.Id"  class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a>
+                                        <a href="/admin/metadataui/delete/?modelId=@item.ModelId&id=@item.Id"  class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Excluir</a>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </table>
+                }
+                </div>                
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -3,7 +3,7 @@ using System;
 
 namespace Singl.Models
 {
-    public class RelatorioEvasao
+    public class RelatorioEvasao : IModel<Guid>
     {
         public RelatorioEvasao()
         {

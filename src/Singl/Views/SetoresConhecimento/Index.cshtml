@@ -1,0 +1,48 @@
+@model IEnumerable<Singl.Models.SetorConhecimento>
+
+@{
+    ViewBag.Title = "Lista de setores de conhecimento";
+    Layout = "/Views/Shared/_InfoLayout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="section-heading">@ViewBag.Title</h2>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Sigla)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th></th>
+                    </tr>
+                @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sigla)
+                        </td>
+                        <td>
+                            <a href="/setoresconhecimento/@item.Sigla">@item.Nome</a>
+                        </td>
+                        <td>
+                            <div class="pull-right">
+                                <a href="/setoresconhecimento/@item.Sigla" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </table>
+                <hr class="hard"/>
+                <div>
+                    <a href="javascript:history.go(-1)">Voltar</a>
+                </div>                
+            </div>
+        </div>
+    </div>
+</section>
+

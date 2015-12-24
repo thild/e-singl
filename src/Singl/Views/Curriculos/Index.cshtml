@@ -1,0 +1,89 @@
+@model Singl.Models.Curriculo
+@{ Singl.Models.Disciplina disciplina = null; }
+
+@{
+    ViewBag.Title = $"Detalhes do currículo {@Model.Nome}";
+    Layout = "/Views/Shared/_InfoLayout.cshtml";
+
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="section-heading">@Model.Curso.Nome</h2>
+                <hr class="hard">
+                <h3 class="section-heading">@ViewBag.Title</h3>
+                <hr class="hard">
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Curso)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Curso.Nome)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ano)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Ano)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PrazoConclusao)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.PrazoConclusao)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Regime)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Regime)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Series)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Series)
+                        </dd>
+                        <dt>Lista de disciplinas</dt>
+                        <dd>
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => disciplina.Codigo)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => disciplina.Nome)
+                                    </th>
+                                </tr>
+                            @foreach (var item in Model.Disciplinas) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Codigo)
+                                    </td>
+                                    <td>
+                                        <a  href="/disciplinas/@item.Codigo">@item.Nome</a>
+                                    </td>
+                                </tr>
+                            }
+                            </table>
+                        </dd>
+                    </dl>
+                </div>
+                <hr class="hard"/>
+                <div>
+                    <a asp-controller="Curso" asp-action="Details" asp-route-id="@Model.Curso.Id" >Voltar ao curso</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

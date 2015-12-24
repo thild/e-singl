@@ -1,0 +1,77 @@
+@model Singl.Models.Departamento
+@{ Singl.Models.Curso curso = null; }
+
+@{
+    ViewBag.Title = $"Detalhes do departamento \"{@Model.Nome}\"";
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="section-heading">@ViewBag.Title</h2>
+                <hr class="hard"/>
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Sigla)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Sigla)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                        <dt>Lista de cursos</dt>
+                        <dd>
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => curso.Codigo)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => curso.Nome)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            @foreach (var item in Model.Cursos) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Codigo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td>
+                                        <div class="pull-right">
+                                            <a href="/admin/cursos/@item.Codigo" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
+                                            <a href="/admin/cursos/edit/@item.Codigo" class="btn btn-warning"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a>
+                                            <a href="/admin/cursos/delete/@item.Codigo" class="btn btn-danger">
+                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Excluir</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            </table>
+                        </dd>                        
+                    </dl>
+                </div>
+                <hr class="hard"/>
+                <div class="pull-right">
+                    <a href="/admin/departamentos/edit/@Model.Sigla" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a>
+                    <!--<a href="/admin/cursos?departamento=@Model.Sigla" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Listar cursos</a> -->
+                </div>
+                <div>
+                    <a asp-controller="Departamentos" asp-action="Index">Voltar à lista</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

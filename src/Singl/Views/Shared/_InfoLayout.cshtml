@@ -126,6 +126,7 @@
 
         @* Move site.css to a content delivery network (CDN) for better performance. *@
         <link asp-append-version="true" rel="stylesheet" href="~/css/site.css" />
+        <link asp-append-version="true" rel="stylesheet" href="~/css/admin.css" />
         <meta name="x-font-awesome-stylesheet-fallback-test" class="fa">
         <environment names="Development">
             <link asp-append-version="true" rel="stylesheet" href="~/css/font-awesome.css" />
@@ -167,37 +168,16 @@
     
     
         @* You can use the head section to render additional meta tags. *@
-        <link asp-append-version="true" rel="stylesheet" href="~/css/animate.css" />
-        <link asp-append-version="true" rel="stylesheet" href="~/css/home.css" />
-
-        <environment names="Development">
-            <link asp-append-version="true" rel="stylesheet" href="~/css/bootstrap-touch-carousel.css" />
-        </environment>
-        <environment names="Staging,Production">
-            <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/css/bootstrap-touch-carousel.css"
-                  asp-fallback-href="~/css/bootstrap-touch-carousel.css"
-                  asp-fallback-test-class="carousel-caption" asp-fallback-test-property="display" asp-fallback-test-value="none" />
-        </environment>
-        
-        <!-- Custom Fonts -->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        @RenderSection("head", required: false)
 
     </head>
     
-    <body id="page-top">
+    <body id="page-top" style="padding-top: 50px;">
     
         @* Skip to main content link for people who use screen readers. sr-only makes this only visible to screen readers.
             See http://a11yproject.com/posts/skip-nav-links/. *@
         <a href="#main" class="sr-only sr-only-focusable">Pular para o conteúdo principal</a>
- 
+        
         @* nav - The main navigation for the site. *@
         <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
@@ -205,9 +185,6 @@
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span aria-hidden="true" class="sr-only">Ligar/desligar navegação</span>
-                        <span aria-hidden="true" class="icon-bar"></span>
-                        <span aria-hidden="true" class="icon-bar"></span>
-                        <span aria-hidden="true" class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand page-scroll" href="#page-top">@AppSettings.Value.SiteTitle</a>
                 </div>
@@ -216,16 +193,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a class="page-scroll" href="#about">Sobre</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#values">Valores</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#areas">Áreas de atuação</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#contact">Contato</a>
+                            <a class="page-scroll" href="#about">Ajuda</a>
                         </li>
                     </ul>
                 </div>
@@ -233,6 +201,13 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
+        
+        <header id="main">
+            <div class="header-content">
+                <div class="header-content-inner">
+                </div>
+            </div>
+        </header>        
 
         @RenderBody()
         <hr />
@@ -261,25 +236,6 @@
             </script>
         </environment>
 
-       
-        
-            
-        <environment names="Development">
-            <script asp-append-version="true" src="~/js/bootstrap-touch-carousel.js"></script>
-            <script asp-append-version="true" src="~/js/jquery.easing.js"></script>
-            <script asp-append-version="true" src="~/js/jquery.fittext.js"></script>
-            <script asp-append-version="true" src="~/js/wow.js"></script>
-        </environment>
-        <environment names="Staging,Production">
-            <script asp-append-version="true" src="~/js/jquery.easing.js"></script>
-            <script asp-append-version="true" src="~/js/jquery.fittext.js"></script>
-            <script asp-append-version="true" src="~/js/wow.js"></script>
-            <script src="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/js/bootstrap-touch-carousel.js"
-                    asp-fallback-src="~/js/bootstrap-touch-carousel.js"
-                    asp-fallback-test="window.Hammer && window.Hammer.Instance">
-            </script>
-        </environment>
-        <script asp-append-version="true" src="~/js/home.js"></script>
         @RenderSection("scripts", required: false)
     </body>
 </html>

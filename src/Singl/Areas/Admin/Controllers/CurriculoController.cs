@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
-using Singl;
 using Singl.Models;
 using Singl.ViewModels;
 

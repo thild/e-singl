@@ -2,7 +2,7 @@
 
 namespace Singl.Models
 {
-    public class PapelUsuario
+    public class PapelUsuario : IModel<Guid>
     {
         public Guid Id { get; set; }
         

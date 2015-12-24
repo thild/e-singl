@@ -1,12 +1,11 @@
-using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Singl.Models
 {
     //Oferta
-    public class OfertaCurso
+    public class OfertaCurso : IModel<Guid>
     {
         
         public OfertaCurso()
@@ -24,7 +23,7 @@ namespace Singl.Models
         
         public SituacaoOfertaCurso Situacao { get; set; }
         
-        public Modalidade Modalidade { get; set; }
+        public ModalidadeEnsino Modalidade { get; set; }
         
         [ForeignKey("CursoId")]
         public Curso Curso { get; set; }

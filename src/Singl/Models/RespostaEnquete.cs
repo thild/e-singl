@@ -1,10 +1,9 @@
 
 using System;
-using System.Collections.Generic;
 
 namespace Singl.Models
 {
-    public class RespostaEnquete
+    public class RespostaEnquete : IModel<Guid>
     {
         public RespostaEnquete() {
             Id = Guid.NewGuid();    
