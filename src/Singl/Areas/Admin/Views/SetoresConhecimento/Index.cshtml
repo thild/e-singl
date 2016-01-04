@@ -19,6 +19,9 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Nome)
                         </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Campus)
+                        </th>
                         <th></th>
                     </tr>
                 @foreach (var item in Model) {
@@ -30,16 +33,19 @@
                             @Html.DisplayFor(modelItem => item.Nome)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Campus.Nome)
+                        </td>
+                        <td>
                             <div class="pull-right">
                                 <!--<a asp-controller="Departamentos" asp-action="Details" asp-route-sigla="@item.Sigla" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
                                 <a asp-controller="Departamentos" asp-action="Edit" asp-route-sigla="@item.Sigla" class="btn btn-warning"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a>
                                 <a asp-controller="Departamentos" asp-action="Delete" asp-route-sigla="@item.Sigla" class="btn btn-danger">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Excluir</a>-->
-                                <a href="/admin/setoresconhecimento/@item.Sigla/@item.Cidade.Sigla" class="btn btn-default">
+                                <a href="/admin/setoresconhecimento/@item.Sigla/@item.Campus.UnidadeUniversitaria.Sigla" class="btn btn-default">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
-                                <a href="/admin/setoresconhecimento/edit/@item.Sigla/@item.Cidade.Sigla"  class="btn btn-warning">
+                                <a href="/admin/setoresconhecimento/edit/@item.Sigla/@item.Campus.UnidadeUniversitaria.Sigla"  class="btn btn-warning">
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a>
-                                <a href="/admin/setoresconhecimento/delete/@item.Sigla/@item.Cidade.Sigla" class="btn btn-danger">
+                                <a href="/admin/setoresconhecimento/delete/@item.Sigla/@item.Campus.UnidadeUniversitaria.Sigla" class="btn btn-danger">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Excluir</a>
                             </div>
                         </td>

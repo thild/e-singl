@@ -1,5 +1,5 @@
 @model Singl.Models.SetorConhecimento
-@{ Singl.Models.SetorConhecimento setorConhecimento = null; }
+@{ Singl.Models.Departamento departamento = null; }
 
 @{
     ViewBag.Title = $"Detalhes do setor \"{@Model.Nome}\"";
@@ -15,16 +15,16 @@
                 <div>
                     <dl class="dl-horizontal">
                         <dt>
-                            @Html.DisplayNameFor(model => model.Sigla)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.Sigla)
-                        </dd>
-                        <dt>
                             @Html.DisplayNameFor(model => model.Nome)
                         </dt>
                         <dd>
                             @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Sigla)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Sigla)
                         </dd>
                     @if(Model.Departamentos.Count != 0) {
                         <dt>Departamentos</dt>
@@ -32,24 +32,24 @@
                             <table class="table">
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => setorConhecimento.Sigla)
+                                        @Html.DisplayNameFor(model => departamento.Nome)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => setorConhecimento.Nome)
+                                        @Html.DisplayNameFor(model => departamento.Sigla)
                                     </th>
                                     <th></th>
                                 </tr>
                             @foreach (var item in Model.Departamentos) {
                                 <tr>
                                     <td>
+                                        <a href="/departamentos/@item.Sigla/@item.Campus.UnidadeUniversitaria.Sigla">@item.Nome</a>
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.Sigla)
                                     </td>
                                     <td>
-                                        <a href="/departamentos/@item.Sigla">@item.Nome</a>
-                                    </td>
-                                    <td>
                                         <div class="pull-right">
-                                            <a href="/departamentos/@item.Sigla" class="btn btn-default">
+                                            <a href="/departamentos/@item.Sigla/@item.Campus.UnidadeUniversitaria.Sigla" class="btn btn-default">
                                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
                                         </div>
                                     </td>

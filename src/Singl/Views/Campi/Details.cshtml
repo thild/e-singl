@@ -15,16 +15,16 @@
                 <div>
                     <dl class="dl-horizontal">
                         <dt>
-                            @Html.DisplayNameFor(model => model.Sigla)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.Sigla)
-                        </dd>
-                        <dt>
                             @Html.DisplayNameFor(model => model.Nome)
                         </dt>
                         <dd>
                             @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Sigla)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Sigla)
                         </dd>
                     @if(Model.SetoresConhecimento.Count != 0) {
                         <dt>Lista de setores de conhecimento</dt>
@@ -32,24 +32,24 @@
                             <table class="table">
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => setorConhecimento.Sigla)
+                                        @Html.DisplayNameFor(model => setorConhecimento.Nome)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => setorConhecimento.Nome)
+                                        @Html.DisplayNameFor(model => setorConhecimento.Sigla)
                                     </th>
                                     <th></th>
                                 </tr>
                             @foreach (var item in Model.SetoresConhecimento) {
                                 <tr>
                                     <td>
+                                        <a href="/setoresconhecimento/@item.Sigla/@item.Campus.UnidadeUniversitaria.Sigla">@item.Nome</a>
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.Sigla)
                                     </td>
                                     <td>
-                                        <a href="/setoresconhecimento/@item.Sigla">@item.Nome</a>
-                                    </td>
-                                    <td>
                                         <div class="pull-right">
-                                            <a href="/setoresconhecimento/@item.Sigla" class="btn btn-default">
+                                            <a href="/setoresconhecimento/@item.Sigla/@item.Campus.UnidadeUniversitaria.Sigla" class="btn btn-default">
                                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
                                         </div>
                                     </td>

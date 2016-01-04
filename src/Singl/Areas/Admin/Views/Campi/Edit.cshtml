@@ -1,4 +1,4 @@
-@model Singl.Models.Departamento
+@model Singl.Models.Campus
 
 @{
     ViewBag.Title = $"Editar campus \"{@Model.Nome}\"";
@@ -37,7 +37,7 @@
                                 </button>    
                             </div>
                             <div>
-                                <a asp-controller="Campi" asp-action="Index">Voltar à lista</a>
+                                <a href="javascript:history.go(-1)">Voltar</a>
                             </div>
                         </div>
                     </form>

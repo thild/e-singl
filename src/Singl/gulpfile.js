@@ -2,7 +2,9 @@
 // The above line of code enables Visual Studio to automatically start Gulp tasks at certain key moments. The 'clean'
 // task is run on solution clean, the 'build' task is run on solution build and the 'watch' task is run on opening the 
 // solution. You can also edit the above using the Task Runner Explorer window in Visual Studio (See 
-// http://docs.asp.net/en/latest/client-side/using-gulp.html)'use strict';
+// http://docs.asp.net/en/latest/client-side/using-gulp.html)
+
+'use strict';
 
 var gulp = require("gulp"),
   fs = require("fs"),                         // npm file system API (https://nodejs.org/api/fs.html)
@@ -77,7 +79,9 @@ var paths = {
     fonts: "./" + project.webroot + "/fonts/",
     img: "./" + project.webroot + "/img/",
     js: "./" + project.webroot + "/js/",
-    lib: "./bower_components/main/"
+    lib: "./" + project.webroot + "/lib/",
+    app: "./" + project.webroot + "/app/",
+    app_views: "./" + project.webroot + "/app/views/"
 };
 
 // $Start-TypeScript$
@@ -172,13 +176,35 @@ var sources = {
         {
             name: "font-awesome",
             path: paths.bower + "font-awesome/**/*.{ttf,svg,woff,woff2,otf,eot}"
-        }    ],
+        }    
+    ],
     // An array of paths to images to be optimized.
     img: [
         paths.img + "**/*.{png,jpg,jpeg,gif,svg}"
     ],
+    // An array of paths to views to be optimized.
+    app_views: [
+        {
+            name: "app-views",
+            paths: [
+                paths.scripts + "app/views/**/*"
+            ]
+        }
+    ],
     // An array containing objects required to build a single JavaScript file.
     js: [
+        {
+            // name - The name of the final JavaScript file to build.
+            name: "angular.js",
+            // paths - A single or array of paths to JavaScript or TypeScript files which will be concatenated and 
+            // minified to create a file with the above file name.
+            paths: [
+                // Feel free to remove any parts of Bootstrap you don't use.
+                paths.bower + "angular/angular.js",
+                paths.bower + "angular-resource/angular-resource.js",
+                paths.bower + "angular-route/angular-route.js",
+            ]
+        },
         {
             // name - The name of the final JavaScript file to build.
             name: "bootstrap.js",
@@ -240,17 +266,25 @@ var sources = {
         {
             name: "home.js",
             paths: [
-                paths.scripts + "home/**/*.js"
+                paths.scripts + "js/home/**/*.js"
             ]
         },
         {
             name: "site.js",
             paths: [
-                paths.scripts + "fallback/styles.js",
-                paths.scripts + "fallback/scripts.js",
-                paths.scripts + "site.js"
+                paths.scripts + "js/fallback/styles.js",
+                paths.scripts + "js/fallback/scripts.js",
+                paths.scripts + "js/site.js"
             ]
         }
+    ],
+    app: [
+        {
+            name: "app.js",
+            paths: [
+                paths.scripts + "app/**/*.js"
+            ]
+        },
     ]
 };
 
@@ -278,10 +312,21 @@ gulp.task("clean-fonts", function (cb) {
 });
 
 /*
+ * Deletes all files and folders within the app_views directory.
+ */
+gulp.task("clean-app-views", function (cb) {
+    return rimraf(paths.app_views, cb);
+});
+
+/*
  * Deletes all files and folders within the js directory.
  */
 gulp.task("clean-js", function (cb) {
     return rimraf(paths.js, cb);
+});
+
+gulp.task("clean-app", function (cb) {
+    return rimraf(paths.app + "app.js", cb);
 });
 // $Start-CshtmlMinification$
 
@@ -393,6 +438,21 @@ gulp.task("build-fonts", ["clean-fonts"], function () {
 });
 
 /*
+ * Builds the angularjs views.
+ */
+gulp.task("build-app-views", ["clean-app-views"], function () {
+    var tasks = sources.app_views.map(function (source) { // For each set of source files in the sources.
+        return gulp                                 // Return the stream.
+            .src(source.paths)                      // Start with the source paths.
+            .pipe(plumber())                        // Handle any errors.
+            .pipe(debug())
+            .pipe(gulp.dest(paths.app_views));            // Saves the app-views file to the specified destination path.
+    });
+    return merge(tasks);  
+});
+
+
+/*
  * Builds the JavaScript files for the site.
  */
 gulp.task("build-js", ["clean-js", "lint-js"], function () {
@@ -421,6 +481,38 @@ gulp.task("build-js", ["clean-js", "lint-js"], function () {
     });
     return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
 });
+
+/*
+ * Builds the JavaScript files for the site.
+ */
+gulp.task("build-app", ["clean-app", "lint-js"], function () {
+    var tasks = sources.app.map(function (source) { // For each set of source files in the sources.
+        return gulp                             // Return the stream.
+            .src(source.paths)                  // Start with the source paths.
+            .pipe(plumber())                    // Handle any errors.
+            .pipe(gulpif(
+                environment.isDevelopment(),    // If running in the development environment.
+                sourcemaps.init()))             // Set up the generation of .map source files for the JavaScript.
+            // $Start-TypeScript$
+            .pipe(gulpif(                       // If the file is a TypeScript (.ts) file.
+                "**/*.ts",
+                typescript(getTypeScriptProject(source)))) // Compile TypeScript (.ts) to JavaScript (.js) using the specified options.
+            // $End-TypeScript$
+            .pipe(concat(source.name))          // Concatenate JavaScript files into a single file with the specified name.
+            .pipe(sizeBefore(source.name))      // Write the size of the file to the console before minification.
+            .pipe(gulpif(
+                !environment.isDevelopment(),   // If running in the staging or production environment.
+                uglify()))                      // Minifies the JavaScript.
+            .pipe(sizeAfter(source.name))       // Write the size of the file to the console after minification.
+            .pipe(gulpif(
+                environment.isDevelopment(),    // If running in the development environment.
+                sourcemaps.write(".")))         // Generates source .map files for the JavaScript.
+            .pipe(gulp.dest(paths.app));         // Saves the JavaScript file to the specified destination path.
+    });
+    return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
+});
+
+
 // $Start-CshtmlMinification$
 
 /*
@@ -446,7 +538,9 @@ gulp.task("build", [
     // $Start-CshtmlMinification$
     //"build-html",
     // $End-CshtmlMinification$
-    "build-js"
+    "build-js",
+    "build-app",
+    //"build-app-views"
 ]);
 
 /*
@@ -481,9 +575,25 @@ gulp.task("watch-css", function () {
  */
 gulp.task("watch-js", function () {
     return gulp
-        .watch(paths.scripts + "**/*.{js,ts}", ["build-js"])     // Watch the scripts folder for file changes.
+        .watch(paths.scripts + "js/**/*.{js,ts}", ["build-js"])     // Watch the scripts folder for file changes.
         .on("change", function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-js task started."));
+        });
+});
+
+gulp.task("watch-app", function () {
+    return gulp
+        .watch(paths.scripts + "app/**/*.{js,ts}", ["build-app"])     // Watch the scripts folder for file changes.
+        .on("change", function (event) {        // Log the change to the console.
+            gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-app task started."));
+        });
+});
+
+gulp.task("watch-app-views", function () {
+    return gulp
+        .watch(paths.scripts + "app/views/*.html", ["build-app-views"])     // Watch the scripts folder for file changes.
+        .on("change", function (event) {        // Log the change to the console.
+            gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-app-views task started."));
         });
 });
 
@@ -492,7 +602,7 @@ gulp.task("dnx-watch", shell.task(["dnx-watch kestrel"]));
 /*
  * Watch the styles and scripts folders for changes. Build the CSS and JavaScript if something changes.
  */
-gulp.task("watch", ["watch-css", "watch-js", "dnx-watch"]);
+gulp.task("watch", ["watch-css", "watch-js", "watch-app", "watch-app-views", "dnx-watch"]);
 
 function pageSpeed(strategy, cb) {
     if (siteUrl === undefined) {

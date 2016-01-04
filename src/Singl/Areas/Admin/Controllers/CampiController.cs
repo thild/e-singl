@@ -30,7 +30,7 @@ namespace Singl.Areas.Admin.Controllers
 
             var campus = db.Campi
                 .Include(m => m.SetoresConhecimento)
-                .Include(m => m.Cidade)
+                .Include(m => m.UnidadeUniversitaria)
                 .Single(m => m.Sigla == sigla);
                 
             if (campus == null)
@@ -76,7 +76,7 @@ namespace Singl.Areas.Admin.Controllers
 
             var campus = db.Campi
                 .Include(m => m.SetoresConhecimento)
-                .Include(m => m.Cidade)
+                .Include(m => m.UnidadeUniversitaria)
                 .Single(m => m.Sigla == sigla);
             if (campus == null)
             {

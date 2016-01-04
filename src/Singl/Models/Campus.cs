@@ -15,8 +15,10 @@ namespace Singl.Models
         public Guid Id { get; set; }
         
         public string Nome { get; set;} 
-        public Cidade Cidade {get; set;}
-        public Guid CidadeId {get; set;}
+
+        [Display(Name = "Unidade universitária")]
+        public UnidadeUniversitaria UnidadeUniversitaria {get; set;}
+        public Guid UnidadeUniversitariaId {get; set;}
         public IList<SetorConhecimento> SetoresConhecimento { get; set; }
         public IList<SetorAdministrativo> SetoresAdministrativo { get; set; }
         public string Sigla { get; set; }

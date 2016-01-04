@@ -67,6 +67,8 @@ namespace Singl
             services.AddTransient<Singl.Services.IDisciplinaService, Singl.Services.DisciplinaService>();
             services.AddTransient<Singl.Services.ISetorAdministrativoService, Singl.Services.SetorAdministrativoService>();
             services.AddTransient<Singl.Services.ISetorConhecimentoService, Singl.Services.SetorConhecimentoService>();
+            services.AddTransient<Singl.Services.ICampusService, Singl.Services.CampusService>();
+            services.AddTransient<Singl.Services.IUnidadeUniversitariaService, Singl.Services.UnidadeUniversitariaService>();
 
             // Uncomment the following line to add Web API services which makes it easier to port Web API 2 controllers.
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
@@ -139,6 +141,12 @@ namespace Singl
                     "controllerRoute",
                     "{controller}",
                     new { controller = "Home" });
+                    
+                // After all your routes
+                routes.MapRoute(
+                    "DeepLink",
+                    "{*pathInfo}",
+                    defaults: new { controller = "SPA", action = "Index" });                    
 
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");

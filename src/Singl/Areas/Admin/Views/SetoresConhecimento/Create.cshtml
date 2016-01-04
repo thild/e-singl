@@ -1,4 +1,4 @@
-@inject Singl.Services.ISetorConhecimentoService SetorConhecimentoService
+@inject Singl.Services.ICampusService CampusService
 
 @model Singl.Models.SetorConhecimento
 
@@ -18,13 +18,6 @@
                         <div class="form-horizontal">
                             <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
                             <div class="form-group">
-                                <label asp-for="Sigla" class="control-label col-md-2"></label>
-                                <div class="col-md-10">
-                                    <input asp-for="Sigla" class="form-control" />
-                                    <span asp-validation-for="Sigla" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label asp-for="Nome" class="control-label col-md-2"></label>
                                 <div class="col-md-10">
                                     <input asp-for="Nome" class="form-control" />
@@ -32,12 +25,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label asp-for="SuperSetorId" class="control-label col-md-2"></label>
+                                <label asp-for="Sigla" class="control-label col-md-2"></label>
                                 <div class="col-md-10">
-                                    <select asp-for="SuperSetorId" 
-                                        asp-items="@SetorConhecimentoService.GetAll().Select(x => new SelectListItem { Text = x.Nome, Value = x.Id.ToString() })" 
+                                    <input asp-for="Sigla" class="form-control" />
+                                    <span asp-validation-for="Sigla" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CampusId" class="control-label col-md-2"></label>
+                                <div class="col-md-10">
+                                    <select asp-for="CampusId" 
+                                        asp-items="@CampusService.GetAll().Select(x => new SelectListItem { Text = x.Nome, Value = x.Id.ToString() })" 
                                         class="form-control"></select>
-                                    <span asp-validation-for="SuperSetorId" class="text-danger"></span>
+                                    <span asp-validation-for="CampusId" class="text-danger"></span>
                                 </div>
                             </div>
                             <hr class="hard">

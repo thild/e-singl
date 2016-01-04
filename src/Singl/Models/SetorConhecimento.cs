@@ -22,8 +22,7 @@ namespace Singl.Models
         public Campus Campus { get; set;}
          
         public Guid CampusId { get; set;} 
-        public Cidade Cidade {get; set;}
-        public Guid CidadeId {get; set;}
+       
 
     }
 }
