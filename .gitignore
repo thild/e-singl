@@ -21,6 +21,9 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+wwwroot/app/
+wwwroot/images/
+wwwroot/fonts/
 wwwroot/lib/
 wwwroot/css/
 wwwroot/js/
