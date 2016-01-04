@@ -132,12 +132,12 @@
             <link asp-append-version="true" rel="stylesheet" href="~/css/font-awesome.css" />
             <link asp-append-version="true" rel="stylesheet" href="~/css/bootstrap.css" />
             @* Find a modernizr bower*@            
-            <!--<script asp-append-version="true" src="~/js/modernizr.js"></script>-->
+            <!--<script asp-append-version="true" src="~/lib/modernizr.js"></script>-->
             <script src="//ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
         </environment>
         <environment names="Staging,Production">
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-            <!--<script asp-append-version="true" src="~/js/modernizr.js"></script>-->
+            <!--<script asp-append-version="true" src="~/lib/modernizr.js"></script>-->
             <script src="//ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
             <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
                   asp-fallback-href="~/css/bootstrap.css"
@@ -215,23 +215,24 @@
             <p>&copy; @DateTime.Now.Year - @AppSettings.Value.SiteTitle</p>
         </footer>
 
-        <script asp-append-version="true" src="~/js/site.js"></script>
         <environment names="Development">
-            <script asp-append-version="true" src="~/js/jquery.js"></script>
-            <script asp-append-version="true" src="~/js/bootstrap.js"></script>
-            <script asp-append-version="true" src="~/js/hammer.js"></script>
+            <script asp-append-version="true" src="~/js/site.js"></script>
+            <script asp-append-version="true" src="~/lib/jquery.js"></script>
+            <script asp-append-version="true" src="~/lib/bootstrap.js"></script>
+            <script asp-append-version="true" src="~/lib/hammer.js"></script>
         </environment>
         <environment names="Staging,Production">
+            <script asp-append-version="true" src="~/js/site.min.js"></script>
             <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
-                    asp-fallback-src="~/js/jquery.js"
+                    asp-fallback-src="~/lib/jquery.js"
                     asp-fallback-test="window.jQuery">
             </script>
             <script src="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
-                    asp-fallback-src="~/js/bootstrap.js"
+                    asp-fallback-src="~/lib/bootstrap.js"
                     asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
             </script>
             <script src="//ajax.aspnetcdn.com/ajax/hammer.js/2.0.4/hammer.min.js"
-                    asp-fallback-src="~/js/hammer.js"
+                    asp-fallback-src="~/lib/hammer.js"
                     asp-fallback-test="window.Hammer">
             </script>
         </environment>
