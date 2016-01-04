@@ -83,7 +83,7 @@
     		}
     	} else {
     		$scope.validationErrors.push('Could not add movie.');
-    	};
+    	}
     } 
      
 })();
