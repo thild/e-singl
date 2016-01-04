@@ -13,22 +13,29 @@ namespace Singl.Controllers
         [HttpGet()]
         public IActionResult Index()
         {
-            return View(db.Departamentos.ToList());
+            return View(db.Departamentos
+                .Include(m => m.Campus)
+                .ThenInclude(m => m.UnidadeUniversitaria)
+                .ToList());
         }
 
         // GET: Departamento/5
-        [HttpGet("{sigla}")]
-        [Route("[action]/{sigla}")]
-        public IActionResult Details(string sigla)
+        [HttpGet("{sigla}/{unidadeUniversitaria}")]
+        [Route("[action]/{sigla}/{unidadeUniversitaria}")]
+        public IActionResult Details(string sigla, string unidadeUniversitaria)
         {
             if (string.IsNullOrEmpty(sigla))
             {
                 return new HttpStatusCodeResult(404);
             }
 
-            var departamento = db.Departamentos
+            var departamentos = db.Departamentos
                 .Include(m => m.Cursos)
-                .Single(m => m.Sigla == sigla.ToUpper());
+                .Include(m => m.Campus)
+                .ThenInclude(m => m.UnidadeUniversitaria).ToList();
+                
+            var departamento = departamentos.Single(m => m.Sigla == sigla && 
+                m.Campus.UnidadeUniversitaria.Sigla == unidadeUniversitaria);
                 
             if (departamento == null)
             {

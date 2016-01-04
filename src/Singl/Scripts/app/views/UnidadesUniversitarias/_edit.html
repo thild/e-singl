@@ -1,0 +1,28 @@
+<div class="bg-danger validationErrors" ng-show="validationErrors">
+	<ul>
+		<li ng-repeat="error in validationErrors">{{error}}</li>
+	</ul>
+</div> 
+
+<div class="form-group">
+	<label for="Nome">Nome</label>
+	<input name="Nome"
+		   type="text"
+		   class="form-control"
+		   placeholder="Digite o nome"
+		   ng-model="unidadeUniversitaria.Nome"
+		   ng-required="true"
+		   ng-minlength="3"
+           ng-pattern="/^[A-Z]/"/>
+           <span class="help-block" ng-if="formAddEdit.Nome.$error.pattern">Must start from Capital letter</span>
+</div>
+<div class="form-group">
+	<label for="Sigla">Sigla</label>
+	<input name="Sigla" 
+		   type="text" 
+		   class="form-control" 
+		   placeholder="Digite a sigla" 
+		   ng-model="unidadeUniversitaria.Sigla"
+		   ng-required="true"
+           ng-minlength="1" />
+</div>

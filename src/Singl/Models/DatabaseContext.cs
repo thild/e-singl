@@ -26,6 +26,7 @@ namespace Singl
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Polo> Polos { get; set; }
         public DbSet<Cidade> Cidades { get; set; }
+        public DbSet<UnidadeUniversitaria> UnidadesUniversitarias { get; set; }
         public DbSet<Campus> Campi { get; set; }
         public DbSet<Questao> Questoes { get; set; }
         public DbSet<Alternativa> Alternativas { get; set; }
@@ -165,24 +166,28 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
             });
             
             //Cidade
-            var guarapuava = new Cidade {Id = Guid.Parse("bd38f703-ebec-4f7e-a6ec-f333c28f36e4"), Nome = "Guarapuava", Sigla = "G"};
-            var irati = new Cidade {Id = Guid.Parse("aef0aa2a-e4c9-432e-b26f-43c0f93f37fe"), Nome = "Irati", Sigla = "I"};
-            
-            var chopinzinho = new Cidade {Id = Guid.Parse("c266f0a5-0ff8-4324-9da2-c3c322199cd0"), Nome = "Chopinzinho", Sigla = "CH"};
-            var laranjeirasSul = new Cidade {Id = Guid.Parse("5182c404-fc3d-4a82-881d-c4b59051c641"), Nome = "Laranjeiras do Sul", Sigla = "LS"};
-            var pitanga = new Cidade {Id = Guid.Parse("4ede2654-16d4-43b8-8b7f-b175d7918bb4"), Nome = "Pitanga", Sigla = "PI"};
-            var prudentopolis = new Cidade {Id = Guid.Parse("cb0988c3-fabd-4aaf-8082-e99637523ce1"), Nome = "Prudentópolis", Sigla = "PR"};
+            var guarapuava = new Cidade {Id = Guid.Parse("bd38f703-ebec-4f7e-a6ec-f333c28f36e4"), Nome = "Guarapuava"};
+            var irati = new Cidade {Id = Guid.Parse("aef0aa2a-e4c9-432e-b26f-43c0f93f37fe"), Nome = "Irati"};
+            var chopinzinho = new Cidade {Id = Guid.Parse("c266f0a5-0ff8-4324-9da2-c3c322199cd0"), Nome = "Chopinzinho"};
+            var laranjeirasSul = new Cidade {Id = Guid.Parse("5182c404-fc3d-4a82-881d-c4b59051c641"), Nome = "Laranjeiras do Sul"};
+            var pitanga = new Cidade {Id = Guid.Parse("4ede2654-16d4-43b8-8b7f-b175d7918bb4"), Nome = "Pitanga"};
+            var prudentopolis = new Cidade {Id = Guid.Parse("cb0988c3-fabd-4aaf-8082-e99637523ce1"), Nome = "Prudentópolis"};
             Cidades.AddRange(guarapuava, irati, chopinzinho, laranjeirasSul, pitanga, prudentopolis);
+
+            //UnidadeUniversitaria
+            var uu_guarapuava = new UnidadeUniversitaria {Id = Guid.Parse("bd38f703-ebec-4f7e-a6ec-f333c28f36e4"), Nome = "Guarapuava", Sigla = "G", Cidade = guarapuava};
+            var uu_irati = new UnidadeUniversitaria {Id = Guid.Parse("aef0aa2a-e4c9-432e-b26f-43c0f93f37fe"), Nome = "Irati", Sigla = "I", Cidade = irati};
+            UnidadesUniversitarias.AddRange(uu_guarapuava, uu_irati);
             
             //Campus
-            var campusSantaCruz = new Campus {Id = Guid.Parse("0894e92c-d0b5-4a65-8154-7fc7a30adaf6"), Nome = "Santa Cruz", Cidade = guarapuava, Sigla = "SC", Sede = true};
-            var campusCedeteg = new Campus {Id = Guid.Parse("5329ca07-f91e-488b-bb39-a48afb6f5182"), Nome = "CEDETEG", Cidade = guarapuava, Sigla = "C"};
-            var campusIrati = new Campus {Id = Guid.Parse("637a4db0-8ebe-482f-9165-79a71c7c2ecb"), Nome = "Irati", Cidade = irati, Sigla = "I"};
+            var campusSantaCruz = new Campus {Id = Guid.Parse("0894e92c-d0b5-4a65-8154-7fc7a30adaf6"), Nome = "Santa Cruz", UnidadeUniversitaria = uu_guarapuava, Sigla = "SC", Sede = true};
+            var campusCedeteg = new Campus {Id = Guid.Parse("5329ca07-f91e-488b-bb39-a48afb6f5182"), Nome = "CEDETEG", UnidadeUniversitaria = uu_guarapuava, Sigla = "C"};
+            var campusIrati = new Campus {Id = Guid.Parse("637a4db0-8ebe-482f-9165-79a71c7c2ecb"), Nome = "Irati", UnidadeUniversitaria = uu_irati, Sigla = "I"};
             
-            var campusChopinzinho = new Campus {Id = Guid.Parse("daa993e7-0434-4aa5-9b8b-f43bffd786e5"), Nome = "Chopinzinho", Cidade = chopinzinho, Sigla = "CH", Avancado = true};
-            var campusLaranjeirasSul = new Campus {Id = Guid.Parse("2daef512-79b9-4f76-a5e9-ab37ca76e49d"), Nome = "Laranjeiras do Sul", Cidade = laranjeirasSul, Sigla = "LS", Avancado = true};
-            var campusPitanga = new Campus {Id = Guid.Parse("8cb7875a-3df3-49b0-9a3d-0235a9e7ae3e"), Nome = "Pitanga", Sigla = "PI", Cidade = pitanga, Avancado = true};
-            var campusPrudentopolis = new Campus {Id = Guid.Parse("bb9124cb-b492-482e-a7ef-345e86926c55"), Nome = "Prudentópolis", Sigla = "PR", Cidade = prudentopolis, Avancado = true};
+            var campusChopinzinho = new Campus {Id = Guid.Parse("daa993e7-0434-4aa5-9b8b-f43bffd786e5"), Nome = "Chopinzinho", UnidadeUniversitaria = uu_guarapuava, Sigla = "CH", Avancado = true};
+            var campusLaranjeirasSul = new Campus {Id = Guid.Parse("2daef512-79b9-4f76-a5e9-ab37ca76e49d"), Nome = "Laranjeiras do Sul", UnidadeUniversitaria = uu_guarapuava, Sigla = "LS", Avancado = true};
+            var campusPitanga = new Campus {Id = Guid.Parse("8cb7875a-3df3-49b0-9a3d-0235a9e7ae3e"), Nome = "Pitanga", Sigla = "PI", UnidadeUniversitaria = uu_guarapuava, Avancado = true};
+            var campusPrudentopolis = new Campus {Id = Guid.Parse("bb9124cb-b492-482e-a7ef-345e86926c55"), Nome = "Prudentópolis", Sigla = "PR", UnidadeUniversitaria = uu_guarapuava, Avancado = true};
             Campi.AddRange(campusSantaCruz, campusCedeteg, campusIrati, campusChopinzinho, campusLaranjeirasSul, campusPitanga,
                            campusPrudentopolis);
             
@@ -201,12 +206,12 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
 // 2027a141-93ad-468a-9f62-78c9b076e900
             
             //Setores de conhecimento
-            var seaa_g = new SetorConhecimento {Id = Guid.Parse("d33795a5-e364-48df-a3a7-2fd57245e019"), Nome = "Setor de Ciências Agrárias e Ambientais", Sigla = "SEAA", Campus = campusCedeteg, Cidade = guarapuava};
-            var seet_g = new SetorConhecimento {Id = Guid.Parse("cff44bd2-3199-4adc-8786-b677b6f89500"), Nome = "Setor de Ciências Exatas e de Tecnologia", Sigla = "SEET", Campus = campusCedeteg, Cidade = guarapuava};
-            var sehla_g = new SetorConhecimento {Id = Guid.Parse("fa8e2635-3ae1-4d29-857a-6eed65b89851"), Nome = "Setor de Ciências Humanas, Letras e Artes", Sigla = "SEHLA", Campus = campusSantaCruz, Cidade = guarapuava};
-            var ses_g = new SetorConhecimento {Id = Guid.Parse("e120b519-bd0c-48c4-b744-6fc57798c491"), Nome = "Setor de Ciências da Saúde", Sigla = "SES", Campus = campusCedeteg, Cidade = guarapuava};
-            var ses_i = new SetorConhecimento {Id = Guid.Parse("ac47aca3-973e-44a3-bcd2-cbe076202043"), Nome = "Setor de Ciências da Saúde", Sigla = "SES", Campus = campusIrati, Cidade = irati};
-            var sesa_g = new SetorConhecimento {Id = Guid.Parse("70c6f0f5-66db-472a-a2db-317b49c1f54a"), Nome = "Setor de Ciências Sociais Aplicadas", Sigla = "SESA", Campus = campusSantaCruz, Cidade = guarapuava};
+            var seaa_g = new SetorConhecimento {Id = Guid.Parse("d33795a5-e364-48df-a3a7-2fd57245e019"), Nome = "Setor de Ciências Agrárias e Ambientais", Sigla = "SEAA", Campus = campusCedeteg};
+            var seet_g = new SetorConhecimento {Id = Guid.Parse("cff44bd2-3199-4adc-8786-b677b6f89500"), Nome = "Setor de Ciências Exatas e de Tecnologia", Sigla = "SEET", Campus = campusCedeteg};
+            var sehla_g = new SetorConhecimento {Id = Guid.Parse("fa8e2635-3ae1-4d29-857a-6eed65b89851"), Nome = "Setor de Ciências Humanas, Letras e Artes", Sigla = "SEHLA", Campus = campusSantaCruz};
+            var ses_g = new SetorConhecimento {Id = Guid.Parse("e120b519-bd0c-48c4-b744-6fc57798c491"), Nome = "Setor de Ciências da Saúde", Sigla = "SES", Campus = campusCedeteg};
+            var ses_i = new SetorConhecimento {Id = Guid.Parse("ac47aca3-973e-44a3-bcd2-cbe076202043"), Nome = "Setor de Ciências da Saúde", Sigla = "SES", Campus = campusIrati};
+            var sesa_g = new SetorConhecimento {Id = Guid.Parse("70c6f0f5-66db-472a-a2db-317b49c1f54a"), Nome = "Setor de Ciências Sociais Aplicadas", Sigla = "SESA", Campus = campusSantaCruz};
             SetoresConhecimento.Add(seaa_g); 
             SetoresConhecimento.Add(seet_g); 
             SetoresConhecimento.Add(sehla_g); 
@@ -656,18 +661,34 @@ CREATE TABLE "RelatorioEvasao" (
 
             builder.Entity<SetorAdministrativo>()
                 .HasIndex(m => new {Sigla = m.Sigla, CampusId = m.CampusId})
+                .IsUnique();      
+                
+            //UnidadeUniversitaria
+            builder.Entity<UnidadeUniversitaria>()
+                .HasKey(m => m.Id);
+                
+            builder.Entity<UnidadeUniversitaria>()
+                .HasIndex(m => new {Sigla = m.Sigla})
                 .IsUnique();                
-
+                
+            builder.Entity<UnidadeUniversitaria>()
+                .Property(m => m.Nome)
+                .IsRequired();
+                
+            builder.Entity<UnidadeUniversitaria>()
+                .Property(m => m.Sigla)
+                .IsRequired();
+                
             //SetorConhecimento
             builder.Entity<SetorConhecimento>()
                 .HasKey(m => m.Id);
                 
             builder.Entity<SetorConhecimento>()
-                .HasIndex(m => new {Nome = m.Nome, CidadeId = m.CidadeId})
+                .HasIndex(m => new {Nome = m.Nome, CampusId = m.CampusId})
                 .IsUnique();                
 
             builder.Entity<SetorConhecimento>()
-                .HasIndex(m => new {Sigla = m.Sigla, CidadeId = m.CidadeId})
+                .HasIndex(m => new {Sigla = m.Sigla, CampusId = m.CampusId})
                 .IsUnique();                
                 
                             

@@ -13,7 +13,9 @@ namespace Singl.Controllers
         [HttpGet()]
         public IActionResult Index()
         {
-            return View(db.Campi.ToList());
+            return View(db.Campi
+                .OrderBy(m => m.Nome)
+                .ToList());
         }
 
         // GET: Campus/5
@@ -28,6 +30,8 @@ namespace Singl.Controllers
 
             var departamento = db.Campi
                 .Include(m => m.SetoresConhecimento)
+                .ThenInclude(m => m.Campus)
+                .ThenInclude(m => m.UnidadeUniversitaria)
                 .Single(m => m.Sigla == sigla.ToUpper());
                 
             if (departamento == null)

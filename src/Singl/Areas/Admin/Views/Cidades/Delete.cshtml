@@ -1,0 +1,41 @@
+@model Singl.Models.Cidade
+
+@{
+    ViewBag.Title = $"Excluir cidade \"{@Model.Nome}\"";
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="section-heading">@ViewBag.Title</h2>
+                <hr class="hard">
+                <h4>Tem certeza que deseja excluir a cidade "@Model.Nome"?</h4>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                    </dl>
+                    <hr class="hard">
+                    <form asp-controller="Cidades" asp-action="Delete" method="post">
+                        <div class="form-actions no-color pull-right">
+                            <button type="submit" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"> Excluir</span>
+                            </button>   
+                        </div>
+                        <div>
+                            <a href="javascript:history.go(-1)">Voltar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,4 +1,5 @@
 @model IEnumerable<Singl.Models.SetorConhecimento>
+@{ Singl.Models.UnidadeUniversitaria unidadeUniversitaria = null; }
 
 @{
     ViewBag.Title = "Lista de setores de conhecimento";
@@ -18,6 +19,9 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Nome)
                         </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Campus.UnidadeUniversitaria)
+                        </th>
                         <th></th>
                     </tr>
                 @foreach (var item in Model) {
@@ -26,11 +30,14 @@
                             @Html.DisplayFor(modelItem => item.Sigla)
                         </td>
                         <td>
-                            <a href="/setoresconhecimento/@item.Sigla">@item.Nome</a>
+                            <a href="/setoresconhecimento/@item.Sigla/@item.Campus.UnidadeUniversitaria.Sigla">@item.Nome</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Campus.UnidadeUniversitaria.Nome)
                         </td>
                         <td>
                             <div class="pull-right">
-                                <a href="/setoresconhecimento/@item.Sigla" class="btn btn-default">
+                                <a href="/setoresconhecimento/@item.Sigla/@item.Campus.UnidadeUniversitaria.Sigla" class="btn btn-default">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
                             </div>
                         </td>
