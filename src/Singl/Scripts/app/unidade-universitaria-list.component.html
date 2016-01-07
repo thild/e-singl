@@ -1,0 +1,6 @@
+<h2>UnidadeUniversitaria List</h2>
+<p><i>Pick a unidadeUniversitaria from the list</i></p>
+<div *ngFor="#unidadeUniversitaria of unidadesUniversitarias" (click)="selectUnidadeUniversitaria(unidadeUniversitaria)">
+    {{unidadeUniversitaria.name}}
+</div>
+<unidade-universitaria-detail *ngIf="selectedUnidadeUniversitaria" [unidadeUniversitaria]="selectedUnidadeUniversitaria"></unidade-universitaria-detail>

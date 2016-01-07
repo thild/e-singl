@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -61,7 +62,16 @@ namespace Singl
                 });
             });
             // Add MVC services to the services container.
-            services.AddMvc();
+            services.AddMvc().AddMvcOptions(option => 
+            {
+                //Clear all existing output formatters
+                option.OutputFormatters.Clear();
+                var jsonOutputFormatter = new JsonOutputFormatter();
+                //Set ReferenceLoopHandling
+                jsonOutputFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                //Insert above jsonOutputFormatter as the first formatter, you can insert other formatters.
+                option.OutputFormatters.Insert(0, jsonOutputFormatter);
+            });
 
 
             services.AddTransient<Singl.Services.IDisciplinaService, Singl.Services.DisciplinaService>();

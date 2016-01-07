@@ -81,7 +81,7 @@ var paths = {
     js: "./" + project.webroot + "/js/",
     lib: "./" + project.webroot + "/lib/",
     app: "./" + project.webroot + "/app/",
-    app_views: "./" + project.webroot + "/app/views/"
+    app_views: "./" + project.webroot + "/app/areas/"
 };
 
 // $Start-TypeScript$
@@ -185,9 +185,15 @@ var sources = {
     // An array of paths to views to be optimized.
     app_views: [
         {
-            name: "app-views",
+            name: "app-views-singl",
             paths: [
-                paths.scripts + "app/views/**/*"
+                paths.scripts + "app/areas/**/singl/views/**/*.*"
+            ]
+        },
+        {
+            name: "app-views-admin",
+            paths: [
+                paths.scripts + "app/areas/**/admin/views/**/*.*"
             ]
         }
     ],
@@ -219,6 +225,7 @@ var sources = {
                 paths.bower + "angular/angular.js",
                 paths.bower + "angular-resource/angular-resource.js",
                 paths.bower + "angular-route/angular-route.js",
+                paths.bower + "angular-animate/angular-animate.js"
             ]
         },
         {
@@ -282,11 +289,23 @@ var sources = {
     ],    
     app: [
         {
-            name: "app.js",
+            name: "admin.js",
             paths: [
-                paths.scripts + "app/**/*.js"
+                paths.scripts + "app/areas/admin/**/*.js",
+                paths.scripts + "app/services/**/*.js",
+                paths.scripts + "app/filters.js",
+                paths.scripts + "app/directives.js"
             ]
         },
+        {
+            name: "singl.js",
+            paths: [
+                paths.scripts + "app/areas/singl/**/*.js",
+                paths.scripts + "app/services/**/*.js",
+                paths.scripts + "app/filters.js",
+                paths.scripts + "app/directives.js"
+            ]
+        }
     ]
 };
 
@@ -335,7 +354,7 @@ gulp.task("clean-lib", function (cb) {
 });
 
 gulp.task("clean-app", function (cb) {
-    return rimraf(paths.app + "app.js", cb);
+    return rimraf(paths.app, cb);
 });
 // $Start-CshtmlMinification$
 
@@ -524,7 +543,7 @@ gulp.task("build-lib", ["clean-lib", "lint-js"], function () {
 /*
  * Builds the JavaScript files for the site.
  */
-gulp.task("build-app", ["clean-app", "lint-js"], function () {
+gulp.task("build-app", ["clean-app", "build-app-views", "lint-js"], function () {
     var tasks = sources.app.map(function (source) { // For each set of source files in the sources.
         return gulp                             // Return the stream.
             .src(source.paths)                  // Start with the source paths.
@@ -579,8 +598,7 @@ gulp.task("build", [
     // $End-CshtmlMinification$
     "build-js",
     "build-lib",
-    "build-app",
-    "build-app-views"
+    "build-app"
 ]);
 
 /*
@@ -631,7 +649,7 @@ gulp.task("watch-app", function () {
 
 gulp.task("watch-app-views", function () {
     return gulp
-        .watch(paths.scripts + "app/views/*.html", ["build-app-views"])     // Watch the scripts folder for file changes.
+        .watch(paths.scripts + "app/**/*.html", ["build-app-views"])     // Watch the scripts folder for file changes.
         .on("change", function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-app-views task started."));
         });

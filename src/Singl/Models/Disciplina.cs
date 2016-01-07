@@ -23,9 +23,18 @@ namespace Singl.Models
         [MaxLength(10)]
         public string Codigo { get; set; }
         
+        [NotMapped]
+        public string CodigoNome {
+            get {
+                return $"{Codigo} - {Nome}";
+            }
+        }        
+        
         public int Ano { get; set; }
         
         public int Serie { get; set; }
+        
+        public int Ordem { get; set; }
         
         [DataType(DataType.Url)]
         public string UrlImagem { get; set; }

@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="section-heading">Lista de unidades universitárias</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sigla</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="unidadeUniversitaria in unidadesUniversitarias">
+                    <td>
+                        <a href="/spa/unidadesuniversitarias/{{unidadeUniversitaria.Sigla}}">{{unidadeUniversitaria.Nome}}</a>
+                    </td>
+                    <td>{{unidadeUniversitaria.Sigla}}</td>
+                    <td>
+                        <div class="pull-right">
+                            <a href="/spa/unidadesuniversitarias/{{unidadeUniversitaria.Sigla}}" class="btn btn-default">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr class="hard" />
+        <div>
+            <a href="javascript:history.go(-1)">Voltar</a>
+        </div>
+    </div>
+</div>

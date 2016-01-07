@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="section-heading">Lista de cursos</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Código</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="curso in cursos">
+                    <td>
+                        <a href="/spa/cursos/{{curso.Codigo}}">{{curso.Nome}}</a>
+                    </td>
+                    <td>{{curso.Codigo}}</td>
+                    <td>
+                        <div class="pull-right">
+                            <a href="/spa/cursos/{{curso.Codigo}}" class="btn btn-default">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr class="hard"/>
+        <div>
+            <a href="javascript:history.go(-1)">Voltar</a>
+        </div>                
+    </div>
+</div>

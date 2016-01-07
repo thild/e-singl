@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Singl.Models
@@ -17,6 +18,13 @@ namespace Singl.Models
         
         public string Nome { get; set;} 
         public string Sigla { get; set;} 
+        
+        [NotMapped]
+        public string SiglaNome {
+            get {
+                return $"{Sigla} - {Nome}";
+            }
+        }
         public SetorConhecimento SetorConhecimento {get; set;}
         public Guid SetorConhecimentoId {get; set;}
         public Campus Campus { get; set;}

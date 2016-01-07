@@ -1,9 +1,42 @@
 // Site style
 
-input.ng-invalid.ng-touched {
-    background-color: #FA787E;
+input.ng-invalid.ng-touched
+{
+    background-color: #fa787e;
 }
- 
-input.ng-valid.ng-touched {
-    background-color: #78FA89;
+
+input.ng-valid.ng-touched
+{
+    background-color: #78fa89;
 }
+
+.dl-horizontal dt
+{
+    overflow: visible !important;
+    white-space: normal !important;
+    text-overflow: ellipsis !important;
+}
+
+.dl-horizontal dd
+{
+    border-bottom: 1px solid #eee;
+}
+
+hr.light
+{
+    border-width: 1px 0 0;
+}
+
+hr.hard
+{
+    border-width: 4px 0 0;
+}
+
+.campus-sede
+{
+    background-color: #eee;
+}
+
+
+//ui.bootstrap
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
