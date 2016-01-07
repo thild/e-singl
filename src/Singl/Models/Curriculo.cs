@@ -46,7 +46,6 @@ namespace Singl.Models
         public Curso Curso { get; set; }
         public Guid CursoId { get; set; }
         
-        [Newtonsoft.Json.JsonProperty("disciplinas")]
         [NotMappedAttribute]
         public IList<Disciplina> Disciplinas { get; set; }
         

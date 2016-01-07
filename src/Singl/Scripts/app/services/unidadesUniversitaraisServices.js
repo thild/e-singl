@@ -8,7 +8,7 @@
     UnidadesUniversitarias.$inject = ['$resource'];
 
     function UnidadesUniversitarias($resource) {
-        return $resource('/api/unidadesuniversitarias/:id');
+        return $resource('/api/unidadesuniversitarias/:sigla');
     }
 
 

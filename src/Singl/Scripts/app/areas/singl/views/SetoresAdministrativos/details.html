@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="section-heading">Detalhes do setor administrativo "{{setorAdministrativoDto.SetorAdministrativo.Nome}}"</h2>
+        <hr class="hard"/>
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Nome
+                </dt>
+                <dd>
+                    {{setorAdministrativoDto.SetorAdministrativo.Nome}} 
+                </dd>
+                <dt>
+                    Sigla
+                </dt>
+                <dd>
+                    {{setorAdministrativoDto.SetorAdministrativo.Sigla}}
+                </dd>
+            </dl>
+            <div ng-if="setorAdministrativoDto.SetorAdministrativo.SubSetores.length > 0">
+                <h3>Lista de sub-setores</h3>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Nome
+                        </th>
+                        <th>
+                            Sigla
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr ng-repeat="subSetor in setorAdministrativoDto.SetorAdministrativo.SubSetores">
+                        <td>
+                            <a href="/spa/setoresadministrativos/{{subSetor.Sigla}}/{{setorAdministrativoDto.Campus.Sigla}}">{{subSetor.Nome}}</a>
+                        </td>
+                        <td>
+                            {{subSetor.Sigla}}
+                        </td>
+                        <td>
+                            <div class="pull-right">
+                                <a href="/spa/setoresadministrativos/{{subSetor.Sigla}}/{{setorAdministrativoDto.Campus.Sigla}}" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <hr class="hard"/>
+        <div>
+            <a href="javascript:history.go(-1)">Voltar</a>
+        </div>      
+    </div>
+</div>

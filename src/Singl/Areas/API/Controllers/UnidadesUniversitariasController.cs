@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
 using Singl.Models;
 
 namespace Singl.Areas.API.Controllers
@@ -21,20 +22,37 @@ namespace Singl.Areas.API.Controllers
         [HttpGet]
         public IEnumerable<UnidadeUniversitaria> Get()
         {
+            System.Console.WriteLine("Get()");
             return _context.UnidadesUniversitarias
                 .OrderBy(m => m.Nome)
                 .ToList();
         }
  
-        [HttpGet("{id:guid}")]
-        public IActionResult Get(Guid id)
+        [HttpGet("{sigla}")]
+        public IActionResult Get(string sigla)
         {
-			var movie = _context.UnidadesUniversitarias.Single(m => m.Id == id);
-			if (movie == null) {
-				return new HttpNotFoundResult();
-			} else {
-				return new ObjectResult(movie);
+            
+            if (string.IsNullOrEmpty(sigla))
+            {
+                return new HttpStatusCodeResult(404);
             }
+
+            var uu = _context.UnidadesUniversitarias
+                .Include(m => m.Campi)
+                .Single(m => m.Sigla == sigla.ToUpper());
+                
+            uu.Campi = uu.Campi
+                .OrderByDescending(m => m.Sede)
+                .ThenBy(m => m.Avancado)
+                .ThenBy(m => m.Nome)
+                .ToList();
+                
+            if (uu == null)
+            {
+                return new HttpNotFoundResult();
+            }
+                        
+            return new ObjectResult(uu);
 		} 
         
         [HttpPost]
@@ -43,7 +61,6 @@ namespace Singl.Areas.API.Controllers
         {
 			if (ModelState.IsValid)
 			{
-                System.Console.WriteLine(unidadeUniversitaria.Id);
 				if (unidadeUniversitaria.Id == Guid.Empty)
 				{
 					_context.UnidadesUniversitarias.Add(unidadeUniversitaria);
@@ -66,13 +83,21 @@ namespace Singl.Areas.API.Controllers
 
 
 		//[Authorize("CanEdit", "true")]
-		[HttpDelete("{id:guid}")]
-        public IActionResult Delete(Guid id)
+		[HttpDelete("{sigla}")]
+        public IActionResult Delete(string sigla)
         {
-			var movie = _context.UnidadesUniversitarias.Single(m => m.Id == id);
-			_context.UnidadesUniversitarias.Remove(movie);
-			_context.SaveChanges();
-            return new HttpStatusCodeResult(200);
+            if (string.IsNullOrEmpty(sigla))
+            {
+                return new HttpNotFoundResult();
+            }
+            var obj = _context.UnidadesUniversitarias.Single(m => m.Sigla == sigla.ToUpper());
+            if (obj == null)
+            {
+                return new HttpNotFoundResult();
+            }            
+            _context.UnidadesUniversitarias.Remove(obj);
+            _context.SaveChanges();
+            return new HttpOkResult();
         }        
     }
 }

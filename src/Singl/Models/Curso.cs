@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System;
 using System.Linq;
 using Singl.Models.Validators;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Singl.Extensions;
 
 namespace Singl.Models
 {
@@ -32,10 +35,17 @@ namespace Singl.Models
         [Display(Name = "Código")]
         public string Codigo { get; set; }
 
+        [NotMapped]
+        public string CodigoNome {
+            get {
+                return $"{Codigo} - {Nome}";
+            }
+        }
         public Departamento Departamento { get; set; }
         public Guid DepartamentoId { get; set; }
 
         [Display(Name = "Tipo")]
+        [JsonConverter(typeof(EnumValueConverter))]
         public TipoCurso Tipo { get; set; }
 
         [Display(Name = "Perfil do egresso")]
@@ -69,7 +79,6 @@ namespace Singl.Models
             }
         }
 
-        [Newtonsoft.Json.JsonProperty("disciplinas")]
         [NotMapped]
         public IList<Disciplina> Disciplinas
         {

@@ -130,22 +130,25 @@
         @* $End-Windows81IE11EdgeFavicon$ *@
 
         @* Move site.css to a content delivery network (CDN) for better performance. *@
-        <link asp-append-version="true" rel="stylesheet" href="~/css/site.css" />
         <meta name="x-font-awesome-stylesheet-fallback-test" class="fa">
         <environment names="Development">
             <link asp-append-version="true" rel="stylesheet" href="~/css/font-awesome.css" />
             <link asp-append-version="true" rel="stylesheet" href="~/css/bootstrap.css" />
+            <link asp-append-version="true" rel="stylesheet" href="~/css/site.css" />
             @* Find a modernizr bower*@            
             <!--<script asp-append-version="true" src="~/lib/modernizr.js"></script>-->
             <script src="//ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
         </environment>
         <environment names="Staging,Production">
-            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+                  asp-fallback-href="~/css/font-awesome.min.css"
+                  asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
             <!--<script asp-append-version="true" src="~/lib/modernizr.js"></script>-->
             <script src="//ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
             <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
-                  asp-fallback-href="~/css/bootstrap.css"
+                  asp-fallback-href="~/css/bootstrap.min.css"
                   asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+            <link asp-append-version="true" rel="stylesheet" href="~/css/site.min.css" />
         </environment>
     
         @* Description - Used by search engines. Aim for more than 160 characters. *@
@@ -208,7 +211,8 @@
             <script asp-append-version="true" src="~/lib/angular.js"></script>            
             <script asp-append-version="true" src="~/lib/jquery.validate.js"></script>
             <script asp-append-version="true" src="~/lib/jquery.validate.unobtrusive.js"></script>                   
-            <script asp-append-version="true" src="~/app/app.js"></script>     
+            <script asp-append-version="true" src="~/app/singl.js"></script>
+            <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>            
         </environment>
         <environment names="Staging,Production">
             <script asp-append-version="true" src="~/js/site.min.js"></script>
@@ -228,9 +232,12 @@
                     asp-fallback-src="~/lib/angular/angular.min.js"
                     asp-fallback-test="window.angular">
             </script>            
+            <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+            <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.min.js"></script>            
+
             <script src="~/lib/jquery.validate.min.js"></script>
             <script src="~/lib/jquery.validate.unobtrusive.min.js"></script>            
-            <script src="~/app/app.min.js"></script>            
+            <script src="~/app/singl.min.js"></script>            
         </environment>
     </body>
 </html>

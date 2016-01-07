@@ -20,7 +20,7 @@ namespace Singl.Models
         public UnidadeUniversitaria UnidadeUniversitaria {get; set;}
         public Guid UnidadeUniversitariaId {get; set;}
         public IList<SetorConhecimento> SetoresConhecimento { get; set; }
-        public IList<SetorAdministrativo> SetoresAdministrativo { get; set; }
+        public IList<SetorAdministrativo> SetoresAdministrativos { get; set; }
         public string Sigla { get; set; }
         public bool Sede { get; set; }
         public bool Avancado { get; set; }

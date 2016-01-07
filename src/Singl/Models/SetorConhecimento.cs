@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Singl.Models
 {
@@ -18,6 +19,13 @@ namespace Singl.Models
         public string Nome { get; set; }
         
         public string Sigla { get; set;} 
+        
+        [NotMapped]
+        public string SiglaNome {
+            get {
+                return $"{Sigla} - {Nome}";
+            }
+        }
         
         public Campus Campus { get; set;}
          

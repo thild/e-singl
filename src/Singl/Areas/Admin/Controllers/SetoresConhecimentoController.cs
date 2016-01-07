@@ -27,9 +27,11 @@ namespace Singl.Areas.Admin.Controllers
         [HttpGet("{sigla}/{unidadeUniversitaria}")]
         public IActionResult Details(string sigla, string unidadeUniversitaria)
         {
-            if (string.IsNullOrEmpty(sigla))
+            
+            if (string.IsNullOrEmpty(sigla) || 
+                string.IsNullOrEmpty(unidadeUniversitaria))
             {
-                return new HttpStatusCodeResult(404);
+                return new HttpNotFoundResult();
             }
 
             //TODO: Verificar se na versao final do EF ainda throw "Specified cast is not valid" com a query

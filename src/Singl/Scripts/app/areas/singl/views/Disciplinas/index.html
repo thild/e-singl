@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="section-heading">Lista de disciplinas</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Código</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="disciplina in disciplinas">
+                    <td>
+                        <a href="/spa/disciplinas/{{disciplina.Codigo}}">{{disciplina.Nome}}</a>
+                    </td>
+                    <td>{{disciplina.Codigo}}</td>
+                    <td>
+                        <div class="pull-right">
+                            <a href="/spa/disciplinas/{{disciplina.Codigo}}" class="btn btn-default">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr class="hard"/>
+        <div>
+            <a href="javascript:history.go(-1)">Voltar</a>
+        </div>                
+    </div>
+</div>

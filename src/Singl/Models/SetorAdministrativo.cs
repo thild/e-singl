@@ -15,6 +15,13 @@ namespace Singl.Models
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Sigla { get; set;} 
+
+        [NotMapped]
+        public string SiglaNome {
+            get {
+                return $"{Sigla} - {Nome}";
+            }
+        }
         
         public SetorAdministrativo SuperSetor { get; set; }
 

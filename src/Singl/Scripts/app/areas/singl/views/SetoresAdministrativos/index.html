@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="section-heading">Lista de setores administrativos</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sigla</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="sa in setoresAdministrativos">
+                    <td>
+                        <a href="/spa/setoresadministrativos/{{sa.Sigla}}/{{sa.Campus.Sigla}}">{{sa.Nome}}</a>
+                    </td>
+                    <td>{{sa.Sigla}}</td>
+                    <td>
+                        <div class="pull-right">
+                            <a href="/spa/setoresadministrativos/{{sa.Sigla}}/{{sa.Campus.Sigla}}" class="btn btn-default">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detalhes</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr class="hard"/>
+        <div>
+            <a href="javascript:history.go(-1)">Voltar</a>
+        </div>                
+    </div>
+</div>

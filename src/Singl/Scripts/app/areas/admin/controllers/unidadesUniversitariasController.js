@@ -2,7 +2,7 @@
     'use strict';
  
     angular
-        .module('singlApp')
+        .module('singlAdminApp')
         .controller('UnidadesUniversitariasListController', UnidadesUniversitariasListController)
         .controller('UnidadesUniversitariasAddController', UnidadesUniversitariasAddController)
         .controller('UnidadesUniversitariasEditController', UnidadesUniversitariasEditController)
@@ -24,7 +24,7 @@
             $scope.unidadeUniversitaria.$save(
                 // success
 				function () {
-                    $location.path('/spa/unidadesuniversitarias');
+                    $location.path('/spa/admin/unidadesuniversitarias');
 				},
 				// error
 				function (error) {
@@ -43,7 +43,7 @@
             $scope.unidadeUniversitaria.$save(
                 // success
 				function () {
-                    $location.path('/spa/unidadesuniversitarias');
+                    $location.path('/spa/admin/unidadesuniversitarias');
 				},
 				// error
 				function (error) {
@@ -63,7 +63,7 @@
             $scope.unidadeUniversitaria.$remove({id:$scope.unidadeUniversitaria.Id}, 
                 // success
 				function () {
-                    $location.path('/spa/unidadesuniversitarias');
+                    $location.path('/spa/admin/unidadesuniversitarias');
 				},
 				// error
 				function (error) {

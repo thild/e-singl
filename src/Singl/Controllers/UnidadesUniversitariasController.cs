@@ -28,18 +28,18 @@ namespace Singl.Controllers
                 return new HttpStatusCodeResult(404);
             }
 
-            var departamento = db.UnidadesUniversitarias
+            var uu = db.UnidadesUniversitarias
                 .Include(m => m.Campi)
                 .Single(m => m.Sigla == sigla.ToUpper());
                 
-            departamento.Campi = departamento.Campi.OrderBy(m => m.Nome).ToList();
+            uu.Campi = uu.Campi.OrderBy(m => m.Nome).ToList();
                 
-            if (departamento == null)
+            if (uu == null)
             {
                 return new HttpStatusCodeResult(404);
             }
 
-            return View(departamento);
+            return View(uu);
         }
     }
 }
