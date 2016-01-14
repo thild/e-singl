@@ -27,6 +27,7 @@ bld/
 **/wwwroot/lib/
 **/wwwroot/css/
 **/wwwroot/js/
+**/typings
 
 # Visual Studio 2015 cache/options directory
 .vs/

@@ -30,7 +30,7 @@ namespace Singl.Services
 
         public IQueryable<SetorAdministrativo> Get(Guid? superSetorId)
         {
-           return _context.SetoresAdministrativos.Where(m => m.SuperSetorId == superSetorId).AsQueryable();
+           return _context.SetoresAdministrativos.Where(m => m.SupersetorId == superSetorId).AsQueryable();
         }
 
         public IQueryable<SetorAdministrativo> GetAll()
@@ -40,7 +40,7 @@ namespace Singl.Services
         
         public IQueryable<SetorAdministrativo> GetAllButMeAndChilds(Guid? me)
         {
-            return _context.SetoresAdministrativos.Where(m => m.Id != me && m.SuperSetorId != me).AsQueryable();
+            return _context.SetoresAdministrativos.Where(m => m.Id != me && m.SupersetorId != me).AsQueryable();
         }        
     }
 

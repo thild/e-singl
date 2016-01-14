@@ -66,6 +66,7 @@ var siteUrl = undefined;
 var paths = {
     // Source Directory Paths
     bower: "./bower_components/",
+    node: "./node_modules/",
     contents: "Contents/",
     scripts: "Scripts/",
     styles: "Styles/",
@@ -80,7 +81,7 @@ var paths = {
     img: "./" + project.webroot + "/images/",
     js: "./" + project.webroot + "/js/",
     lib: "./" + project.webroot + "/lib/",
-    app: "./" + project.webroot + "/app/",
+    app: "./" + project.webroot + "/app/areas/",
     app_views: "./" + project.webroot + "/app/areas/"
 };
 
@@ -187,13 +188,7 @@ var sources = {
         {
             name: "app-views-singl",
             paths: [
-                paths.scripts + "app/areas/**/singl/views/**/*.*"
-            ]
-        },
-        {
-            name: "app-views-admin",
-            paths: [
-                paths.scripts + "app/areas/**/admin/views/**/*.*"
+                paths.scripts + "app/areas/**/singl/**/*.html"
             ]
         }
     ],
@@ -217,15 +212,29 @@ var sources = {
     lib: [
         {
             // name - The name of the final JavaScript file to build.
-            name: "angular.js",
+            name: "angular2.js",
             // paths - A single or array of paths to JavaScript or TypeScript files which will be concatenated and 
             // minified to create a file with the above file name.
             paths: [
-                // Feel free to remove any parts of Bootstrap you don't use.
-                paths.bower + "angular/angular.js",
-                paths.bower + "angular-resource/angular-resource.js",
-                paths.bower + "angular-route/angular-route.js",
-                paths.bower + "angular-animate/angular-animate.js"
+                paths.node + "angular2/bundles/angular2-polyfills.js",
+                paths.node + "/angular2/bundles/angular2.dev.js",
+                paths.node + "/angular2/bundles/router.dev.js",
+                paths.node + "/angular2/bundles/http.dev.js"
+            ]
+        },
+        {
+            name: "system.js",
+            paths: [
+                paths.node + "systemjs/dist/system.src.js"
+            ]
+        },
+        {
+            // name - The name of the final JavaScript file to build.
+            name: "Rx.js",
+            // paths - A single or array of paths to JavaScript or TypeScript files which will be concatenated and 
+            // minified to create a file with the above file name.
+            paths: [
+                paths.node + "rxjs/bundles/Rx.js"                
             ]
         },
         {
@@ -289,21 +298,10 @@ var sources = {
     ],    
     app: [
         {
-            name: "admin.js",
+            name: "app.js",
+            area: "singl",
             paths: [
-                paths.scripts + "app/areas/admin/**/*.js",
-                paths.scripts + "app/services/**/*.js",
-                paths.scripts + "app/filters.js",
-                paths.scripts + "app/directives.js"
-            ]
-        },
-        {
-            name: "singl.js",
-            paths: [
-                paths.scripts + "app/areas/singl/**/*.js",
-                paths.scripts + "app/services/**/*.js",
-                paths.scripts + "app/filters.js",
-                paths.scripts + "app/directives.js"
+                paths.scripts + "app/areas/**/singl/**/*.*"
             ]
         }
     ]
@@ -479,6 +477,41 @@ gulp.task("build-app-views", ["clean-app-views"], function () {
     return merge(tasks);  
 });
 
+/*
+ * Builds the JavaScript files for the site.
+ */
+gulp.task("build-app", ["clean-app"], function () {
+    var tasks = sources.app.map(function (source) { // For each set of source files in the sources.
+        return gulp                             // Return the stream.
+            .src(source.paths)                  // Start with the source paths.
+            .pipe(plumber({
+                handleError: function (err) {
+                    console.log(err);
+                    this.emit('end');
+                }
+            }))
+            .pipe(debug())
+            .pipe(gulpif(
+                environment.isDevelopment(),    // If running in the development environment.
+                sourcemaps.init()))             // Set up the generation of .map source files for the JavaScript.
+            // $Start-TypeScript$
+            .pipe(gulpif(                       // If the file is a TypeScript (.ts) file.
+                "**/*.ts",
+                typescript(getTypeScriptProject(source)))) // Compile TypeScript (.ts) to JavaScript (.js) using the specified options.
+            // $End-TypeScript$
+            .pipe(sizeBefore(source.name))      // Write the size of the file to the console before minification.
+            .pipe(gulpif(
+                !environment.isDevelopment(),   // If running in the staging or production environment.
+                uglify()))                      // Minifies the JavaScript.
+            .pipe(sizeAfter(source.name))       // Write the size of the file to the console after minification.
+            .pipe(gulpif(
+                environment.isDevelopment(),    // If running in the development environment.
+                sourcemaps.write(".")))         // Generates source .map files for the JavaScript.
+            .pipe(gulp.dest(paths.app));         // Saves the JavaScript file to the specified destination path.
+    });
+    return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
+});
+
 
 /*
  * Builds the JavaScript files for the site.
@@ -540,35 +573,6 @@ gulp.task("build-lib", ["clean-lib", "lint-js"], function () {
     return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
 });
 
-/*
- * Builds the JavaScript files for the site.
- */
-gulp.task("build-app", ["clean-app", "build-app-views", "lint-js"], function () {
-    var tasks = sources.app.map(function (source) { // For each set of source files in the sources.
-        return gulp                             // Return the stream.
-            .src(source.paths)                  // Start with the source paths.
-            .pipe(plumber())                    // Handle any errors.
-            .pipe(gulpif(
-                environment.isDevelopment(),    // If running in the development environment.
-                sourcemaps.init()))             // Set up the generation of .map source files for the JavaScript.
-            // $Start-TypeScript$
-            .pipe(gulpif(                       // If the file is a TypeScript (.ts) file.
-                "**/*.ts",
-                typescript(getTypeScriptProject(source)))) // Compile TypeScript (.ts) to JavaScript (.js) using the specified options.
-            // $End-TypeScript$
-            .pipe(concat(source.name))          // Concatenate JavaScript files into a single file with the specified name.
-            .pipe(sizeBefore(source.name))      // Write the size of the file to the console before minification.
-            .pipe(gulpif(
-                !environment.isDevelopment(),   // If running in the staging or production environment.
-                uglify()))                      // Minifies the JavaScript.
-            .pipe(sizeAfter(source.name))       // Write the size of the file to the console after minification.
-            .pipe(gulpif(
-                environment.isDevelopment(),    // If running in the development environment.
-                sourcemaps.write(".")))         // Generates source .map files for the JavaScript.
-            .pipe(gulp.dest(paths.app));         // Saves the JavaScript file to the specified destination path.
-    });
-    return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
-});
 
 
 // $Start-CshtmlMinification$
@@ -641,7 +645,7 @@ gulp.task("watch-js", function () {
 
 gulp.task("watch-app", function () {
     return gulp
-        .watch(paths.scripts + "app/**/*.{js,ts}", ["build-app"])     // Watch the scripts folder for file changes.
+        .watch(paths.scripts + "app/**/*.{ts,html}", ["build-app"])     // Watch the scripts folder for file changes.
         .on("change", function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-app task started."));
         });
@@ -660,7 +664,7 @@ gulp.task("dnx-watch", shell.task(["dnx-watch kestrel"]));
 /*
  * Watch the styles and scripts folders for changes. Build the CSS and JavaScript if something changes.
  */
-gulp.task("watch", ["watch-css", "watch-js", "watch-app", "watch-app-views", "dnx-watch"]);
+gulp.task("watch", ["watch-css", "watch-js", "watch-app", "dnx-watch"]);
 
 function pageSpeed(strategy, cb) {
     if (siteUrl === undefined) {

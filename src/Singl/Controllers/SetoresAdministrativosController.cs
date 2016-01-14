@@ -27,7 +27,7 @@ namespace Singl.Controllers
             }
 
             var departamento = db.SetoresAdministrativos
-                .Include(m => m.SubSetores)
+                .Include(m => m.Subsetores)
                 .Single(m => m.Sigla == sigla);
                 
             if (departamento == null)

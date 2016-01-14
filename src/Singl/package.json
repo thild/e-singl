@@ -30,13 +30,25 @@
     "gulp-util": "3.0.6",
     "merge-stream": "1.0.0",
     "psi": "1.0.6",
-    "rimraf": "2.4.3"    
+    "rimraf": "2.4.3",
+    "angular2": "2.0.0-beta.1",
+    "systemjs": "0.19.6",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.33.3",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.0",
+    "zone.js": "0.5.10"    
+  },
+  "devDependencies": {
+    "concurrently": "^1.0.0",
+    "typescript": "^1.7.3"
   },
   "engines": {
     "node": "4.2.1",
     "npm": "2.14.7"
   },  
   "scripts": {
+    "tsc": "(tsc) compiling typescrypt",
     "preinstall": "echo installing...",
     "start": "echo starting app...",
     "build": "bower install && gulp build"

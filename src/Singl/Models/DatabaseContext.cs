@@ -193,8 +193,8 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
             
             //Setores administrativos
             var saNead = new SetorAdministrativo {Id = Guid.Parse("8facb2e5-855b-457c-a98f-0d48cbee8a1d"), Nome = "Núcleo de Educação à Distância", Sigla = "NEAD", Campus = campusSantaCruz};
-            var saNeadVideos = new SetorAdministrativo {Id = Guid.Parse("b4ff3410-fcbc-4895-b958-ae10818fa01e"), Nome = "NEAD - Vídeos", Sigla = "NEADV", SuperSetor = saNead, Campus = campusSantaCruz};
-            var saNeadMulti = new SetorAdministrativo {Id = Guid.Parse("01d69cfb-f49b-41d4-9062-f0e97bae9136"), Nome = "NEAD - Multidisciplinar", Sigla = "NEADM", SuperSetor = saNead, Campus = campusSantaCruz};
+            var saNeadVideos = new SetorAdministrativo {Id = Guid.Parse("b4ff3410-fcbc-4895-b958-ae10818fa01e"), Nome = "NEAD - Vídeos", Sigla = "NEADV", Supersetor = saNead, Campus = campusSantaCruz};
+            var saNeadMulti = new SetorAdministrativo {Id = Guid.Parse("01d69cfb-f49b-41d4-9062-f0e97bae9136"), Nome = "NEAD - Multidisciplinar", Sigla = "NEADM", Supersetor = saNead, Campus = campusSantaCruz};
             SetoresAdministrativos.AddRange(saNead,saNeadMulti,saNeadVideos); 
             
             
@@ -683,15 +683,15 @@ CREATE TABLE "RelatorioEvasao" (
                 .HasKey(m => m.Id);
                 
             builder.Entity<SetorAdministrativo>()
-                .HasMany(m => m.SubSetores)
-                .WithOne(m => m.SuperSetor)
-                .HasForeignKey(m => m.SuperSetorId)
+                .HasMany(m => m.Subsetores)
+                .WithOne(m => m.Supersetor)
+                .HasForeignKey(m => m.SupersetorId)
                 .IsRequired(false);
                             
             builder.Entity<SetorAdministrativo>()
-                .HasOne(m => m.SuperSetor)
-                .WithMany(m => m.SubSetores)
-                .HasForeignKey(m => m.SuperSetorId)
+                .HasOne(m => m.Supersetor)
+                .WithMany(m => m.Subsetores)
+                .HasForeignKey(m => m.SupersetorId)
                 .IsRequired(false);
 
             builder.Entity<SetorAdministrativo>()

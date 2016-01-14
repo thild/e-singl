@@ -54,12 +54,12 @@ namespace Singl.Areas.API.Controllers
             
             setorConhecimento.Departamentos = setorConhecimento.Departamentos.OrderBy(m => m.Nome).ToList();
             
-            var dto = new {SetorConhecimento = setorConhecimento, 
-                UnidadeUniversitaria = 
-                _context.UnidadesUniversitarias.Single(m => m.Id == 
-                    setorConhecimento.Campus.UnidadeUniversitariaId)};
+            // var dto = new {SetorConhecimento = setorConhecimento, 
+            //     UnidadeUniversitaria = 
+            //     _context.UnidadesUniversitarias.Single(m => m.Id == 
+            //         setorConhecimento.Campus.UnidadeUniversitariaId)};
                         
-            return new ObjectResult(dto);
+            return new ObjectResult(setorConhecimento);
 		} 
         
         [HttpPost]
