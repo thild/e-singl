@@ -1,0 +1,9 @@
+<ul>
+    <li *ngFor="#item of list"
+        [class.selected]="isSelected(item)"
+        (click)="onSelect(item)">
+        <span class="id-badge">
+            {{item[selectionProperty]}}
+        </span> {{item[descriptionProperty]}}
+    </li>
+</ul>

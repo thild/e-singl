@@ -40,3 +40,36 @@ hr.hard
 
 //ui.bootstrap
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.spa ul {list-style-type: none; margin-left: 1em; padding: 0; }
+
+.spa li { cursor: pointer; position: relative; left: 0; transition: all 0.2s ease; }
+.spa li:hover {color: black; background-color: #eceff1; left: .2em;}
+
+.spa span.model { cursor: pointer; position: relative; left: 0; transition: all 0.2s ease; }
+.spa span.model:hover {color: black; background-color: #eceff1; left: .2em;}
+
+/* route-link anchor tags */
+.spa a {padding: 5px; text-decoration: none; font-family: Arial, Helvetica, sans-serif; }
+.spa a:visited, a:link {color: #444;}
+.spa a:hover {color: white; background-color: #1171a3; }
+.spa a.router-link-active {color: white; background-color: #52b9e9; }
+
+.spa .selected { background-color: #cfd8dc; color: black; }
+
+.spa .id-badge {
+    display: inline-block;
+    position: relative;
+    min-width: 10px;
+    font-size: x-small;
+    font-weight: bold;
+    color: #FFF;
+    line-height: 1em;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-color: #607d8b;
+    border-radius: 3px;
+    text-align: center;
+    padding: 2px;
+    width: 70px;
+ }

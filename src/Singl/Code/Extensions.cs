@@ -17,4 +17,5 @@ namespace Singl.Extensions
             return ca == null ? enumValue.ToString() : ca.Name;
         }
     }
+    
 }

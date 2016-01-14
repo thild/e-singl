@@ -25,7 +25,7 @@
                         <dd>
                             @Html.DisplayFor(model => model.Nome)
                         </dd>
-                    @if(Model.SubSetores.Count != 0) {
+                    @if(Model.Subsetores.Count != 0) {
                         <dt>Lista de subsetores administrativos</dt>
                         <dd>
                             <table class="table">
@@ -38,7 +38,7 @@
                                     </th>
                                     <th></th>
                                 </tr>
-                            @foreach (var item in Model.SubSetores) {
+                            @foreach (var item in Model.Subsetores) {
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Sigla)

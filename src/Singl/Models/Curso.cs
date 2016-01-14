@@ -22,35 +22,43 @@ namespace Singl.Models
         }
 
         [Required]
+        [ScaffoldColumn(false)]
         public Guid Id { get; set; }
 
         [Required]
         [MinLength(4, ErrorMessage="Bla")]
         [MaxLength(100)]
+        [ScaffoldColumn(true)]
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         [StringLength(20, MinimumLength = 4, ErrorMessage = "O campo {0} deve conter entre {2} e {1} caracteres alfanuméricos.")]
         [RegularExpression(@"^[\w\s]*$", ErrorMessage = "O campo {0} deve conter apenas caracteres alfanuméricos.")]
         [Display(Name = "Código")]
+        [ScaffoldColumn(true)]
         public string Codigo { get; set; }
 
         [NotMapped]
+        [ScaffoldColumn(true)]
         public string CodigoNome {
             get {
                 return $"{Codigo} - {Nome}";
             }
         }
+        [ScaffoldColumn(true)]
         public Departamento Departamento { get; set; }
         public Guid DepartamentoId { get; set; }
 
         [Display(Name = "Tipo")]
         [JsonConverter(typeof(EnumValueConverter))]
+        [ScaffoldColumn(true)]
         public TipoCurso Tipo { get; set; }
 
         [Display(Name = "Perfil do egresso")]
+        [ScaffoldColumn(true)]
         public string PerfilEgresso { get; set; }
 
+        [ScaffoldColumn(true)]
         public Campus Campus { get; set;}
          
         public Guid CampusId { get; set;} 
@@ -80,6 +88,7 @@ namespace Singl.Models
         }
 
         [NotMapped]
+        [ScaffoldColumn(true)]
         public IList<Disciplina> Disciplinas
         {
             get

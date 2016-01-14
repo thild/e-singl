@@ -42,15 +42,15 @@ namespace Singl.Areas.API.Controllers
             var campus = _context.Campi
                 .Include(m => m.SetoresConhecimento)
                 .Include(m => m.SetoresAdministrativos)
-                .ThenInclude(m => m.SuperSetor)
+                .ThenInclude(m => m.Supersetor)
                 .Single(m => m.Sigla == sigla.ToUpper());
                 
-            campus.SetoresConhecimento = campus.SetoresConhecimento.OrderBy(m => m.Nome).ToList();
-            
-            var dto = new {Campus = campus, 
-                UnidadeUniversitaria = 
-                _context.UnidadesUniversitarias.Single(m => m.Id == 
-                    campus.UnidadeUniversitariaId)};
+            // campus.SetoresConhecimento = campus.SetoresConhecimento.OrderBy(m => m.Nome).ToList();
+            // 
+            // var dto = new {Campus = campus, 
+            //     UnidadeUniversitaria = 
+            //     _context.UnidadesUniversitarias.Single(m => m.Id == 
+            //         campus.UnidadeUniversitariaId)};
             
                 
             if (campus == null)
@@ -58,7 +58,7 @@ namespace Singl.Areas.API.Controllers
                 return new HttpNotFoundResult();
             }
                         
-            return new ObjectResult(dto);
+            return new ObjectResult(campus);
 		} 
         
         [HttpPost]

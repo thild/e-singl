@@ -38,24 +38,24 @@ namespace Singl.Areas.API.Controllers
                 return new HttpNotFoundResult();
             }
 
-            var SetoresAdministrativos = _context.SetoresAdministrativos
-                .Include(m => m.SubSetores)
+            var setoresAdministrativos = _context.SetoresAdministrativos
+                .Include(m => m.Subsetores)
                 .Include(m => m.Campus).ToList();
                 
-            var SetorAdministrativo = SetoresAdministrativos.Single(m => m.Sigla == sigla && 
+            var setorAdministrativo = setoresAdministrativos.Single(m => m.Sigla == sigla && 
                 m.Campus.Sigla == campus);
                                 
-            if (SetorAdministrativo == null)
+            if (setorAdministrativo == null)
             {
                 return new HttpNotFoundResult();
             }
             
-            SetorAdministrativo.SubSetores = SetorAdministrativo.SubSetores.OrderBy(m => m.Nome).ToList();
+            setorAdministrativo.Subsetores = setorAdministrativo.Subsetores.OrderBy(m => m.Nome).ToList();
             
-            var dto = new {SetorAdministrativo = SetorAdministrativo, 
-                Campus = _context.Campi.Single(m => m.Id == SetorAdministrativo.CampusId)};
+            // var dto = new {SetorAdministrativo = SetorAdministrativo, 
+            //     Campus = _context.Campi.Single(m => m.Id == SetorAdministrativo.CampusId)};
                         
-            return new ObjectResult(dto);
+            return new ObjectResult(setorAdministrativo);
 		} 
         
         [HttpPost]
@@ -96,7 +96,7 @@ namespace Singl.Areas.API.Controllers
             }
 
             var SetoresAdministrativos = _context.SetoresAdministrativos
-                .Include(m => m.SubSetores)
+                .Include(m => m.Subsetores)
                 .Include(m => m.Campus)
                 .ToList();
                 

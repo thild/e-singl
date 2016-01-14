@@ -29,7 +29,7 @@ namespace Singl.Areas.Admin.Controllers
             }
 
             var SetorAdministrativo = db.SetoresAdministrativos
-                .Include(m => m.SubSetores)
+                .Include(m => m.Subsetores)
                 .Single(m => m.Sigla == sigla);
                 
             if (SetorAdministrativo == null)
@@ -74,7 +74,7 @@ namespace Singl.Areas.Admin.Controllers
             }
 
             var SetorAdministrativo = db.SetoresAdministrativos
-                .Include(m => m.SubSetores)
+                .Include(m => m.Subsetores)
                 .Single(m => m.Sigla == sigla);
             if (SetorAdministrativo == null)
             {
