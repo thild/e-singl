@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
 using System.Linq;
+using Singl.Core.Scaffolding;
 
 // I - Informações do pesquisador: PqI (      ) PqE (      )
 // Nome do pesquisador:
@@ -23,6 +24,16 @@ using System.Linq;
 namespace Singl.Models
 {
     //Curso
+  [ModelMetadataAttribute(
+                DetailNavigationUrl="`/projetospesquisa/${model.Id}`", 
+                DescriptionProperty="Titulo",
+                SelectionProperty="Id",
+                DetailRouteName="ProjetoPesquisaDetail",
+                DetailRouteParams=@"`{""id"":""${model.Id}""}`",
+                ListNavigationUrl="`/projetospesquisa`", 
+                ListRouteName="ProjetoPesquisaList",
+                ListRouteParams=@"`{""id"":""${model.Id}""}`"
+                )]
     public class ProjetoPesquisa : IModel<Guid>
     {
 

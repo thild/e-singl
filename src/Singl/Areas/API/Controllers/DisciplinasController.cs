@@ -22,7 +22,6 @@ namespace Singl.Areas.API.Controllers
         [HttpGet]
         public IEnumerable<Disciplina> Get()
         {
-            System.Console.WriteLine("Get()");
             return _context.Disciplinas
                     .OrderBy(m => m.Serie)
                     .ThenBy(m => m.Semestre)

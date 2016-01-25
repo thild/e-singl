@@ -13,6 +13,7 @@ namespace Singl.Models
         {
             Id = Guid.NewGuid();
             Ano = DateTimeOffset.Now.Year;
+            Disciplinas = new List<Disciplina>();
         }
         
         [Required]
@@ -46,7 +47,7 @@ namespace Singl.Models
         public Curso Curso { get; set; }
         public Guid CursoId { get; set; }
         
-        [NotMappedAttribute]
+        //[NotMappedAttribute]
         public IList<Disciplina> Disciplinas { get; set; }
         
         [NotMappedAttribute]

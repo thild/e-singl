@@ -22,11 +22,13 @@ namespace Singl.Areas.API.Controllers
         [HttpGet]
         public IEnumerable<Campus> Get()
         {
-            System.Console.WriteLine("Get()");
             return _context.Campi
+                .Include(m => m.UnidadeUniversitaria)
                 .Include(m => m.SetoresConhecimento)
                 .Include(m => m.SetoresAdministrativos)
-                .OrderBy(m => m.Nome)
+                .OrderByDescending(m => m.Sede)
+                .ThenBy(m => m.Avancado)
+                .ThenBy(m => m.Nome)
                 .ToList();
         }
  
@@ -40,12 +42,16 @@ namespace Singl.Areas.API.Controllers
             }
 
             var campus = _context.Campi
+                .Include(m => m.UnidadeUniversitaria)
                 .Include(m => m.SetoresConhecimento)
                 .Include(m => m.SetoresAdministrativos)
                 .ThenInclude(m => m.Supersetor)
+                .Include(m => m.SetoresConhecimento)
+                .ThenInclude(m => m.Campus)
                 .Single(m => m.Sigla == sigla.ToUpper());
                 
-            // campus.SetoresConhecimento = campus.SetoresConhecimento.OrderBy(m => m.Nome).ToList();
+            campus.SetoresAdministrativos = campus.SetoresAdministrativos.OrderBy(m => m.Nome).ToList();
+            campus.SetoresConhecimento = campus.SetoresConhecimento.OrderBy(m => m.Nome).ToList();
             // 
             // var dto = new {Campus = campus, 
             //     UnidadeUniversitaria = 

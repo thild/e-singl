@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
@@ -20,12 +21,27 @@ namespace Singl.Areas.API.Controllers
         }
         // GET: api/values
         [HttpGet]
-        public IEnumerable<Curso> Get()
+        public IEnumerable<dynamic> Get()
         {
-            System.Console.WriteLine("Get()");
-            return _context.Cursos
+            var list = _context.Cursos
+                .Include(m => m.Departamento)
+                .Include(m => m.Campus)
+                .ThenInclude(m => m.UnidadeUniversitaria)
+                .Include(m => m.Curriculos)
+                .ThenInclude(m => m.Disciplinas)
                 .OrderBy(m => m.Nome)
                 .ToList();
+
+            List<dynamic> retList = new List<dynamic>();       
+            
+            foreach (var item in list)
+            {
+                retList.Add(
+                   item.ToDto()
+                );
+            }                         
+                
+            return retList;
         }
  
         [HttpGet("{codigo}")]
@@ -57,13 +73,8 @@ namespace Singl.Areas.API.Controllers
             {
                 return new HttpNotFoundResult();
             }
-            var result = new {
-                Curso = curso,
-                Departamento = curso.Departamento,
-                Campus = curso.Campus,
-                UnidadeUniversitaria = curso.Campus.UnidadeUniversitaria
-            };                        
-            return new ObjectResult(result);
+                          
+            return new ObjectResult(curso.ToDto());
 		} 
         
         [HttpPost]

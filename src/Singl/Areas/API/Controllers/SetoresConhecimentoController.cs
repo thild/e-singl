@@ -32,7 +32,6 @@ namespace Singl.Areas.API.Controllers
         [HttpGet("{sigla}/{unidadeUniversitaria}")]
         public IActionResult Get(string sigla, string unidadeUniversitaria)
         {
-            
             if (string.IsNullOrEmpty(sigla) || 
                 string.IsNullOrEmpty(unidadeUniversitaria))
             {
@@ -58,7 +57,6 @@ namespace Singl.Areas.API.Controllers
             //     UnidadeUniversitaria = 
             //     _context.UnidadesUniversitarias.Single(m => m.Id == 
             //         setorConhecimento.Campus.UnidadeUniversitariaId)};
-                        
             return new ObjectResult(setorConhecimento);
 		} 
         

@@ -22,8 +22,8 @@ namespace Singl.Areas.API.Controllers
         [HttpGet]
         public IEnumerable<UnidadeUniversitaria> Get()
         {
-            System.Console.WriteLine("Get()");
             return _context.UnidadesUniversitarias
+                .Include(m => m.Campi)
                 .OrderBy(m => m.Nome)
                 .ToList();
         }

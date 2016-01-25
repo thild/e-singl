@@ -13,8 +13,10 @@ import {ServiceBase} from './service-base.service';
 
 
 @Injectable()
-export class UnidadeUniversitariaService extends ServiceBase<UnidadeUniversitaria> {
-       constructor(_http: Http) {
-           super(_http, 'Id', '/api/unidadesuniversitarias/', '`${params.sigla}`');
-       }
-} 
+export class UnidadeUniversitariaService extends ServiceBase {
+    
+    constructor(_http: Http) {
+        super(_http, 'Sigla', '/api/unidadesuniversitarias/', '`${params.sigla}`');
+    }
+}
+       
