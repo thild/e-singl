@@ -6,11 +6,17 @@ using Singl.Core.Scaffolding;
 
 namespace Singl.Models
 {
-    [ModelNavigationAttribute(NavigationUrl="`/setoresaconhecimento/${model.Sigla}/${model.SiglaUnidadeUniversitaria}`", 
+    [ModelMetadataAttribute(
+                DisplayName = "Setor de conhecimento",
+                DetailNavigationUrl="`/setoresconhecimento/${model.Sigla}/${model.SiglaUnidadeUniversitaria}`", 
                 DescriptionProperty="Nome",
                 SelectionProperty="Sigla",
-                RouteName="SetorConhecimentoDetail",
-                RouteParams=@"`{""sigla"":""${model.Sigla}"",""campus"":""${model.SiglaUnidadeUniversitaria}""}`")]
+                DetailRouteName="SetorConhecimentoDetail",
+                DetailRouteParams=@"`{""sigla"":""${model.Sigla}"",""unidadeUniversitaria"":""${model.SiglaUnidadeUniversitaria}""}`",
+                ListNavigationUrl="`/setoresconhecimento`", 
+                ListRouteName="SetorConhecimentoList",
+                ListRouteParams=@"`{""sigla"":""${model.Sigla}""}`"
+                )]
     public class SetorConhecimento : IModel<Guid>
     {
         public SetorConhecimento()
@@ -20,11 +26,15 @@ namespace Singl.Models
         [Required]
         public Guid Id { get; set; }
         
-        public IList<Departamento> Departamentos { get; set; }
 
+        [ScaffoldColumn(true)]
         public string Nome { get; set; }
         
+        [ScaffoldColumn(true)]
         public string Sigla { get; set;} 
+        
+        [ScaffoldColumn(true)]
+        public IList<Departamento> Departamentos { get; set; }
         
         [NotMapped]
         public string SiglaNome {
@@ -36,10 +46,11 @@ namespace Singl.Models
         [NotMapped]
         public string SiglaUnidadeUniversitaria {
             get {
-                return Campus?.UnidadeUniversitaria?.Sigla ?? string.Empty;
+                return Campus?.SiglaUnidadeUniversitaria ?? string.Empty;
             }
         }
         
+        [ScaffoldColumn(true)]
         public Campus Campus { get; set;}
          
         public Guid CampusId { get; set;} 

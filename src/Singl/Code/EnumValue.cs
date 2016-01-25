@@ -14,6 +14,7 @@ namespace Singl.Extensions
         public string Name { get; set; }
 
         public string Label { get; set; }
+        public string Description { get; set; }
     }
 
     public static class EnumHelpers
@@ -24,12 +25,13 @@ namespace Singl.Extensions
 
             DisplayAttribute attribute =
                 member.GetCustomAttribute<DisplayAttribute>();
-
+            
             return new EnumValue
             {
                 Value = (int)value,
                 Name = Enum.GetName(enumType, value),
-                Label = attribute.Name
+                Label = attribute?.Name ?? Enum.GetName(enumType, value),
+                Description = attribute?.Description ?? string.Empty
             };
         }
 
@@ -57,6 +59,8 @@ namespace Singl.Extensions
             object value,
             JsonSerializer serializer)
         {
+            Console.WriteLine(new string('#', 40) );
+            Console.WriteLine("EnumTypeConverter - WriteJson");
             if (value == null)
             {
                 writer.WriteNull();
@@ -81,7 +85,8 @@ namespace Singl.Extensions
 
         public override bool CanConvert(Type objectType)
         {
-
+            Console.WriteLine(new string('#', 40) );
+            Console.WriteLine("EnumTypeConverter - CanConvert");
             return typeof(Type).IsAssignableFrom(objectType);
         }
     }
@@ -94,6 +99,8 @@ namespace Singl.Extensions
             object value,
             JsonSerializer serializer)
         {
+            Console.WriteLine(new string('#', 40) );
+            Console.WriteLine("EnumValueConverter - WriteJson");
             if (value == null)
             {
                 writer.WriteNull();
@@ -118,6 +125,8 @@ namespace Singl.Extensions
 
         public override bool CanConvert(Type objectType)
         {
+            Console.WriteLine(new string('#', 40) );
+            Console.WriteLine("EnumValueConverter - CanConvert");
             //return objectType.IsAbstract;
             return true;
         }

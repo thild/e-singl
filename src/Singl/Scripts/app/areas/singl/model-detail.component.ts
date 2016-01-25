@@ -8,18 +8,24 @@
 // TODO SOMEDAY: Feature Componetized like CrisisCenter
 import {Component, OnInit, Input, Output}   from 'angular2/core';
 import {ModelMetadataService}   from './model-metadata.service';
-import {ListComponent} from './list.component';
+import {ModelListComponent} from './model-list.component';
 import {Router, RouteParams, RouterLink} from 'angular2/router';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {IServiceBase}   from './service-base.service';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/share';
+import 'rxjs/Rx';
 
 @Component({
-    selector: 'model-details',
-    templateUrl: 'app/areas/singl/model-details.component.html',
-    directives: [ROUTER_DIRECTIVES, ListComponent, RouterLink ]
+    selector: 'model-detail',
+    templateUrl: 'app/areas/singl/model-detail.component.html',
+    directives: [ROUTER_DIRECTIVES, ModelListComponent, RouterLink ]
 })
-export class ModelDetailsComponent implements OnInit {
+export class ModelDetailComponent implements OnInit {
 
-    properties: any[];
+    modelMetadata: Observable<any>;
+    properties: Observable<any>;
     @Input() model: any;
     @Input() modelName: string;
     @Input() notFoundMessage: string;
@@ -27,41 +33,40 @@ export class ModelDetailsComponent implements OnInit {
 
     constructor(public router: Router,
         public routeParams: RouteParams,
-        public metadataService: ModelMetadataService) {
-
-    }
+        public metadataService: ModelMetadataService)
+    {}
 
     getModelNavigationDescription(model, property): string {
         if (model[property.PropertyName])
             return model[property.PropertyName][property.DescriptionProperty]
         return "-";
     }
-
-    // getModelNavigationUrl(model, property): string {
-    //     if(model == null)
-    //         return "";
-    //     return eval(property.NavigationUrl);
-    // }
-    // 
-    // getModelNavigationRouteParams(model, property): any {
-    //     if(model == null)
-    //         return null;
-    //     if(property.RouteParams == "")
-    //         return null;            
-    //     return JSON.parse(eval(property.RouteParams));
-    // }
     
     onSelect(model: any, property: any) {
         if (model) 
-            this.router.navigateByUrl(eval(property.NavigationUrl));
+            this.router.navigateByUrl(eval(property.DetailNavigationUrl));
     }    
 
     ngOnInit() {
         this.metadataService.get(this.modelName)
             .subscribe(data => {
-                this.properties = data.Properties;
+                this.modelMetadata = data;
+                this.properties = Observable.of(data.Properties);
+                
+                // let sigla = this.routeParams.get(this.modelMetadata.SelectionProperty);
+                // this.modelService.get(eval(this.modelMetadata.DetailNavigationUrl))
+                //     .subscribe(data => this.model = data,
+                //             error => console.log('Could not load.', error));            
+                
             },
             error => console.log('Could not load.', error));
+            
     }
 
+    //TODO go to list filtered by previous navigation
+    gotoList() {
+        let model = this.model;
+        let args = JSON.parse(eval(this.modelMetadata["ListRouteParams"]));
+        this.router.navigate([this.modelMetadata["ListRouteName"], args ]);
+    }
 }

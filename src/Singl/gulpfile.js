@@ -249,7 +249,7 @@ var sources = {
         },
         {
             name: "modernizr.js",
-            paths: paths.bower + "modernizr/src/Modernizr.js"
+            paths: paths.bower + "modernizr/modernizr.js"
         },
         {
             name: "bootstrap-touch-carousel.js",

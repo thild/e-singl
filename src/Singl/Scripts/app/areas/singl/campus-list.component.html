@@ -1,8 +1,5 @@
-<h2>Campi</h2>
-<ul>
-    <li *ngFor="#item of list"
-        [class.selected]="isSelected(item)"
-        (click)="onSelect(item)">
-        <span class="id-badge">{{item.Sigla}}</span> {{item.Nome}}
-    </li>
-</ul>
+<model-list modelName="Singl.Models.Campus" 
+    [list]="list"
+    headingMessage="Campi"
+    showHeading=true>
+</model-list>

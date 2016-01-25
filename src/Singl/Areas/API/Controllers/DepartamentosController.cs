@@ -20,40 +20,58 @@ namespace Singl.Areas.API.Controllers
         }
         // GET: api/values
         [HttpGet]
-        public IEnumerable<Departamento> Get()
+        public IEnumerable<dynamic> Get()
         {
-            return _context.Departamentos
-                .Include(m => m.Campus)
+            var list = _context.Departamentos
+                .Include(m => m.SetorConhecimento)
+                .ThenInclude(m => m.Campus)
                 .ThenInclude(m => m.UnidadeUniversitaria)
+                .Include(m => m.Cursos)
                 .OrderBy(m => m.Nome)
                 .ToList();
+            
+            List<dynamic> retList = new List<dynamic>();       
+            
+            foreach (var item in list)
+            {
+                retList.Add(
+                   item.ToDto()
+                );
+            }                
+                                        
+            return retList;
         }
  
         [HttpGet("{sigla}/{unidadeUniversitaria}")]
         public IActionResult Get(string sigla, string unidadeUniversitaria)
         {
-            
             if (string.IsNullOrEmpty(sigla) || 
                 string.IsNullOrEmpty(unidadeUniversitaria))
             {
                 return new HttpNotFoundResult();
             }
 
-            var Departamentos = _context.Departamentos
-                .Include(m => m.Cursos)
+            var departamentos = _context.Departamentos
+                .Include(m => m.SetorConhecimento)
                 .Include(m => m.Campus)
-                .ThenInclude(m => m.UnidadeUniversitaria).ToList();
+                .ThenInclude(m => m.UnidadeUniversitaria)
+                .Include(m => m.Cursos)
+                .OrderBy(m => m.Nome)
+                .ToList();
                 
-            var obj = Departamentos.Single(m => m.Sigla == sigla && 
+            var item = departamentos.Single(m => m.Sigla == sigla && 
                 m.Campus.UnidadeUniversitaria.Sigla == unidadeUniversitaria);
-                                
-            if (obj == null)
+                
+            item.Cursos = item.Cursos.OrderBy(m => m.Nome).ToList();
+                            
+            if (item == null)
             {
                 return new HttpNotFoundResult();
             }
                         
-            return new ObjectResult(obj);
+            return new ObjectResult(item.ToDto());
 		} 
+        
         
         [HttpPost]
 		//[Authorize("CanEdit", "true")]

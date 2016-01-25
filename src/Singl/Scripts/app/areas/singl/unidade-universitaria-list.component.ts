@@ -3,39 +3,33 @@
 import {Component, OnInit}   from 'angular2/core';
 import {UnidadeUniversitariaService}   from './unidade-universitaria.service';
 import {UnidadeUniversitaria} from './unidade-universitaria';
-import {Router, RouteParams} from 'angular2/router';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {RouteParams, Router, CanActivate, ROUTER_DIRECTIVES} from 'angular2/router';
+import {ModelListComponent} from './model-list.component';
+import {ModelMetadataService} from './model-metadata.service';
 
 @Component({
-  selector:    'unidade-universitaria-list',
-  templateUrl: 'app/areas/singl/unidade-universitaria-list.component.html',
-  directives: [ROUTER_DIRECTIVES]  
+    selector: 'unidade-universitaria-list',
+    templateUrl: 'app/areas/singl/unidade-universitaria-list.component.html',
+    directives: [ROUTER_DIRECTIVES, ModelListComponent]
 })
+@CanActivate(() => ModelMetadataService.load('Singl.Models.UnidadeUniversitaria'))
 export class UnidadeUniversitariaListComponent implements OnInit {
-  list: any[];
 
-  private _selected: string;
+    list: any[];
 
-  constructor(
-    private _service : UnidadeUniversitariaService,
-    public router: Router,
-    public routeParams: RouteParams
-    ) 
-  {
-      this._selected = routeParams.get('sigla');
-  }
+    constructor(
+        public service: UnidadeUniversitariaService,
+        public router: Router,
+        public routeParams: RouteParams)
+    { 
+        console.log(routeParams.params);
+    }
 
-  isSelected(item: any) { 
-      return item.Sigla == this._selected; 
-  }
-
-  onSelect(item: any) {
-    //this._router.navigate( ['UnidadeUniversitariaDetail', { sigla: unidadeUniversitaria.Sigla }] );
-    this.router.navigateByUrl( '/unidadesuniversitarias/'+ item.Sigla );
-  }
-  
-  ngOnInit() {
-        this._service.observable$.subscribe(m => this.list = m);
-        this._service.getAll();
-  }
+    ngOnInit() {
+        if (this.list == null) {
+            this.service.observableList$.subscribe(m => this.list = m);
+            this.service.getAll();
+        }
+    }
+    
 }

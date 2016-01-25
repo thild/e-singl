@@ -1,8 +1,5 @@
-<h2>Setores administrativos</h2>
-<ul>
-    <li *ngFor="#item of list"
-        [class.selected]="isSelected(item)"
-        (click)="onSelect(item)">
-        <span class="id-badge">{{item.Sigla}}</span> {{item.Nome}}
-    </li>
-</ul>
+<model-list modelName="Singl.Models.SetorAdministrativo" 
+    [list]="list"
+    headingMessage="Setores administrativos"
+    showHeading=true>
+</model-list>

@@ -5,11 +5,17 @@ using Singl.Core.Scaffolding;
 
 namespace Singl.Models
 {
-    [ModelNavigationAttribute(NavigationUrl="`/unidadesuniversitarias/${model.Sigla}`", 
+    [ModelMetadataAttribute(
+                DisplayName = "Unidade universitária",
                 DescriptionProperty="Nome",
                 SelectionProperty="Sigla",
-                RouteName="UnidadeUniversitariaDetail",
-                RouteParams=@"`{""sigla"":""${model.Sigla}""}`")]
+                ListNavigationUrl="`/unidadesuniversitarias`", 
+                ListRouteName="UnidadeUniversitariaList",
+                ListRouteParams=@"`{""sigla"":""${model.Sigla}""}`",
+                DetailRouteName="UnidadeUniversitariaDetail",
+                DetailNavigationUrl="`/unidadesuniversitarias/${model.Sigla}`", 
+                DetailRouteParams=@"`{""sigla"":""${model.Sigla}""}`"
+                )]
     public class UnidadeUniversitaria : IModel<Guid>
     {
         public UnidadeUniversitaria()

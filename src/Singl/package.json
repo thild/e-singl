@@ -31,7 +31,7 @@
     "merge-stream": "1.0.0",
     "psi": "1.0.6",
     "rimraf": "2.4.3",
-    "angular2": "2.0.0-beta.1",
+    "angular2": "2.0.0-beta.0",
     "systemjs": "0.19.6",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.33.3",

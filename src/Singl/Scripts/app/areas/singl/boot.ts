@@ -29,16 +29,26 @@ const ROUTER_PROVIDERS: Array<any> = [
 	})
 ];
 
+import {ModelMetadataService} from './model-metadata.service'
 import {UnidadeUniversitariaService} from './unidade-universitaria.service'
 import {CampusService} from './campus.service'
 import {SetorAdministrativoService} from './setor-administrativo.service'
-import {ModelMetadataService} from './model-metadata.service'
+import {SetorConhecimentoService} from './setor-conhecimento.service'
+import {DepartamentoService} from './departamento.service'
+import {CursoService} from './curso.service'
+import {DisciplinaService} from './disciplina.service'
+import {FilterService}  from './filter-service';
 
 const SERVICE_PROVIDERS: Array<any> = [
+    ModelMetadataService,
     UnidadeUniversitariaService,
     CampusService,
     SetorAdministrativoService,
-    ModelMetadataService
+    SetorConhecimentoService,
+    DepartamentoService,
+    CursoService,
+    DisciplinaService,
+    FilterService
 ];
 
 const APP_PROVIDERS: Array<any> = [
@@ -49,7 +59,7 @@ const APP_PROVIDERS: Array<any> = [
     SERVICE_PROVIDERS
 ];
 
-//enableProdMode();
+enableProdMode();
 
 bootstrap(AppComponent, [APP_PROVIDERS]);
 

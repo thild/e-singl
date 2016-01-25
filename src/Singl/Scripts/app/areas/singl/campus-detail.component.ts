@@ -1,34 +1,40 @@
 /// <reference path="../../../../node_modules/angular2/core.d.ts" />
 
-import {Component,  OnInit}  from 'angular2/core';
+import {Component, OnInit}  from 'angular2/core';
 import {CampusService}   from './campus.service';
-import {RouteParams, Router} from 'angular2/router';
+import {RouteParams, Router, CanActivate, ROUTER_DIRECTIVES} from 'angular2/router';
 import {Campus} from './campus';
-import {ModelDetailsComponent} from './model-details.component';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {ModelDetailComponent} from './model-detail.component';
+import {ModelMetadataService} from './model-metadata.service';
 
 @Component({
-  selector:    'campus-detail',
-  templateUrl: 'app/areas/singl/campus-detail.component.html',
-  directives: [ROUTER_DIRECTIVES, ModelDetailsComponent]    
+    selector: 'campus-detail',
+    templateUrl: 'app/areas/singl/campus-detail.component.html',
+    directives: [ROUTER_DIRECTIVES, ModelDetailComponent]
 })
-export class CampusDetailComponent implements OnInit  {
-  model: any;
-  
-  constructor(
-    private _service: CampusService,
-    public router: Router,
-    public routeParams: RouteParams
-  ) {}
+@CanActivate(() => ModelMetadataService.load('Singl.Models.Campus'))
+export class CampusDetailComponent implements OnInit {
 
-  ngOnInit() {
-    let sigla = this.routeParams.get('sigla');
-    this._service.get({sigla: sigla})
-        .subscribe(data => this.model = data,
-                   error => console.log('Could not load.', error));
-  }
+    model: any;
 
-  gotoList() {
-    this.router.navigate(['CampusList',  {sigla: this.model.Sigla} ]);
-  }
+    constructor(
+        private _service: CampusService,
+        public router: Router,
+        public routeParams: RouteParams
+    ) { }
+
+    ngOnInit() {
+        console.log("campus - ngOnInit");
+        if (this.model == null) {
+            let sigla = this.routeParams.get('sigla');
+            this._service.observableModel$
+            .subscribe(m => {
+                console.log("campus - subscribe");
+                this.model = m;
+            }
+            );
+            console.log("this._service.get");
+            this._service.get({ sigla: sigla });
+        }
+    }
 }

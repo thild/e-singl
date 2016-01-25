@@ -6,11 +6,17 @@ using Singl.Core.Scaffolding;
 
 namespace Singl.Models
 {
-    [ModelNavigationAttribute(NavigationUrl="`/setoresadministrativos/${model.Sigla}/${model.SiglaCampus}`", 
+    [ModelMetadataAttribute(
+                    DisplayName = "Setor administrativo",
+                    DetailNavigationUrl="`/setoresadministrativos/${model.Sigla}/${model.SiglaCampus}`", 
                     DescriptionProperty="Nome",
                     SelectionProperty="Sigla",
-                    RouteName="SetorAdministrativoDetail",
-                    RouteParams=@"`{""sigla"":""${model.Sigla}"",""campus"":""${model.SiglaCampus}""}`")]
+                    DetailRouteName="SetorAdministrativoDetail",
+                    DetailRouteParams=@"`{""sigla"":""${model.Sigla}"",""campus"":""${model.SiglaCampus}""}`",
+                    ListNavigationUrl="`/setoresadministrativos`", 
+                    ListRouteName="SetorAdministrativoList",
+                    ListRouteParams=@"`{""sigla"":""${model.Sigla}""}`"
+                    )]
     public class SetorAdministrativo : IModel<Guid>
     {
         public SetorAdministrativo()

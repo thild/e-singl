@@ -23,7 +23,7 @@ namespace Singl.Models
         
         public SituacaoOfertaCurso Situacao { get; set; }
         
-        public ModalidadeEnsino Modalidade { get; set; }
+        public ModalidadeEnsino ModalidadeEnsino { get; set; }
         
         [ForeignKey("CursoId")]
         public Curso Curso { get; set; }

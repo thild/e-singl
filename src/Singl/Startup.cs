@@ -68,7 +68,10 @@ namespace Singl
                 option.OutputFormatters.Clear();
                 var jsonOutputFormatter = new JsonOutputFormatter();
                 //Set ReferenceLoopHandling
+                //jsonOutputFormatter.SerializerSettings.MaxDepth = 3;
                 jsonOutputFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                //jsonOutputFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
+                
                 //Insert above jsonOutputFormatter as the first formatter, you can insert other formatters.
                 option.OutputFormatters.Insert(0, jsonOutputFormatter);
             });
@@ -162,16 +165,16 @@ namespace Singl
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
 
-//             if (System.IO.File.Exists("singl.sqlite"))
-//             {
-//                 System.Console.WriteLine("Deleted singl.sqlite");
-//                 System.IO.File.Delete("singl.sqlite");
-//             }
-// 
-//             using (var context = new DatabaseContext())
-//             {
-//                 context.InitializeStoreDatabaseAsync(app.ApplicationServices).Wait();
-//             }
+            if (System.IO.File.Exists("singl.sqlite"))
+            {
+                System.Console.WriteLine("Deleted singl.sqlite");
+                System.IO.File.Delete("singl.sqlite");
+            }
+
+            using (var context = new DatabaseContext())
+            {
+                context.InitializeStoreDatabaseAsync(app.ApplicationServices).Wait();
+            }
         }
 
         private void ConfigureMappers()

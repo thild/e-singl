@@ -38,8 +38,6 @@ namespace Singl.Areas.Admin.Controllers
         // GET: Disciplina/Create
         public IActionResult Create()
         {
-                Console.WriteLine("Teste1");
-            
             return View(new DisciplinaCreateViewModel());
         }
 
@@ -48,8 +46,6 @@ namespace Singl.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(DisciplinaCreateViewModel disciplina)
         {
-            Console.WriteLine("Teste2");
-            
             if (ModelState.IsValid)
             {
                 var c = db.Curriculos.Single(m => m.Id == disciplina.CurriculoId);

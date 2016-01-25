@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div *ngIf="!model">
+            {{notFoundMessage}}
+        </div>
+        <div *ngIf="model">
+            <h4 class="section-heading">{{headingMessage}} "{{model[modelMetadata.DescriptionProperty]}}"</h4> 
+            <hr class="hard"/> 
+            <div>
+                <dl class="dl-horizontal">
+                    <template ngFor #property="$implicit" [ngForOf]="properties | async">
+                        <template [ngIf]="property.Scaffold">
+                            <dt>
+                                {{property.DisplayName}}
+                            </dt>
+                            <dd [ngSwitch]="property.ClientType">
+                                <template ngSwitchWhen="string">
+                                    <template [ngIf]="property.IsUrl">
+                                        <a href="{{model[property.PropertyName]}}">Acesse <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
+                                    </template>
+                                    <template [ngIf]="!property.IsUrl">
+                                        {{model[property.PropertyName]}}
+                                    </template>
+                                </template>
+                                <template ngSwitchWhen="enum">{{model[property.PropertyName].Label}}</template>
+                                <template ngSwitchWhen="number">{{model[property.PropertyName]}}</template>
+                                <template ngSwitchWhen="boolean">
+                                    <template [ngIf]="model[property.PropertyName]">
+                                        <span class="glyphicon glyphicon-check" aria-label="model[property.PropertyName]"></span>
+                                    </template>
+                                    <template [ngIf]="!model[property.PropertyName]">
+                                        <span class="glyphicon glyphicon-unchecked" aria-label="model[property.PropertyName]"></span>
+                                    </template>
+                                </template>
+                                <template ngSwitchWhen="array">
+                                    <div *ngIf="model[property.PropertyName] && model[property.PropertyName].length > 0">  
+                                        <model-list 
+                                            selectionProperty="{{property.SelectionProperty}}"              
+                                            descriptionProperty="{{property.DescriptionProperty}}"      
+                                            detailNavigationUrl="{{property.DetailNavigationUrl}}"
+                                            [list]="model[property.PropertyName]"
+                                            showFilters=false
+                                        ></model-list>
+                                    </div>            
+                                    <div *ngIf="!model[property.PropertyName]">
+                                        -
+                                    </div>            
+                                </template>
+                                <template ngSwitchWhen="any">
+                                    <template [ngIf]="model[property.PropertyName]">
+                                        <!--<a [routerLink]="[property.RouteName, getModelNavigationRouteParams(model[property.PropertyName], property)]">{{getModelNavigationDescription(model, property)}}</a>-->
+                                        <span class="model-navigation">
+                                            <span class="id-badge">{{model[property.PropertyName][property.SelectionProperty]}}</span>
+                                            <span (click)="onSelect(model[property.PropertyName], property)">{{getModelNavigationDescription(model, property)}}
+                                                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                                            </span>
+                                        </span>
+                                    </template>
+                                    <template [ngIf]="!model[property.PropertyName]">
+                                        -
+                                    </template>
+                                    <!--<a href="" (click)="onSelect(model[property.PropertyName], property)">{{getModelNavigationDescription(model, property)}}</a>-->
+                                </template>
+                            </dd> 
+                        </template>
+                    </template>     
+                </dl>
+            </div>
+            <hr class="hard"/>
+            <div>
+                <button class="btn btn-default" (click)="gotoList()">Lista de {{modelMetadata.DisplayName}}</button>
+            </div>      
+        </div>
+    </div>
+</div>
+            

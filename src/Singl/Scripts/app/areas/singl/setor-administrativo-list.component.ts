@@ -3,36 +3,30 @@
 import {Component, OnInit}   from 'angular2/core';
 import {SetorAdministrativoService}   from './setor-administrativo.service';
 import {SetorAdministrativo} from './setor-administrativo';
-import {Router, RouteParams} from 'angular2/router';
+import {RouteParams, Router, CanActivate, ROUTER_DIRECTIVES} from 'angular2/router';
+import {ModelListComponent} from './model-list.component';
+import {ModelMetadataService} from './model-metadata.service';
 
 @Component({
-  selector:    'setor-administrativo-list',
-  templateUrl: 'app/areas/singl/setor-administrativo-list.component.html'
+    selector: 'setor-administrativo-list',
+    templateUrl: 'app/areas/singl/setor-administrativo-list.component.html',
+    directives: [ROUTER_DIRECTIVES, ModelListComponent]
 })
+@CanActivate(() => ModelMetadataService.load('Singl.Models.SetorAdministrativo'))
 export class SetorAdministrativoListComponent implements OnInit {
-  list: any[];
 
-  private _selected: string;
+    list: any[];
 
-  constructor(
-    private _service : SetorAdministrativoService,
-    public router: Router,
-    public routeParams: RouteParams
-    ) 
-  {
-      this._selected = routeParams.get('sigla');
-  }
+    constructor(
+        public service: SetorAdministrativoService,
+        public router: Router,
+        public routeParams: RouteParams
+    ) { }
 
-  isSelected(item: any) { 
-      return item.Sigla == this._selected; 
-  }
-
-  onSelect(item: any) {
-    this.router.navigateByUrl(`/setoresadministrativos/${item.Sigla}/${item.SiglaCampus}`);
-  }
-  
-  ngOnInit() {
-        this._service.observable$.subscribe(m => this.list = m);
-        this._service.getAll();
-  }
+    ngOnInit() {
+        if (this.list == null) {
+            this.service.observableList$.subscribe(m => this.list = m);
+            this.service.getAll();
+        }
+    }
 }
