@@ -1,6 +1,8 @@
 /// <reference path="../../../../node_modules/angular2/core.d.ts" />
 
 import {Component} from 'angular2/core';
+import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+
 import {UnidadeUniversitariaListComponent} from './unidade-universitaria-list.component';
 import {UnidadeUniversitariaDetailComponent} from './unidade-universitaria-detail.component';
 import {CampusListComponent} from './campus-list.component';
@@ -15,29 +17,28 @@ import {CursoListComponent} from './curso-list.component';
 import {CursoDetailComponent} from './curso-detail.component';
 import {DisciplinaListComponent} from './disciplina-list.component';
 import {DisciplinaDetailComponent} from './disciplina-detail.component';
+import {NeadInfoComponent} from './info/nead-info.component';
 import {FilterService} from './filter-service';
+import {HistoryNavigationComponent} from './history-navigation.component';
 
 
 import {ModelListComponent} from './model-list.component';
-import {StartComponent, AComponent, BComponent, CComponent} from './start.component';
-import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {HomeComponent, AComponent, BComponent, CComponent} from './home.component';
 
 @Component({
   selector: 'singl-app',
   templateUrl: 'app/areas/singl/app.component.html',
-  directives: [ROUTER_DIRECTIVES]
+  directives: [HistoryNavigationComponent, ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-  {path: '/aa', name: 'AA', loader: () => Promise.resolve(AComponent)},
-  {path: '/bb', name: 'BB', loader: () => Promise.resolve(BComponent)},
-  {path: '/cc', name: 'CC', loader: () => Promise.resolve(CComponent)},
-  {path: '/', name: 'Start', loader: () => Promise.resolve(StartComponent)},
+  {path: '/', name: 'Home', loader: () => Promise.resolve(HomeComponent)},
   {path:'/unidadesuniversitarias', name: 'UnidadeUniversitariaList', loader: () => Promise.resolve(UnidadeUniversitariaListComponent)},
   {path:'/unidadesuniversitarias/:sigla', name: 'UnidadeUniversitariaDetail', loader: () => Promise.resolve(UnidadeUniversitariaDetailComponent)},
   {path:'/campi', name: 'CampusList', loader: () => Promise.resolve(CampusListComponent)},
   {path:'/campi/:sigla', name: 'CampusDetail', loader: () => Promise.resolve(CampusDetailComponent)},
   {path:'/setoresadministrativos', name: 'SetorAdministrativoList', loader: () => Promise.resolve(SetorAdministrativoListComponent)},
   {path:'/setoresadministrativos/:sigla/:campus', name: 'SetorAdministrativoDetail', loader: () => Promise.resolve(SetorAdministrativoDetailComponent)},
+  {path:'/setoresadministrativos/NEAD/SC/info', name: 'NeadInfo', loader: () => Promise.resolve(NeadInfoComponent)},
   {path:'/setoresconhecimento', name: 'SetorConhecimentoList', loader: () => Promise.resolve(SetorConhecimentoListComponent)},
   {path:'/setoresconhecimento/:sigla/:unidadeUniversitaria', name: 'SetorConhecimentoDetail', loader: () => Promise.resolve(SetorConhecimentoDetailComponent)},
   {path:'/departamentos', name: 'DepartamentoList', loader: () => Promise.resolve(DepartamentoListComponent)},
@@ -46,11 +47,28 @@ import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
   {path:'/cursos/:codigo', name: 'CursoDetail', loader: () => Promise.resolve(CursoDetailComponent)},
   {path:'/disciplinas', name: 'DisciplinaList', loader: () => Promise.resolve(DisciplinaListComponent)},
   {path:'/disciplinas/:codigo', name: 'DisciplinaDetail', loader: () => Promise.resolve(DisciplinaDetailComponent)},
+  {path:'/ajuda', name: 'Ajuda', loader: () => Promise.resolve(AjudaComponent)},
 ])
-export class AppComponent {
-    
-    public teste:string;
+export class AppComponent  {
     
     constructor(public router: Router) {
+        // router.subscribe(
+        //     url => {
+        //         window.scrollTo(0,0);
+        //     }
+        // );
     }
+    
+}
+
+
+@Component({
+  selector: 'singl-app',
+  template: `<h1>Ajuda</h1>`
+})
+export class AjudaComponent  {
+    
+    constructor() {
+    }
+    
 }

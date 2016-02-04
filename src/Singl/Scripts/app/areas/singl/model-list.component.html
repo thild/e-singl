@@ -1,22 +1,26 @@
-<h4 *ngIf="showHeading">{{headingMessage}}</h4>
-<div *ngIf="showFilters==true">
-    <model-list-filter (check)="onCheck($event)">
-    </model-list-filter>
-    <hr />
-</div>
-<div *ngIf="hasSelectedItems()">
-<ul>
-    <!--<li *ngFor="#item of list | filter:getFilterParams()"-->
-    <!--<li *ngFor="#item of list | filter:selectedFilters" [class.selected]="isSelected(item)" (click)="onSelect(item)">-->
-    <li *ngFor="#item of filteredList" [class.selected]="isSelected(item)" (click)="onSelect(item)">
-        <span class="model-navigation">
+<section class="spa">
+    <div class="container-fluid">
+        <h4 *ngIf="showHeading">{{headingMessage}}</h4>
+        <div *ngIf="showFilters==true">
+            <model-list-filter (check)="onCheck($event)">
+            </model-list-filter>
+            <hr />
+        </div>
+        <div *ngIf="hasSelectedItems()">
+            <ul>
+                <!--<li *ngFor="#item of list | filter:getFilterParams()"-->
+                <!--<li *ngFor="#item of list | filter:selectedFilters" [class.selected]="isSelected(item)" (click)="onSelect(item)">-->
+                <li *ngFor="#item of filteredList" [class.selected]="isSelected(item)" (click)="onSelect(item)">
+                    <span class="model-navigation">
             <span class="id-badge">
                 {{item[selectionProperty]}}
             </span> {{item[descriptionProperty]}} <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-        </span>
-    </li>
-</ul>
-</div>
-<div *ngIf="!hasSelectedItems()">
-    Nenhum item encontrado
-</div>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="!hasSelectedItems()">
+            Nenhum item encontrado
+        </div>
+    </div>
+</section>

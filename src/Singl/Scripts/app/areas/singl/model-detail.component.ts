@@ -20,11 +20,11 @@ import 'rxjs/Rx';
 @Component({
     selector: 'model-detail',
     templateUrl: 'app/areas/singl/model-detail.component.html',
-    directives: [ROUTER_DIRECTIVES, ModelListComponent, RouterLink ]
+    directives: [ROUTER_DIRECTIVES, ModelListComponent, RouterLink]
 })
 export class ModelDetailComponent implements OnInit {
 
-    modelMetadata: Observable<any>;
+    modelMetadata: any;
     properties: Observable<any>;
     @Input() model: any;
     @Input() modelName: string;
@@ -34,18 +34,23 @@ export class ModelDetailComponent implements OnInit {
     constructor(public router: Router,
         public routeParams: RouteParams,
         public metadataService: ModelMetadataService)
-    {}
+    { }
 
     getModelNavigationDescription(model, property): string {
         if (model[property.PropertyName])
             return model[property.PropertyName][property.DescriptionProperty]
         return "-";
     }
-    
+
     onSelect(model: any, property: any) {
-        if (model) 
+        if (model)
             this.router.navigateByUrl(eval(property.DetailNavigationUrl));
-    }    
+    }
+
+    getInfoUrl(): string {
+        let model = this.model;
+        return eval(this.modelMetadata.DetailNavigationUrl) + "/info";
+    }
 
     ngOnInit() {
         this.metadataService.get(this.modelName)
@@ -60,13 +65,17 @@ export class ModelDetailComponent implements OnInit {
                 
             },
             error => console.log('Could not load.', error));
-            
+
     }
 
     //TODO go to list filtered by previous navigation
     gotoList() {
         let model = this.model;
         let args = JSON.parse(eval(this.modelMetadata["ListRouteParams"]));
-        this.router.navigate([this.modelMetadata["ListRouteName"], args ]);
+        this.router.navigate([this.modelMetadata["ListRouteName"], args]);
+    }
+
+    gotoInfo() {
+        this.router.navigateByUrl(this.getInfoUrl());
     }
 }

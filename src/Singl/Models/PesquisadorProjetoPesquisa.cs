@@ -11,6 +11,6 @@ namespace Singl.Models
         public ProjetoPesquisa ProjetoPesquisa { get; set; }
         public Guid ProjetoPesquisaId { get; set; }
         public Guid PesquisadorId { get; set; }
-        public Usuario Pesquisador { get; internal set; }
+        public Pessoa Pesquisador { get; internal set; }
     }
 }

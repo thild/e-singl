@@ -1,0 +1,191 @@
+<header id="main">
+    <div class="header-content">
+        <div class="header-content-inner">
+            <h1 style="padding-bottom: 0px;">{{model?.Nome}}</h1>
+            <h3>{{instituicao?.Nome}}</h3>
+            <a href="/spa/setoresadministrativos/NEAD/SC/info#about" class="btn btn-primary btn-xl page-scroll">Saiba mais</a>
+        </div>
+    </div>
+</header>
+
+<section class="bg-primary" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Sobre o NEAD!</h2>
+                <hr class="light">
+                <p class="text-faded">{{model?.Sobre}}</p>
+                <a href="/spa/setoresadministrativos/NEAD/SC/info#values" class="btn btn-default btn-xl page-scroll">Como trabalhamos</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="values">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Nossos valores</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-certificate wow bounceIn text-primary"></i>
+                    <h3>Excelência</h3>
+                    <p class="text-muted">Cursos certificados, reconhecidos e de qualidade!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-group wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                    <h3>Profissionalismo</h3>
+                    <p class="text-muted">Competência, comprometimento e responsabilidade no ensino!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                    <h3>Atualização</h3>
+                    <p class="text-muted">Ensino de vanguarda e pesquisa estado da arte!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                    <h3>Amor pelo que fazemos</h3>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row top30">
+                <div class="col-lg-12 text-center">
+                    <a href="/spa/setoresadministrativos/NEAD/SC/info#areas" class="btn btn-primary btn-xl page-scroll">Comece agora!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="areas">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Áreas de atuação</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="area-box">
+                    <img src="/images/areas/1.jpg" class="img-responsive" alt="">
+                    <div class="area-box-caption">
+                        <div class="area-box-caption-content">
+                            <div class="project-category text-faded">
+                                Ensino
+                            </div>
+                            <!--<div class="project-name">
+                                Project Name
+                            </div>-->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="area-box">
+                    <img src="/images/areas/2.jpg" class="img-responsive" alt="">
+                    <div class="area-box-caption">
+                        <div class="area-box-caption-content">
+                            <div class="project-category text-faded">
+                                Pesquisa
+                            </div>
+                            <!--<div class="project-name">
+                                Project Name
+                            </div>-->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="area-box">
+                    <img src="/images/areas/3.jpg" class="img-responsive" alt="">
+                    <div class="area-box-caption">
+                        <div class="area-box-caption-content">
+                            <div class="project-category text-faded">
+                                Extensão
+                            </div>
+                            <!--<div class="project-name">
+                                Project Name
+                            </div>-->
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<aside class="bg-dark">
+    <div class="container text-center">
+        <div class="call-to-action">
+            <a [routerLink]="['/CursoList',{filter:'CursosNead'}]" class="btn btn-default btn-xl wow tada">Encontre seu curso!</a>
+        </div>
+    </div>
+</aside>
+
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Conheça um pouco mais sobre o NEAD!</h2>
+                <hr class="primary">
+                <ui-tabs>
+                    <template ui-pane title='História' active="true">
+                        <p>{{model?.Sobre}}</p>
+                    </template>
+                    <template ui-pane title='Setores'>
+                        <model-list selectionProperty="Sigla" descriptionProperty="Nome" detailNavigationUrl=""
+                        [list]="model?.Subsetores" showFilters=false></model-list>
+                    </template>
+                </ui-tabs>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Entre em contato!</h2>
+                <hr class="primary">
+                <p>Gostaria de saber como estudar em uma das melhores universidade do país? Que ótimo! Nos telefone ou nos mande
+                    um e-mail que teremos o prazer em responder o mais breve possível!</p>
+            </div>
+            <div class="col-lg-4 col-lg-offset-2 text-center">
+                <i class="fa fa-phone fa-3x wow bounceIn"></i>
+                <p><span itemprop="telephone"><a href="tel:{{model?.Telefone}}">{{model?.Telefone}}</a></span></p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                <p><a href="mailto:{{model?.Email}}">{{model?.Email}}</a></p>
+            </div>
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <hr class="primary">
+                <div itemscope itemtype="http://schema.org/LocalBusiness">
+                    <address>
+                        <strong><span itemprop="name">{{instituicao?.Nome}}</span></strong><br>
+                        {{instituicao?.Endereco}}<br>
+                        <abbr title="Telefone">Fone:</abbr> <span itemprop="telephone"><a href="tel:{{instituicao?.Telefone}}">{{instituicao?.Telefone}}</a></span> <br>
+                        <abbr title="Fax">Fax:</abbr> {{instituicao?.Fax}}
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

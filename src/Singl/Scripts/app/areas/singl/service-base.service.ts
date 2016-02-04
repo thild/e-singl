@@ -55,8 +55,8 @@ export class ServiceBase implements IServiceBase {
                 }
             }
         }
-        let apiUrl = this.baseUrl + eval(this.getUrl);
-        //console.log("httpGet");
+        let url = this.getUrl ? eval(this.getUrl) : '';
+        let apiUrl = this.baseUrl + url;
         this._http.get(apiUrl)
             .map(response => response.json())
             .subscribe(data => {
@@ -96,4 +96,11 @@ export class ServiceBase implements IServiceBase {
             },
             error => console.log('Could not load.', error));
     }
+    
+    getInfo(params: any) {
+        let apiUrl = this.baseUrl + eval(this.getUrl) + '/info';
+        return this._http.get(apiUrl)
+            .map(response => response.json());
+    }
+    
 }

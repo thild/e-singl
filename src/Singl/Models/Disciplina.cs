@@ -58,6 +58,7 @@ namespace Singl.Models
         [DataType(DataType.Url)]
         public string UrlImagem { get; set; }
         
+        //TODO: Faz parte da oferta da disciplina Singl.Models.OfertaDisciplina
         [DataType(DataType.Url)]
         [ScaffoldColumn(true)]
         [Display(Name = "AVA")]
@@ -82,17 +83,18 @@ namespace Singl.Models
         public string Ementa { get; set; }
         
         [ScaffoldColumn(true)]
-        public string Objetivos { get; set; }
+        public string Objetivos { get; set; } 
 
         [Display(Name = "Currículo")]
-        [ForeignKey("CurriculoId")]
         [ScaffoldColumn(true)]
         public Curriculo Curriculo { get; set; }
 
         public Guid CurriculoId { get; set; }
         
+        //TODO: Manter a bibliografia apenas na oferta da disciplina
         [ScaffoldColumn(true)]
         public string Bibliografia { get; internal set; }
+        
         [Display(Name = "Créditos")]
         [ScaffoldColumn(true)]
         public int Creditos { get; internal set; }

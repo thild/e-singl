@@ -132,12 +132,12 @@
         @* Move site.css to a content delivery network (CDN) for better performance. *@
         <meta name="x-font-awesome-stylesheet-fallback-test" class="fa">
         <environment names="Development">
+            <script src="/lib/modernizr.js"></script>
             <link asp-append-version="true" rel="stylesheet" href="/css/font-awesome.css" />
             <link asp-append-version="true" rel="stylesheet" href="/css/bootstrap.css" />
             <link asp-append-version="true" rel="stylesheet" href="/css/site.css" />
             @* Find a modernizr bower*@            
             <!--<script asp-append-version="true" src="/lib/modernizr.js"></script>-->
-            <script src="/lib/modernizr.js"></script>
         </environment>
         <environment names="Staging,Production">
             <!--<script asp-append-version="true" src="/lib/modernizr.js"></script>-->
@@ -167,18 +167,22 @@
         </footer>
             
         <environment names="Development">
-            <script asp-append-version="true" src="/js/site.js"></script>
             <script asp-append-version="true" src="/lib/jquery.js"></script>
             <script asp-append-version="true" src="/lib/bootstrap.js"></script>
             <script asp-append-version="true" src="/lib/hammer.js"></script>
+            <script asp-append-version="true" src="/lib/bootstrap-touch-carousel.js"></script>
+            <script asp-append-version="true" src="/lib/jquery.easing.js"></script>
+            <script asp-append-version="true" src="/lib/jquery.fittext.js"></script>
+            <script asp-append-version="true" src="/lib/wow.js"></script>
             <script asp-append-version="true" src="/lib/system.js"></script>
             <script asp-append-version="true" src="/lib/Rx.js"></script>
             <script asp-append-version="true" src="/lib/angular2.js"></script>
-            <script asp-append-version="true" src="/lib/jquery.validate.js"></script>
-            <script asp-append-version="true" src="/lib/jquery.validate.unobtrusive.js"></script>                   
+            <script asp-append-version="true" src="/js/site.js"></script>
+            <script asp-append-version="true" src="/js/home.js"></script>
+            <!--<script asp-append-version="true" src="/lib/jquery.validate.js"></script>-->
+            <!--<script asp-append-version="true" src="/lib/jquery.validate.unobtrusive.js"></script>                   -->
         </environment>
         <environment names="Staging,Production">
-            <script asp-append-version="true" src="/js/site.min.js"></script>
             <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
                     asp-fallback-src="/lib/jquery.min.js"
                     asp-fallback-test="window.jQuery">
@@ -187,6 +191,13 @@
                     asp-fallback-src="/lib/bootstrap.min.js"
                     asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
             </script>
+            <script src="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/lib/bootstrap-touch-carousel.js"
+                    asp-fallback-src="/lib/bootstrap-touch-carousel.js"
+                    asp-fallback-test="window.Hammer && window.Hammer.Instance">
+            </script>
+            <script asp-append-version="true" src="/lib/jquery.easing.min.js"></script>
+            <script asp-append-version="true" src="/lib/jquery.fittext.min.js"></script>
+            <script asp-append-version="true" src="/lib/wow.min.js"></script>
             <script src="//ajax.aspnetcdn.com/ajax/hammer.js/2.0.4/hammer.min.js"
                     asp-fallback-src="/lib/hammer.min.js"
                     asp-fallback-test="window.Hammer">
@@ -194,9 +205,12 @@
             <script src="/lib/system.min.js"></script>
             <script src="/lib/Rx.min.js"></script>
             <script src="/lib/angular2.min.js"></script>
-            <script src="/lib/jquery.validate.min.js"></script>
-            <script src="/lib/jquery.validate.unobtrusive.min.js"></script>            
+            <script asp-append-version="true" src="/js/site.min.js"></script>
+            <script asp-append-version="true" src="/js/home.min.js"></script>
+            <!--<script src="/lib/jquery.validate.min.js"></script>-->
+            <!--<script src="/lib/jquery.validate.unobtrusive.min.js"></script>            -->
         </environment>
+
         <!-- 2. Configure SystemJS -->
         <script>
             System.config({

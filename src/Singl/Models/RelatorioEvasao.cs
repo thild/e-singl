@@ -18,9 +18,9 @@ namespace Singl.Models
 
         public Polo Polo { get; set; }
 
-        public Usuario Aluno { get; set; }
+        public Pessoa Aluno { get; set; }
 
-        public Usuario Relator { get; set; }
+        public Pessoa Relator { get; set; }
 
         //public Usuario Coordenador { get; set; } //pegar de Curso
 

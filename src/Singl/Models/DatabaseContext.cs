@@ -24,7 +24,7 @@ namespace Singl
 
         //public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Papel> Papeis { get; set; }
-        public DbSet<PapelUsuario> PapeisUsuarios { get; set; }
+        //public DbSet<PapelUsuario> PapeisUsuarios { get; set; }
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Polo> Polos { get; set; }
         public DbSet<Cidade> Cidades { get; set; }
@@ -41,6 +41,10 @@ namespace Singl
         public DbSet<ProjetoExtensao> ProjetosExtensao { get; set; }
         public DbSet<ProgramaExtensao> ProgramasExtensao { get; set; }
         public DbSet<PropostaExtensionista> PropostasExtensionista { get; set; }
+        public DbSet<VinculoSetorAdministrativo> VinculosSetorAdministrativo { get; set; }
+        public DbSet<VinculoCurso> VinculosCurso { get; set; }
+        public DbSet<VinculoTurma> VinculosTurma { get; set; }
+        public DbSet<Pessoa> Pessoas { get; set; }
 
 
         //Model metadata
@@ -75,9 +79,11 @@ namespace Singl
             }
         }
 
-        private Usuario coordenador = null;
-        private Usuario aluno = null;
-        private Usuario relator = null;
+        private static Usuario coordenadorUser = null;
+        private static Usuario alunoUser = null;
+        private static Usuario relatorUser = null;
+
+
 
 
         /// <summary>
@@ -114,37 +120,37 @@ namespace Singl
                 //await userManager.AddClaimAsync(user, new Claim("ManageStore", "Allowed"));
             }
 
-            aluno = new Usuario
+            alunoUser = new Usuario
             {
                 Email = "teste@teste.com",
-                // Nome = "Aluno",
+                Nome = "Aluno",
                 // NomeUsuario = "aluno",
-                // Sobrenome = "Teste",
+                Sobrenome = "Teste",
                 UserName = "aluno"
             };
-            await userManager.CreateAsync(aluno, "Admin!@#123" /*configuration[defaultAdminPassword]*/);
+            await userManager.CreateAsync(alunoUser, "Admin!@#123" /*configuration[defaultAdminPassword]*/);
             //await userManager.AddClaimAsync(aluno, new Claim("ManageStore", "Allowed"));
 
-            coordenador = new Usuario
+            coordenadorUser = new Usuario
             {
                 Email = "coordenador@teste.com",
-                // Nome = "Coordenador",
+                Nome = "Coordenador",
                 // NomeUsuario = "coordenador",
-                // Sobrenome = "Teste",
+                Sobrenome = "Teste",
                 UserName = "coordenador"
             };
-            await userManager.CreateAsync(coordenador, "Admin!@#123" /*configuration[defaultAdminPassword]*/);
+            await userManager.CreateAsync(coordenadorUser, "Admin!@#123" /*configuration[defaultAdminPassword]*/);
             //await userManager.AddClaimAsync(coordenador, new Claim("ManageStore", "Allowed"));
 
-            relator = new Usuario
+            relatorUser = new Usuario
             {
                 Email = "relator@teste.com",
-                // Nome = "Relator",
+                Nome = "Relator",
                 // NomeUsuario = "relator",
-                // Sobrenome = "Teste",
+                Sobrenome = "Teste",
                 UserName = "relator"
             };
-            await userManager.CreateAsync(relator, "Admin!@#123" /*configuration[defaultAdminPassword]*/);
+            await userManager.CreateAsync(relatorUser, "Admin!@#123" /*configuration[defaultAdminPassword]*/);
             //await userManager.AddClaimAsync(relator, new Claim("ManageStore", "Allowed"));
 
             await this.SaveChangesAsync();
@@ -157,15 +163,16 @@ namespace Singl
 
             Instituicao.Add(new Instituicao
             {
-                Nome = "NEAD - Núcleo de Educação a Distância",
-                Vinculo = "Universidade Estadual do Centro-Oeste",
-                Endereco = $"Rua Padre Salvador, 875 – Santa Cruz – Cx. Postal 3010" +
+                Nome = "Universidade Estadual do Centro-Oeste",
+                Endereco = $"Rua Padre Salvador, 875 – Santa Cruz - Cx. Postal 730" +
                            $" CEP 85015-430 – Guarapuava – PR",
-                Telefone = "+55 (42) 3621-1095",
+                Telefone = "+55 (42) 3621-1000",
                 Fax = "+55 (42) 3621-1090",
-                Email = "nead@univentro.br",
-                Sobre = @"O Núcleo de Educação a Distância é um órgão vinculado à Reitoria, criado por meio da Resolução 086/2005 – Cepe/Unicentro, com competência para implementar políticas e diretrizes para a EAD (Educação a Distância) em todos os níveis de ensino no âmbito da Unicentro (Universidade Estadual do Centro-Oeste), incluindo a oferta e a execução de cursos e programas de Educação Profissional, dentre outros, nos termos da legislação vigente.
-A estrutura organizacional para os cursos ofertados na modalidade de Educação a Distância da Unicentro é composta de um Núcleo de Educação a Distância, localizado no Campus Sede da Universidade, pela estrutura advinda da Parceria do Sistema Aberta do Brasil – UAB e por Polos de Apoio Presenciais de Educação a Distância, localizados em diversos municípios."
+                Email = "contato@unicentro.br",
+                Sobre = @"Localizada na região centro-sul do Paraná, a Unicentro é reconhecida pelos trabalhos desenvolvidos nas áreas do ensino, 
+                          da pesquisa e da extensão universitárias. Com a união da Fafig de Guarapuava e da Fecli de Irati, a Unicentro teve sua 
+                          criação no ano de 1990 e foi reconhecida pelo governo do Paraná 7 anos mais tarde. A partir de então, os trabalhos voltados 
+                          para a pesquisa e o ensino têm como foco o preparo dos estudantes para o mundo."
             });
 
             //Cidade
@@ -195,7 +202,18 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
                            campusPrudentopolis);
 
             //Setores administrativos
-            var saNead = new SetorAdministrativo { Id = Guid.Parse("8facb2e5-855b-457c-a98f-0d48cbee8a1d"), Nome = "Núcleo de Educação à Distância", Sigla = "NEAD", Campus = campusSantaCruz };
+            var saNead = new SetorAdministrativo
+            {
+                Id = Guid.Parse("8facb2e5-855b-457c-a98f-0d48cbee8a1d"),
+                Telefone = "+55 (42) 3621-1095",
+                Fax = "+55 (42) 3621-1090",
+                Email = "nead@unicentro.br",
+                Sobre = @"O Núcleo de Educação a Distância é um órgão vinculado à Reitoria, criado por meio da Resolução 086/2005 – Cepe/Unicentro, com competência para implementar políticas e diretrizes para a EAD (Educação a Distância) em todos os níveis de ensino no âmbito da Unicentro (Universidade Estadual do Centro-Oeste), incluindo a oferta e a execução de cursos e programas de Educação Profissional, dentre outros, nos termos da legislação vigente.
+A estrutura organizacional para os cursos ofertados na modalidade de Educação a Distância da Unicentro é composta de um Núcleo de Educação a Distância, localizado no Campus Sede da Universidade, pela estrutura advinda da Parceria do Sistema Aberta do Brasil – UAB e por Polos de Apoio Presenciais de Educação a Distância, localizados em diversos municípios.",
+                Nome = "Núcleo de Educação à Distância",
+                Sigla = "NEAD",
+                Campus = campusSantaCruz
+            };
             var saNeadVideos = new SetorAdministrativo { Id = Guid.Parse("b4ff3410-fcbc-4895-b958-ae10818fa01e"), Nome = "NEAD - Vídeos", Sigla = "NEADV", Supersetor = saNead, Campus = campusSantaCruz };
             var saNeadMulti = new SetorAdministrativo { Id = Guid.Parse("01d69cfb-f49b-41d4-9062-f0e97bae9136"), Nome = "NEAD - Multidisciplinar", Sigla = "NEADM", Supersetor = saNead, Campus = campusSantaCruz };
             SetoresAdministrativos.AddRange(saNead, saNeadMulti, saNeadVideos);
@@ -407,22 +425,22 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
 
             //Cursos
 
-//             var c570 = new Curso
-//             {
-//                 Id = Guid.Parse("ff275275-ebd0-42a1-8a70-682cce576c48"),
-//                 Codigo = "570",
-//                 Nome = "Bacharelado em Ciência da Computação",
-//                 Departamento = decomp_g,
-//                 Tipo = TipoCurso.Bacharelado,
-//                 PerfilEgresso = @"O Curso de Bacharelado em Ciências da Computação tem por objetivo habilitar o Bacharel a conquistar bases Científicas e Tecnológicas 
-//                                   para atuar na área de informática, bem como ingressar em programas de Pós-Graduação e Pesquisa.",
-//                 Campus = campusCedeteg
-//             };
-//             Cursos.Add(c570);
-// 
-//            
-// 
-//             
+            //             var c570 = new Curso
+            //             {
+            //                 Id = Guid.Parse("ff275275-ebd0-42a1-8a70-682cce576c48"),
+            //                 Codigo = "570",
+            //                 Nome = "Bacharelado em Ciência da Computação",
+            //                 Departamento = decomp_g,
+            //                 Tipo = TipoCurso.Bacharelado,
+            //                 PerfilEgresso = @"O Curso de Bacharelado em Ciências da Computação tem por objetivo habilitar o Bacharel a conquistar bases Científicas e Tecnológicas 
+            //                                   para atuar na área de informática, bem como ingressar em programas de Pós-Graduação e Pesquisa.",
+            //                 Campus = campusCedeteg
+            //             };
+            //             Cursos.Add(c570);
+            // 
+            //            
+            // 
+            //             
 
             //mestrado química
 
@@ -593,6 +611,7 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
                 Departamento = defil_g,
                 Tipo = TipoCurso.Especializacao,
                 ModalidadeEnsino = ModalidadeEnsino.Distancia,
+                Tags = "NEAD",
                 PerfilEgresso = @"O Bacharel em Filosofia é o profissional que auxilia na formulação e na proposição de soluções de problemas nos diversos campos do 
                                   conhecimento e, em especial, na educação, área em que colabora na formulação e na execução de projetos de desenvolvimento dos conteúdos 
                                   curriculares, bem como na utilização de tecnologias da informação, da comunicação e de metodologias, estratégias e materiais de apoio inovadores.",
@@ -623,6 +642,7 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
                 Nome = "Atividade Física e Saúde",
                 Tipo = TipoCurso.Especializacao,
                 ModalidadeEnsino = ModalidadeEnsino.Distancia,
+                Tags = "NEAD",
                 PerfilEgresso = @"A Educação Física possui um grande campo de atuação que engloba o treinamento esportivo de iniciação e de rendimento, a prescrição e orientação de atividades físicas para saúde e estética, a gestão esportiva, a preparação e reabilitação física, a recreação e o lazer. Para estar qualificado a intervir nessas diferentes áreas, o egresso receberá uma formação generalista, estabelecida por um currículo que abrange temáticas variadas e pertinentes ao mercado profissional de Belo Horizonte e região. Espera-se que o egresso do Curso de Bacharelado em Educação Física seja capaz de analisar as demandas sociais e utilizar as diferentes manifestações e expressões do movimento humano como ferramenta de trabalho, visando proporcionar à sociedade a possibilidade de adoção de um estilo de vida fisicamente ativo e saudável.",
                 Campus = campusSantaCruz
             };
@@ -761,6 +781,11 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
             Disciplinas.Add(new Disciplina { Codigo = "1001-2016", Nome = "Trabalho de Conclusão de Curso (TCC)", Curriculo = cur_atividade_fisica });
 
 
+            var coordenador = new Pessoa { Usuario = coordenadorUser };
+            var aluno = new Pessoa { Usuario = alunoUser };
+            var relator = new Pessoa { Usuario = relatorUser };
+
+            Pessoas.AddRange(coordenador, aluno, relator);
 
             //Projeto de pesquisa
             var pp = new ProjetoPesquisa
@@ -784,24 +809,6 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
                 ProjetoPesquisa = pp
             };
             PesquisadoresProjetosPesquisa.Add(ppp);
-            // 
-            //         public DateTimeOffset Inicio { get; set; }
-            //         public DateTimeOffset Termino { get; set; }
-            //         public string Titulo { get; set; }
-            //         public string Descricao { get; set; }
-            //         public string Objetivos { get; set; }
-            //         public Departamento Departamento { get; set; }
-            //         public Guid DepartamentoId { get; set; }
-            //         public SetorAdministrativo SetorAdministrativo { get; set; }
-            //         public Guid SetorAdministrativoId { get; set; }
-            //         public TipoPesquisa Tipo { get; set; }
-            //         public IList<Usuario> Pesquisadores { get; set; }
-            /*
-CREATE TABLE "Polo" (
-    "Id" BLOB NOT NULL PRIMARY KEY,
-    "Nome" TEXT NOT NULL
-)            
-            */
 
             var polo = new Polo
             {
@@ -809,37 +816,6 @@ CREATE TABLE "Polo" (
             };
             Polos.Add(polo);
 
-            /*
-CREATE TABLE "Usuario" (
-    "Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "Email" TEXT NOT NULL,
-    "Nome" TEXT NOT NULL,
-    "NomeUsuario" TEXT NOT NULL,
-    "Sobrenome" TEXT NOT NULL,
-    "UrlImagem" TEXT
-)
-            */
-
-
-            /*
-CREATE TABLE "RelatorioEvasao" (
-    "Id" BLOB NOT NULL PRIMARY KEY,
-    "AlunoId" INTEGER,
-    "CoordenadorId" INTEGER,
-    "CursoId" BLOB,
-    "DataRelatorio" TEXT NOT NULL,
-    "DisciplinaId" BLOB,
-    "Observacoes" TEXT,
-    "PoloId" BLOB,
-    "RelatorId" INTEGER,
-    CONSTRAINT "FK_RelatorioEvasao_Usuario_AlunoId" FOREIGN KEY ("AlunoId") REFERENCES "Usuario" ("Id"),
-    CONSTRAINT "FK_RelatorioEvasao_Usuario_CoordenadorId" FOREIGN KEY ("CoordenadorId") REFERENCES "Usuario" ("Id"),
-    CONSTRAINT "FK_RelatorioEvasao_Curso_CursoId" FOREIGN KEY ("CursoId") REFERENCES "Curso" ("Id"),
-    CONSTRAINT "FK_RelatorioEvasao_Disciplina_DisciplinaId" FOREIGN KEY ("DisciplinaId") REFERENCES "Disciplina" ("Id"),
-    CONSTRAINT "FK_RelatorioEvasao_Polo_PoloId" FOREIGN KEY ("PoloId") REFERENCES "Polo" ("Id"),
-    CONSTRAINT "FK_RelatorioEvasao_Usuario_RelatorId" FOREIGN KEY ("RelatorId") REFERENCES "Usuario" ("Id")
-)            
-            */
 
             var re = new Enquete
             {
@@ -912,12 +888,12 @@ CREATE TABLE "RelatorioEvasao" (
 
             this.SaveChanges();
 
-            Curso570.Create(this, 
+            Curso570.Create(this,
                 decomp_g,
                 campusCedeteg);
-                
+
             this.SaveChanges();
-                
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -1021,6 +997,18 @@ CREATE TABLE "RelatorioEvasao" (
             //ProjetoPesquisa
             builder.Entity<PesquisadorProjetoPesquisa>()
                 .HasKey(m => new { m.PesquisadorId, m.ProjetoPesquisaId });
+
+            //VinculoSetorAdministrativo
+            builder.Entity<VinculoSetorAdministrativo>()
+                .HasKey(m => new { m.PapelId, m.PessoaId, m.SetorAdministrativoId, m.Inicio });
+
+            //VinculoTurma
+            builder.Entity<VinculoTurma>()
+                .HasKey(m => new { m.PapelId, m.PessoaId, m.TurmaId, m.Inicio });
+
+            //VinculoCurso
+            builder.Entity<VinculoCurso>()
+                .HasKey(m => new { m.PapelId, m.PessoaId, m.CursoId, m.Inicio });
 
             //Departamento
             builder.Entity<Departamento>()
@@ -1176,7 +1164,7 @@ CREATE TABLE "RelatorioEvasao" (
                             $" CEP 85015-430 – Guarapuava – PR",
                 Telefone = "+55 (42) 3621-1095",
                 Fax = "+55 (42) 3621-1090",
-                Email = "nead@univentro.br",
+                Email = "nead@unicentro.br",
                 Sobre = @"O Núcleo de Educação a Distância é um órgão vinculado à Reitoria, criado por meio da Resolução 086/2005 – Cepe/Unicentro, com competência para implementar políticas e diretrizes para a EAD (Educação a Distância) em todos os níveis de ensino no âmbito da Unicentro (Universidade Estadual do Centro-Oeste), incluindo a oferta e a execução de cursos e programas de Educação Profissional, dentre outros, nos termos da legislação vigente.
 A estrutura organizacional para os cursos ofertados na modalidade de Educação a Distância da Unicentro é composta de um Núcleo de Educação a Distância, localizado no Campus Sede da Universidade, pela estrutura advinda da Parceria do Sistema Aberta do Brasil – UAB e por Polos de Apoio Presenciais de Educação a Distância, localizados em diversos municípios."
             });
@@ -1630,8 +1618,8 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
                                    depsi_i, defono_i,
                                    decomp_g, deali_g, defis_g, demat_g, deq_g);
         }
-        
-        private void CreateCursos ()
+
+        private void CreateCursos()
         {
             //Cursos
 
@@ -1639,7 +1627,7 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
             var campi = Campi.ToDictionaryAsync(m => m.Sigla + m.SiglaUnidadeUniversitaria).Result;
 
             //Curso570.Create(this, departamentos, campi);
-            
+
 
             //mestrado química
 
@@ -1799,9 +1787,9 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
                 Campus = campi["CEDETEG"]
             };
             Cursos.Add(cMQA200);
-            
+
             Curso1000.Create(this, departamentos, campi);
-            
+
             var esp_atividade_fisica = new Curso
             {
                 Id = Guid.Parse("8b15ca5a-cbaf-460e-ba26-bd38652c7c55"),
@@ -1850,6 +1838,6 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
             Disciplinas.Add(new Disciplina { Codigo = "1001-2016", Nome = "Trabalho de Conclusão de Curso (TCC)", Curriculo = cur_atividade_fisica });
         }
 
-       
+
     }
 }

@@ -5,12 +5,11 @@ import {Router, RouteParams} from 'angular2/router';
 
 
 @Component({
-  selector: 'start',
-  template: `<h1>Start</h1><a [routerLink]="['UnidadeUniversitariaList']">Lista de unidades universitárias</a>
-  <a [routerLink]="['AA']">AA</a>`,
+  selector: 'home',
+  template: `<h1>Home</h1><a [routerLink]="['UnidadeUniversitariaList']">Lista de unidades universitárias</a>`,
   directives: [ROUTER_DIRECTIVES]
 })
-export class StartComponent  {
+export class HomeComponent  {
   constructor(
     public router: Router,
     public routeParams: RouteParams

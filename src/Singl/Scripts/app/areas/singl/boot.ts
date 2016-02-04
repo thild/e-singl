@@ -9,10 +9,10 @@ import {
 	APP_BASE_HREF,
 	ROUTER_PROVIDERS as NG2_ROUTER_PROVIDERS,
 	LocationStrategy,
-	HashLocationStrategy
+	HashLocationStrategy,
+    PathLocationStrategy
 } from 'angular2/router';
 
-import {PathLocationStrategy} from 'angular2/router';
 import {AppComponent} from './app.component';
 import {Logger}         from './logger.service';
 
@@ -23,6 +23,7 @@ const ROUTER_PROVIDERS: Array<any> = [
 	}),
 	provide(LocationStrategy, {
 		useClass: PathLocationStrategy
+//		useClass: HashLocationStrategy
 	}),
 	provide(APP_BASE_HREF, {
 		useValue: '/spa'
@@ -36,6 +37,7 @@ import {SetorAdministrativoService} from './setor-administrativo.service'
 import {SetorConhecimentoService} from './setor-conhecimento.service'
 import {DepartamentoService} from './departamento.service'
 import {CursoService} from './curso.service'
+import {InstituicaoService} from './instituicao.service'
 import {DisciplinaService} from './disciplina.service'
 import {FilterService}  from './filter-service';
 
@@ -48,6 +50,7 @@ const SERVICE_PROVIDERS: Array<any> = [
     DepartamentoService,
     CursoService,
     DisciplinaService,
+    InstituicaoService,
     FilterService
 ];
 
