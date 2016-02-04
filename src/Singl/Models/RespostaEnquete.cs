@@ -17,7 +17,7 @@ namespace Singl.Models
         
         public Polo Polo { get; set; }
 
-        public Usuario Respondente { get; set; }
+        public Pessoa Respondente { get; set; }
         
         public DateTimeOffset Data { get; set; }
 

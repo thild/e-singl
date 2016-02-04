@@ -7,72 +7,60 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span aria-hidden="true" class="sr-only">Ligar/desligar navegação</span>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">Singl</a>
+            <!--<a class="navbar-brand page-scroll" href="#page-top">Singl</a>-->
+            <a class="navbar-brand page-scroll" [routerLink]="['/Home']">Singl</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li [class.active]="active"><a [routerLink]="['/UnidadeUniversitariaList']" class="link">Unidades universitárias</a></li>
-                <li [class.active]="active"><a [routerLink]="['/CampusList']" class="link">Campi</a></li>
-                <li [class.active]="active"><a [routerLink]="['/SetorAdministrativoList']" class="link">Setores administrativos</a></li>
-                <li [class.active]="active">
+                <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/UnidadeUniversitariaList']" class="link">Unidades universitárias</a></li>
+                <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/CampusList']" class="link">Campi</a></li>
+                <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/SetorAdministrativoList']" class="link">Setores administrativos</a></li>
+                <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cursos <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">Graduação</li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" class="dropdown-header">Graduação</li>
                         <!--<li role="separator" class="divider"></li>                          -->
-                        <li><a [routerLink]="['/CursoList',{filter:'CursosBacharelado'}]" class="link">Bacharelado</a></li>
-                        <li><a [routerLink]="['/CursoList',{filter:'CursosLicenciatura'}]" class="link">Licenciatura</a></li>
-                        <li class="dropdown-header">Pós-Graduação</li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosBacharelado'}]" class="link">Bacharelado</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosLicenciatura'}]" class="link">Licenciatura</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" class="dropdown-header">Pós-Graduação</li>
                         <!--<li role="separator" class="divider"></li>                          -->
-                        <li><a [routerLink]="['/CursoList',{filter:'CursosEspecializacao'}]" class="link">Especialização</a></li>
-                        <li><a [routerLink]="['/CursoList',{filter:'CursosMestrado'}]" class="link">Mestrado</a></li>
-                        <li><a [routerLink]="['/CursoList',{filter:'CursosDoutorado'}]" class="link">Doutorado</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosEspecializacao'}]" class="link">Especialização</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosMestrado'}]" class="link">Mestrado</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosDoutorado'}]" class="link">Doutorado</a></li>
                         <!--<li role="separator" class="divider"></li>                          -->
-                        <li class="dropdown-header">Extensão</li>
-                        <li><a [routerLink]="['/CursoList']" class="link">Curta duração</a></li>
-                        <li class="dropdown-header">Por modalidade de ensino</li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" class="dropdown-header">Extensão</li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList']" class="link">Curta duração</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" class="dropdown-header">Por modalidade de ensino</li>
                         <!--<li role="separator" class="divider"></li>                          -->
-                        <li><a [routerLink]="['/CursoList',{filter:'CursosPresenciais'}]" class="link">Presencial</a></li>
-                        <li><a [routerLink]="['/CursoList',{filter:'CursosDistancia'}]" class="link">Distância</a></li>
-                        <li><a [routerLink]="['/CursoList',{filter:'CursosSemipresenciais'}]" class="link">Semipresencial</a></li>
-                    </ul>                    
+                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosPresenciais'}]" class="link">Presencial</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosDistancia'}]" class="link">Distância</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosSemipresenciais'}]" class="link">Semipresencial</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" class="dropdown-header">Por setor administrativo</li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosNead'}]" class="link">NEAD</a></li>
+                    </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a class="page-scroll" href="#about">Ajuda</a>
-                </li>
+                <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/Ajuda']" class="link" aria-label="Ajuda"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
 </nav>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <div class="btn-toolbar" role="toolbar" aria-label="Barra de ferramentas">
-            <div class="btn-group" role="group" aria-label="Voltar/Avançar">
-                <button aria-label="Volbar" class="btn btn-default" onclick="javascript:history.go(-1)">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                </button>
-                <button aria-label="Avançar" class="btn btn-default" onclick="javascript:history.go(1)">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                </button>
-            </div>
-        </div>
-    </div>
-</nav>        
-<header id="main">
+<!--<history-navigation></history-navigation>-->
+
+<!--<header id="main">
     <div class="header-content">
         <div class="header-content-inner">
         </div>
     </div>
-</header>        
-<section>
-    <div class="container-fluid">
-        <main class="spa">
-            <router-outlet></router-outlet>
-        </main>
-    </div>
-</section>
+</header>        -->
+
+<!--<section>
+    <div class="container-fluid">-->
+<router-outlet></router-outlet>
+<!--</div>
+</section>-->

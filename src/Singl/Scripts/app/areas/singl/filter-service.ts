@@ -47,7 +47,7 @@ export class FilterService {
     }
             
     public static CursosNead(list:Array<any>) : Array<any> {
-        return list.filter(m => m.ModalidadeEnsino.Name == "Presencial");
+        return list.filter(m => m.ModalidadeEnsino.Name == "Distancia" && (m.Tags as string).indexOf("NEAD") != -1);
     }
     
     getCursoFilters() : Array<any> {
@@ -59,7 +59,8 @@ export class FilterService {
             {description: "Doutorado", value: "CursosDoutorado"},
             {description: "Presenciais", value: "CursosPresenciais"},
             {description: "A distância", value: "CursosDistancia"},
-            {description: "Semipresenciais", value: "CursosSemipresenciais"}
+            {description: "Semipresenciais", value: "CursosSemipresenciais"},
+            {description: "NEAD", value: "CursosNead"}
         ];
     }    
             

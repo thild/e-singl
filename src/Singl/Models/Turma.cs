@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using System.Linq;
 
 namespace Singl.Models
 {
@@ -23,13 +24,18 @@ namespace Singl.Models
         [Display(Name = "Código")]
         public string Codigo { get; set; }
         
-        [ForeignKey("DisciplinaId")]
-        public Disciplina Disciplina { get; set; }
-        public Guid DisciplinaId { get; set; }
+        public OfertaDisciplina OfertaDisciplina { get; set; }
+        public Guid OfertaDisciplinaId { get; set; }
         
-        
-        [Newtonsoft.Json.JsonProperty("alunos")]
         [NotMappedAttribute]
-        public IList<Usuario> Alunos {get; private set;}
+        public IList<Pessoa> Alunos {get {
+            return Vinculos?
+                .Where(m => m.Papel.Nome == "Aluno")
+                .Select(m => m.Pessoa).ToList();
+        }}
+        
+        [ScaffoldColumn(false)]
+        [Display(Name="Vínculos")]
+        public IList<VinculoTurma> Vinculos { get; internal set;} = new List<VinculoTurma>();
     }
 }

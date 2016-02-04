@@ -1,6 +1,6 @@
 
 // TODO SOMEDAY: Feature Componetized like CrisisCenter
-import {Component, OnInit, Injector}   from 'angular2/core';
+import {Component, OnInit}   from 'angular2/core';
 import {CursoService}   from './curso.service';
 import {Curso} from './curso';
 import {Router, RouteParams, CanActivate, ROUTER_DIRECTIVES} from 'angular2/router';

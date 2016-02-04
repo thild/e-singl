@@ -85,6 +85,10 @@ namespace Singl.Models
         [ScaffoldColumn(true)]
         public Campus Campus { get; set; }
 
+        [ScaffoldColumn(true)]
+        public string Tags { get; set; }
+
+
         public Guid CampusId { get; set; }
 
         [Display(Name = "Currículos")]
@@ -120,6 +124,10 @@ namespace Singl.Models
                 return Curriculo?.Disciplinas;
             }
         }
+        
+        [ScaffoldColumn(true)]
+        [Display(Name="Vínculos")]
+        public IList<VinculoCurso> Vinculos { get; } = new List<VinculoCurso>();
 
         public dynamic ToDto()
         {
@@ -133,6 +141,7 @@ namespace Singl.Models
             dto.Disciplinas = Disciplinas == null ? null : Disciplinas.Select(x => new { x.Id, x.Nome, x.Codigo });
             dto.ModalidadeEnsino = ModalidadeEnsino;
             dto.Nome = Nome;
+            dto.Tags = Tags;
             dto.PerfilEgresso = PerfilEgresso;
             //TypeDescriptor.CreateProperty(dto, new JsonConverterAttribute(typeof(EnumValueConverter)));
             dto.Tipo = Tipo;

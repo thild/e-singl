@@ -28,13 +28,13 @@ namespace Singl.Models
         public PropostaExtensionista()
         {
             Id = Guid.NewGuid();
-            EquipeExecutora = new List<Usuario>();
+            EquipeExecutora = new List<Pessoa>();
         }
 
         [Required]
         public Guid Id { get; set; }
 
-        public Usuario Coordenador { get; set; }
+        public Pessoa Coordenador { get; set; }
 
         public DateTimeOffset Inicio { get; set; }
 
@@ -74,7 +74,7 @@ namespace Singl.Models
         public string EntidadesParceiras { get; set; }
         
         [NotMapped()]
-        public List<Usuario> EquipeExecutora { get; set; }
+        public List<Pessoa> EquipeExecutora { get; set; }
 
         // TODO: Criar um ViewComponent com ajax        
         // 1.7.1. Áreas de Conhecimento CNPq 

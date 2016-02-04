@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -292,6 +293,11 @@ namespace Singl.Core.Scaffolding
         public string DisplayName { get; set; }
     }
 
+    [System.AttributeUsage(System.AttributeTargets.Property)]    
+    public class DtoAttribute : Attribute
+    {
+    }
+
 }
 
 
@@ -357,8 +363,33 @@ namespace Singl.Extensions
                             t.GetTypeInfo().GetGenericTypeDefinition() == typeof(IEnumerable<>))
                 .Select(t => t.GetGenericArguments()[0]).SingleOrDefault();
         }
-        
     }
+    
+//     public static class DtoExtensions {
+//          public static ExpandoObject ToDto(this object value) {
+//             
+//             IDictionary<string, object> dto = new ExpandoObject();
+//             
+//             var properties = value.GetType()
+//                 .GetProperties(BindingFlags.Public | 
+//                               BindingFlags.Instance)
+//                 .Where(p => p.CanRead);
+// 
+//             foreach (var property in properties)
+//             {
+//                 var dtoAttr = property.GetAttribute<DtoAttribute>();
+//                 if (dtoAttr != null)
+//                 {
+//                     dto.Add(property.Name, property.GetValue(value, null));
+//                 }
+//             }
+// 
+//             return dto as ExpandoObject;            
+//             
+//         }
+//         
+//     }
+    
 }
 
 

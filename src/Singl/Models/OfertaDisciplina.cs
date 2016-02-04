@@ -36,7 +36,10 @@ namespace Singl.Models
         public string BibliografiaComplementar { get; set; }
         
         [DataType(DataType.Url)]
-        public string Url { get; set; }        
+        [ScaffoldColumn(true)]
+        [Display(Name = "AVA")]
+        [Url]
+        public string UrlAva { get; set; }
         
     }
 }

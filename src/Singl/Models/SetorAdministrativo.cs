@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Dynamic;
+using System.Linq;
 using Singl.Core.Scaffolding;
 
 namespace Singl.Models
@@ -66,6 +68,37 @@ namespace Singl.Models
         }
 
         public Guid CampusId { get; set; }
+        
+         [Display(Name="Endereço")]
+        public string Endereco { get; set; }      
+        public string Telefone { get; set; }      
+        public string Fax { get; set; }      
+
+        [Display(Name="E-mail")]
+        public string Email { get; set; }
+        public string Sobre { get; set; }
+        
+        [ScaffoldColumn(true)]
+        [Display(Name="Vínculos")]
+        public IList<VinculoSetorAdministrativo> Vinculos { get; } = new List<VinculoSetorAdministrativo>();
+
+        
+        public dynamic ToDto()
+        {
+            dynamic dto = new ExpandoObject();
+            dto.Nome = Campus == null ? null : new { Campus.Id, Campus.Nome, Campus.Sigla };
+            dto.Sigla = Sigla;
+            dto.Supersetor = Supersetor == null ? null : new { Supersetor.Id, Supersetor.Nome, Supersetor.Sigla };
+            dto.Campus = Campus == null ? null : new { Campus.Id, Campus.Nome, Campus.Sigla };
+            dto.Subsetores = Subsetores == null ? null : Subsetores.Select(x => new { x.Id, x.Nome, x.Sigla });
+            dto.Nome = Nome;
+            dto.Sobre = Sobre;
+            dto.Endereco = Endereco;
+            dto.Telefone = Telefone;
+            dto.Fax = Fax;
+            dto.Email = Email;
+            return dto;
+        }        
 
     }
 }

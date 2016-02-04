@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Singl.Models
 {
@@ -8,17 +9,29 @@ namespace Singl.Models
 
         public  Usuario() {
         }
+        string nome;
 
-//         [Required]
-//         [MinLength(4)]
-//         [MaxLength(20)]
-//         public string NomeUsuario { get; set; }
-//         
-//         [Required]
-//         public string Nome { get; set; }
-//         
-//         [Required]
-//         public string Sobrenome { get; set; }
+
+        //         [Required]
+        //         [MinLength(4)]
+        //         [MaxLength(20)]
+        //         public string NomeUsuario { get; set; }
+        //         
+        [Required]
+        public string Nome
+        {
+            get
+            {
+                return nome ?? UserName;
+            }
+
+            set
+            {
+                nome = value;
+            }
+        }
+
+        public string Sobrenome { get; set; }
 //         
 //         [NotMappedAttribute]
 //         public string NomeCompleto { get; set; }

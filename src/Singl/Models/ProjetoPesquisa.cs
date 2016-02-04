@@ -40,13 +40,13 @@ namespace Singl.Models
         public ProjetoPesquisa()
         {
             Id = Guid.NewGuid();
-            Pesquisadores = new List<Usuario>();
+            Pesquisadores = new List<Pessoa>();
         }
         
         [Required]
         public Guid Id { get; set; }
         
-        public Usuario Coordenador { get; set; }
+        public Pessoa Coordenador { get; set; }
         
         public DateTimeOffset Inicio { get; set; }
         
@@ -79,7 +79,7 @@ namespace Singl.Models
         public TipoPesquisa Tipo { get; set; }
 
         [NotMapped()]
-        public IList<Usuario> Pesquisadores { get; set; }
+        public IList<Pessoa> Pesquisadores { get; set; }
 
     }
 }
