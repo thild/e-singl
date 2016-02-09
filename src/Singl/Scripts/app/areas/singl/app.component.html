@@ -20,25 +20,25 @@
                 <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cursos <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li data-toggle="collapse" data-target=".navbar-collapse" class="dropdown-header">Graduação</li>
+                        <li class="dropdown-header">Graduação</li>
                         <!--<li role="separator" class="divider"></li>                          -->
-                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosBacharelado'}]" class="link">Bacharelado</a></li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosLicenciatura'}]" class="link">Licenciatura</a></li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse" class="dropdown-header">Pós-Graduação</li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/CursoList',{filter:'CursosBacharelado'}]" class="link">Bacharelado</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/CursoList',{filter:'CursosLicenciatura'}]" class="link">Licenciatura</a></li>
+                        <li class="dropdown-header">Pós-Graduação</li>
                         <!--<li role="separator" class="divider"></li>                          -->
-                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosEspecializacao'}]" class="link">Especialização</a></li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosMestrado'}]" class="link">Mestrado</a></li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosDoutorado'}]" class="link">Doutorado</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/CursoList',{filter:'CursosEspecializacao'}]" class="link">Especialização</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/CursoList',{filter:'CursosMestrado'}]" class="link">Mestrado</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/CursoList',{filter:'CursosDoutorado'}]" class="link">Doutorado</a></li>
                         <!--<li role="separator" class="divider"></li>                          -->
-                        <li data-toggle="collapse" data-target=".navbar-collapse" class="dropdown-header">Extensão</li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList']" class="link">Curta duração</a></li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse" class="dropdown-header">Por modalidade de ensino</li>
+                        <li class="dropdown-header">Extensão</li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/CursoList']" class="link">Curta duração</a></li>
+                        <li class="dropdown-header">Por modalidade de ensino</li>
                         <!--<li role="separator" class="divider"></li>                          -->
-                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosPresenciais'}]" class="link">Presencial</a></li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosDistancia'}]" class="link">Distância</a></li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosSemipresenciais'}]" class="link">Semipresencial</a></li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse" class="dropdown-header">Por setor administrativo</li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse"><a [routerLink]="['/CursoList',{filter:'CursosNead'}]" class="link">NEAD</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/CursoList',{filter:'CursosPresenciais'}]" class="link">Presencial</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/CursoList',{filter:'CursosDistancia'}]" class="link">Distância</a></li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/CursoList',{filter:'CursosSemipresenciais'}]" class="link">Semipresencial</a></li>
+                        <li class="dropdown-header">Por setor administrativo</li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" [class.active]="active"><a [routerLink]="['/CursoList',{filter:'CursosNead'}]" class="link">NEAD</a></li>
                     </ul>
                 </li>
             </ul>

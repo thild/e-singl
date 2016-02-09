@@ -20,6 +20,13 @@ namespace Singl.Models
        
     }
 
+    public class VinculoSetorConhecimento : Vinculo
+    {
+       public SetorConhecimento SetorConhecimento { get; set; }
+       public Guid SetorConhecimentoId { get; set; }
+       
+    }
+
     public class VinculoCurso : Vinculo
     {
        public Curso Curso { get; set; }

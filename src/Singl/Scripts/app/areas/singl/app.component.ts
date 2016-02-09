@@ -23,7 +23,7 @@ import {HistoryNavigationComponent} from './history-navigation.component';
 
 
 import {ModelListComponent} from './model-list.component';
-import {HomeComponent, AComponent, BComponent, CComponent} from './home.component';
+import {HomeComponent} from './home.component';
 
 @Component({
   selector: 'singl-app',

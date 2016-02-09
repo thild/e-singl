@@ -1,4 +1,4 @@
-/// <reference path="../../../../../typings/jquery/jquery.d.ts" />
+// /// <reference path="../../../../../typings/jquery/jquery.d.ts" />
 
 import {Component, OnInit} from 'angular2/core';
 import {SetorAdministrativoService}   from './../setor-administrativo.service';
@@ -12,8 +12,9 @@ import 'rxjs/Rx';
 import {ModelListComponent} from './../model-list.component';
 
 import {UiTabs, UiPane} from './../components/tabs/ui_tabs';
+import {InstituicaoFooterComponent} from './../components/fragments/instituicao-footer.component';
 
-declare var jQuery:JQueryStatic;
+//declare var jQuery:JQueryStatic;
 
 // <link asp-append-version="true" rel="stylesheet" href="/css/animate.css" />
 // <link asp-append-version="true" rel="stylesheet" href="/css/home.css" />
@@ -22,7 +23,7 @@ declare var jQuery:JQueryStatic;
 @Component({
     selector: 'nead-info',
     templateUrl: 'app/areas/singl/info/nead-info.component.html',
-    directives: [ROUTER_DIRECTIVES, UiTabs, UiPane, ModelListComponent],
+    directives: [ROUTER_DIRECTIVES, UiTabs, UiPane, ModelListComponent, InstituicaoFooterComponent],
     styleUrls: ['./css/animate.css', './css/home.css']
 })
 @CanActivate(() => ModelMetadataService.load('Singl.Models.SetorAdministrativo'))
@@ -65,10 +66,10 @@ export class NeadInfoComponent implements OnInit {
 //             });
 // 
             // Highlight the top nav as scrolling occurs
-            jQuery('body')['scrollspy']({
-                target: '.navbar-fixed-top',
-                offset: 51
-            });
+            // jQuery('body')['scrollspy']({
+            //     target: '.navbar-fixed-top',
+            //     offset: 51
+            // });
 // 
 //             // Fit Text Plugin for Main Header
 //             jQuery("h1").fitText(

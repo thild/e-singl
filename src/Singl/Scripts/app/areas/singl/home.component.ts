@@ -17,34 +17,3 @@ export class HomeComponent  {
   {
   }
 }
-
-
-
-@Component({
-  selector: 'a-a',
-  template: `<h1>AA</h1><a [routerLink]="['BB']">BB</a>`,
-  directives: [ROUTER_DIRECTIVES]
-})
-export class AComponent  {
-
-}
-
-
-@Component({
-  selector: 'b-b',
-  template: `<h1>BB</h1><a [routerLink]="['CC']">CC</a>`,
-  directives: [ROUTER_DIRECTIVES]
-})
-export class BComponent  {
-
-}
-
-
-@Component({
-  selector: 'c-c',
-  template: `<h1>CC</h1>`,
-  directives: [ROUTER_DIRECTIVES]
-})
-export class CComponent  {
-
-}
