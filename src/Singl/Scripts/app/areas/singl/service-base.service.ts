@@ -98,7 +98,7 @@ export class ServiceBase implements IServiceBase {
     }
     
     getInfo(params: any) {
-        let apiUrl = this.baseUrl + eval(this.getUrl) + '/info';
+        let apiUrl = this.baseUrl + (this.getUrl ? eval(this.getUrl) : '') + '/info';
         return this._http.get(apiUrl)
             .map(response => response.json());
     }

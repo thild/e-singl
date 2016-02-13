@@ -8,14 +8,13 @@
         </div>
         <div *ngIf="hasSelectedItems()">
             <ul>
-                <!--<li *ngFor="#item of list | filter:getFilterParams()"-->
-                <!--<li *ngFor="#item of list | filter:selectedFilters" [class.selected]="isSelected(item)" (click)="onSelect(item)">-->
                 <li *ngFor="#item of filteredList" [class.selected]="isSelected(item)" (click)="onSelect(item)">
                     <span class="model-navigation">
-            <span class="id-badge">
-                {{item[selectionProperty]}}
-            </span> {{item[descriptionProperty]}} <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                    </span>
+                        <span class="id-badge">
+                            {{item[selectionProperty]}}
+                        </span> {{item[descriptionProperty]}} <span class="glyphicon glyphicon-arrow-right"
+                    aria-hidden="true"></span>
+                    </span> 
                 </li>
             </ul>
         </div>

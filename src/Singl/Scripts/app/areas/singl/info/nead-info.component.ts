@@ -1,6 +1,6 @@
 // /// <reference path="../../../../../typings/jquery/jquery.d.ts" />
 
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, ViewEncapsulation} from 'angular2/core';
 import {SetorAdministrativoService}   from './../setor-administrativo.service';
 import {InstituicaoService}   from './../instituicao.service';
 import {RouteParams, Router, CanActivate, ROUTER_DIRECTIVES} from 'angular2/router';
@@ -12,7 +12,10 @@ import 'rxjs/Rx';
 import {ModelListComponent} from './../model-list.component';
 
 import {UiTabs, UiPane} from './../components/tabs/ui_tabs';
+import {Tabs} from './../components/tabs/tabs';
+import {Tab} from './../components/tabs/tab';
 import {InstituicaoFooterComponent} from './../components/fragments/instituicao-footer.component';
+import {ContatoFragmentComponent} from './../components/fragments/contato-fragment.component';
 
 //declare var jQuery:JQueryStatic;
 
@@ -23,8 +26,10 @@ import {InstituicaoFooterComponent} from './../components/fragments/instituicao-
 @Component({
     selector: 'nead-info',
     templateUrl: 'app/areas/singl/info/nead-info.component.html',
-    directives: [ROUTER_DIRECTIVES, UiTabs, UiPane, ModelListComponent, InstituicaoFooterComponent],
-    styleUrls: ['./css/animate.css', './css/home.css']
+    directives: [ROUTER_DIRECTIVES, UiTabs, UiPane, ModelListComponent, 
+                 InstituicaoFooterComponent, ContatoFragmentComponent, 
+                 Tab, Tabs],
+    styleUrls: ['./css/info.css']
 })
 @CanActivate(() => ModelMetadataService.load('Singl.Models.SetorAdministrativo'))
 export class NeadInfoComponent implements OnInit {

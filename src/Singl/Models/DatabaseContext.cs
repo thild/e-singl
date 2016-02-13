@@ -27,6 +27,7 @@ namespace Singl
         //public DbSet<PapelUsuario> PapeisUsuarios { get; set; }
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Polo> Polos { get; set; }
+        public DbSet<PoloCurso> PolosCurso { get; set; }
         public DbSet<Cidade> Cidades { get; set; }
         public DbSet<UnidadeUniversitaria> UnidadesUniversitarias { get; set; }
         public DbSet<Campus> Campi { get; set; }
@@ -45,6 +46,8 @@ namespace Singl
         public DbSet<VinculoCurso> VinculosCurso { get; set; }
         public DbSet<VinculoTurma> VinculosTurma { get; set; }
         public DbSet<Pessoa> Pessoas { get; set; }
+        public DbSet<Docente> Docentes { get; set; }
+        public DbSet<DocenteCurso> DocentesCurso { get; set; }
 
 
         //Model metadata
@@ -160,20 +163,7 @@ namespace Singl
         {
 
 
-
-            Instituicao.Add(new Instituicao
-            {
-                Nome = "Universidade Estadual do Centro-Oeste",
-                Endereco = $"Rua Padre Salvador, 875 – Santa Cruz - Cx. Postal 730" +
-                           $" CEP 85015-430 – Guarapuava – PR",
-                Telefone = "+55 (42) 3621-1000",
-                Fax = "+55 (42) 3621-1090",
-                Email = "contato@unicentro.br",
-                Sobre = @"Localizada na região centro-sul do Paraná, a Unicentro é reconhecida pelos trabalhos desenvolvidos nas áreas do ensino, 
-                          da pesquisa e da extensão universitárias. Com a união da Fafig de Guarapuava e da Fecli de Irati, a Unicentro teve sua 
-                          criação no ano de 1990 e foi reconhecida pelo governo do Paraná 7 anos mais tarde. A partir de então, os trabalhos voltados 
-                          para a pesquisa e o ensino têm como foco o preparo dos estudantes para o mundo."
-            });
+            InstituicaoMigration.Create(this);
 
             //Cidade
             var guarapuava = new Cidade { Id = Guid.Parse("bd38f703-ebec-4f7e-a6ec-f333c28f36e4"), Nome = "Guarapuava" };
@@ -601,38 +591,38 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
             };
             Cursos.Add(cMQA200);
 
-
-
-            var esp_filosofia = new Curso
-            {
-                Id = Guid.Parse("c38e9d6e-dcdf-4fea-8fce-88e338e6c74a"),
-                Codigo = "1000",
-                Nome = "Ensino de Filosofia no Ensino Médio",
-                Departamento = defil_g,
-                Tipo = TipoCurso.Especializacao,
-                ModalidadeEnsino = ModalidadeEnsino.Distancia,
-                Tags = "NEAD",
-                PerfilEgresso = @"O Bacharel em Filosofia é o profissional que auxilia na formulação e na proposição de soluções de problemas nos diversos campos do 
-                                  conhecimento e, em especial, na educação, área em que colabora na formulação e na execução de projetos de desenvolvimento dos conteúdos 
-                                  curriculares, bem como na utilização de tecnologias da informação, da comunicação e de metodologias, estratégias e materiais de apoio inovadores.",
-                Campus = campusSantaCruz
-            };
-            Cursos.Add(esp_filosofia);
-
-            var cur_filosofia = new Curriculo
-            {
-                Id = Guid.Parse("24356e45-33ca-42f2-a605-393cf7408906"),
-                Nome = "Curriculo 2015",
-                Ano = DateTime.Now.Year,
-                Regime = Regime.Especial,
-                Series = 1,
-                PrazoConclusaoMaximo = 30,
-                PrazoConclusaoIdeal = 18,
-                Curso = esp_filosofia,
-                CursoId = esp_filosofia.Id
-            };
-
-            Curriculos.Add(cur_filosofia);
+// 
+// 
+//             var esp_filosofia = new Curso
+//             {
+//                 Id = Guid.Parse("c38e9d6e-dcdf-4fea-8fce-88e338e6c74a"),
+//                 Codigo = "1000",
+//                 Nome = "Ensino de Filosofia no Ensino Médio",
+//                 Departamento = defil_g,
+//                 Tipo = TipoCurso.Especializacao,
+//                 ModalidadeEnsino = ModalidadeEnsino.Distancia,
+//                 Tags = "NEAD",
+//                 PerfilEgresso = @"O Bacharel em Filosofia é o profissional que auxilia na formulação e na proposição de soluções de problemas nos diversos campos do 
+//                                   conhecimento e, em especial, na educação, área em que colabora na formulação e na execução de projetos de desenvolvimento dos conteúdos 
+//                                   curriculares, bem como na utilização de tecnologias da informação, da comunicação e de metodologias, estratégias e materiais de apoio inovadores.",
+//                 Campus = campusSantaCruz
+//             };
+//             Cursos.Add(esp_filosofia);
+// 
+//             var cur_filosofia = new Curriculo
+//             {
+//                 Id = Guid.Parse("24356e45-33ca-42f2-a605-393cf7408906"),
+//                 Nome = "Curriculo 2015",
+//                 Ano = DateTime.Now.Year,
+//                 Regime = Regime.Especial,
+//                 Series = 1,
+//                 PrazoConclusaoMaximo = 30,
+//                 PrazoConclusaoIdeal = 18,
+//                 Curso = esp_filosofia,
+//                 CursoId = esp_filosofia.Id
+//             };
+// 
+//             Curriculos.Add(cur_filosofia);
 
             var esp_atividade_fisica = new Curso
             {
@@ -665,102 +655,102 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
 
             //Disciplinas
 
-            Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2000",
-                Nome = "Introdução a EAD",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=3390",
-                Ordem = 1
-            });
-            Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2001",
-                Nome = "Didática do ensino de filosofia",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=30",
-                Ordem = 2
-            });
-            Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2002",
-                Nome = "Ensino de lógica, ontologia e filosofia da linguagem",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=26",
-                Ordem = 3
-            });
-            Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2003",
-                Nome = "Ensino de ética e filosofia política",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=25",
-                Ordem = 4
-            });
-            Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2004",
-                Nome = "Estética e filosofia da arte e seu ensino",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=27",
-                Ordem = 5
-            });
-            Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2005",
-                Nome = "Filosofia do ensino de filosofia",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=28",
-                Ordem = 6
-            });
-            Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2006",
-                Nome = "História, temas e problemas da filosofia em sala de aula: como ler os clássicos",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=21",
-                Ordem = 7
-            });
-            Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2007",
-                Nome = "Introdução à prática de ensino de filosofia",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=22",
-                Ordem = 8
-            });
-            Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2008",
-                Nome = "Introdução às ferramentas para EaD - Filosofia",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=23",
-                Ordem = 9
-            });
-            Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2009",
-                Nome = "Metodologia do Ensino de Filosofia",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=24",
-                Ordem = 10
-            });
-            Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2010",
-                Nome = "Pesquisa em filosofia na sala de aula",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=31",
-                Ordem = 11
-            });
-            Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2011",
-                Nome = "Teoria do conhecimento e filosofia da ciência e seu ensino",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=29",
-                Ordem = 12
-            });
+            // Disciplinas.Add(new Disciplina
+            // {
+            //     Codigo = "1000-2000",
+            //     Nome = "Introdução a EAD",
+            //     Curriculo = cur_filosofia,
+            //     UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=3390",
+            //     Ordem = 1
+            // });
+            // Disciplinas.Add(new Disciplina
+            // {
+            //     Codigo = "1000-2001",
+            //     Nome = "Didática do ensino de filosofia",
+            //     Curriculo = cur_filosofia,
+            //     UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=30",
+            //     Ordem = 2
+            // });
+            // Disciplinas.Add(new Disciplina
+            // {
+            //     Codigo = "1000-2002",
+            //     Nome = "Ensino de lógica, ontologia e filosofia da linguagem",
+            //     Curriculo = cur_filosofia,
+            //     UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=26",
+            //     Ordem = 3
+            // });
+            // Disciplinas.Add(new Disciplina
+            // {
+            //     Codigo = "1000-2003",
+            //     Nome = "Ensino de ética e filosofia política",
+            //     Curriculo = cur_filosofia,
+            //     UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=25",
+            //     Ordem = 4
+            // });
+            // Disciplinas.Add(new Disciplina
+            // {
+            //     Codigo = "1000-2004",
+            //     Nome = "Estética e filosofia da arte e seu ensino",
+            //     Curriculo = cur_filosofia,
+            //     UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=27",
+            //     Ordem = 5
+            // });
+            // Disciplinas.Add(new Disciplina
+            // {
+            //     Codigo = "1000-2005",
+            //     Nome = "Filosofia do ensino de filosofia",
+            //     Curriculo = cur_filosofia,
+            //     UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=28",
+            //     Ordem = 6
+            // });
+            // Disciplinas.Add(new Disciplina
+            // {
+            //     Codigo = "1000-2006",
+            //     Nome = "História, temas e problemas da filosofia em sala de aula: como ler os clássicos",
+            //     Curriculo = cur_filosofia,
+            //     UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=21",
+            //     Ordem = 7
+            // });
+            // Disciplinas.Add(new Disciplina
+            // {
+            //     Codigo = "1000-2007",
+            //     Nome = "Introdução à prática de ensino de filosofia",
+            //     Curriculo = cur_filosofia,
+            //     UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=22",
+            //     Ordem = 8
+            // });
+            // Disciplinas.Add(new Disciplina
+            // {
+            //     Codigo = "1000-2008",
+            //     Nome = "Introdução às ferramentas para EaD - Filosofia",
+            //     Curriculo = cur_filosofia,
+            //     UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=23",
+            //     Ordem = 9
+            // });
+            // Disciplinas.Add(new Disciplina
+            // {
+            //     Codigo = "1000-2009",
+            //     Nome = "Metodologia do Ensino de Filosofia",
+            //     Curriculo = cur_filosofia,
+            //     UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=24",
+            //     Ordem = 10
+            // });
+            // Disciplinas.Add(new Disciplina
+            // {
+            //     Codigo = "1000-2010",
+            //     Nome = "Pesquisa em filosofia na sala de aula",
+            //     Curriculo = cur_filosofia,
+            //     UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=31",
+            //     Ordem = 11
+            // });
+            // Disciplinas.Add(new Disciplina
+            // {
+            //     Codigo = "1000-2011",
+            //     Nome = "Teoria do conhecimento e filosofia da ciência e seu ensino",
+            //     Curriculo = cur_filosofia,
+            //     UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=29",
+            //     Ordem = 12
+            // });
 
             Disciplinas.Add(new Disciplina { Codigo = "1001-2000", Nome = "Introdução a EAD", Curriculo = cur_atividade_fisica });
             Disciplinas.Add(new Disciplina { Codigo = "1001-2001", Nome = "Antropologia do corpo e saúde", Curriculo = cur_atividade_fisica });
@@ -810,11 +800,12 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
             };
             PesquisadoresProjetosPesquisa.Add(ppp);
 
-            var polo = new Polo
-            {
-                Nome = "Guarapuava",
-            };
-            Polos.Add(polo);
+            // var polo = new Polo
+            // {
+            //     Nome = "Guarapuava",
+            //     Cidade = "Guarapuava"
+            // };
+            // Polos.Add(polo);
 
 
             var re = new Enquete
@@ -887,10 +878,22 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
             Alternativas.Add(new Alternativa { Texto = "A organização da disciplina não foi satisfatória", Questao = q2 });
 
             this.SaveChanges();
+            
+            PolosMigration.Create(this);
+            
+            this.SaveChanges();
+
+            PapeisMigration.Create(this);
+            
+            this.SaveChanges();
 
             Curso570.Create(this,
                 decomp_g,
                 campusCedeteg);
+
+            this.SaveChanges();
+
+            Curso1000.Create(this, defil_g, campusSantaCruz);
 
             this.SaveChanges();
 
@@ -993,6 +996,14 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
             //     .WithMany(m => m.ProjetosPesquisa)
             //     .HasForeignKey(m => m.DepartamentoId)
             //     .IsRequired(false);                                        
+
+            //DocenteCurso
+            builder.Entity<DocenteCurso>()
+                .HasKey(m => new { m.DocenteId, m.CursoId });
+                
+            //PoloCurso
+            builder.Entity<PoloCurso>()
+                .HasKey(m => new { m.PoloId, m.CursoId });
 
             //ProjetoPesquisa
             builder.Entity<PesquisadorProjetoPesquisa>()
@@ -1787,8 +1798,6 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
                 Campus = campi["CEDETEG"]
             };
             Cursos.Add(cMQA200);
-
-            Curso1000.Create(this, departamentos, campi);
 
             var esp_atividade_fisica = new Curso
             {

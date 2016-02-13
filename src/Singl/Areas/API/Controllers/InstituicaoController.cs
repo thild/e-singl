@@ -21,6 +21,24 @@ namespace Singl.Areas.API.Controllers
             return new ObjectResult(_context.Instituicao.Single());
         }
 
+        [HttpGet("info")]
+        public IActionResult Info()
+        {
+
+              var instituicao = _context.Instituicao.FirstOrDefault();
+                
+            if (instituicao == null)
+            {
+                return new HttpNotFoundResult();
+            }
+
+            var dto = instituicao.ToDto();
+            dto.MetadataUI = _context.MetadataUI.SingleOrDefault(m => m.ModelId == instituicao.Id);
+
+            return new ObjectResult(dto);
+        }        
+        
+
 //         // GET: Instituicao/Edit/5
 //         public IActionResult Edit()
 //         {

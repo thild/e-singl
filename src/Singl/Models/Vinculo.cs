@@ -3,8 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Singl.Models
 {
-    public class Vinculo
+    public abstract class Vinculo
     {
+        protected Vinculo() {
+            Fim = DateTimeOffset.MaxValue;
+        }
         public Pessoa Pessoa { get; set; }
         public Guid PessoaId { get; set; }
         public Papel Papel { get; set; }
@@ -41,31 +44,5 @@ namespace Singl.Models
        
     }
 
-    public class Pessoa : IModel<Guid>
-    {
-        public Pessoa() {
-            Id = Guid.NewGuid();
-        }
-        
-        public Guid Id { get; set; }
-        string nome;
 
-
-        //Se existir um usuario, usar o nome
-        public string Nome
-        {
-            get
-            {
-                return Usuario?.Nome ?? nome;
-            }
-
-            set
-            {
-                nome = value;
-            }
-        }
-
-        public Usuario Usuario { get; set; }
-        public string UsuarioId { get; set; }
-    }
 }

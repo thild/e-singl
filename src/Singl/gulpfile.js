@@ -145,9 +145,9 @@ var sources = {
             ]
         },
         {
-            name: "site.css",
+            name: "global.css",
             paths: [
-                paths.styles + "site/site.scss"
+                paths.styles + "global/**/*.scss"
             ]
         },
         {
@@ -157,12 +157,15 @@ var sources = {
             ]
         },
         {
-            name: "home.css",
+            name: "info.css",
             paths: [
-                paths.styles + "home/**/*.less",
-                // Unfortunately, bootstrap-touch-carousel does not provide a SASS version of their library. See 
-                // https://github.com/ixisio/bootstrap-touch-carousel/issues/51 for more information.
-                paths.bower + "bootstrap-touch-carousel/dist/src/less/*.less"
+                paths.styles + "info/**/*.scss"
+            ]
+        },
+        {
+            name: "navigation.css",
+            paths: [
+                paths.styles + "navigation/**/*.scss"
             ]
         }
     ],
@@ -294,7 +297,33 @@ var sources = {
             paths: [
                 paths.bower + "classie/classie.js"
             ]
-        }
+        },
+        {
+            name: "polymer.html",
+            paths: [
+                paths.bower + "polymer/polymer.html",
+                paths.bower + "polymer/polymer-micro.html",
+                paths.bower + "polymer/polymer-mini.html",
+            ]
+        },
+        {
+            name: "google-map.html",
+            paths: [
+                paths.bower + "google-map/google-map.html"
+            ]
+        },
+        {
+            name: "webcomponents-lite.js",
+            paths: [
+                paths.bower + "webcomponentsjs/webcomponents-lite.min.js"
+            ]
+        },
+        {
+            name: "webcomponents.js",
+            paths: [
+                paths.bower + "webcomponentsjs/webcomponents.min.js"
+            ]
+        }        
     ],    
     app: [
         {

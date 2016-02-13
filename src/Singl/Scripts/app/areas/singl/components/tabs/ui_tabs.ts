@@ -38,7 +38,10 @@ export class UiPane {
     </ul>
     <ng-content></ng-content>
     `,
-    styles:['a { cursor: pointer; cursor: hand; }']
+    styles:[`
+        a { cursor: pointer; cursor: hand; }
+        .ui-pane { background-color: red; }
+    `]
 })
 export class UiTabs {
   @ContentChildren(UiPane) panes: QueryList<UiPane>;

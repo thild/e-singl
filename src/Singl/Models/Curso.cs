@@ -89,6 +89,24 @@ namespace Singl.Models
         public string Tags { get; set; }
 
 
+        [ScaffoldColumn(true)]
+        public string Sobre { get; set; }
+
+        [ScaffoldColumn(true)]
+        public string Objetivos { get; set; }
+
+        [ScaffoldColumn(true)]
+        public string Historico { get; set; }
+
+        [Display(Name="Endereço")]
+        public string Endereco { get; set; }      
+        public string Telefone { get; set; }      
+        public string Fax { get; set; }      
+
+        [Display(Name="E-mail")]
+        public string Email { get; set; }
+
+
         public Guid CampusId { get; set; }
 
         [Display(Name = "Currículos")]
@@ -126,8 +144,14 @@ namespace Singl.Models
         }
         
         [ScaffoldColumn(true)]
+        public IList<Docente> Docentes = new List<Docente>();
+                
+        [ScaffoldColumn(true)]
+        public IList<Polo> Polos = new List<Polo>();
+                
+        [ScaffoldColumn(true)]
         [Display(Name="Vínculos")]
-        public IList<VinculoCurso> Vinculos { get; } = new List<VinculoCurso>();
+        public IList<VinculoCurso> Vinculos { get; set; } = new List<VinculoCurso>();
 
         public dynamic ToDto()
         {
@@ -138,11 +162,23 @@ namespace Singl.Models
             dto.Departamento = Departamento == null ? null : new { Departamento.Id, Departamento.Nome, Departamento.Sigla, Departamento.SiglaUnidadeUniversitaria };
             var uu = Campus?.UnidadeUniversitaria;
             dto.UnidadeUniversitaria = uu == null ? null : new { uu.Id, uu.Nome, uu.Sigla };
-            dto.Disciplinas = Disciplinas == null ? null : Disciplinas.Select(x => new { x.Id, x.Nome, x.Codigo });
+            dto.Disciplinas = Disciplinas == null ? null : Disciplinas.Select(x => new { x.Id, x.Nome, x.Codigo, x.CargaHorariaTotal, x.Modulo, x.UrlAva });
+            dto.Docentes = Docentes == null ? null : Docentes.Select(x => new {x.Id, x.Pessoa?.Nome, x.Lattes });
+            dto.Polos = Polos == null ? null : Polos.Select(x => new { x.Nome, x.Endereco, x.Cidade, x.Coordenador, x.Emails, x.Telefones });
+            //TODO Se for docente retornar DocenteId
+            dto.Vinculos = Vinculos == null ? null : Vinculos
+                .Select(x => new {x.PessoaId, x.Pessoa.Nome, Papel = x.Papel.Nome });
             dto.ModalidadeEnsino = ModalidadeEnsino;
             dto.Nome = Nome;
             dto.Tags = Tags;
+            dto.Sobre = Sobre;
+            dto.Objetivos = Objetivos;
+            dto.Historico = Historico;
             dto.PerfilEgresso = PerfilEgresso;
+            dto.Endereco = Endereco;
+            dto.Telefone = Telefone;
+            dto.Fax = Fax;
+            dto.Email = Email;
             //TypeDescriptor.CreateProperty(dto, new JsonConverterAttribute(typeof(EnumValueConverter)));
             dto.Tipo = Tipo;
             return dto;

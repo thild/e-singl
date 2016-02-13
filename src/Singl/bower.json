@@ -16,10 +16,8 @@
     "jquery-easing": "*",
     "jquery-fittext.js": "*",
     "modernizr": "2.8.3",
-    "angular": "1.4.8",
-    "angular-route": "1.4.8",
-    "angular-resource": "1.4.8",
-    "angular-animate": "1.4.8",
-    "ui.bootstrap": "0.14.3"    
+    "ui.bootstrap": "0.14.3",
+    "polymer": "^1.2.0",
+    "google-web-components": "*"
   }
 }

@@ -1,29 +1,162 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Singl.Models;
 
 namespace Singl.Database.Migrations
 {
     internal static class Curso1000
     {
-        public static void Create(DatabaseContext _db, Dictionary<string, Departamento> departamentos, Dictionary<string, Campus> campi)
+        public static void Create(DatabaseContext context,
+        Departamento departamento,
+        Campus campus)
         {
-            var esp_filosofia = new Curso
+            var curso = new Curso
             {
                 Id = Guid.Parse("c38e9d6e-dcdf-4fea-8fce-88e338e6c74a"),
                 Codigo = "1000",
                 Nome = "Ensino de Filosofia no Ensino Médio",
-                Departamento = departamentos["DEFILG"],
+                Departamento = departamento,
                 Tipo = TipoCurso.Especializacao,
                 ModalidadeEnsino = ModalidadeEnsino.Distancia,
                 PerfilEgresso = @"O Bacharel em Filosofia é o profissional que auxilia na formulação e na proposição de soluções de problemas nos diversos campos do 
                                   conhecimento e, em especial, na educação, área em que colabora na formulação e na execução de projetos de desenvolvimento dos conteúdos 
                                   curriculares, bem como na utilização de tecnologias da informação, da comunicação e de metodologias, estratégias e materiais de apoio inovadores.",
-                Campus = campi["SC"]
+                Sobre = "O curso de Especialização em Ensino de Filosofia no Ensino Médio é ofertado pelo NEAD/UNICENTRO, na modalidade a distância e está em sua primeira edição. Nos cursos a distância são disponibilizados materiais didáticos impressos dos textos e atividades disponibilizados no ambiente moodle. Também são realizadas Web Conferências, aulas expositivas e avaliações presenciais. Ao final do curso, os alunos defendem, via comunicação oral e exposição de banners, as pesquisas realizadas para o Trabalho de Conclusão de Curso (TCCs), contando com a presença de professores orientadores e demais docentes da instituição, contribuindo para a conclusão do curso de forma agregadora ao processo de construção do conhecimento. Esse curso é destinado a professores graduados que estejam atuando nos sistemas públicos de ensino e ministram aulas nos Ensinos Fundamental e Médio. Ele deverá dialogar, permanentemente, com a sala de aula, com a prática docente e a escola, a partir de sólida fundamentação teórica que contenha aspectos relativos à escola, ao aluno e ao trabalho docente.",
+                Telefone = "(042) 3621-1097",
+                Tags = "NEAD",
+                Campus = campus
             };
-            _db.Cursos.Add(esp_filosofia);
-            
-            CreateCurriculo(_db, esp_filosofia);
+            CreateCurriculo(context, curso);
+            AddPolos(context, curso);
+            CreateDocentes(context, curso);
+            CreateVinculos(context, curso);
+            context.Cursos.Add(curso);
+        }
+
+        private static void CreateVinculos(DatabaseContext context, Curso curso)
+        {
+            var papeis = context.Papeis.ToDictionary(m => m.Nome);
+            var pessoas = new List<Pessoa>
+            {
+                new Pessoa { Nome = "Augusto Bach" },
+                new Pessoa { Nome = "Darlan Facin Weide" }
+            };
+            context.Pessoas.AddRange(pessoas);
+
+            context.VinculosCurso.AddRange(
+                new VinculoCurso
+                {
+                    Pessoa = pessoas[0],
+                    Papel = papeis["Coordenador de curso"],
+                    Curso = curso,
+                    Inicio = DateTime.Now.AddYears(-1)
+                },
+                new VinculoCurso
+                {
+                    Pessoa = pessoas[1],
+                    Papel = papeis["Coordenador de tutoria"],
+                    Curso = curso,
+                    Inicio = DateTime.Now.AddYears(-1)
+                }
+            );
+
+
+        }
+
+        private static void CreateDocentes(DatabaseContext context, Curso curso)
+        {
+            var pessoa = new Pessoa { Nome = "Anna Flávia Camilli Oliveira Giusti" };
+            context.Pessoas.Add(pessoa);
+            var docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            context.Docentes.Add(docente);
+            var docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
+            context.DocentesCurso.Add(docenteCurso);
+
+            pessoa = new Pessoa { Nome = "Cléber Dias Araújo" };
+            context.Pessoas.Add(pessoa);
+            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            context.Docentes.Add(docente);
+            docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
+            context.DocentesCurso.Add(docenteCurso);
+
+            pessoa = new Pessoa { Nome = "Cléber Dias Araújo" };
+            context.Pessoas.Add(pessoa);
+            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            context.Docentes.Add(docente);
+            docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
+            context.DocentesCurso.Add(docenteCurso);
+
+            pessoa = new Pessoa { Nome = "Elisandra Angrewski" };
+            context.Pessoas.Add(pessoa);
+            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            context.Docentes.Add(docente);
+            docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
+            context.DocentesCurso.Add(docenteCurso);
+
+            pessoa = new Pessoa { Nome = "Ernesto Maria Giusti" };
+            context.Pessoas.Add(pessoa);
+            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            context.Docentes.Add(docente);
+            docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
+            context.DocentesCurso.Add(docenteCurso);
+
+            pessoa = new Pessoa { Nome = "Gilmar Evandro" };
+            context.Pessoas.Add(pessoa);
+            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            context.Docentes.Add(docente);
+            docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
+            context.DocentesCurso.Add(docenteCurso);
+
+            pessoa = new Pessoa { Nome = "Mariana Prado" };
+            context.Pessoas.Add(pessoa);
+            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            context.Docentes.Add(docente);
+            docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
+            context.DocentesCurso.Add(docenteCurso);
+
+            pessoa = new Pessoa { Nome = "Rodrigo" };
+            context.Pessoas.Add(pessoa);
+            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            context.Docentes.Add(docente);
+            docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
+            context.DocentesCurso.Add(docenteCurso);
+
+        }
+
+
+        private static void AddPolos(DatabaseContext context, Curso esp_filosofia)
+        {
+            var polos = context.Polos.ToDictionary(m => m.Cidade);
+
+            context.PolosCurso.Add(
+                new PoloCurso
+                {
+                    Curso = esp_filosofia,
+                    Polo = polos["Diamante do Norte"]
+                }
+            );
+            context.PolosCurso.Add(
+                new PoloCurso
+                {
+                    Curso = esp_filosofia,
+                    Polo = polos["Faxinal"]
+                }
+            );
+            context.PolosCurso.Add(
+                new PoloCurso
+                {
+                    Curso = esp_filosofia,
+                    Polo = polos["Lapa"]
+                }
+            );
+            context.PolosCurso.Add(
+                new PoloCurso
+                {
+                    Curso = esp_filosofia,
+                    Polo = polos["Nova Tebas"]
+                }
+            );
         }
 
         private static void CreateCurriculo(DatabaseContext _db, Curso esp_filosofia)
@@ -49,101 +182,135 @@ namespace Singl.Database.Migrations
         {
             //Disciplinas
 
-            _db.Disciplinas.Add(new Disciplina
+            _db.Disciplinas.AddRange(new Disciplina
             {
                 Codigo = "1000-2000",
-                Nome = "Introdução a EAD",
+                Nome = "Ambientação AVA",
+                Modulo = "O campo Conceitual da Filosofia no Ensino Médio",
+                CargaHorariaTotal = 40,
                 Curriculo = cur_filosofia,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=3390",
                 Ordem = 1
-            });
-            _db.Disciplinas.Add(new Disciplina
+            },
+            new Disciplina
             {
                 Codigo = "1000-2001",
-                Nome = "Didática do ensino de filosofia",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=30",
-                Ordem = 2
-            });
-            _db.Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2002",
-                Nome = "Ensino de lógica, ontologia e filosofia da linguagem",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=26",
-                Ordem = 3
-            });
-            _db.Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2003",
-                Nome = "Ensino de ética e filosofia política",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=25",
-                Ordem = 4
-            });
-            _db.Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2004",
-                Nome = "Estética e filosofia da arte e seu ensino",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=27",
-                Ordem = 5
-            });
-            _db.Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2005",
-                Nome = "Filosofia do ensino de filosofia",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=28",
-                Ordem = 6
-            });
-            _db.Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2006",
-                Nome = "História, temas e problemas da filosofia em sala de aula: como ler os clássicos",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=21",
-                Ordem = 7
-            });
-            _db.Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2007",
-                Nome = "Introdução à prática de ensino de filosofia",
-                Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=22",
-                Ordem = 8
-            });
-            _db.Disciplinas.Add(new Disciplina
-            {
-                Codigo = "1000-2008",
-                Nome = "Introdução às ferramentas para EaD - Filosofia",
+                Nome = "Introdução às ferramentas para EaD",
+                Modulo = "O campo Conceitual da Filosofia no Ensino Médio",
+                CargaHorariaTotal = 40,
                 Curriculo = cur_filosofia,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=23",
-                Ordem = 9
-            });
-            _db.Disciplinas.Add(new Disciplina
+                Ordem = 2
+            },
+            new Disciplina
             {
-                Codigo = "1000-2009",
+                Codigo = "1000-2002",
+                Nome = "História, temas e problemas da filosofia em sala de aula: como ler os clássicos",
+                Modulo = "O campo Conceitual da Filosofia no Ensino Médio",
+                CargaHorariaTotal = 30,
+                Curriculo = cur_filosofia,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=21",
+                Ordem = 3
+            },
+            new Disciplina
+            {
+                Codigo = "1000-2003",
+                Nome = "Introdução à prática de ensino de filosofia",
+                Modulo = "O campo Conceitual da Filosofia no Ensino Médio",
+                CargaHorariaTotal = 30,
+                Curriculo = cur_filosofia,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=22",
+                Ordem = 4
+            },
+            new Disciplina
+            {
+                Codigo = "1000-2004",
                 Nome = "Metodologia do Ensino de Filosofia",
+                Modulo = "O campo Conceitual da Filosofia no Ensino Médio",
+                CargaHorariaTotal = 30,
                 Curriculo = cur_filosofia,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=24",
-                Ordem = 10
-            });
-            _db.Disciplinas.Add(new Disciplina
+                Ordem = 5
+            },
+            new Disciplina
             {
-                Codigo = "1000-2010",
-                Nome = "Pesquisa em filosofia na sala de aula",
+                Codigo = "1000-2005",
+                Nome = "Ensino de ética e filosofia política",
+                Modulo = "A Filosofia e as Tecnologias de seu Ensino",
+                CargaHorariaTotal = 40,
                 Curriculo = cur_filosofia,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=31",
-                Ordem = 11
-            });
-            _db.Disciplinas.Add(new Disciplina
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=25",
+                Ordem = 6
+            },
+            new Disciplina
             {
-                Codigo = "1000-2011",
+                Codigo = "1000-2006",
+                Nome = "Ensino de lógica, ontologia e filosofia da linguagem",
+                Modulo = "A Filosofia e as Tecnologias de seu Ensino",
+                CargaHorariaTotal = 30,
+                Curriculo = cur_filosofia,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=26",
+                Ordem = 7
+            },
+            new Disciplina
+            {
+                Codigo = "1000-2007",
+                Nome = "Filosofia do ensino de filosofia",
+                Modulo = "A Filosofia e as Tecnologias de seu Ensino",
+                CargaHorariaTotal = 40,
+                Curriculo = cur_filosofia,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=28",
+                Ordem = 8
+            },
+            new Disciplina
+            {
+                Codigo = "1000-2008",
                 Nome = "Teoria do conhecimento e filosofia da ciência e seu ensino",
+                Modulo = "A Filosofia e as Tecnologias de seu Ensino",
+                CargaHorariaTotal = 30,
                 Curriculo = cur_filosofia,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=29",
+                Ordem = 9
+            },
+            new Disciplina
+            {
+                Codigo = "1000-2009",
+                Nome = "Estética e filosofia da arte e seu ensino",
+                Modulo = "A Filosofia e as Tecnologias de seu Ensino",
+                CargaHorariaTotal = 30,
+                Curriculo = cur_filosofia,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=27",
+                Ordem = 10
+            },
+            new Disciplina
+            {
+                Codigo = "1000-2010",
+                Nome = "Didática do ensino de filosofia",
+                Modulo = "A Pesquisa Filosófica em sala de aula",
+                CargaHorariaTotal = 30,
+                Curriculo = cur_filosofia,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=30",
+                Ordem = 11
+            },
+            new Disciplina
+            {
+                Codigo = "1000-2011",
+                Nome = "Pesquisa em filosofia na sala de aula",
+                Modulo = "A Pesquisa Filosófica em sala de aula",
+                CargaHorariaTotal = 30,
+                Curriculo = cur_filosofia,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=31",
                 Ordem = 12
+            },
+            new Disciplina
+            {
+                Codigo = "1000-2012",
+                Nome = "TCC",
+                Modulo = "Trabalho de conclusão de curso",
+                CargaHorariaTotal = 180,
+                Curriculo = cur_filosofia,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=31",
+                Ordem = 13
             });
         }
 

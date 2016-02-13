@@ -1,14 +1,14 @@
 <style>
     header {
-        background-image: url('/images/nead-info.jpg') !important;
+        background-image: url('/images/instituicao-info.jpg') !important;
     }
 </style>
 <header id="main">
     <div class="header-content">
+       
         <div class="header-content-inner">
-            <h1 style="padding-bottom: 0px;">{{model?.Nome}}</h1>
-            <h3>{{instituicao?.Nome}}</h3>
-            <a href="/spa/setoresadministrativos/NEAD/SC/info#about" class="btn btn-primary btn-xl page-scroll">Saiba mais</a>
+            <h1 style="padding-bottom: 0px;">{{model?.NomeSigla}}</h1>
+            <a href="/spa#about" class="btn btn-primary btn-xl page-scroll">Saiba mais</a>
         </div>
     </div>
 </header>
@@ -17,10 +17,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
-                <h2 class="section-heading">Sobre o NEAD!</h2>
+                <h2 class="section-heading">Sobre a {{model?.Sigla}}</h2>
                 <hr class="light">
                 <p class="text-faded">{{model?.Sobre}}</p>
-                <a href="/spa/setoresadministrativos/NEAD/SC/info#values" class="btn btn-default btn-xl page-scroll">Como trabalhamos</a>
+                <a href="/spa#values" class="btn btn-default btn-xl page-scroll">Como trabalhamos</a>
             </div>
         </div>
     </div>
@@ -68,7 +68,7 @@
         <div class="container">
             <div class="row top30">
                 <div class="col-lg-12 text-center">
-                    <a href="/spa/setoresadministrativos/NEAD/SC/info#areas" class="btn btn-primary btn-xl page-scroll">Comece agora!</a>
+                    <a href="/spa#areas" class="btn btn-primary btn-xl page-scroll">Comece agora!</a>
                 </div>
             </div>
         </div>
@@ -134,31 +134,26 @@
     </div>
 </aside>
 
-<section id="more">
+<section id="contact">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
-                <h2 class="section-heading">Conheça um pouco mais sobre o NEAD!</h2>
+                <h2 class="section-heading">Conheça um pouco mais sobre a {{model?.Sigla}}</h2>
                 <hr class="primary">
                 <tabs>
                     <tab title='História' active="true">
                         <p>{{model?.Sobre}}</p>
                     </tab>
                     <tab title='Setores'>
-                        <model-list selectionProperty="Sigla" descriptionProperty="Nome" detailNavigationUrl=""
-                        [list]="model?.Subsetores" showFilters=false></model-list>
+                        <model-list selectionProperty="Sigla" descriptionProperty="Nome" detailNavigationUrl="" [list]="model?.Subsetores" showFilters=false></model-list>
                     </tab>
                 </tabs>
             </div>
         </div>
     </div>
 </section>
-<contato-fragment telefone={{model?.Telefone}} 
-                  email={{model?.Email}}  
-                  mensagem="Gostaria de saber como estudar em uma das melhores universidade do país? Que ótimo! Nos telefone ou nos mande
-                    um e-mail que teremos o prazer em responder o mais breve possível!"  
-                  ></contato-fragment>
-<!--<section id="contact">
+
+<section id="contact">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -177,5 +172,5 @@
             </div>
         </div>
     </div>
-</section>-->
+</section>
 <instituicao-footer></instituicao-footer>
