@@ -20,7 +20,8 @@ import 'rxjs/Rx';
 @Component({
     selector: 'model-detail',
     templateUrl: 'app/areas/singl/model-detail.component.html',
-    directives: [ROUTER_DIRECTIVES, ModelListComponent, RouterLink]
+    directives: [ROUTER_DIRECTIVES, ModelListComponent, RouterLink],
+    styleUrls: ['./css/navigation.css']
 })
 export class ModelDetailComponent implements OnInit {
 

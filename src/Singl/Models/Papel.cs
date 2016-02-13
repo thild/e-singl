@@ -1,13 +1,15 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Singl.Models
 {
     public class Papel : IModel<Guid>
     {
+        public Papel() {
+            Id = Guid.NewGuid();
+        }
+        
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Required]

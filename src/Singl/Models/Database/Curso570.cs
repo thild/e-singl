@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Singl.Models;
 
 namespace Singl.Database.Migrations
 {
     internal static class Curso570
     {
-        public static void Create(DatabaseContext _db,
+        public static void Create(DatabaseContext context,
         Departamento departamento,
         Campus campus)
         {
@@ -19,11 +20,32 @@ namespace Singl.Database.Migrations
                 Tipo = TipoCurso.Bacharelado,
                 PerfilEgresso = @"O Curso de Bacharelado em Ciências da Computação tem por objetivo habilitar o Bacharel a conquistar bases Científicas e Tecnológicas 
                                   para atuar na área de informática, bem como ingressar em programas de Pós-Graduação e Pesquisa.",
-                Campus = campus
+                Campus = campus,
+                Email = "decomp@unicentro.br",
+                Telefone = "(42) 6329 8344",
+                Endereco = @"
+                Campus Cedeteg<br />
+                Bloco DECOMP/DEMAT<br />
+                Rua Camargo Varela de Sá, 03 – Vila Carli<br />
+                Fone: (42) 3629-8100<br />
+                CEP 85040-080<br />
+                Guarapuava – PR",
+                Sobre = "O curso de Bacharelado em Ciência da Computação tem a Computação como atividade fim e visa à formação de profissionais habilitados para o desenvolvimento científico e tecnológico da Computação. O curso propicia conhecimento de aspectos teóricos e práticos para o desenvolvimento e aplicação de tecnologias em todas as suas etapas (análise, projeto, desenvolvimento, avaliação e implantação de sistemas computacionais) em diferentes contextos (empresarial, de pesquisa, educacional e outros). Além disso, o curso busca promover as capacidades inovadora e empreendedora dos alunos para que possam dar continuidade as suas atividades em pesquisa."               
             };
             CreateCurriculo(curso);
-            _db.Cursos.Add(curso);
+            CreateDocentes(context, curso);
+            context.Cursos.Add(curso);
 
+        }
+
+        private static void CreateDocentes(DatabaseContext context, Curso curso)
+        {
+            var pessoa = new Pessoa { Nome = "Tony Alexander Hild" };
+            context.Pessoas.Add(pessoa);
+            var docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/8060668053527592" };
+            context.Docentes.Add(docente);
+            var docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
+            context.DocentesCurso.Add(docenteCurso);
         }
 
         private static void CreateCurriculo(Curso curso)
@@ -177,7 +199,7 @@ namespace Singl.Database.Migrations
                 Ordem = 13,
                 Serie = 1,
                 Semestre = 2
-            });            
+            });
             curriculo.Disciplinas.Add(new Disciplina
             {
                 Codigo = "2315",
@@ -187,7 +209,7 @@ namespace Singl.Database.Migrations
                 Ordem = 14,
                 Serie = 1,
                 Semestre = 2
-            });            
+            });
         }
 
     }

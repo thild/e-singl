@@ -23,7 +23,12 @@ import {FilterService}  from './filter-service';
     selector: 'model-list',
     pipes: [FilterPipe],
     templateUrl: 'app/areas/singl/model-list.component.html',
-    directives: [ModelListFilterComponent, ROUTER_DIRECTIVES]
+    directives: [ModelListFilterComponent, ROUTER_DIRECTIVES],
+    styleUrls: ['./css/navigation.css'],
+    styles: [`
+        ul {list-style-type: none; padding: 0; }
+        hr { border-width: 1px 0 0;}        
+    `]
 })
 export class ModelListComponent {
     private _selectedId: string;

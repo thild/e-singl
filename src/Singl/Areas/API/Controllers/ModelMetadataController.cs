@@ -365,30 +365,30 @@ namespace Singl.Extensions
         }
     }
     
-//     public static class DtoExtensions {
-//          public static ExpandoObject ToDto(this object value) {
-//             
-//             IDictionary<string, object> dto = new ExpandoObject();
-//             
-//             var properties = value.GetType()
-//                 .GetProperties(BindingFlags.Public | 
-//                               BindingFlags.Instance)
-//                 .Where(p => p.CanRead);
-// 
-//             foreach (var property in properties)
-//             {
-//                 var dtoAttr = property.GetAttribute<DtoAttribute>();
-//                 if (dtoAttr != null)
-//                 {
-//                     dto.Add(property.Name, property.GetValue(value, null));
-//                 }
-//             }
-// 
-//             return dto as ExpandoObject;            
-//             
-//         }
-//         
-//     }
+    public static class DynamicExtensions {
+         public static ExpandoObject ToExpandoObject(this object value) {
+            
+            IDictionary<string, object> dto = new ExpandoObject();
+            
+            var properties = value.GetType()
+                .GetProperties(BindingFlags.Public | 
+                              BindingFlags.Instance)
+                .Where(p => p.CanRead);
+
+            foreach (var property in properties)
+            {
+                // var dtoAttr = property.GetAttribute<DtoAttribute>();
+                // if (dtoAttr != null)
+                // {
+                    dto.Add(property.Name, property.GetValue(value, null));
+                // }
+            }
+
+            return dto as ExpandoObject;            
+            
+        }
+        
+    }
     
 }
 

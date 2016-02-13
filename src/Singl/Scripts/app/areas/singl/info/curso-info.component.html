@@ -1,0 +1,277 @@
+<style>
+    header {
+        background-image: url('/images/curso-info.jpg') !important;
+    }
+</style>
+<header id="main">
+    <div class="header-content">
+        <div class="header-content-inner">
+            <h1 style="padding-bottom: 0px;">{{model?.Nome}}</h1>
+            <h3>{{instituicao?.Nome}}</h3>
+            <h4 *ngIf="model?.Tags?.indexOf('NEAD') != -1">Núcleo de Educação a Distância</h4>
+            <h4>{{model?.Departamento?.Nome}}</h4>
+            <a href="/spa/cursos/{{model?.Codigo}}/info#about" class="btn btn-primary btn-xl page-scroll">Saiba mais</a>
+        </div>
+    </div>
+</header>
+
+<section class="bg-primary" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Sobre o {{model?.Nome}}</h2>
+                <hr class="light">
+                <p class="text-faded">{{model?.Sobre}}</p>
+                <a href="/spa/cursos/{{model?.Codigo}}/info#more" class="btn btn-default btn-xl page-scroll">Informações adicionais</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--<section id="values">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Nossos valores</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-certificate wow bounceIn text-primary"></i>
+                    <h3>Excelência</h3>
+                    <p class="text-muted">Cursos certificados, reconhecidos e de qualidade!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-group wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                    <h3>Profissionalismo</h3>
+                    <p class="text-muted">Competência, comprometimento e responsabilidade no ensino!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                    <h3>Atualização</h3>
+                    <p class="text-muted">Ensino de vanguarda e pesquisa estado da arte!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                    <h3>Amor pelo que fazemos</h3>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row top30">
+                <div class="col-lg-12 text-center">
+                    <a href="/spa/cursos/{{model?.Codigo}}/info#areas" class="btn btn-primary btn-xl page-scroll">Comece agora!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->
+
+<!--<section id="areas">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Áreas de atuação</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="area-box">
+                    <img src="/images/areas/1.jpg" class="img-responsive" alt="">
+                    <div class="area-box-caption">
+                        <div class="area-box-caption-content">
+                            <div class="project-category text-faded">
+                                Ensino
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="area-box">
+                    <img src="/images/areas/2.jpg" class="img-responsive" alt="">
+                    <div class="area-box-caption">
+                        <div class="area-box-caption-content">
+                            <div class="project-category text-faded">
+                                Pesquisa
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="area-box">
+                    <img src="/images/areas/3.jpg" class="img-responsive" alt="">
+                    <div class="area-box-caption">
+                        <div class="area-box-caption-content">
+                            <div class="project-category text-faded">
+                                Extensão
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>-->
+
+<!--<aside class="bg-dark">
+    <div class="container text-center">
+        <div class="call-to-action">
+            <a [routerLink]="['/CursoList',{filter:'CursosNead'}]" class="btn btn-default btn-xl wow tada">Encontre seu curso!</a>
+        </div>
+    </div>
+</aside>-->
+
+<section id="more">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Informações adicionais sobre o curso</h2>
+                <hr class="primary">
+                <tabs>
+                    <tab active="true" title='Disciplinas'>
+                        <ul class="list-unstyled">
+                            <style>
+                                .disciplina {
+                                    padding: 2px;
+                                }
+                                
+                                .disciplina,
+                                .disciplina a {
+                                    height: 36px;
+                                    line-height: 36px;
+                                }
+                                
+                                .disciplina:hover {
+                                    background-color: #f3f3f3;
+                                }
+                            </style>
+                            <li class="disciplina text-left" *ngFor="#item of model?.Disciplinas">
+                                <a class="pull-left" [routerLink]="['/DisciplinaDetail',{codigo:item.Codigo}]">{{item.Nome}}: {{item.CargaHorariaTotal}}h</a>
+                                <a class="pull-right" href="{{item.UrlAva}}"> <img src="/images/icons/ava-32x32.png" aria-hidden="true" /> AVA</a>
+                            </li>
+                        </ul>
+                    </tab>
+                    <tab title='Administração'>
+                        <ul class="list-unstyled">
+                            <li *ngFor="#item of model?.Vinculos">
+                                <h4>{{item.Papel}}</h4>
+                                <p>{{item.Nome}}</p>
+                            </li>
+                        </ul>
+                    </tab>
+                    <tab title='Docentes'>
+                        <ul class="list-unstyled">
+                            <style>
+                                .docente {
+                                    padding: 2px;
+                                }
+                                
+                                .docente,
+                                .docente span,
+                                .docente a {
+                                    height: 36px;
+                                    line-height: 36px;
+                                }
+                                
+                                .docente:hover {
+                                    background-color: #f3f3f3;
+                                }
+                            </style>
+                            <li class="docente" *ngFor="#item of model?.Docentes">
+                                <a class="pull-left" [routerLink]="['/DocenteDetail',{id:item.Id}]">{{item.Nome}}</a>
+                                <a class="pull-right" href="{{item.Lattes}}"> <img src="/images/icons/lattes.png" aria-hidden="true" /> Lattes</a>
+                            </li>
+                        </ul>
+                    </tab>
+                    <tab *ngIf="model?.ModalidadeEnsino?.Name == 'Distancia'" title='Polos'>
+                        <polo-list [polos]="model?.Polos"> </polo-list>
+                    </tab>
+                    <tab *ngIf="model?.Historico" title='Histórico'>
+                        <p>{{model?.Historico}}</p>
+                    </tab>
+                </tabs>
+                <!--<ui-tabs>
+                    <template ui-pane active="true" title='Docentes'>
+                        <div class="ui-pane">
+                            <ul class="list-unstyled">
+                                <li style="height: 38px" *ngFor="#item of model?.Docentes">
+                                    <span class="pull-left">{{item.Nome}}</span>
+                                    <a class="pull-right" href="{{item.Lattes}}"> <img src="/images/icons/lattes.png" aria-hidden="true" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                    <template ui-pane title='Equipe'>
+                        <div class="ui-pane">
+                            <ul>
+                                <li *ngFor="#item of model?.Equipe">
+                                    {{item.Nome}}
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                    <template *ngIf="model?.ModalidadeEnsino?.Name == 'Distancia'" ui-pane title='Polos'>
+                        <div class="ui-pane">
+                            <polo-list [polos]="model?.Polos"> </polo-list>
+                        </div>
+                    </template>
+                    <template ui-pane title='Histórico'>
+                        <div class="ui-pane">
+                            <p>{{model?.Historico}}</p>
+                        </div>
+                    </template>
+                </ui-tabs>-->
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Entre em contato!</h2>
+                <hr class="primary">
+                <p>Gostaria de saber mais informações sobre este curso de uma das melhores universidade do país? Que ótimo!
+                    Nos telefone ou nos mande um e-mail que teremos o prazer em responder o mais breve possível!</p>
+            </div>
+            <div class="col-lg-4 col-lg-offset-2 text-center">
+                <i class="fa fa-phone fa-3x wow bounceIn"></i>
+                <p><span itemprop="telephone"><a href="tel:{{model?.Telefone}}">{{model?.Telefone}}</a></span></p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                <p><a href="mailto:{{model?.Email}}">{{model?.Email}}</a></p>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <div itemscope itemtype="http://schema.org/LocalBusiness">
+                        <address>
+                    <strong><span itemprop="name">{{model?.Nome}}</span></strong><br>
+                    <div [innerHTML]="model?.Endereco"></div><br>
+                    <div *ngIf="model?.Fax">                    
+                        <abbr title="Fax">Fax:</abbr> {{model?.Fax}}
+                    </div>
+                </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<instituicao-footer></instituicao-footer>

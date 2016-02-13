@@ -98,5 +98,6 @@ namespace Singl.Models
         [Display(Name = "Créditos")]
         [ScaffoldColumn(true)]
         public int Creditos { get; internal set; }
+        public string Modulo { get; internal set; }
     }
 }

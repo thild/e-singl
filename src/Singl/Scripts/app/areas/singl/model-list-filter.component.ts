@@ -37,7 +37,10 @@ import {FilterService}  from './filter-service';
     `,
     pipes: [FilterPipe],
     templateUrl: 'app/areas/singl/model-list-filter.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    styles: [`
+        ul {list-style-type: none; padding: 0; }
+    `]
 })
 export class ModelListFilterComponent {
 

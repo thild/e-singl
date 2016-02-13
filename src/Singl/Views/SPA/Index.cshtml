@@ -135,7 +135,8 @@
             <script src="/lib/modernizr.js"></script>
             <link asp-append-version="true" rel="stylesheet" href="/css/font-awesome.css" />
             <link asp-append-version="true" rel="stylesheet" href="/css/bootstrap.css" />
-            <link asp-append-version="true" rel="stylesheet" href="/css/site.css" />
+            <link asp-append-version="true" rel="stylesheet" href="/css/animate.css" />
+            <link asp-append-version="true" rel="stylesheet" href="/css/global.css" />
             @* Find a modernizr bower*@            
             <!--<script asp-append-version="true" src="/lib/modernizr.js"></script>-->
         </environment>
@@ -148,11 +149,17 @@
             <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
                   asp-fallback-href="/css/bootstrap.min.css"
                   asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
-            <link asp-append-version="true" rel="stylesheet" href="/css/site.min.css" />
+            <link asp-append-version="true" rel="stylesheet" href="/css/animate.min.css" />
+            <link asp-append-version="true" rel="stylesheet" href="/css/global.min.css" />
         </environment>
     
         @* Description - Used by search engines. Aim for more than 160 characters. *@
         <meta name="description" content="@ViewBag.Description">
+        
+        <!--<script src="/lib/webcomponents-lite.js"></script>
+        <link rel="import" href="/lib/polymer.html">
+        <link rel="import" href="/lib/google-map.html">      -->
+        
 
     </head>
     
@@ -210,6 +217,15 @@
             <!--<script src="/lib/jquery.validate.min.js"></script>-->
             <!--<script src="/lib/jquery.validate.unobtrusive.min.js"></script>            -->
         </environment>
+
+
+        <!--Configure Polymer - hold for now-->
+        <!--<script src="/lib/webcomponents.js"></script>
+        <script>
+            var Polymer = Polymer || {};
+            Polymer.dom = 'shadow';
+        </script>        
+        <link rel="import" href="/lib/google-map.html">-->
 
         <!-- 2. Configure SystemJS -->
         <script>

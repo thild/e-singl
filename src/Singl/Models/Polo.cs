@@ -9,6 +9,7 @@ namespace Singl.Models
         public Polo() {
             Id = Guid.NewGuid();
         }
+
         
         [Required]
         public Guid Id { get; set; }
@@ -17,5 +18,14 @@ namespace Singl.Models
         [MinLength(4)]
         [MaxLength(20)]
         public string Nome { get; set; }
+        public string Endereco { get; set; }
+        public string Cidade { get; set; }
+        
+        [Display(Name = "Telefone(s)")]
+        public string Telefones { get; set; }
+
+        [Display(Name = "Email(s)")]
+        public string Emails { get; set; }
+        public string Coordenador { get; set; }
     }
 }

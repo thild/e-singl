@@ -77,6 +77,78 @@ namespace Singl.Areas.API.Controllers
             return new ObjectResult(curso.ToDto());
 		} 
         
+        [HttpGet("{codigo}/info")]
+        public IActionResult Info(string codigo)
+        {
+            if (string.IsNullOrEmpty(codigo))
+            {
+                return new HttpNotFoundResult();
+            }
+
+              var curso = _context.Cursos
+                .Include(m => m.Departamento)
+                .Include(m => m.Campus)
+                .ThenInclude(m => m.UnidadeUniversitaria)
+                .Include(m => m.Curriculos)
+                .ThenInclude(m => m.Disciplinas)
+                .Single(m => m.Codigo == codigo.ToUpper());
+                
+            if (curso == null)
+            {
+                return new HttpNotFoundResult();
+            }
+            //TODO: Gambiarra master. Descobrir porque o Theninclude (Pessoa) não é retornado em 1 
+            var docentesCurso = _context.DocentesCurso
+                .Include(m => m.Docente)
+                .ThenInclude(m => m.Pessoa)
+                .Where(m => m.CursoId == curso.Id).Select(m => new {m.Docente, m.Docente.Pessoa});
+
+            // 1    
+            curso.Docentes = docentesCurso
+                .Select(m => m.Docente)
+                .OrderBy(m => m.Pessoa.Nome)
+                .ToList();
+                
+            foreach (var item in curso.Docentes)
+            {
+                item.Pessoa = docentesCurso.Where(m => m.Docente.Id == item.Id).Select(m => m.Pessoa).Single();
+            }                
+
+            curso.Curriculo.Disciplinas = 
+                curso.Curriculo.Disciplinas
+                    .OrderBy(m => m.Serie)
+                    .ThenBy(m => m.Semestre)
+                    .ThenBy(m => m.Ordem)
+                    .ThenBy(m => m.Nome)
+                    .ToList();
+                    
+            curso.Polos = _context.PolosCurso
+                .Where(m => m.CursoId == curso.Id)
+                .Select(m => m.Polo)
+                .OrderBy(m => m.Nome)
+                .ToList();
+                
+            curso.Vinculos = _context.VinculosCurso
+                .Where(m => m.CursoId == curso.Id && m.Fim == DateTimeOffset.MaxValue)
+                .Select( m =>
+                    new VinculoCurso {
+                        CursoId = m.CursoId,
+                        Curso = m.Curso,
+                        Fim = m.Fim,
+                        Inicio = m.Inicio,
+                        PapelId = m.PapelId,
+                        Papel = m.Papel,   
+                        PessoaId = m.PessoaId,
+                        Pessoa = m.Pessoa   
+                    }
+                    ).ToList();
+
+            var dto = curso.ToDto();
+            dto.MetadataUI = _context.MetadataUI.SingleOrDefault(m => m.ModelId == curso.Id);
+
+            return new ObjectResult(dto);
+        }        
+        
         [HttpPost]
 		//[Authorize("CanEdit", "true")]
         public IActionResult Post([FromBody]Curso curso)
