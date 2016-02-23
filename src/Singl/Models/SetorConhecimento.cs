@@ -8,14 +8,14 @@ namespace Singl.Models
 {
     [ModelMetadataAttribute(
                 DisplayName = "Setor de conhecimento",
-                DetailNavigationUrl="`/setoresconhecimento/${model.Sigla}/${model.SiglaUnidadeUniversitaria}`", 
-                DescriptionProperty="Nome",
-                SelectionProperty="Sigla",
-                DetailRouteName="SetorConhecimentoDetail",
-                DetailRouteParams=@"`{""sigla"":""${model.Sigla}"",""unidadeUniversitaria"":""${model.SiglaUnidadeUniversitaria}""}`",
-                ListNavigationUrl="`/setoresconhecimento`", 
-                ListRouteName="SetorConhecimentoList",
-                ListRouteParams=@"`{""sigla"":""${model.Sigla}""}`"
+                DetailNavigationUrl = "`/setoresconhecimento/${model.Sigla}/${model.SiglaUnidadeUniversitaria}`",
+                DescriptionProperty = "Nome",
+                SelectionProperty = "Sigla",
+                DetailRouteName = "SetorConhecimentoDetail",
+                DetailRouteParams = @"`{""sigla"":""${model.Sigla}"",""unidadeUniversitaria"":""${model.SiglaUnidadeUniversitaria}""}`",
+                ListNavigationUrl = "`/setoresconhecimento`",
+                ListRouteName = "SetorConhecimentoList",
+                ListRouteParams = @"`{""sigla"":""${model.Sigla}""}`"
                 )]
     public class SetorConhecimento : IModel<Guid>
     {
@@ -25,36 +25,51 @@ namespace Singl.Models
 
         [Required]
         public Guid Id { get; set; }
-        
+
 
         [ScaffoldColumn(true)]
         public string Nome { get; set; }
-        
+
         [ScaffoldColumn(true)]
-        public string Sigla { get; set;} 
-        
+        public string Sigla { get; set; }
+
+
         [ScaffoldColumn(true)]
         public IList<Departamento> Departamentos { get; set; }
-        
+
         [NotMapped]
-        public string SiglaNome {
-            get {
+        public string SiglaNome
+        {
+            get
+            {
                 return $"{Sigla} - {Nome}";
             }
         }
 
         [NotMapped]
-        public string SiglaUnidadeUniversitaria {
-            get {
+        public string SiglaUnidadeUniversitaria
+        {
+            get
+            {
                 return Campus?.SiglaUnidadeUniversitaria ?? string.Empty;
             }
         }
-        
+
+        [NotMapped]
+        public string SiglaCompleta
+        {
+            get
+            {
+                return Sigla + (SiglaUnidadeUniversitaria != "" ? "/" + SiglaUnidadeUniversitaria : "");
+            }
+        }
+
+
         [ScaffoldColumn(true)]
-        public Campus Campus { get; set;}
-         
-        public Guid CampusId { get; set;} 
-       
+        public Campus Campus { get; set; }
+
+        public Guid CampusId { get; set; }
+
 
     }
 }

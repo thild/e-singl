@@ -100,6 +100,8 @@ namespace Singl.Models
 
         [Display(Name="Endereço")]
         public string Endereco { get; set; }      
+        
+        //TODO Implementar telefones com descrição
         public string Telefone { get; set; }      
         public string Fax { get; set; }      
 
@@ -152,6 +154,10 @@ namespace Singl.Models
         [ScaffoldColumn(true)]
         [Display(Name="Vínculos")]
         public IList<VinculoCurso> Vinculos { get; set; } = new List<VinculoCurso>();
+        
+        [ScaffoldColumn(true)]
+        [Display(Name="Rede social")]
+        public string UrlFacebook { get; set; }
 
         public dynamic ToDto()
         {
@@ -181,6 +187,8 @@ namespace Singl.Models
             dto.Email = Email;
             //TypeDescriptor.CreateProperty(dto, new JsonConverterAttribute(typeof(EnumValueConverter)));
             dto.Tipo = Tipo;
+            
+            dto.UrlFacebook = UrlFacebook;
             return dto;
         }
     }
