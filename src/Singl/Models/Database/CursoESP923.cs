@@ -5,7 +5,7 @@ using Singl.Models;
 
 namespace Singl.Database.Migrations
 {
-    internal static class Curso1000
+    internal static class CursoESP923
     {
         public static void Create(DatabaseContext context,
         Departamento departamento,
@@ -13,8 +13,8 @@ namespace Singl.Database.Migrations
         {
             var curso = new Curso
             {
-                Id = Guid.Parse("c38e9d6e-dcdf-4fea-8fce-88e338e6c74a"),
-                Codigo = "1000",
+                //Id = Guid.Parse("c38e9d6e-dcdf-4fea-8fce-88e338e6c74a"),
+                Codigo = "ESP923",
                 Nome = "Ensino de Filosofia no Ensino Médio",
                 Departamento = departamento,
                 Tipo = TipoCurso.Especializacao,
@@ -125,43 +125,37 @@ namespace Singl.Database.Migrations
         }
 
 
-        private static void AddPolos(DatabaseContext context, Curso esp_filosofia)
+        private static void AddPolos(DatabaseContext context, Curso curso)
         {
             var polos = context.Polos.ToDictionary(m => m.Cidade);
 
-            context.PolosCurso.Add(
+            context.PolosCurso.AddRange(
                 new PoloCurso
                 {
-                    Curso = esp_filosofia,
+                    Curso = curso,
                     Polo = polos["Diamante do Norte"]
-                }
-            );
-            context.PolosCurso.Add(
+                },
                 new PoloCurso
                 {
-                    Curso = esp_filosofia,
+                    Curso = curso,
                     Polo = polos["Faxinal"]
-                }
-            );
-            context.PolosCurso.Add(
+                },
                 new PoloCurso
                 {
-                    Curso = esp_filosofia,
+                    Curso = curso,
                     Polo = polos["Lapa"]
-                }
-            );
-            context.PolosCurso.Add(
+                },
                 new PoloCurso
                 {
-                    Curso = esp_filosofia,
+                    Curso = curso,
                     Polo = polos["Nova Tebas"]
                 }
             );
         }
 
-        private static void CreateCurriculo(DatabaseContext _db, Curso esp_filosofia)
+        private static void CreateCurriculo(DatabaseContext context, Curso curso)
         {
-            var cur_filosofia = new Curriculo
+            var curriculo = new Curriculo
             {
                 Id = Guid.Parse("24356e45-33ca-42f2-a605-393cf7408906"),
                 Nome = "Curriculo 2015",
@@ -170,145 +164,145 @@ namespace Singl.Database.Migrations
                 Series = 1,
                 PrazoConclusaoMaximo = 30,
                 PrazoConclusaoIdeal = 18,
-                Curso = esp_filosofia,
-                CursoId = esp_filosofia.Id
+                Curso = curso,
+                CursoId = curso.Id
             };
 
-            _db.Curriculos.Add(cur_filosofia);
-            CreateDisciplinas(_db, cur_filosofia);
+            context.Curriculos.Add(curriculo);
+            CreateDisciplinas(context, curriculo);
         }
 
-        private static void CreateDisciplinas(DatabaseContext _db, Curriculo cur_filosofia)
+        private static void CreateDisciplinas(DatabaseContext context, Curriculo curso)
         {
             //Disciplinas
 
-            _db.Disciplinas.AddRange(new Disciplina
+            context.Disciplinas.AddRange(new Disciplina
             {
-                Codigo = "1000-2000",
+                Codigo = "92300",
                 Nome = "Ambientação AVA",
                 Modulo = "O campo Conceitual da Filosofia no Ensino Médio",
                 CargaHorariaTotal = 40,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=3390",
                 Ordem = 1
             },
             new Disciplina
             {
-                Codigo = "1000-2001",
+                Codigo = "92301",
                 Nome = "Introdução às ferramentas para EaD",
                 Modulo = "O campo Conceitual da Filosofia no Ensino Médio",
                 CargaHorariaTotal = 40,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=23",
                 Ordem = 2
             },
             new Disciplina
             {
-                Codigo = "1000-2002",
+                Codigo = "92302",
                 Nome = "História, temas e problemas da filosofia em sala de aula: como ler os clássicos",
                 Modulo = "O campo Conceitual da Filosofia no Ensino Médio",
                 CargaHorariaTotal = 30,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=21",
                 Ordem = 3
             },
             new Disciplina
             {
-                Codigo = "1000-2003",
+                Codigo = "92303",
                 Nome = "Introdução à prática de ensino de filosofia",
                 Modulo = "O campo Conceitual da Filosofia no Ensino Médio",
                 CargaHorariaTotal = 30,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=22",
                 Ordem = 4
             },
             new Disciplina
             {
-                Codigo = "1000-2004",
+                Codigo = "92304",
                 Nome = "Metodologia do Ensino de Filosofia",
                 Modulo = "O campo Conceitual da Filosofia no Ensino Médio",
                 CargaHorariaTotal = 30,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=24",
                 Ordem = 5
             },
             new Disciplina
             {
-                Codigo = "1000-2005",
+                Codigo = "92305",
                 Nome = "Ensino de ética e filosofia política",
                 Modulo = "A Filosofia e as Tecnologias de seu Ensino",
                 CargaHorariaTotal = 40,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=25",
                 Ordem = 6
             },
             new Disciplina
             {
-                Codigo = "1000-2006",
+                Codigo = "92306",
                 Nome = "Ensino de lógica, ontologia e filosofia da linguagem",
                 Modulo = "A Filosofia e as Tecnologias de seu Ensino",
                 CargaHorariaTotal = 30,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=26",
                 Ordem = 7
             },
             new Disciplina
             {
-                Codigo = "1000-2007",
+                Codigo = "92307",
                 Nome = "Filosofia do ensino de filosofia",
                 Modulo = "A Filosofia e as Tecnologias de seu Ensino",
                 CargaHorariaTotal = 40,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=28",
                 Ordem = 8
             },
             new Disciplina
             {
-                Codigo = "1000-2008",
+                Codigo = "92308",
                 Nome = "Teoria do conhecimento e filosofia da ciência e seu ensino",
                 Modulo = "A Filosofia e as Tecnologias de seu Ensino",
                 CargaHorariaTotal = 30,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=29",
                 Ordem = 9
             },
             new Disciplina
             {
-                Codigo = "1000-2009",
+                Codigo = "92309",
                 Nome = "Estética e filosofia da arte e seu ensino",
                 Modulo = "A Filosofia e as Tecnologias de seu Ensino",
                 CargaHorariaTotal = 30,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=27",
                 Ordem = 10
             },
             new Disciplina
             {
-                Codigo = "1000-2010",
+                Codigo = "92310",
                 Nome = "Didática do ensino de filosofia",
                 Modulo = "A Pesquisa Filosófica em sala de aula",
                 CargaHorariaTotal = 30,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=30",
                 Ordem = 11
             },
             new Disciplina
             {
-                Codigo = "1000-2011",
+                Codigo = "92311",
                 Nome = "Pesquisa em filosofia na sala de aula",
                 Modulo = "A Pesquisa Filosófica em sala de aula",
                 CargaHorariaTotal = 30,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=31",
                 Ordem = 12
             },
             new Disciplina
             {
-                Codigo = "1000-2012",
+                Codigo = "92312",
                 Nome = "TCC",
                 Modulo = "Trabalho de conclusão de curso",
                 CargaHorariaTotal = 180,
-                Curriculo = cur_filosofia,
+                Curriculo = curso,
                 UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=31",
                 Ordem = 13
             });

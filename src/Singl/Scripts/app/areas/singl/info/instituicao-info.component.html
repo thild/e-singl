@@ -5,7 +5,7 @@
 </style>
 <header id="main">
     <div class="header-content">
-       
+
         <div class="header-content-inner">
             <h1 style="padding-bottom: 0px;">{{model?.NomeSigla}}</h1>
             <a href="/spa#about" class="btn btn-primary btn-xl page-scroll">Saiba mais</a>
@@ -137,12 +137,21 @@
 <section id="contact">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
+            <div class="col-lg-8 col-lg-offset-2">
                 <h2 class="section-heading">Conheça um pouco mais sobre a {{model?.Sigla}}</h2>
                 <hr class="primary">
                 <tabs>
                     <tab title='História' active="true">
                         <p>{{model?.Sobre}}</p>
+                    </tab>
+                    <tab title='Atos legais'>
+                        <ul>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2014/11/Lei_9295_90_Insitui_a_UNICENTRO.pdf">Lei que institui a UNICENTRO</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2014/11/Decreto_3444_97_Reconhecimento_da_UNICENTRO.pdf">Decreto de reconhecimento da UNICENTRO</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/Estatuto.pdf">Estatuto da UNICENTRO</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/res_estatuto2010.pdf">Resolução - altera anexo I do estatuto</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/regimento2010.pdf">Regimento da UNICENTRO</a></li>
+                        </ul>
                     </tab>
                     <tab title='Setores'>
                         <model-list selectionProperty="Sigla" descriptionProperty="Nome" detailNavigationUrl="" [list]="model?.Subsetores" showFilters=false></model-list>

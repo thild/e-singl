@@ -20,7 +20,7 @@ namespace Singl.Models
     {
         public UnidadeUniversitaria()
         {
-            
+            Id = Guid.NewGuid();
         }
 
         [Required]

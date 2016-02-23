@@ -137,27 +137,70 @@
 <section id="more">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <h2 class="section-heading">Conheça um pouco mais sobre o NEAD!</h2>
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2 class="section-heading text-center">Conheça um pouco mais sobre o NEAD!</h2>
                 <hr class="primary">
                 <tabs>
                     <tab title='História' active="true">
                         <p>{{model?.Sobre}}</p>
                     </tab>
                     <tab title='Setores'>
-                        <model-list selectionProperty="Sigla" descriptionProperty="Nome" detailNavigationUrl=""
-                        [list]="model?.Subsetores" showFilters=false></model-list>
+                        <model-list selectionProperty="Sigla" descriptionProperty="Nome" detailNavigationUrl="" [list]="model?.Subsetores" showFilters=false></model-list>
+                    </tab>
+                    <tab title='Documentos'>
+                        <ul>
+                            <li><a href="/docs/termos_fichas/ficha_cadastro_coord_curso.doc">Ficha de cadastro de coordenador de curso</a></li>
+                            <li><a href="/docs/termos_fichas/ficha_cadastro_coord_tutoria.doc">Ficha de cadastro de coordenador de tutoria</a></li>
+                            <li><a href="/docs/termos_fichas/ficha_cadastro_professor.doc">Ficha de cadastro de professor</a></li>
+                            <li><a href="/docs/termos_fichas/ficha_cadastro_tutor.doc">Ficha de cadastro de tutor</a></li>
+                            <li><a href="/docs/termos_fichas/termo_compromisso_professor.doc">Termo de compromisso de professor</a></li>
+                            <li><a href="/docs/termos_fichas/termo_compromisso_tutor.doc">Termo de compromisso de tutor</a> </li>
+                            <li><a href="/docs/termos_fichas/termo_direitos_autorais.doc">Termo de cessão de direitos autorais</a></li>
+                        </ul>
+                    </tab>
+                    <tab title='Links'>
+                        <ul>
+                            <li><a href="http://nead.unicentro.br/">Sítio Instituicional - NEAD</a></li>
+                            <li><a href="http://sguweb.unicentro.br/usuarios/login">Sistema de Gestão Universitária - SGU</a></li>
+                            <li><a href="http://redmine.unicentro.br/">Gerenciador de projetos - Redmine</a></li>
+                            <li><a href="http://neadvideos.wix.com/neadvideos/">Coordenação de Vídeos</a></li>
+                            <li><a href="http://wiki.unicentro.br/Lyceum">Lyceum</a></li>
+                            <li><a href="http://wiki.unicentro.br/Informa%C3%A7%C3%B5es_Aluno_Online">Informações Aluno Online</a></li>
+                            <li><a href="http://www.unicentro.br/aonline/">Acesso Aluno Online</a></li>
+                            <li><a href="http://www.unicentro.br/donline/">Acesso Docente Online</a></li>
+                            <li><a href="http://moodle.unicentro.br/">Acesso AVA Moodle</a></li>
+                        </ul>
+                    </tab>
+                    <tab title='Tutoriais'>
+                        <ul>
+                            <li><a href="https://www.youtube.com/watch?v=MhEmO17SbNo">Imersão faqs</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=­NzKmvhnH1Y">Moodle 2.6</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=19AdL2ky8Nk">Tutorial videoaula</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=pWCUnXsTPeM">Tutorial ISSU</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=1_pBXVufEu4">Tutorial Prezi</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=ov1hSx0YQqM">Tutorial Moodle­ CRESOL</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=Z2CPaIoOvpQ">Vídeo Institucional NEAD</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=G9Mo7KOVCHc">Acessibilidade EAD</a></li>
+                        </ul>
                     </tab>
                 </tabs>
             </div>
         </div>
     </div>
 </section>
-<contato-fragment telefone={{model?.Telefone}} 
-                  email={{model?.Email}}  
-                  mensagem="Gostaria de saber como estudar em uma das melhores universidade do país? Que ótimo! Nos telefone ou nos mande
-                    um e-mail que teremos o prazer em responder o mais breve possível!"  
-                  ></contato-fragment>
+
+<aside class="bg-dark">
+    <div class="container text-center">
+        <div class="call-to-action">
+            <a class="btn btn-default btn-xl wow tada" href="http://nead.unicentro.br/">Informações detalhadas no nosso sítio instituicional</a>
+        </div>
+    </div>
+</aside>
+
+
+
+<contato-fragment telefone={{model?.Telefone}} email={{model?.Email}} mensagem="Gostaria de saber como estudar em uma das melhores universidade do país? Que ótimo! Nos telefone ou nos mande
+                    um e-mail que teremos o prazer em responder o mais breve possível!"></contato-fragment>
 <!--<section id="contact">
     <div class="container">
         <div class="row">

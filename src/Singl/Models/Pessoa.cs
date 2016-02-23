@@ -29,5 +29,6 @@ namespace Singl.Models
 
         public Usuario Usuario { get; set; }
         public string UsuarioId { get; set; }
+        public string Axionimo { get; internal set; }
     }
 }
