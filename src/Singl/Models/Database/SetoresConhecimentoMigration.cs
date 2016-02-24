@@ -19,14 +19,14 @@ namespace Singl.Database.Migrations
                 //Id = Guid.Parse("d33795a5-e364-48df-a3a7-2fd57245e019"),
                 Nome = "Setor de Ciências Agrárias e Ambientais",
                 Sigla = "SEAA",
-                Campus = campi["CEDETEG"]
+                Campus = campi["C"]
             },
             new SetorConhecimento
             {
                 //Id = Guid.Parse("cff44bd2-3199-4adc-8786-b677b6f89500"),
                 Nome = "Setor de Ciências Exatas e de Tecnologia",
                 Sigla = "SEET",
-                Campus = campi["CEDETEG"]
+                Campus = campi["C"]
             },
             new SetorConhecimento
             {
@@ -40,7 +40,7 @@ namespace Singl.Database.Migrations
                 //Id = Guid.Parse("e120b519-bd0c-48c4-b744-6fc57798c491"),
                 Nome = "Setor de Ciências da Saúde",
                 Sigla = "SES",
-                Campus = campi["CEDETEG"]
+                Campus = campi["C"]
             },
             new SetorConhecimento
             {

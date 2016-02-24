@@ -26,6 +26,8 @@ A estrutura organizacional para os cursos ofertados na modalidade de Educação 
                 Campus = campi["SC"]
             };
 
+            context.SetoresAdministrativos.Add(saNead);
+
             context.SetoresAdministrativos.AddRange(
             //Setores administrativos
             new SetorAdministrativo

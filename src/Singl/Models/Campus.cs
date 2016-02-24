@@ -21,7 +21,7 @@ namespace Singl.Models
     {
         public Campus()
         {
-
+            Id = Guid.NewGuid();
         }
 
         [Required]

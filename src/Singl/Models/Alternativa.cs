@@ -6,6 +6,10 @@ namespace Singl.Models
 {
     public class Alternativa : IModel<Guid>
     {
+        public Alternativa() {
+            Id = Guid.NewGuid();
+        }
+        
         [Required]
         public Guid Id { get; set; }
         

@@ -1,22 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Data.Entity;
 using Singl.Models;
 
 namespace Singl.Database.Migrations
 {
     internal static class CursoESP921
     {
-        public static void Create(DatabaseContext context,
-        Departamento departamento,
-        Campus campus)
+        public static void Create(DatabaseContext context)
         {
             var curso = new Curso
             {
                 //Id = Guid.Parse("c38e9d6e-dcdf-4fea-8fce-88e338e6c74a"),
                 Codigo = "ESP291",
                 Nome = "Educação e Formação Empreendedora",
-                Departamento = departamento,
+                Departamento = context.Departamentos
+                    .Include(m => m.Campus)
+                    .ThenInclude(m => m.UnidadeUniversitaria)
+                    .ToList()
+                    .Single(m => m.SiglaCompleta == "DEADM/G"),
                 Tipo = TipoCurso.Especializacao,
                 ModalidadeEnsino = ModalidadeEnsino.Distancia,
                 PerfilEgresso = @"Ao final do curso, o aluno será capaz de:
@@ -33,7 +36,7 @@ namespace Singl.Database.Migrations
                 Email = "pos.empreendedora.unicentro@gmail.com",
                 UrlFacebook = "https://www.facebook.com/empreendedoraunicentro",
                 Tags = "NEAD",
-                Campus = campus
+                Campus = context.Campi.Single(m => m.Sigla == "SC")
             };
             CreateCurriculo(context, curso);
             AddPolos(context, curso);

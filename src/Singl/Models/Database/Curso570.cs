@@ -1,26 +1,29 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Data.Entity;
 using Singl.Models;
 
 namespace Singl.Database.Migrations
 {
     internal static class Curso570
     {
-        public static void Create(DatabaseContext context,
-        Departamento departamento,
-        Campus campus)
+        public static void Create(DatabaseContext context)
         {
             var curso = new Curso
             {
-                Id = Guid.Parse("aa558bbc-f283-4780-a6e8-40acab3a5541"),
+                //Id = Guid.Parse("aa558bbc-f283-4780-a6e8-40acab3a5541"),
                 Codigo = "570",
                 Nome = "Bacharelado em Ciência da Computação",
-                Departamento = departamento,
+                Departamento = context.Departamentos
+                    .Include(m => m.Campus)
+                    .ThenInclude(m => m.UnidadeUniversitaria)
+                    .ToList()
+                    .Single(m => m.SiglaCompleta == "DECOMP/G"),
                 Tipo = TipoCurso.Bacharelado,
                 PerfilEgresso = @"O Curso de Bacharelado em Ciências da Computação tem por objetivo habilitar o Bacharel a conquistar bases Científicas e Tecnológicas 
                                   para atuar na área de informática, bem como ingressar em programas de Pós-Graduação e Pesquisa.",
-                Campus = campus,
+                Campus = context.Campi.Single(m => m.Sigla == "C"),
                 Email = "decomp@unicentro.br",
                 Telefone = "(42) 6329 8344",
                 Endereco = @"
@@ -30,7 +33,7 @@ namespace Singl.Database.Migrations
                 Fone: (42) 3629-8100<br />
                 CEP 85040-080<br />
                 Guarapuava – PR",
-                Sobre = "O curso de Bacharelado em Ciência da Computação tem a Computação como atividade fim e visa à formação de profissionais habilitados para o desenvolvimento científico e tecnológico da Computação. O curso propicia conhecimento de aspectos teóricos e práticos para o desenvolvimento e aplicação de tecnologias em todas as suas etapas (análise, projeto, desenvolvimento, avaliação e implantação de sistemas computacionais) em diferentes contextos (empresarial, de pesquisa, educacional e outros). Além disso, o curso busca promover as capacidades inovadora e empreendedora dos alunos para que possam dar continuidade as suas atividades em pesquisa."               
+                Sobre = "O curso de Bacharelado em Ciência da Computação tem a Computação como atividade fim e visa à formação de profissionais habilitados para o desenvolvimento científico e tecnológico da Computação. O curso propicia conhecimento de aspectos teóricos e práticos para o desenvolvimento e aplicação de tecnologias em todas as suas etapas (análise, projeto, desenvolvimento, avaliação e implantação de sistemas computacionais) em diferentes contextos (empresarial, de pesquisa, educacional e outros). Além disso, o curso busca promover as capacidades inovadora e empreendedora dos alunos para que possam dar continuidade as suas atividades em pesquisa."
             };
             CreateCurriculo(curso);
             CreateDocentes(context, curso);

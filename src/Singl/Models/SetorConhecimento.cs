@@ -21,6 +21,7 @@ namespace Singl.Models
     {
         public SetorConhecimento()
         {
+            Id = Guid.NewGuid();
         }
 
         [Required]

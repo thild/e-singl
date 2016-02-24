@@ -7,6 +7,10 @@ namespace Singl.Models
 {
     public class Questao : IModel<Guid>
     {
+        public Questao() {
+            Id = Guid.NewGuid();
+        }
+        
         [Required]
         public Guid Id { get; set; }
       
