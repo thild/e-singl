@@ -10,19 +10,20 @@ namespace Singl.Models
 {
     [ModelMetadataAttribute(
                     DisplayName = "Setor administrativo",
-                    DetailNavigationUrl="`/setoresadministrativos/${model.Sigla}/${model.SiglaCampus}`", 
-                    DescriptionProperty="Nome",
-                    SelectionProperty="Sigla",
-                    DetailRouteName="SetorAdministrativoDetail",
-                    DetailRouteParams=@"`{""sigla"":""${model.Sigla}"",""campus"":""${model.SiglaCampus}""}`",
-                    ListNavigationUrl="`/setoresadministrativos`", 
-                    ListRouteName="SetorAdministrativoList",
-                    ListRouteParams=@"`{""sigla"":""${model.Sigla}""}`"
+                    DetailNavigationUrl = "`/setoresadministrativos/${model.Sigla}/${model.SiglaCampus}`",
+                    DescriptionProperty = "Nome",
+                    SelectionProperty = "Sigla",
+                    DetailRouteName = "SetorAdministrativoDetail",
+                    DetailRouteParams = @"`{""sigla"":""${model.Sigla}"",""campus"":""${model.SiglaCampus}""}`",
+                    ListNavigationUrl = "`/setoresadministrativos`",
+                    ListRouteName = "SetorAdministrativoList",
+                    ListRouteParams = @"`{""sigla"":""${model.Sigla}""}`"
                     )]
     public class SetorAdministrativo : IModel<Guid>
     {
         public SetorAdministrativo()
         {
+            Id = Guid.NewGuid();
         }
 
         [Required]
@@ -67,22 +68,31 @@ namespace Singl.Models
             }
         }
 
-        public Guid CampusId { get; set; }
-        
-         [Display(Name="Endereço")]
-        public string Endereco { get; set; }      
-        public string Telefone { get; set; }      
-        public string Fax { get; set; }      
+        [NotMapped]
+        public string SiglaCompleta
+        {
+            get
+            {
+                return Sigla + (SiglaCampus != "" ? "/" + SiglaCampus : "");
+            }
+        }
 
-        [Display(Name="E-mail")]
+        public Guid CampusId { get; set; }
+
+        [Display(Name = "Endereço")]
+        public string Endereco { get; set; }
+        public string Telefone { get; set; }
+        public string Fax { get; set; }
+
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
         public string Sobre { get; set; }
-        
+
         [ScaffoldColumn(true)]
-        [Display(Name="Vínculos")]
+        [Display(Name = "Vínculos")]
         public IList<VinculoSetorAdministrativo> Vinculos { get; } = new List<VinculoSetorAdministrativo>();
 
-        
+
         public dynamic ToDto()
         {
             dynamic dto = new ExpandoObject();
@@ -98,7 +108,7 @@ namespace Singl.Models
             dto.Fax = Fax;
             dto.Email = Email;
             return dto;
-        }        
+        }
 
     }
 }

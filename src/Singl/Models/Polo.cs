@@ -27,5 +27,8 @@ namespace Singl.Models
         [Display(Name = "Email(s)")]
         public string Emails { get; set; }
         public string Coordenador { get; set; }
+        
+        [Url]
+        public string Site { get; set; }
     }
 }

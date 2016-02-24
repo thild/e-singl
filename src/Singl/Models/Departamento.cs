@@ -24,7 +24,7 @@ namespace Singl.Models
     {
         public Departamento()
         {
-
+            Id = Guid.NewGuid();
         }
 
         [Required]
@@ -53,6 +53,15 @@ namespace Singl.Models
                 return Campus?.SiglaUnidadeUniversitaria ?? string.Empty;
             }
         }
+        
+        [NotMapped]
+        public string SiglaCompleta
+        {
+            get
+            {
+                return Sigla + (SiglaUnidadeUniversitaria != "" ? "/" + SiglaUnidadeUniversitaria : "");
+            }
+        }        
 
         [ScaffoldColumn(true)]
         [Display(Name = "Setor de conhecimento")]

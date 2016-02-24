@@ -112,6 +112,31 @@ namespace Singl.Database.Migrations
                     Telefones = "(44) 3231-1366",
                     Emails = "uabitambe@hotmail.com",
                     Coordenador = ""
+                },
+                new Polo {
+                    Nome = "Engenheiro Beltrão",
+                    Cidade = "Engenheiro Beltrão",
+                    Endereco = "Rua Clotário Portugal,115. Centro.",
+                    Telefones = "(44) 3537-2642",
+                    Emails = "polouabbeltrao@bol.com.br",
+                    Site = "http://polouabbeltrao.blogspot.com.br/",
+                    Coordenador = ""
+                },
+                new Polo {
+                    Nome = "Flor da Serra do Sul",
+                    Cidade = "Flor da Serra do Sul",
+                    Endereco = "Rua Cristiano Bender, 419. Centro.",
+                    Telefones = "(46) 3565-1270",
+                    Emails = "polofss@bol.com.br",
+                    Coordenador = ""
+                },
+                new Polo {
+                    Nome = "Laranjeiras do Sul",
+                    Cidade = "Laranjeiras do Sul",
+                    Endereco = "Avenida Oscar da Silva Guedes, 01. Vila Alberti.",
+                    Telefones = "(42) 3635-3990",
+                    Emails = "pololaranjeiras@yahoo.com.br",
+                    Coordenador = ""
                 }
             );
         }

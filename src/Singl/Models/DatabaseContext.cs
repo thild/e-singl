@@ -171,6 +171,9 @@ namespace Singl
 
             UnidadesUniversitariasMigration.Create(this);
             this.SaveChanges();
+            
+            CampiMigration.Create(this);
+            this.SaveChanges();
 
             SetoresAdministrativosMigration.Create(this);
             this.SaveChanges();
@@ -283,37 +286,29 @@ namespace Singl
 
             this.SaveChanges();
 
-            SetoresConhecimentoMigration.Create(this);
-            
-            this.SaveChanges();
-            
             PolosMigration.Create(this);
-            
             this.SaveChanges();
 
             PapeisMigration.Create(this);
-            
             this.SaveChanges();
 
-//             Curso570.Create(this, decomp_g, campusCedeteg);
-// 
-//             this.SaveChanges();
-// 
-//             CursoESP920.Create(this, deduf_g, campusCedeteg);
-// 
-//             this.SaveChanges();
-// 
-//             CursoESP921.Create(this, deadm_g, campusSantaCruz);
-// 
-//             this.SaveChanges();
-// 
-//             CursoESP922.Create(this, defil_g, campusSantaCruz);
-// 
-//             this.SaveChanges();
-// 
-//             CursoESP923.Create(this, defil_g, campusSantaCruz);
-// 
-//             this.SaveChanges();
+            Curso570.Create(this);
+            this.SaveChanges();
+
+            CursoESP920.Create(this);
+            this.SaveChanges();
+
+            CursoESP921.Create(this);
+            this.SaveChanges();
+
+            CursoESP922.Create(this);
+            this.SaveChanges();
+
+            CursoESP923.Create(this);
+            this.SaveChanges();
+
+            CursoESP927.Create(this);
+            this.SaveChanges();
 
         }
 

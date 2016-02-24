@@ -156,7 +156,8 @@ namespace Singl.Models
         public IList<VinculoCurso> Vinculos { get; set; } = new List<VinculoCurso>();
         
         [ScaffoldColumn(true)]
-        [Display(Name="Rede social")]
+        [Display(Name="Facebook")]
+        [Url]
         public string UrlFacebook { get; set; }
 
         public dynamic ToDto()
