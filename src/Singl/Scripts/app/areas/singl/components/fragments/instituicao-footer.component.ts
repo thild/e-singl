@@ -23,7 +23,8 @@ import {InstituicaoService}   from './../../instituicao.service';
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <a href="{{instituicao?.UrlFaleConosco}}">Fale conosco</a> |
                 <a href="{{instituicao?.UrlFaleComReitoria}}">Fale com a reitoria</a> |
-                <a href="{{instituicao?.UrlOuvidoria}}">Ouvidoria</a>
+                <a href="{{instituicao?.UrlOuvidoria}}">Ouvidoria</a> |
+                <a href="{{instituicao?.PortalTransparencia}}">Portal da transparência</a>
             </div>
         </div>        
     </div>
