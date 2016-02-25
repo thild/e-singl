@@ -137,6 +137,14 @@ namespace Singl.Database.Migrations
                     Telefones = "(42) 3635-3990",
                     Emails = "pololaranjeiras@yahoo.com.br",
                     Coordenador = ""
+                },
+                new Polo {
+                    Nome = "Apucarana",
+                    Cidade = "Apucarana",
+                    Endereco = "Praça Rui Barbosa, 12. Centro.",
+                    Telefones = "(43) 3425-1603",
+                    Emails = "apucaranapolo@gmail.com",
+                    Coordenador = ""
                 }
             );
         }

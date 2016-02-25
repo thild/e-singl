@@ -180,6 +180,14 @@ namespace Singl.Database.Migrations
                 Sigla = "DEADM",
                 SetorConhecimento = scs["SESA/G"],
                 Campus = campi["SC"]
+            },
+            new Departamento
+            {
+                //Id = Guid.Parse("7ef8c48c-b028-4c04-a3e4-c382845c9b1b"),
+                Nome = "Departamento de Geografia",
+                Sigla = "DEGEO",
+                SetorConhecimento = scs["SEAA/G"],
+                Campus = campi["C"]
             }
             );
         }

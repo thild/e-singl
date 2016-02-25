@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Singl.Models
 {
@@ -29,6 +30,15 @@ namespace Singl.Models
 
         public Usuario Usuario { get; set; }
         public string UsuarioId { get; set; }
-        public string Axionimo { get; internal set; }
+        public string Axionimo { get; set; }
+
+        [NotMapped]
+        public string NomeComAxionimo
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(Axionimo) ? $"{Axionimo} {Nome}" : Nome;
+            }
+        }
     }
 }

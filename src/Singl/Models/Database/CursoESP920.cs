@@ -22,16 +22,15 @@ namespace Singl.Database.Migrations
                     .Single(m => m.SiglaCompleta == "DEDUF/G"),
                 Tipo = TipoCurso.Especializacao,
                 ModalidadeEnsino = ModalidadeEnsino.Distancia,
-                PerfilEgresso = @"Ao final do curso, o aluno será capaz de:
-                                  Conhecer o funcionamento das estruturas que compõem o organismo, as alterações agudas e crônicas, induzidas pelo exercício físico, 
-                                  no funcionamento normal do organismo, a influência do exercício físico na gênese de determinadas disfunções orgânicas, 
-                                  para prescrever e acompanhar a prescrição de treinamentos físicos para indivíduos em diferentes condições de saúde;
-                                  Avaliar a influência do exercício físico no agravamento ou tratamento de lesões;
-                                  Conhecer as principais enfermidades que acometem o organismo humano, bem como a influência do treinamento físico para o seu tratamento;
-                                  Reconhecer a importância da disseminação do conhecimento da atividade física no ambiente escolar e não escolar em crianças, 
-                                  adolescentes, adultos e idosos.",
-                Sobre = @"Em 2015 iniciaremos o Curso de Especialização em Atividade Física e Saúde na modalidade EaD. Este curso é promovido pelo Departamento de Educação Física do Campus CEDETEG da UNICENTRO em conjunto com a UAB (Universidade Aberta do Brasil).
-                          O curso de Especialização em Atividade Física e Saúde promoverá a qualificação na área da atividade física aplicada à saúde, desde princípios referentes à educação básica até a parte clínica do exercício, para profissionais com prerrogativas para atuar em avaliação, prescrição e acompanhamento de programas de treinamento físico em crianças, adolescentes, adultos e idosos. Partindo do estudo crítico dos conceitos relacionados à atividade física, busca a adequada fundamentação para a aplicação destes conhecimentos frente ao desafio produzido pelo exercício físico. Além disso, visa proporcionar contato com os mais modernos métodos de pesquisa básica e aplicada ao estudo do movimento e, também, oportunizar contato com as diferentes linhas de investigação científica nas diferentes abordagens relacionadas com a análise do movimento humano.",
+                PerfilEgresso = @"
+                <p>O curso de Especialização em Atividade Física e Saúde do Departamento em Educação Física do Campus CEDETEG da Universidade Estadual do Centro-Oeste-UNICENTRO, deverá assegurar uma formação acadêmico-profissional generalista, humanista e
+                crítica, qualificadora de uma intervenção fundamentada no rigor científico, na reflexão filosófica e na conduta ética.</p>
+                <p>O especialista em atividade física e saúde deverá estar qualificado para analisar criticamente a realidade social, para nela intervir acadêmica e profissionalmente por meio de manifestações e expressões culturais do movimento humano, tematizadas nas
+                diferentes formas e modalidades de exercícios físicos, visando a formação, a ampliação e o enriquecimento cultural das pessoas para aumentar as possibilidades de adoção de um estilo de vida fisicamente ativo e saudável.</p>
+                <p>A finalidade da formação desta especialização é capacitar o aluno a interagir com grupos humanos, independentemente de idade, de condições socioeconômicas, de condições físicas e mentais, de gênero, de etnia e de crença, oportunizando o conhecimento e
+                a possibilidade de acesso à prática das diferentes expressões e manifestações culturais da atividade física aplicada a saúde.</p>
+                ",
+                Apresentacao = @"<p>O curso de Especialização em Atividade Física e Saúde promove a qualificação na área da atividade física aplicada à saúde, desde princípios referentes à educação básica até a parte clínica do exercício, para profissionais com prerrogativas para atuar em avaliação, prescrição e acompanhamento de programas de treinamento físico em crianças, adolescentes, adultos e idosos. Partindo do estudo crítico dos conceitos relacionados à atividade física, busca a adequada fundamentação para a aplicação destes conhecimentos frente ao desafio produzido pelo exercício físico. Além disso, visa proporcionar contato com os mais modernos métodos de pesquisa básica e aplicada ao estudo do movimento e, também, oportunizar contato com as diferentes linhas de investigação científica nas diferentes abordagens relacionadas com a análise do movimento humano.</p>",
                 Telefone = "(042) 3629-8161",
                 Email = "esp.asf@gmail.com",
                 UrlFacebook = "https://www.facebook.com/Especializa%C3%A7%C3%A3o-Atividade-F%C3%ADsica-e-Sa%C3%BAde-698659630279758",
@@ -79,77 +78,154 @@ namespace Singl.Database.Migrations
         {
             var pessoa = new Pessoa { Nome = "Marcos Roberto Queiroga" };
             context.Pessoas.Add(pessoa);
-            var docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            var docente = new Docente
+            {
+                Pessoa = pessoa,
+                Lattes = "http://lattes.cnpq.br/6567883239960466",
+                GrauAcademico = GrauAcademico.Doutorado,
+                AreaAtuacao = "Educação Física",
+                VinculoInstitucional = "UNICENTRO"
+            };
             context.Docentes.Add(docente);
             var docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
             context.DocentesCurso.Add(docenteCurso);
 
             pessoa = new Pessoa { Nome = "José Ronaldo Mendonça Fassheber" };
             context.Pessoas.Add(pessoa);
-            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            docente = new Docente
+            {
+                Pessoa = pessoa,
+                Lattes = "http://lattes.cnpq.br/6484810469192211",
+                GrauAcademico = GrauAcademico.Doutorado,
+                AreaAtuacao = "Educação Física",
+                VinculoInstitucional = "UNICENTRO"
+            };
             context.Docentes.Add(docente);
             docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
             context.DocentesCurso.Add(docenteCurso);
 
             pessoa = new Pessoa { Nome = "Deoclécio Rocco Gruppi" };
             context.Pessoas.Add(pessoa);
-            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            docente = new Docente
+            {
+                Pessoa = pessoa,
+                Lattes = "http://lattes.cnpq.br/6054282302524184",
+                GrauAcademico = GrauAcademico.Doutorado,
+                AreaAtuacao = "Educação Física",
+                VinculoInstitucional = "UNICENTRO"
+            };
             context.Docentes.Add(docente);
             docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
             context.DocentesCurso.Add(docenteCurso);
 
             pessoa = new Pessoa { Nome = "Bruno Sergio Portela" };
             context.Pessoas.Add(pessoa);
-            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            docente = new Docente
+            {
+                Pessoa = pessoa,
+                Lattes = "http://lattes.cnpq.br/6754813859281072",
+                GrauAcademico = GrauAcademico.Doutorado,
+                AreaAtuacao = "Educação Física",
+                VinculoInstitucional = "UNICENTRO"
+            };
             context.Docentes.Add(docente);
             docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
             context.DocentesCurso.Add(docenteCurso);
 
             pessoa = new Pessoa { Nome = "Marcus Peikriszwili Tartaruga" };
             context.Pessoas.Add(pessoa);
-            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            docente = new Docente
+            {
+                Pessoa = pessoa,
+                Lattes = "http://lattes.cnpq.br/4765697449834723",
+                GrauAcademico = GrauAcademico.Doutorado,
+                AreaAtuacao = "Educação Física",
+                VinculoInstitucional = "UNICENTRO"
+            };
             context.Docentes.Add(docente);
             docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
             context.DocentesCurso.Add(docenteCurso);
 
             pessoa = new Pessoa { Nome = "Silvano da Silva Coutinho" };
             context.Pessoas.Add(pessoa);
-            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            docente = new Docente
+            {
+                Pessoa = pessoa,
+                Lattes = "http://lattes.cnpq.br/6915822598056918",
+                GrauAcademico = GrauAcademico.Doutorado,
+                AreaAtuacao = "Educação Física",
+                VinculoInstitucional = "UNICENTRO"
+            };
             context.Docentes.Add(docente);
             docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
             context.DocentesCurso.Add(docenteCurso);
 
             pessoa = new Pessoa { Nome = "Schelyne Ribas da Silva" };
             context.Pessoas.Add(pessoa);
-            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            docente = new Docente
+            {
+                Pessoa = pessoa,
+                Lattes = "http://lattes.cnpq.br/7097732627026723",
+                GrauAcademico = GrauAcademico.Mestrado,
+                AreaAtuacao = "Educação Física",
+                VinculoInstitucional = "UNICENTRO"
+            };
             context.Docentes.Add(docente);
             docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
             context.DocentesCurso.Add(docenteCurso);
 
             pessoa = new Pessoa { Nome = "Luis Augusto da Silva" };
             context.Pessoas.Add(pessoa);
-            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            docente = new Docente
+            {
+                Pessoa = pessoa,
+                Lattes = "http://lattes.cnpq.br/0000000000000000",
+                GrauAcademico = GrauAcademico.Mestrado,
+                AreaAtuacao = "Educação Física",
+                VinculoInstitucional = "UNICENTRO"
+            };
             context.Docentes.Add(docente);
             docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
             context.DocentesCurso.Add(docenteCurso);
 
             pessoa = new Pessoa { Nome = "Sandra Aires Ferreira" };
             context.Pessoas.Add(pessoa);
-            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            docente = new Docente
+            {
+                Pessoa = pessoa,
+                Lattes = "http://lattes.cnpq.br/0174243620485879",
+                GrauAcademico = GrauAcademico.Mestrado,
+                AreaAtuacao = "Educação Física",
+                VinculoInstitucional = "UNICENTRO"
+            };
             context.Docentes.Add(docente);
             docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
             context.DocentesCurso.Add(docenteCurso);
 
             pessoa = new Pessoa { Nome = "Anderson Vulczak" };
             context.Pessoas.Add(pessoa);
-            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            docente = new Docente
+            {
+                Pessoa = pessoa,
+                Lattes = "http://lattes.cnpq.br/6468114175514575",
+                GrauAcademico = GrauAcademico.Mestrado,
+                AreaAtuacao = "Educação Física",
+                VinculoInstitucional = "UNICENTRO"
+            };
             context.Docentes.Add(docente);
             docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
             context.DocentesCurso.Add(docenteCurso);
 
             pessoa = new Pessoa { Nome = "Verônica Volski" };
             context.Pessoas.Add(pessoa);
-            docente = new Docente { Pessoa = pessoa, Lattes = "http://lattes.cnpq.br/0000000000000000" };
+            docente = new Docente
+            {
+                Pessoa = pessoa,
+                Lattes = "http://lattes.cnpq.br/9468417249775157",
+                GrauAcademico = GrauAcademico.Especializacao,
+                AreaAtuacao = "Educação Física",
+                VinculoInstitucional = "UNICENTRO"
+            };
             context.Docentes.Add(docente);
             docenteCurso = new DocenteCurso { Docente = docente, Curso = curso };
             context.DocentesCurso.Add(docenteCurso);
@@ -199,12 +275,12 @@ namespace Singl.Database.Migrations
         {
             var curriculo = new Curriculo
             {
-                //Id = Guid.Parse("24356e45-33ca-42f2-a605-393cf7408906"),
+                //Id = Guid.Parse("24356e45-33ca-42f2-a605-393cf7248906"),
                 Nome = "Curriculo 2015",
                 Ano = DateTime.Now.Year,
                 Regime = Regime.Especial,
                 Series = 1,
-                PrazoConclusaoMaximo = 30,
+                PrazoConclusaoMaximo = 24,
                 PrazoConclusaoIdeal = 18,
                 Curso = curso,
                 CursoId = curso.Id
@@ -223,9 +299,10 @@ namespace Singl.Database.Migrations
                 Codigo = "92001",
                 Nome = "Tecnologia da Informação e Comunicação",
                 Modulo = "",
-                CargaHorariaTotal = 40,
+                CargaHorariaTotal = 24,
                 Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=3390",
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=11",
+                Semestre = 1,
                 Ordem = 1
             },
             new Disciplina
@@ -233,9 +310,10 @@ namespace Singl.Database.Migrations
                 Codigo = "92002",
                 Nome = "Conceitos de Atividade Física e Saúde",
                 Modulo = "",
-                CargaHorariaTotal = 40,
+                CargaHorariaTotal = 24,
                 Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=23",
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=7",
+                Semestre = 1,
                 Ordem = 2
             },
             new Disciplina
@@ -243,99 +321,109 @@ namespace Singl.Database.Migrations
                 Codigo = "92003",
                 Nome = "Políticas Públicas na Saúde e Qualidade de Vida",
                 Modulo = "",
-                CargaHorariaTotal = 30,
+                CargaHorariaTotal = 24,
                 Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=21",
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=10",
+                Semestre = 1,
                 Ordem = 3
-            },
-            new Disciplina
-            {
-                Codigo = "92004",
-                Nome = "Metodologia da Pesquisa",
-                Modulo = "",
-                CargaHorariaTotal = 30,
-                Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=22",
-                Ordem = 4
             },
             new Disciplina
             {
                 Codigo = "92005",
                 Nome = "Medidas e Avaliação em Atividade Física",
                 Modulo = "",
-                CargaHorariaTotal = 30,
+                CargaHorariaTotal = 24,
                 Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=24",
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=8",
+                Semestre = 1,
+                Ordem = 4
+            },
+            new Disciplina
+            {
+                Codigo = "92004",
+                Nome = "Metodologia da Pesquisa",
+                Modulo = "",
+                CargaHorariaTotal = 24,
+                Curriculo = curriculo,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=16",
+                Semestre = 1,
                 Ordem = 5
-            },
-            new Disciplina
-            {
-                Codigo = "92007",
-                Nome = "Metodologia do Ensino Superior",
-                Modulo = "",
-                CargaHorariaTotal = 40,
-                Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=25",
-                Ordem = 6
-            },
-            new Disciplina
-            {
-                Codigo = "92008",
-                Nome = "Epidemiologia da Atividade Física e Saúde",
-                Modulo = "",
-                CargaHorariaTotal = 30,
-                Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=26",
-                Ordem = 7
             },
             new Disciplina
             {
                 Codigo = "92009",
                 Nome = "Bioestatística",
                 Modulo = "",
-                CargaHorariaTotal = 40,
+                CargaHorariaTotal = 24,
                 Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=28",
-                Ordem = 8
-            },
-            new Disciplina
-            {
-                Codigo = "92010",
-                Nome = "Fisiologia da atividade física",
-                Modulo = "",
-                CargaHorariaTotal = 30,
-                Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=29",
-                Ordem = 9
-            },
-            new Disciplina
-            {
-                Codigo = "92006",
-                Nome = "Seminários de pesquisa",
-                Modulo = "",
-                CargaHorariaTotal = 30,
-                Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=27",
-                Ordem = 10
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=6",
+                Semestre = 1,
+                Ordem = 6
             },
             new Disciplina
             {
                 Codigo = "92011",
                 Nome = "Atividade física para populações especiais",
                 Modulo = "",
-                CargaHorariaTotal = 30,
+                CargaHorariaTotal = 24,
                 Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=30",
-                Ordem = 11
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=5",
+                Semestre = 1,
+                Ordem = 7
+            },
+            new Disciplina
+            {
+                Codigo = "92010",
+                Nome = "Fisiologia da atividade física",
+                Modulo = "",
+                CargaHorariaTotal = 24,
+                Curriculo = curriculo,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=15",
+                Semestre = 2,
+                Ordem = 8
+            },
+            new Disciplina
+            {
+                Codigo = "92015",
+                Nome = "Aspectos biomecânicos da atividade física",
+                Modulo = "",
+                CargaHorariaTotal = 24,
+                Curriculo = curriculo,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=13",
+                Semestre = 2,
+                Ordem = 9
             },
             new Disciplina
             {
                 Codigo = "92012",
                 Nome = "Antropologia do corpo e saúde",
                 Modulo = "",
-                CargaHorariaTotal = 30,
+                CargaHorariaTotal = 24,
                 Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=31",
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=12",
+                Semestre = 2,
+                Ordem = 10
+            },
+            new Disciplina
+            {
+                Codigo = "92008",
+                Nome = "Epidemiologia da Atividade Física e Saúde",
+                Modulo = "",
+                CargaHorariaTotal = 24,
+                Curriculo = curriculo,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=14",
+                Semestre = 2,
+                Ordem = 11
+            },
+            new Disciplina
+            {
+                Codigo = "92007",
+                Nome = "Metodologia do Ensino Superior",
+                Modulo = "",
+                CargaHorariaTotal = 24,
+                Curriculo = curriculo,
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=9",
+                Semestre = 2,
                 Ordem = 12
             },
             new Disciplina
@@ -343,9 +431,10 @@ namespace Singl.Database.Migrations
                 Codigo = "92013",
                 Nome = "Psicologia aplicada a atividade física",
                 Modulo = "",
-                CargaHorariaTotal = 30,
+                CargaHorariaTotal = 24,
                 Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=31",
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=18",
+                Semestre = 2,
                 Ordem = 13
             },
             new Disciplina
@@ -353,29 +442,32 @@ namespace Singl.Database.Migrations
                 Codigo = "92014",
                 Nome = "Nutrição para atividade física e saúde",
                 Modulo = "",
-                CargaHorariaTotal = 30,
+                CargaHorariaTotal = 24,
                 Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=31",
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=17",
+                Semestre = 2,
                 Ordem = 14
             },
             new Disciplina
             {
-                Codigo = "92015",
-                Nome = "Aspectos biomecânicos da atividade física",
+                Codigo = "92006",
+                Nome = "Seminários de pesquisa",
                 Modulo = "",
-                CargaHorariaTotal = 30,
+                CargaHorariaTotal = 24,
                 Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=31",
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=19",
+                Semestre = 2,
                 Ordem = 15
             },
             new Disciplina
             {
-                Codigo = "92016",
+                Codigo = "920TCC",
                 Nome = "TCC",
                 Modulo = "Trabalho de conclusão de curso",
                 CargaHorariaTotal = 180,
                 Curriculo = curriculo,
-                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=31",
+                UrlAva = "http://moodle.unicentro.br/moodle/course/view.php?id=20",
+                Semestre = 3,
                 Ordem = 16
             });
         }
