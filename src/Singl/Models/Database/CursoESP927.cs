@@ -25,9 +25,9 @@ namespace Singl.Database.Migrations
                 PerfilEgresso = @"O Bacharel em Filosofia é o profissional que auxilia na formulação e na proposição de soluções de problemas nos diversos campos do 
                                   conhecimento e, em especial, na educação, área em que colabora na formulação e na execução de projetos de desenvolvimento dos conteúdos 
                                   curriculares, bem como na utilização de tecnologias da informação, da comunicação e de metodologias, estratégias e materiais de apoio inovadores.",
-                Sobre = @"O curso de especialização proposto visa contribuir para uma efetiva mudança na dinâmica da sala de aula, na perspectiva de que a construção e aquisição do conhecimento sejam garantidas por meio de um processo de ensino e aprendizagem participativo e significativo, que assegure aos alunos e alunas da educação básica o direito de aprender.
-                Esse processo se inicia com o professor-cursista buscando o conhecimento, socializando essa busca e os conhecimentos adquiridos, ao mesmo tempo em que exercita a reconstrução de saberes e práticas. A intenção é desenvolver um curso de formação pautado nas dinâmicas e nas necessidades advindas do trabalho cotidiano dos professores no espaço da escola e da sala de aula, de modo a fortalecê-los no enfrentamento dos desafios postos por esse trabalho.
-                O curso deverá dialogar, permanentemente, com a sala de aula, com a prática docente e com a escola, a partir de uma sólida fundamentação teórica e interdisciplinar que contemple aspectos relativos à escola, ao aluno, ao próprio trabalho docente, à metodologia de ensino, aos saberes e aos conhecimentos dos conteúdos específicos da área de formação.",
+                Apresentacao = @"<p>O curso de especialização proposto visa contribuir para uma efetiva mudança na dinâmica da sala de aula, na perspectiva de que a construção e aquisição do conhecimento sejam garantidas por meio de um processo de ensino e aprendizagem participativo e significativo, que assegure aos alunos e alunas da educação básica o direito de aprender.</p>
+                <p>Esse processo se inicia com o professor-cursista buscando o conhecimento, socializando essa busca e os conhecimentos adquiridos, ao mesmo tempo em que exercita a reconstrução de saberes e práticas. A intenção é desenvolver um curso de formação pautado nas dinâmicas e nas necessidades advindas do trabalho cotidiano dos professores no espaço da escola e da sala de aula, de modo a fortalecê-los no enfrentamento dos desafios postos por esse trabalho.</p>
+                <p>O curso deverá dialogar, permanentemente, com a sala de aula, com a prática docente e com a escola, a partir de uma sólida fundamentação teórica e interdisciplinar que contemple aspectos relativos à escola, ao aluno, ao próprio trabalho docente, à metodologia de ensino, aos saberes e aos conhecimentos dos conteúdos específicos da área de formação.</p>",
                 Telefone = "(42) 3629-8189",
                 Email = "matematicaead.unicentro@gmail.com",
                 UrlFacebook = "https://www.facebook.com/matematicanead",
@@ -261,7 +261,7 @@ namespace Singl.Database.Migrations
             },
             new Disciplina
             {
-                Codigo = "92708",
+                Codigo = "927TCC",
                 Nome = "TCC",
                 Modulo = "Prática - completude",
                 CargaHorariaTotal = 40,

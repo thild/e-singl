@@ -10,19 +10,24 @@
             <h3>{{instituicao?.Nome}}</h3>
             <h4 *ngIf="model?.Tags?.indexOf('NEAD') != -1">Núcleo de Educação a Distância</h4>
             <h4>{{model?.Departamento?.Nome}}</h4>
-            <a href="/spa/cursos/{{model?.Codigo}}/info#about" class="btn btn-primary btn-xl page-scroll">Saiba mais</a>
+            <a href="/spa/cursos/{{model?.Codigo}}/info#apresentacao" class="btn btn-primary btn-xl page-scroll">Apresentação</a>
         </div>
     </div>
 </header>
 
-<section class="bg-primary" id="about">
+<section class="bg-primary" id="apresentacao">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
-                <h2 class="section-heading">Sobre o {{model?.Nome}}</h2>
+                <h2 class="section-heading">Apresentação do Curso {{model?.Nome}}</h2>
                 <hr class="light">
-                <p class="text-faded">{{model?.Sobre}}</p>
+                <div class="text-faded text-justify" [innerHTML]="model?.Apresentacao"></div>
+                <h2 class="section-heading">Perfil do egresso</h2>
+                <hr class="light">
+                <div class="text-faded text-justify text-list" [innerHTML]="model?.PerfilEgresso"></div>
+                <div style="margin-top: 20px">
                 <a href="/spa/cursos/{{model?.Codigo}}/info#more" class="btn btn-default btn-xl page-scroll">Informações adicionais</a>
+                </div>
             </div>
         </div>
     </div>
@@ -143,7 +148,7 @@
                 <h2 class="section-heading">Informações adicionais sobre o curso</h2>
                 <hr class="primary">
                 <tabs>
-                    <tab active="true" title='Disciplinas'>
+                    <tab active="true" title='Grade curricular'>
                         <ul class="list-unstyled">
                             <style>
                                 .disciplina {
@@ -170,7 +175,7 @@
                         <ul class="list-unstyled">
                             <li *ngFor="#item of model?.Vinculos">
                                 <h4>{{item.Papel}}</h4>
-                                <p>{{item.Nome}}</p>
+                                <p>{{item.NomeComAxionimo}}</p>
                             </li>
                         </ul>
                     </tab>
@@ -192,10 +197,65 @@
                                     background-color: #f3f3f3;
                                 }
                             </style>
-                            <li class="docente" *ngFor="#item of model?.Docentes">
+                            <!--<li class="docente" *ngFor="#item of model?.Docentes">
                                 <a class="pull-left" [routerLink]="['/DocenteDetail',{id:item.Id}]">{{item.Nome}}</a>
                                 <a class="pull-right" href="{{item.Lattes}}"> <img src="/images/icons/lattes.png" aria-hidden="true" /> Lattes</a>
-                            </li>
+                            </li>-->
+                            <style type="text/css">
+                                .tg {
+                                    border-collapse: collapse;
+                                    border-spacing: 0;
+                                    width: 100%;
+                                }
+                                
+                                .tg td {
+                                    padding: 10px 5px;
+                                    border: solid#ddd 1px;
+                                    border-left: none;
+                                    border-right: none;
+                                    overflow: hidden;
+                                    word-break: normal;
+                                    text-align: center;
+                                }
+                                
+                                .tg tr:first-of-type th {
+                                    border-top: none;
+                                }
+                                
+                                .tg tr th:first-of-type {
+                                    text-align: left;
+                                }
+                                
+                                .tg th {
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    padding: 10px 5px;
+                                    border: solid#ddd 1px;
+                                    border-left: none;
+                                    border-right: none;
+                                    overflow: hidden;
+                                    word-break: normal;
+                                    text-align: center;
+                                }
+                            </style>
+                            <table class="tg">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Área de atuação</th>
+                                    <th>Grau acadêmico</th>
+                                    <th>Vínculo institucional</th>
+                                    <th>Lattes</th>
+                                </tr>
+                                <tr *ngFor="#item of model?.Docentes">
+                                    <td><a class="pull-left" [routerLink]="['/DocenteDetail',{id:item.Id}]">{{item.NomeComAxionimo}}</a></td>
+                                    <td>{{item.AreaAtuacao}}</td>
+                                    <td>{{item.GrauAcademico.Name}}</td>
+                                    <td>{{item.VinculoInstitucional}}</td>
+                                    <td>
+                                        <a href="{{item.Lattes}}"> <img src="/images/icons/lattes.png" aria-hidden="true" /></a>
+                                    </td>
+                                </tr>
+                            </table>
                         </ul>
                     </tab>
                     <tab *ngIf="model?.ModalidadeEnsino?.Name == 'Distancia'" title='Polos'>
@@ -258,18 +318,23 @@
                 <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
                 <p><a href="mailto:{{model?.Email}}">{{model?.Email}}</a></p>
             </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <div itemscope itemtype="http://schema.org/LocalBusiness">
-                        <address>
-                    <strong><span itemprop="name">{{model?.Nome}}</span></strong><br>
-                    <div [innerHTML]="model?.Endereco"></div><br>
-                    <div *ngIf="model?.Fax">                    
-                        <abbr title="Fax">Fax:</abbr> {{model?.Fax}}
-                    </div>
-                </address>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <div itemscope itemtype="http://schema.org/LocalBusiness">
+                    <address>
+                            <div *ngIf="model?.Endereco" [innerHTML]="model?.Endereco"></div><br>
+                            <div *ngIf="model?.Fax">                    
+                                <abbr title="Fax">Fax:</abbr> {{model?.Fax}}
+                            </div>
+                        </address>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <i class="fa fa-facebook fa-3x wow bounceIn"></i>
+                <p><a href="{{model?.UrlFacebook}}">Acesse nossa página no Facebook</a></p>
             </div>
         </div>
     </div>

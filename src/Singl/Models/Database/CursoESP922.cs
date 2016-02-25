@@ -23,7 +23,7 @@ namespace Singl.Database.Migrations
                 Tipo = TipoCurso.Especializacao,
                 ModalidadeEnsino = ModalidadeEnsino.Distancia,
                 PerfilEgresso = @"",
-                Sobre = @"",
+                Apresentacao = @"",
                 Telefone = "(42) 3621-1463",
                 Email = "mestreclaudio@uol.com.br",
                 UrlFacebook = "https://www.facebook.com/Especializa%C3%A7%C3%A3o-Ensino-de-Sociologia-para-Ensino-M%C3%A9dio-772999666131488",
@@ -309,7 +309,7 @@ namespace Singl.Database.Migrations
             },
             new Disciplina
             {
-                Codigo = "92211",
+                Codigo = "922TCC",
                 Nome = "TCC",
                 Modulo = "Trabalho de conclusão de curso",
                 CargaHorariaTotal = 180,
