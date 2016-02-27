@@ -24,15 +24,15 @@ import {ContatoFragmentComponent} from './../components/fragments/contato-fragme
 
 
 @Component({
-    selector: 'nead-info',
-    templateUrl: 'app/areas/singl/info/nead-info.component.html',
+    selector: 'nead-home',
+    templateUrl: 'app/areas/singl/home/nead-home.component.html',
     directives: [ROUTER_DIRECTIVES, UiTabs, UiPane, ModelListComponent, 
                  InstituicaoFooterComponent, ContatoFragmentComponent, 
                  Tab, Tabs],
-    styleUrls: ['./css/info.css']
+    styleUrls: ['./css/home.css']
 })
 @CanActivate(() => ModelMetadataService.load('Singl.Models.SetorAdministrativo'))
-export class NeadInfoComponent implements OnInit {
+export class NeadHomeComponent implements OnInit {
 
     //TODO: gambiarra ridícula;
     //descobrir como fazer binding com interpolation {{}}
@@ -46,6 +46,10 @@ export class NeadInfoComponent implements OnInit {
         public router: Router,
         public routeParams: RouteParams
     ) { }
+
+    navigateLocally(anchorName: string) {
+    document.location.hash = anchorName;
+    }
 
     ngOnInit() {
 

@@ -35,7 +35,8 @@ namespace Singl.Database.Migrations
                 Email = "esp.asf@gmail.com",
                 UrlFacebook = "https://www.facebook.com/Especializa%C3%A7%C3%A3o-Atividade-F%C3%ADsica-e-Sa%C3%BAde-698659630279758",
                 Tags = "NEAD",
-                Campus = context.Campi.Single(m => m.Sigla == "C")
+                Campus = context.Campi.Single(m => m.Sigla == "C"),
+                UrlDocumentoAprovacao = "http://www.unicentro.br/atos/201406030908117886.pdf"
             };
             CreateCurriculo(context, curso);
             AddPolos(context, curso);

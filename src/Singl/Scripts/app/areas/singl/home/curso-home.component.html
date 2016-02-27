@@ -1,16 +1,16 @@
 <style>
     header {
-        background-image: url('/images/curso-info.jpg') !important;
+        background-image: url('/images/curso-home.jpg') !important;
     }
 </style>
 <header id="main">
     <div class="header-content">
         <div class="header-content-inner">
-            <h1 style="padding-bottom: 0px;">{{model?.Nome}}</h1>
+            <h1>{{model?.Nome}}</h1>
             <h3>{{instituicao?.Nome}}</h3>
             <h4 *ngIf="model?.Tags?.indexOf('NEAD') != -1">Núcleo de Educação a Distância</h4>
             <h4>{{model?.Departamento?.Nome}}</h4>
-            <a href="/spa/cursos/{{model?.Codigo}}/info#apresentacao" class="btn btn-primary btn-xl page-scroll">Apresentação</a>
+            <a href="/spa/cursos/{{model?.Codigo}}/home#apresentacao" class="btn btn-primary btn-xl page-scroll">Apresentação</a>
         </div>
     </div>
 </header>
@@ -26,7 +26,7 @@
                 <hr class="light">
                 <div class="text-faded text-justify text-list" [innerHTML]="model?.PerfilEgresso"></div>
                 <div style="margin-top: 20px">
-                <a href="/spa/cursos/{{model?.Codigo}}/info#more" class="btn btn-default btn-xl page-scroll">Informações adicionais</a>
+                    <a href="/spa/cursos/{{model?.Codigo}}/home#more" class="btn btn-default btn-xl page-scroll">Informações adicionais</a>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="container">
             <div class="row top30">
                 <div class="col-lg-12 text-center">
-                    <a href="/spa/cursos/{{model?.Codigo}}/info#areas" class="btn btn-primary btn-xl page-scroll">Comece agora!</a>
+                    <a href="/spa/cursos/{{model?.Codigo}}/home#areas" class="btn btn-primary btn-xl page-scroll">Comece agora!</a>
                 </div>
             </div>
         </div>
@@ -164,6 +164,15 @@
                                 .disciplina:hover {
                                     background-color: #f3f3f3;
                                 }
+                                
+                                @media (max-width: 700px) {
+                                    .disciplina > a {
+                                        max-width: 70%;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        white-space: nowrap;
+                                    }
+                                }
                             </style>
                             <li class="disciplina text-left" *ngFor="#item of model?.Disciplinas">
                                 <a class="pull-left" [routerLink]="['/DisciplinaDetail',{codigo:item.Codigo}]">{{item.Nome}}: {{item.CargaHorariaTotal}}h</a>
@@ -171,7 +180,7 @@
                             </li>
                         </ul>
                     </tab>
-                    <tab title='Administração'>
+                    <tab title='Coordenação'>
                         <ul class="list-unstyled">
                             <li *ngFor="#item of model?.Vinculos">
                                 <h4>{{item.Papel}}</h4>
@@ -221,8 +230,19 @@
                                 .tg tr:first-of-type th {
                                     border-top: none;
                                 }
+                                /* Portrait */
                                 
-                                .tg tr th:first-of-type {
+                                @media (max-width: 800px) {
+                                    .tg th:nth-child(2),
+                                    .tg td:nth-child(2),
+                                    .tg th:nth-child(4),
+                                    .tg td:nth-child(4) {
+                                        display: none;
+                                    }
+                                }
+                                
+                                .tg tr th:first-of-type,
+                                .tg tr td:first-of-type {
                                     text-align: left;
                                 }
                                 
@@ -247,7 +267,7 @@
                                     <th>Lattes</th>
                                 </tr>
                                 <tr *ngFor="#item of model?.Docentes">
-                                    <td><a class="pull-left" [routerLink]="['/DocenteDetail',{id:item.Id}]">{{item.NomeComAxionimo}}</a></td>
+                                    <td><a class="text-left" [routerLink]="['/DocenteHome',{id:item.Id}]">{{item.NomeComAxionimo}}</a></td>
                                     <td>{{item.AreaAtuacao}}</td>
                                     <td>{{item.GrauAcademico.Name}}</td>
                                     <td>{{item.VinculoInstitucional}}</td>
@@ -320,6 +340,16 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-lg-4 col-lg-offset-2 text-center">
+                <i class="fa fa-facebook fa-3x wow bounceIn"></i>
+                <p><a href="{{model?.UrlFacebook}}">Acesse nossa página no Facebook</a></p>
+            </div>
+            <div *ngIf="model?.ModalidadeEnsino?.Name == 'Distancia'" class="col-lg-4 text-center">
+                <i class="fa fa-support fa-3x wow bounceIn"></i>
+                <p><a href="mailto:nead.unicentro@gmail.com">Central de Atendimento Moodle</a></p>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <div itemscope itemtype="http://schema.org/LocalBusiness">
                     <address>
@@ -329,16 +359,6 @@
                             </div>
                         </address>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-lg-offset-2 text-center">
-                <i class="fa fa-facebook fa-3x wow bounceIn"></i>
-                <p><a href="{{model?.UrlFacebook}}">Acesse nossa página no Facebook</a></p>
-            </div>
-            <div class="col-lg-4 text-center">
-                <i class="fa fa-facebook fa-3x wow bounceIn"></i>
-                <p><a href="mailto:nead.unicentro@gmail.com">Central de Atendimento Moodle</a></p>
             </div>
         </div>
     </div>

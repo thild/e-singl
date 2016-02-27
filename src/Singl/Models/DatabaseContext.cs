@@ -489,7 +489,7 @@ namespace Singl
             builder.Entity<Curso>()
                 .HasMany(m => m.Curriculos)
                 .WithOne(m => m.Curso);
-
+                
             //Curriculo
             builder.Entity<Curriculo>()
                 .HasOne(m => m.Curso)
@@ -507,7 +507,6 @@ namespace Singl
             builder.Entity<Polo>()
                 .HasIndex(m => m.Nome)
                 .IsUnique();
-
 
             //Disciplina
             builder.Entity<Disciplina>()

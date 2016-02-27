@@ -36,7 +36,8 @@
                                         </template>
                                         <template ngSwitchWhen="array">
                                             <div *ngIf="model[property.PropertyName] && model[property.PropertyName].length > 0">
-                                                <model-list selectionProperty="{{property.SelectionProperty}}" descriptionProperty="{{property.DescriptionProperty}}" detailNavigationUrl="{{property.DetailNavigationUrl}}"
+                                                <model-list selectionProperty="{{property.SelectionProperty}}" 
+                                                descriptionProperty="{{property.DescriptionProperty}}" detailNavigationUrl="{{property.DetailNavigationUrl}}"
                                                 [list]="model[property.PropertyName]" showFilters=false></model-list>
                                             </div>
                                             <div *ngIf="!model[property.PropertyName]">
@@ -45,13 +46,52 @@
                                         </template>
                                         <template ngSwitchWhen="any">
                                             <template [ngIf]="model[property.PropertyName]">
-                                                <!--<a [routerLink]="[property.RouteName, getModelNavigationRouteParams(model[property.PropertyName], property)]">{{getModelNavigationDescription(model, property)}}</a>-->
-                                                <span class="model-navigation">
-                                            <span class="id-badge">{{model[property.PropertyName][property.SelectionProperty]}}</span>
-                                                <span (click)="onSelect(model[property.PropertyName], property)">{{getModelNavigationDescription(model, property)}}
-                                                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                                                </span>
-                                                </span>
+                                                <style type="text/css">
+                                                    li {
+                                                        line-height: 3em;
+                                                        vertical-align: middle;
+                                                    }
+                                                    @media (max-width: 360px) {
+                                                        .model-list-description {
+                                                            /*display: inline-block;
+                                                            width: 50%;
+                                                            overflow: hidden;
+                                                            text-overflow: ellipsis;
+                                                            white-space: nowrap;*/
+                                                        }
+                                                        
+                                                        /* Make it a marquee */
+                                                        .marquee {
+                                                            vertical-align: middle;
+                                                            display: inline-block;
+                                                            width: 50%;
+                                                            margin: 0 auto;
+                                                            overflow: hidden;
+                                                            white-space: nowrap;
+                                                            text-overflow: ellipsis;
+                                                            box-sizing: border-box;
+                                                            animation: marquee 10s linear infinite;
+                                                        }
+
+                                                        .marquee:hover {
+                                                            /*animation-play-state: paused*/
+                                                        }
+
+                                                        /* Make it move */
+                                                        @keyframes marquee {
+                                                            0%   { text-indent: 50% }
+                                                            100% { text-indent: -150% }
+                                                        }
+                                                        
+                                                    }
+                                                </style>                                                
+                                                <div class="model-navigation">
+                                                    <span class="id-description" (click)="onSelect(model[property.PropertyName], property)">
+                                                        <span class="id-badge">
+                                                            {{model[property.PropertyName][property.SelectionProperty]}}
+                                                        </span> <span class="model-list-description marquee">{{getModelNavigationDescription(model, property)}}</span> <i class="fa fa-arrow-right fa-2x"></i>
+                                                    </span><span class="home" (click)="gotoHome(model[property.PropertyName])"> <i class="fa fa-home fa-2x"></i></span>
+                                                </div>
                                             </template>
                                             <template [ngIf]="!model[property.PropertyName]">
                                                 -
@@ -65,8 +105,8 @@
                     </div>
                     <hr class="hard" />
                     <div>
-                        <button class="btn btn-default" (click)="gotoList()">Lista de {{modelMetadata.DisplayName}}</button>
-                        <button class="btn btn-info" (click)="gotoInfo()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Info</button>
+                        <button class="btn btn-default" (click)="gotoList()"><i class="fa fa-list fa-2x"></i></button>
+                        <button class="btn btn-home" (click)="gotoHome(model)"><i class="fa fa-home fa-2x"></i></button>
                     </div>
                 </div>
             </div>

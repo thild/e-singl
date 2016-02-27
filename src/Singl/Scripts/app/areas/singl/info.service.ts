@@ -14,7 +14,7 @@ import 'rxjs/add/operator/share';
 import 'rxjs/Rx';
 
 @Injectable()
-export class InfoService {
+export class HomeService {
 
     private static _URL = "/api/info/";
     
@@ -24,25 +24,25 @@ export class InfoService {
     }
   
     get(modelName: string) : Observable<any> {
-        if(InfoService._cache[modelName]) {
-            return InfoService._cache[modelName];
+        if(HomeService._cache[modelName]) {
+            return HomeService._cache[modelName];
         }
-        let ret = this._http.get(InfoService._URL + modelName)
+        let ret = this._http.get(HomeService._URL + modelName)
             .map(response => response.json());
         return ret;
     }  
     
     static load(modelName: string) : Promise<boolean> {
         let injector = Injector.resolveAndCreate([
-            InfoService, HTTP_PROVIDERS
+            HomeService, HTTP_PROVIDERS
         ]);
 
-        let mms = injector.get(InfoService) as InfoService;
+        let mms = injector.get(HomeService) as HomeService;
 
         return mms.get(modelName)
             .toPromise()
             .then((value) => {
-                InfoService._cache[modelName] = Observable.of(value);
+                HomeService._cache[modelName] = Observable.of(value);
                 return value != null;
         });
         

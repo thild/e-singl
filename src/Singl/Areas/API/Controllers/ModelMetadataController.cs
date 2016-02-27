@@ -55,8 +55,8 @@ namespace Singl.Areas.API.Controllers
 
 namespace Singl.Core.Scaffolding
 {
-    
-     public class ModelMetadata
+
+    public class ModelMetadata
     {
 
         public ModelMetadata(Type modelType)
@@ -71,26 +71,27 @@ namespace Singl.Core.Scaffolding
             ListNavigationUrl = string.Empty;
             ListRouteName = string.Empty;
             ListRouteParams = string.Empty;
-            IdProperty = "Id";            
-            
+            IdProperty = "Id";
+
             var mnAttr = modelType.GetAttribute<ModelMetadataAttribute>();
-            if(mnAttr != null) {
-                    DisplayName = mnAttr.DisplayName;
-                    DescriptionProperty = mnAttr.DescriptionProperty;                                
-                    SelectionProperty = mnAttr.SelectionProperty;                                
-                    DetailNavigationUrl = mnAttr.DetailNavigationUrl;                
-                    DetailRouteName = mnAttr.DetailRouteName;                
-                    DetailRouteParams = mnAttr.DetailRouteParams;        
-                    ListNavigationUrl = mnAttr.ListNavigationUrl;
-                    ListRouteName = mnAttr.ListRouteName;
-                    ListRouteParams = mnAttr.ListRouteParams;
-                    IdProperty = mnAttr.IdProperty;
+            if (mnAttr != null)
+            {
+                DisplayName = mnAttr.DisplayName;
+                DescriptionProperty = mnAttr.DescriptionProperty;
+                SelectionProperty = mnAttr.SelectionProperty;
+                DetailNavigationUrl = mnAttr.DetailNavigationUrl;
+                DetailRouteName = mnAttr.DetailRouteName;
+                DetailRouteParams = mnAttr.DetailRouteParams;
+                ListNavigationUrl = mnAttr.ListNavigationUrl;
+                ListRouteName = mnAttr.ListRouteName;
+                ListRouteParams = mnAttr.ListRouteParams;
+                IdProperty = mnAttr.IdProperty;
             }
-                        
+
             Properties = new List<PropertyMetadata>();
 
             var properties = modelType
-                .GetProperties(BindingFlags.Public | 
+                .GetProperties(BindingFlags.Public |
                               BindingFlags.Instance)
                 .Where(p => p.CanRead);
 
@@ -101,9 +102,9 @@ namespace Singl.Core.Scaffolding
         }
 
         public string DisplayName { get; private set; }
-        
+
         public string Description { get; private set; }
-        
+
         public string DescriptionProperty { get; private set; }
 
         public string SelectionProperty { get; private set; }
@@ -113,7 +114,7 @@ namespace Singl.Core.Scaffolding
         public string DetailRouteParams { get; private set; }
         public string ListNavigationUrl { get; set; }
         public string ListRouteName { get; set; }
-        public string ListRouteParams { get; set; }        
+        public string ListRouteParams { get; set; }
         public List<PropertyMetadata> Properties { get; set; }
         public string IdProperty { get; private set; }
     }
@@ -124,17 +125,19 @@ namespace Singl.Core.Scaffolding
 
         public PropertyMetadata(PropertyInfo propertyInfo)
         {
-            PropertyName = propertyInfo.Name;  
+            PropertyName = propertyInfo.Name;
             var displayAttr = propertyInfo.GetAttribute<DisplayAttribute>();
-            if(displayAttr != null) {
+            if (displayAttr != null)
+            {
                 DisplayName = displayAttr.Name;
                 Description = displayAttr.Description ?? string.Empty;
             }
-            else {
+            else
+            {
                 DisplayName = PropertyName;
                 Description = string.Empty;
             }
-            
+
             DescriptionProperty = string.Empty;
             SelectionProperty = string.Empty;
             DetailNavigationUrl = string.Empty;
@@ -144,14 +147,16 @@ namespace Singl.Core.Scaffolding
             ListRouteParams = string.Empty;
             IdProperty = "Id";
             var eType = propertyInfo.GetEnumerableItemType();
-            if(eType != null) {
+            if (eType != null)
+            {
                 var lnAttr = eType.GetAttribute<ModelMetadataAttribute>();
-                if(lnAttr != null) {
-                    DescriptionProperty = lnAttr.DescriptionProperty;                                
-                    SelectionProperty = lnAttr.SelectionProperty;                                
+                if (lnAttr != null)
+                {
+                    DescriptionProperty = lnAttr.DescriptionProperty;
+                    SelectionProperty = lnAttr.SelectionProperty;
                     DetailNavigationUrl = lnAttr.DetailNavigationUrl;
                     DetailRouteName = lnAttr.DetailRouteName;
-                    DetailRouteParams = lnAttr.DetailRouteParams;                
+                    DetailRouteParams = lnAttr.DetailRouteParams;
                     ListNavigationUrl = lnAttr.ListNavigationUrl;
                     ListRouteName = lnAttr.ListRouteName;
                     ListRouteParams = lnAttr.ListRouteParams;
@@ -160,34 +165,36 @@ namespace Singl.Core.Scaffolding
             }
 
             var mnAttr = propertyInfo.PropertyType.GetAttribute<ModelMetadataAttribute>();
-            if(mnAttr != null) {
-                    DescriptionProperty = mnAttr.DescriptionProperty;                                
-                    SelectionProperty = mnAttr.SelectionProperty;                                
-                    DetailNavigationUrl = mnAttr.DetailNavigationUrl;                
-                    DetailRouteName = mnAttr.DetailRouteName;                
-                    DetailRouteParams = mnAttr.DetailRouteParams;                
-                    ListNavigationUrl = mnAttr.ListNavigationUrl;
-                    ListRouteName = mnAttr.ListRouteName;
-                    ListRouteParams = mnAttr.ListRouteParams;
-                    IdProperty = mnAttr.IdProperty;
+            if (mnAttr != null)
+            {
+                DescriptionProperty = mnAttr.DescriptionProperty;
+                SelectionProperty = mnAttr.SelectionProperty;
+                DetailNavigationUrl = mnAttr.DetailNavigationUrl;
+                DetailRouteName = mnAttr.DetailRouteName;
+                DetailRouteParams = mnAttr.DetailRouteParams;
+                ListNavigationUrl = mnAttr.ListNavigationUrl;
+                ListRouteName = mnAttr.ListRouteName;
+                ListRouteParams = mnAttr.ListRouteParams;
+                IdProperty = mnAttr.IdProperty;
             }
-            
+
             var scaffoldAttr = propertyInfo.GetAttribute<ScaffoldColumnAttribute>();
-            if(scaffoldAttr != null) {
+            if (scaffoldAttr != null)
+            {
                 Scaffold = scaffoldAttr.Scaffold;
             }
-            
+
             var fk = propertyInfo.GetAttribute<ForeignKeyAttribute>();
             IsForeignKey = fk != null;
-            
+
             var pk = propertyInfo.GetAttribute<ForeignKeyAttribute>();
             IsPrimaryKey = pk != null;
-                        
+
             var url = propertyInfo.GetAttribute<UrlAttribute>();
             IsUrl = url != null;
-                        
+
             TypeName = propertyInfo.PropertyType.Name;
-            IsEnum = propertyInfo.PropertyType.GetTypeInfo().IsEnum;  
+            IsEnum = propertyInfo.PropertyType.GetTypeInfo().IsEnum;
             IsArray = propertyInfo.PropertyType.GetTypeInfo().IsArray;
             IsList = propertyInfo.PropertyType.IsList();
             IsEnumerable = propertyInfo.PropertyType.GetTypeInfo().ImplementedInterfaces.Any(x => x.FullName == typeof(IEnumerable).FullName);
@@ -196,7 +203,8 @@ namespace Singl.Core.Scaffolding
             ClientType = GetClientType(propertyInfo.PropertyType);
         }
 
-        private string GetClientType (Type type) {
+        private string GetClientType(Type type)
+        {
             if (type.IsNumeric())
             {
                 return "number";
@@ -228,7 +236,7 @@ namespace Singl.Core.Scaffolding
         public bool IsArray { get; private set; }
 
         public bool IsList { get; private set; }
-        
+
         public bool IsEnumerable { get; private set; }
 
         public bool IsEnum { get; private set; }
@@ -244,7 +252,7 @@ namespace Singl.Core.Scaffolding
         public string PropertyName { get; private set; }
 
         public string DisplayName { get; private set; }
-        
+
         public string Description { get; private set; }
 
         public bool Scaffold { get; private set; }
@@ -252,39 +260,39 @@ namespace Singl.Core.Scaffolding
         public string TypeName { get; private set; }
 
         public string ClientType { get; private set; }
-        
+
         public string IdProperty { get; private set; }
         public string DescriptionProperty { get; private set; }
 
         public string SelectionProperty { get; private set; }
 
         public string DetailNavigationUrl { get; private set; }
-        
+
         public string DetailRouteName { get; private set; }
         public string DetailRouteParams { get; private set; }
-        
+
         public string ListNavigationUrl { get; set; }
         public string ListRouteName { get; set; }
-        public string ListRouteParams { get; set; }        
-        
-        
+        public string ListRouteParams { get; set; }
+
+
     }
 
     //TODO: this attribute must be applied to type. 
     //For now it will be applied to property.
     //We have to get the list item type attribute. 
-    [System.AttributeUsage(System.AttributeTargets.Class | 
-                           System.AttributeTargets.Struct, AllowMultiple = true)]    
+    [System.AttributeUsage(System.AttributeTargets.Class |
+                           System.AttributeTargets.Struct, AllowMultiple = true)]
     public class ModelMetadataAttribute : Attribute
     {
         public string DetailNavigationUrl { get; set; }
-        
+
         public string DetailRouteName { get; set; }
 
         public string DescriptionProperty { get; set; }
 
         public string SelectionProperty { get; set; }
-        
+
         public string DetailRouteParams { get; set; }
         public string ListNavigationUrl { get; set; }
         public string ListRouteName { get; set; }
@@ -293,7 +301,7 @@ namespace Singl.Core.Scaffolding
         public string DisplayName { get; set; }
     }
 
-    [System.AttributeUsage(System.AttributeTargets.Property)]    
+    [System.AttributeUsage(System.AttributeTargets.Property)]
     public class DtoAttribute : Attribute
     {
     }
@@ -349,29 +357,74 @@ namespace Singl.Extensions
 
             return attr;
         }
-        
+
         public static T GetAttribute<T>(this Type type) where T : Attribute
         {
             return type.GetTypeInfo().GetCustomAttribute<T>();
         }
-        
-         public static Type GetEnumerableItemType(this PropertyInfo prop)
+
+        public static Type GetEnumerableItemType(this PropertyInfo prop)
         {
             return prop.PropertyType.GetTypeInfo()
                 .ImplementedInterfaces
-                .Where(t => t.GetTypeInfo().IsGenericType == true && 
+                .Where(t => t.GetTypeInfo().IsGenericType == true &&
                             t.GetTypeInfo().GetGenericTypeDefinition() == typeof(IEnumerable<>))
                 .Select(t => t.GetGenericArguments()[0]).SingleOrDefault();
         }
+
+        /// <summary>
+        /// Fill the dest object with the source object.
+        /// </summary>
+        /// <param name='dest'>
+        /// Destination.
+        /// </param>
+        /// <param name='source'>
+        /// Source.
+        /// </param>
+        /// <typeparam name='T'>
+        /// The type parameter of filled object.
+        /// </typeparam>
+        public static void Fill<T>(this T dest, T source)
+        {
+            //We get the array of fields for the new type instance.
+            var props = dest.GetType().GetProperties();
+
+            int i = -1;
+
+            foreach (var p in source.GetType().GetProperties())
+            {
+                ++i;
+                if (!(p.CanWrite || props[i].CanWrite)) continue;
+
+//                 //We query if the fiels support the ICloneable interface.
+//                 var cloneType = p.PropertyType.GetInterface("ICloneable", true);
+// 
+//                 if (cloneType != null)
+//                 {
+//                     //Getting the ICloneable interface from the object.
+//                     var clone = (ICloneable)p.GetValue(source, null);
+//                     //We use the clone method to set the new value to the field.
+//                     props[i].SetValue(dest, clone == null ? default(T) : clone.Clone(), null);
+//                 }
+//                 else
+//                 {
+                    // If the field doesn't support the ICloneable 
+                    // interface then just set it.
+                    props[i].SetValue(dest, p.GetValue(source, null), null);
+                // }
+            }
+        }
     }
-    
-    public static class DynamicExtensions {
-         public static ExpandoObject ToExpandoObject(this object value) {
-            
+
+    public static class DynamicExtensions
+    {
+        public static ExpandoObject ToExpandoObject(this object value)
+        {
+
             IDictionary<string, object> dto = new ExpandoObject();
-            
+
             var properties = value.GetType()
-                .GetProperties(BindingFlags.Public | 
+                .GetProperties(BindingFlags.Public |
                               BindingFlags.Instance)
                 .Where(p => p.CanRead);
 
@@ -380,16 +433,16 @@ namespace Singl.Extensions
                 // var dtoAttr = property.GetAttribute<DtoAttribute>();
                 // if (dtoAttr != null)
                 // {
-                    dto.Add(property.Name, property.GetValue(value, null));
+                dto.Add(property.Name, property.GetValue(value, null));
                 // }
             }
 
-            return dto as ExpandoObject;            
-            
+            return dto as ExpandoObject;
+
         }
-        
+
     }
-    
+
 }
 
 

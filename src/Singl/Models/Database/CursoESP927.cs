@@ -32,7 +32,8 @@ namespace Singl.Database.Migrations
                 Email = "matematicaead.unicentro@gmail.com",
                 UrlFacebook = "https://www.facebook.com/matematicanead",
                 Tags = "NEAD",
-                Campus = context.Campi.Single(m => m.Sigla == "C")
+                Campus = context.Campi.Single(m => m.Sigla == "C"),
+                UrlDocumentoAprovacao = "http://www.unicentro.br/atos/201406041019279472.pdf"
             };
             CreateCurriculo(context, curso);
             AddPolos(context, curso);

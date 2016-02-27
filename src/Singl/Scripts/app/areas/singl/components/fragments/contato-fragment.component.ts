@@ -2,6 +2,15 @@ import {Component, Input, OnInit, ViewEncapsulation} from 'angular2/core';
 
 @Component({
     selector: 'contato-fragment',
+    styles: [
+        `
+        hr {
+            border-color: #F05F40;
+            border-width: 3px;
+            max-width: 350px;
+        }
+        `
+    ],
     template: `
 <section id="contact">
     <div class="container">
@@ -20,6 +29,12 @@ import {Component, Input, OnInit, ViewEncapsulation} from 'angular2/core';
                 <p><a href="mailto:{{email}}">{{email}}</a></p>
             </div>
         </div>
+        <div class="row" *ngIf="facebook">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <i class="fa fa-facebook fa-3x wow bounceIn"></i>
+                <p><a href="{{facebook}}">Acesse nossa página no Facebook</a></p>
+            </div>
+        </div>
     </div>
 </section>
 `,
@@ -29,6 +44,7 @@ export class ContatoFragmentComponent implements OnInit {
     @Input() mensagem: any;
     @Input() telefone: any;
     @Input() email: any;
+    @Input() facebook: any;
 
     constructor(
     ) { }

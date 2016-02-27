@@ -29,7 +29,8 @@ namespace Singl.Database.Migrations
                 Telefone = "(42) 3621-1097",
                 UrlFacebook = "https://www.facebook.com/Especializa%C3%A7%C3%A3o-Ensino-de-Filosofia-para-Ensino-M%C3%A9dio-815281898563759",
                 Tags = "NEAD",
-                Campus = context.Campi.Single(m => m.Sigla == "SC")
+                Campus = context.Campi.Single(m => m.Sigla == "SC"),
+                UrlDocumentoAprovacao = "http://www.unicentro.br/atos/201404231140082591.pdf"
             };
             CreateCurriculo(context, curso);
             AddPolos(context, curso);
