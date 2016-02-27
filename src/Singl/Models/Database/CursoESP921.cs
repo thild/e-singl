@@ -31,7 +31,8 @@ namespace Singl.Database.Migrations
                 Email = "pos.empreendedora.unicentro@gmail.com",
                 UrlFacebook = "https://www.facebook.com/empreendedoraunicentro",
                 Tags = "NEAD",
-                Campus = context.Campi.Single(m => m.Sigla == "SC")
+                Campus = context.Campi.Single(m => m.Sigla == "SC"),
+                UrlDocumentoAprovacao = "http://www.unicentro.br/atos/201405201637194850.pdf"
             };
             CreateCurriculo(context, curso);
             AddPolos(context, curso);

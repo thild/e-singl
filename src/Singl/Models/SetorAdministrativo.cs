@@ -89,6 +89,11 @@ namespace Singl.Models
         public string Sobre { get; set; }
 
         [ScaffoldColumn(true)]
+        [Display(Name = "Facebook")]
+        [Url]
+        public string UrlFacebook { get; set; }
+        
+        [ScaffoldColumn(true)]
         [Display(Name = "Vínculos")]
         public IList<VinculoSetorAdministrativo> Vinculos { get; } = new List<VinculoSetorAdministrativo>();
 
@@ -98,12 +103,14 @@ namespace Singl.Models
             dynamic dto = new ExpandoObject();
             dto.Nome = Campus == null ? null : new { Campus.Id, Campus.Nome, Campus.Sigla };
             dto.Sigla = Sigla;
-            dto.Supersetor = Supersetor == null ? null : new { Supersetor.Id, Supersetor.Nome, Supersetor.Sigla };
+            dto.SiglaCampus = SiglaCampus;
+            dto.Supersetor = Supersetor == null ? null : new { Supersetor.Id, Supersetor.Nome, Supersetor.Sigla, Supersetor.SiglaCampus };
             dto.Campus = Campus == null ? null : new { Campus.Id, Campus.Nome, Campus.Sigla };
-            dto.Subsetores = Subsetores == null ? null : Subsetores.Select(x => new { x.Id, x.Nome, x.Sigla });
+            dto.Subsetores = Subsetores == null ? null : Subsetores.Select(x => new { x.Id, x.Nome, x.Sigla, x.SiglaCampus });
             dto.Nome = Nome;
             dto.Sobre = Sobre;
             dto.Endereco = Endereco;
+            dto.UrlFacebook = UrlFacebook;
             dto.Telefone = Telefone;
             dto.Fax = Fax;
             dto.Email = Email;

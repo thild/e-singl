@@ -149,6 +149,7 @@ namespace Singl.Models
         public IList<Docente> Docentes = new List<Docente>();
 
         [ScaffoldColumn(true)]
+        [NotMapped]
         public IList<Polo> Polos = new List<Polo>();
 
         [ScaffoldColumn(true)]
@@ -159,6 +160,11 @@ namespace Singl.Models
         [Display(Name = "Facebook")]
         [Url]
         public string UrlFacebook { get; set; }
+        
+        [Url]
+        [Display(Name = "Documento de aprovação")]
+        public string UrlDocumentoAprovacao { get; set; }
+        
         public string Apresentacao { get; internal set; }
 
         public dynamic ToDto()
@@ -181,7 +187,7 @@ namespace Singl.Models
                 x.VinculoInstitucional,
                 x.Lattes
             });
-            dto.Polos = Polos == null ? null : Polos.Select(x => new { x.Nome, x.Endereco, x.Cidade, x.Coordenador, x.Emails, x.Telefones });
+            dto.Polos = Polos == null ? null : Polos.Select(x => new {x.Id, x.Nome, x.Endereco, x.Cidade, x.Coordenador, x.Emails, x.Telefones });
             //TODO Se for docente retornar DocenteId
             dto.Vinculos = Vinculos == null ? null : Vinculos
                 .Select(x => new { x.PessoaId, x.Pessoa.NomeComAxionimo, x.Pessoa.Nome, Papel = x.Papel.Nome });

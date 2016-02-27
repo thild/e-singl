@@ -8,7 +8,7 @@ namespace Singl.Database.Migrations
     {
         public static void Create(DatabaseContext context)
         {
-            context.Polos.AddRange(
+            Polo[] polos = {
                 new Polo {
                     Nome = "Diamante do Norte",
                     Cidade = "Diamante do Norte",
@@ -146,7 +146,16 @@ namespace Singl.Database.Migrations
                     Emails = "apucaranapolo@gmail.com",
                     Coordenador = ""
                 }
+            };
+            context.MetadataUI.Add(
+                new MetadataUI {
+                    ModelId = polos[4].Id,
+                    Property = "BackgroundImage",
+                    Value = "/images/polo-bituruna-home.jpg"    
+                }
             );
+            context.Polos.AddRange(polos);
+            
         }
     }
 

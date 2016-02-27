@@ -37,6 +37,8 @@ import {SetorAdministrativoService} from './setor-administrativo.service'
 import {SetorConhecimentoService} from './setor-conhecimento.service'
 import {DepartamentoService} from './departamento.service'
 import {CursoService} from './curso.service'
+import {PoloService} from './polo.service'
+import {DocenteService} from './docente.service'
 import {InstituicaoService} from './instituicao.service'
 import {DisciplinaService} from './disciplina.service'
 import {FilterService}  from './filter-service';
@@ -49,6 +51,8 @@ const SERVICE_PROVIDERS: Array<any> = [
     SetorConhecimentoService,
     DepartamentoService,
     CursoService,
+    PoloService,
+    DocenteService,
     DisciplinaService,
     InstituicaoService,
     FilterService

@@ -102,6 +102,10 @@ export class ModelListComponent {
         this.router.navigateByUrl(eval(this.detailNavigationUrl));
     }
 
+    gotoHome(model: any) {
+        this.router.navigateByUrl(eval(this.detailNavigationUrl) + "/home");
+    }
+
     ngOnInit() {
         if (this.modelName != null) {
             this.metadataService.get(this.modelName)

@@ -48,9 +48,8 @@ export class ModelDetailComponent implements OnInit {
             this.router.navigateByUrl(eval(property.DetailNavigationUrl));
     }
 
-    getInfoUrl(): string {
-        let model = this.model;
-        return eval(this.modelMetadata.DetailNavigationUrl) + "/info";
+    getHomeUrl(model): string {
+        return eval(this.modelMetadata.DetailNavigationUrl) + "/home";
     }
 
     ngOnInit() {
@@ -76,7 +75,7 @@ export class ModelDetailComponent implements OnInit {
         this.router.navigate([this.modelMetadata["ListRouteName"], args]);
     }
 
-    gotoInfo() {
-        this.router.navigateByUrl(this.getInfoUrl());
+    gotoHome(model) {
+        this.router.navigateByUrl(this.getHomeUrl(model));
     }
 }

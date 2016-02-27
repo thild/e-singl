@@ -52,7 +52,8 @@ namespace Singl.Database.Migrations
                 Email = "geoead.unicentro@gmail.com",
                 UrlFacebook = "https://www.facebook.com/Especialização-Ensino-e-Pesquisa-na-Ciência-Geográfica-UABUnicentro-1582083505368169",
                 Tags = "NEAD",
-                Campus = context.Campi.Single(m => m.Sigla == "SC")
+                Campus = context.Campi.Single(m => m.Sigla == "SC"),
+                UrlDocumentoAprovacao = "http://www.unicentro.br/atos/201405201639121273.pdf"
             };
             CreateCurriculo(context, curso);
             AddPolos(context, curso);

@@ -1,7 +1,9 @@
 import {Component, Input} from 'angular2/core';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 @Component({
     selector: 'polo-list',
+    directives: [ROUTER_DIRECTIVES],
     styles: [`
         .zippy {
             background: green;
@@ -11,7 +13,7 @@ import {Component, Input} from 'angular2/core';
     <ul class="list-unstyled">
         <li *ngFor="#item of polos">
             <div itemscope itemtype="http://schema.org/LocalBusiness">
-                <strong><span itemprop="name">{{item.Nome}}</span></strong><br>
+                <strong><span itemprop="name"><a [routerLink]="['/PoloHome',{id:item.Id}]">{{item.Nome}}</a></span></strong><br>
                 <div *ngIf="item.Coordenador">
                     Coordenador(a): {{item.Coordenador}}
                 </div>

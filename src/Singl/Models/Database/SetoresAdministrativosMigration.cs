@@ -23,6 +23,7 @@ namespace Singl.Database.Migrations
 A estrutura organizacional para os cursos ofertados na modalidade de Educação a Distância da Unicentro é composta de um Núcleo de Educação a Distância, localizado no Campus Sede da Universidade, pela estrutura advinda da Parceria do Sistema Aberta do Brasil – UAB e por Polos de Apoio Presenciais de Educação a Distância, localizados em diversos municípios.",
                 Nome = "Núcleo de Educação à Distância",
                 Sigla = "NEAD",
+                UrlFacebook = "https://www.facebook.com/neadunicentro/",
                 Campus = campi["SC"]
             };
 

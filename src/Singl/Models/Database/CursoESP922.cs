@@ -29,6 +29,7 @@ namespace Singl.Database.Migrations
                 UrlFacebook = "https://www.facebook.com/Especializa%C3%A7%C3%A3o-Ensino-de-Sociologia-para-Ensino-M%C3%A9dio-772999666131488",
                 Tags = "NEAD",
                 Campus = context.Campi.Single(m => m.Sigla == "SC"),
+                UrlDocumentoAprovacao = "http://www.unicentro.br/atos/201106091024530350.pdf"
             };
             CreateCurriculo(context, curso);
             AddPolos(context, curso);

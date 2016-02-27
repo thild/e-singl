@@ -8,7 +8,7 @@ import {InstituicaoService}   from './../../instituicao.service';
     <div class="container">
         <div class="row">    
             <div class="col-lg-8 col-lg-offset-2 text-center">
-                <hr class="primary">
+                <hr >
                 <div itemscope itemtype="http://schema.org/LocalBusiness">
                     <address>
                         <strong><span itemprop="name">{{instituicao?.Nome}}</span></strong><br>

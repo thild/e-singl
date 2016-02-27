@@ -157,9 +157,9 @@ var sources = {
             ]
         },
         {
-            name: "info.css",
+            name: "home.css",
             paths: [
-                paths.styles + "info/**/*.scss"
+                paths.styles + "home/**/*.scss"
             ]
         },
         {

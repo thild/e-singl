@@ -1,14 +1,26 @@
 <style>
     header {
-        background-image: url('/images/nead-info.jpg') !important;
+        background-image: url('/images/instituicao-home.jpg') !important;
     }
 </style>
 <header id="main">
     <div class="header-content">
         <div class="header-content-inner">
-            <h1 style="padding-bottom: 0px;">{{model?.Nome}}</h1>
-            <h3>{{instituicao?.Nome}}</h3>
-            <a href="/spa/setoresadministrativos/NEAD/SC/info#about" class="btn btn-primary btn-xl page-scroll">Saiba mais</a>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <img src="/images/instituicao-logo.png" style="width: 150px;" alt="Logo tipo da instituição" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h1>{{model?.NomeSigla}}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="/spa#about" class="btn btn-primary btn-xl page-scroll">Saiba mais</a>
+                </div>
+            </div>
         </div>
     </div>
 </header>
@@ -17,10 +29,38 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
-                <h2 class="section-heading">Sobre o NEAD!</h2>
+                <h2 class="section-heading">Sobre a {{model?.Sigla}}</h2>
                 <hr class="light">
-                <p class="text-faded">{{model?.Sobre}}</p>
-                <a href="/spa/setoresadministrativos/NEAD/SC/info#values" class="btn btn-default btn-xl page-scroll">Como trabalhamos</a>
+                <p class="text-faded text-justify">{{model?.Sobre}}</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <style>
+                        .video-container {
+                            position: relative;
+                            width: 100%;
+                            height: 0;
+                            padding-bottom: 56.25%;
+                            margin-bottom: 20px;
+                        }
+                        
+                        .video {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    </style>
+                    <div class="video-container">
+                        <iframe class="video" src="https://www.youtube.com/embed/GjI-SXoeo_w" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 text-center">
+                        <a href="/spa#values" class="btn btn-default btn-xl page-scroll">Como trabalhamos</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -68,7 +108,7 @@
         <div class="container">
             <div class="row top30">
                 <div class="col-lg-12 text-center">
-                    <a href="/spa/setoresadministrativos/NEAD/SC/info#areas" class="btn btn-primary btn-xl page-scroll">Comece agora!</a>
+                    <a href="/spa#areas" class="btn btn-primary btn-xl page-scroll">Comece agora!</a>
                 </div>
             </div>
         </div>
@@ -134,65 +174,23 @@
     </div>
 </aside>
 
-<section id="more">
+<section id="contact">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                <h2 class="section-heading text-center">Conheça um pouco mais sobre o NEAD!</h2>
+                <h2 class="section-heading text-center">Conheça um pouco mais sobre a {{model?.Sigla}}</h2>
                 <hr class="primary">
                 <tabs>
                     <tab title='História' active="true">
                         <p>{{model?.Sobre}}</p>
                     </tab>
-                    <tab title='Setores'>
-                        <model-list selectionProperty="Sigla" descriptionProperty="Nome" detailNavigationUrl="" [list]="model?.Subsetores" showFilters=false></model-list>
-                    </tab>
-                    <tab title='Documentos'>
+                    <tab title='Atos legais'>
                         <ul>
-                            <li><a href="/docs/termos_fichas/ficha_cadastro_coord_curso.doc">Ficha de cadastro de coordenador de curso</a></li>
-                            <li><a href="/docs/termos_fichas/ficha_cadastro_coord_tutoria.doc">Ficha de cadastro de coordenador de tutoria</a></li>
-                            <li><a href="/docs/termos_fichas/ficha_cadastro_professor.doc">Ficha de cadastro de professor</a></li>
-                            <li><a href="/docs/termos_fichas/ficha_cadastro_tutor.doc">Ficha de cadastro de tutor</a></li>
-                            <li><a href="/docs/termos_fichas/termo_compromisso_professor.doc">Termo de compromisso de professor</a></li>
-                            <li><a href="/docs/termos_fichas/termo_compromisso_tutor.doc">Termo de compromisso de tutor</a> </li>
-                            <li><a href="/docs/termos_fichas/termo_direitos_autorais.doc">Termo de cessão de direitos autorais</a></li>
-                        </ul>
-                    </tab>
-                    <tab title='Atos oficiais'>
-                    </tab>
-                    <tab title='Links'>
-                        <h3>Categorizar</h3>
-                        <ul>
-                            <li><a href="http://nead.unicentro.br/">Sítio Instituicional - NEAD</a></li>
-                            <li><a href="http://sguweb.unicentro.br/usuarios/login">Sistema de Gestão Universitária - SGU</a></li>
-                            <li><a href="http://redmine.unicentro.br/">Gerenciador de projetos - Redmine</a></li>
-                            <li><a href="http://sites.unicentro.br/nead/npa">Coordenação de Vídeos</a></li>
-                            <li><a href="http://wiki.unicentro.br/Lyceum">Lyceum</a></li>
-                            <li><a href="http://wiki.unicentro.br/Informa%C3%A7%C3%B5es_Aluno_Online">Informações Aluno Online</a></li>
-                            <li><a href="http://www.unicentro.br/aonline/">Acesso Aluno Online</a></li>
-                            <li><a href="http://www.unicentro.br/donline/">Acesso Docente Online</a></li>
-                            <li><a href="http://moodle.unicentro.br/">Acesso AVA Moodle</a></li>
-                            <li><a href="http://sguweb.unicentro.br/saguiches/login">Secretaria acadêmica e atividades complementares</a></li>
-                            <li><a href="http://sguweb.unicentro.br/atavaliados/login">TCC</a></li>
-                        </ul>
-                    </tab>
-                    <tab title='Tutoriais'>
-                        <ul>
-                            <li><a href="https://www.youtube.com/watch?v=MhEmO17SbNo">Imersão faqs</a></li>
-                            <li><a href="https://www.youtube.com/watch?v=­NzKmvhnH1Y">Moodle 2.6</a></li>
-                            <li><a href="https://www.youtube.com/watch?v=19AdL2ky8Nk">Tutorial videoaula</a></li>
-                            <li><a href="https://www.youtube.com/watch?v=pWCUnXsTPeM">Tutorial ISSU</a></li>
-                            <li><a href="https://www.youtube.com/watch?v=1_pBXVufEu4">Tutorial Prezi</a></li>
-                            <li><a href="https://www.youtube.com/watch?v=ov1hSx0YQqM">Tutorial Moodle­ CRESOL</a></li>
-                            <li><a href="https://www.youtube.com/watch?v=Z2CPaIoOvpQ">Vídeo Institucional NEAD - Destacar</a></li>
-                            <li><a href="https://www.youtube.com/watch?v=G9Mo7KOVCHc">Acessibilidade EAD</a></li>
-                            <li><a href="https://sguweb.unicentro.br/atprocessos/tutoriais">Tutorial TCC</a></li>
-                        </ul>
-                    </tab>
-                    <tab title='Convênios'>
-                        <ul>
-                            <li><a href="http://www2.unicentro.br/coorcap/dirconv/">Convênios vigentes</a></li>
-                            <li><a href="http://transparencia.gov.br/">Convênios CAPES</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2014/11/Lei_9295_90_Insitui_a_UNICENTRO.pdf">Lei que institui a UNICENTRO</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2014/11/Decreto_3444_97_Reconhecimento_da_UNICENTRO.pdf">Decreto de reconhecimento da UNICENTRO</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/Estatuto.pdf">Estatuto da UNICENTRO</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/res_estatuto2010.pdf">Resolução - altera anexo I do estatuto</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/regimento2010.pdf">Regimento da UNICENTRO</a></li>
                         </ul>
                     </tab>
                 </tabs>
@@ -201,20 +199,7 @@
     </div>
 </section>
 
-<aside class="bg-dark">
-    <div class="container text-center">
-        <div class="call-to-action">
-            <a class="btn btn-default btn-xl wow tada" href="http://nead.unicentro.br/">Informações detalhadas no nosso sítio instituicional</a>
-        </div>
-    </div>
-</aside>
-
-
-
-<contato-fragment telefone={{model?.Telefone}} email={{model?.Email}} mensagem="Gostaria de saber como estudar em uma das melhores universidade do país? Que ótimo! Nos telefone ou nos mande
-                    um e-mail que teremos o prazer em responder o mais breve possível!"></contato-fragment>
-
-<!--<section id="contact">
+<section id="contact">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -233,5 +218,14 @@
             </div>
         </div>
     </div>
-</section>-->
+</section>
+
+<aside class="bg-primary">
+    <div class="container text-center">
+        <div class="call-to-action">
+            <a class="btn btn-default btn-xl wow tada" href="http://www.unicentro.br/">Site instituicional</a>
+        </div>
+    </div>
+</aside>
+
 <instituicao-footer></instituicao-footer>
