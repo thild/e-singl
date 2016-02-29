@@ -1,0 +1,158 @@
+Curso;Codigo;Nome;Modulo;CargaHorariaTotal;Semestre;CodigoMoodle;Ordem
+ESP312;31213;Tecnologias de Informação e Comunicação;;30;1;341;1
+ESP312;31207;Educação Ambiental e responsabilidade Social;;30;1;341;2
+ESP312;31201;Função Social da escola;;30;1;341;3
+ESP312;31202;Educação, ética e princípios democráticos;;30;1;331;4
+ESP312;31208;Tópicos avançados de Gestão Educacional;;30;1;332;5
+ESP312;31205;Gestão do Projeto Pedagógico;;30;1;333;6
+ESP312;31203;Pesquisa em Educação;;30;2;334;7
+ESP312;31212;Gestão financeira, física e patrimonial;;30;2;335;8
+ESP312;31209;Avaliação Institucional;;30;2;336;9
+ESP312;31206;Planejamento Estratégico;;30;2;337;10
+ESP312;31204;Relações interpessoais e Liderança;;30;2;338;11
+ESP312;31210;Criatividade no Ambiente Escolar;;20;2;339;12
+ESP312;31211;Seminários de Pesquisa;;20;2;340;13
+ESP312;312TCC;TCC;;180;3;341;14
+ESP400;40001;Introdução a Informática;;30;;72;1
+ESP400;40002;Educação à Distância;;15;;67;2
+ESP400;40003;O estado e os problemas contemporâneos;;30;;64;3
+ESP400;40004;Estado,  governo e mercado;;15;;22;4
+ESP400;40005;O público e o privado na gestão pública;;30;;70;5
+ESP400;40006;Desenvolvimento e mudança no estado brasileiro;;30;;69;6
+ESP400;40007;Políticas públicas;;30;;74;7
+ESP400;40008;Planejamento estratégico governamental;;15;;79;8
+ESP400;40009;Elaboração de indicadores;;30;;116;9
+ESP400;40011;Pesquisa científica aplicada ao TCC;;30;;71;10
+ESP400;40012;Políticas de saúde e o SUS;;30;;76;11
+ESP400;40013;Gestão dos sistemas e serviços de saúde;;15;;77;12
+ESP400;40014;Organização e funcionamento do SUS;;30;;75;13
+ESP400;40015;Gestão da vigilância à saúde;;30;;74;14
+ESP400;40016;Gestão logística em saúde;;30;;74;14
+ESP400;40017;Fundamentos de TCC;;30;;74;14
+ESP400;400TCC;TCC;;180;;122;15
+ESP920;92001;Tecnologia da Informação e Comunicação;;24;1;11;1
+ESP920;92002;Conceitos de Atividade Física e Saúde;;24;1;7;2
+ESP920;92003;Políticas Públicas na Saúde e Qualidade de Vida;;24;1;10;3
+ESP920;92005;Medidas e Avaliação em Atividade Física;;24;1;8;4
+ESP920;92004;Metodologia da Pesquisa;;24;1;16;5
+ESP920;92009;Bioestatística;;24;1;6;6
+ESP920;92011;Atividade física para populações especiais;;24;1;5;7
+ESP920;92010;Fisiologia da atividade física;;24;2;15;8
+ESP920;92015;Aspectos biomecânicos da atividade física;;24;2;13;9
+ESP920;92012;Antropologia do corpo e saúde;;24;2;12;10
+ESP920;92008;Epidemiologia da Atividade Física e Saúde;;24;2;14;11
+ESP920;92007;Metodologia do Ensino Superior;;24;2;9;12
+ESP920;92013;Psicologia aplicada a atividade física;;24;2;18;13
+ESP920;92014;Nutrição para atividade física e saúde;;24;2;17;14
+ESP920;92006;Seminários de pesquisa;;24;2;19;15
+ESP920;920TCC;TCC;Trabalho de conclusão de curso;180;3;20;16
+ESP921;92101;Tecnologia da Informação e Comunicação;;30;1;322;1
+ESP921;92102;Empreendedorismo e Inovação;;30;1;318;2
+ESP921;92104;Função Social da Escola;;30;1;320;3
+ESP921;92103;Educação, Ética e Construção Social;;30;1;317;4
+ESP921;92109;Estratégias Educacionais para Empreender;;30;1;319;5
+ESP921;92111;Gestão de projetos;;30;1;321;6
+ESP921;92106;Pedagogia Empreendedora;;30;2;328;7
+ESP921;92108;Docência Empreendedora;;30;2;324;8
+ESP921;92110;Empreendedorismo e redes de cooperação;;30;2;325;9
+ESP921;92112;Mundo contemporâneo e suas perspectivas;;30;2;327;10
+ESP921;92113;Sustentabilidade e seus desafios;;20;2;329;11
+ESP921;92107;Criatividade no Ambiente Escolar;;20;2;323;12
+ESP921;92105;Metodologia de Pesquisa;;20;2;3511;13
+ESP921;921TCC;TCC;Trabalho de conclusão de curso;180;3;330;14
+ESP922;92201;Introdução ao Ambiente Virtual;;40;;42;1
+ESP922;92202;Memória e prática docente;;40;;44;2
+ESP922;92203;Ensino de Sociologia: história, metodologia e conteúdos;;40;;41;3
+ESP922;92204;História da sociologia;;40;;48;4
+ESP922;92205;Cultura e identidade;;30;;45;5
+ESP922;92206;Orientação teórico-metodológica para desenvolver TCC;;40;;51;6
+ESP922;92207;Estrutura e mudanças sociais;;32;;47;7
+ESP922;92208;Participação política e cidadania;;40;;49;8
+ESP922;92209;Espaço escolar;;32;;46;9
+ESP922;92210;Ensino de sociologia: conteúdos e metodologia;;30;;50;10
+ESP922;922TCC;TCC;Trabalho de conclusão de curso;180;;4314;11
+ESP923;92300;Ambientação AVA;O campo Conceitual da Filosofia no Ensino Médio;40;;3390;1
+ESP923;92301;Introdução às ferramentas para EaD;O campo Conceitual da Filosofia no Ensino Médio;40;;23;2
+ESP923;92302;História temas e problemas da filosofia em sala de aula: como ler os clássicos;O campo Conceitual da Filosofia no Ensino Médio;30;;21;3
+ESP923;92303;Introdução à prática de ensino de filosofia;O campo Conceitual da Filosofia no Ensino Médio;30;;22;4
+ESP923;92304;Metodologia do Ensino de Filosofia;O campo Conceitual da Filosofia no Ensino Médio;30;;24;5
+ESP923;92305;Ensino de ética e filosofia política;A Filosofia e as Tecnologias de seu Ensino;40;;25;6
+ESP923;92306;Ensino de lógica, ontologia e filosofia da linguagem;A Filosofia e as Tecnologias de seu Ensino;30;;26;7
+ESP923;92307;Filosofia do ensino de filosofia;A Filosofia e as Tecnologias de seu Ensino;40;;28;8
+ESP923;92308;Teoria do conhecimento e filosofia da ciência e seu ensino;A Filosofia e as Tecnologias de seu Ensino;30;;29;9
+ESP923;92309;Estética e filosofia da arte e seu ensino;A Filosofia e as Tecnologias de seu Ensino;30;;27;10
+ESP923;92310;Didática do ensino de filosofia;A Pesquisa Filosófica em sala de aula;30;;30;11
+ESP923;92311;Pesquisa em filosofia na sala de aula;A Pesquisa Filosófica em sala de aula;30;;31;12
+ESP923;923TCC;TCC;Trabalho de conclusão de curso;180;;31;13
+ESP924;92401;Educação a distância;;30;1;3390;1
+ESP924;92402;Introdução à Informática;;30;1;23;2
+ESP924;92403;Processos psíquicos do desenvolvimento humano e aprendizagem escolar;;30;1;21;3
+ESP924;92404;Metodologia de pesquisa;;30;1;22;4
+ESP924;92405;Geografia Humana I: Espacialidades e dinâmicas territoriais recentes;;30;1;24;5
+ESP924;92406;Geografia Física: ensino e aplicabilidade;;30;1;25;6
+ESP924;92407;Estratégias de ensino em geografia;;30;2;26;7
+ESP924;92408;Cartografia digital;;30;2;28;8
+ESP924;92409;Geografia Humana II: leituras sobre o território;;30;2;29;9
+ESP924;92410;Dinâmica natural dos processos do meio físico;;30;2;27;10
+ESP924;92411;Mídias no ensino e pesquisa em geografia;;30;2;30;11
+ESP924;92412;Prevenção e mitigação de desastres naturais;;30;2;31;12
+ESP924;92413;Tópicos de pesquisa e ensino em geografia humana;;30;2;31;13
+ESP924;92414;Geotecnologias aplicadas à análise ambiental;;30;2;31;14
+ESP924;924TCC;TCC;;180;3;31;15
+ESP927;92701;Introdução a EAD;Experimentação - seduzidos pela matemática;40;;23;1
+ESP927;92702;Atividades Experimentais;Experimentação - seduzidos pela matemática;80;;21;2
+ESP927;92703;Funções Elementares;Fundamentação - envolvimento com o conhecimento científico;40;;22;3
+ESP927;92704;Matemática Discreta;Fundamentação - envolvimento com o conhecimento científico;40;;24;4
+ESP927;92705;Geometria Espacial;Fundamentação - envolvimento com o conhecimento científico;40;;25;5
+ESP927;92706;Conteúdo e Prática;Fundamentação - envolvimento com o conhecimento científico;40;;26;6
+ESP927;92707;Metodologia de Pesquisa;Prática - completude;40;;28;7
+ESP927;927TCC;TCC;Prática - completude;40;;31;8
+ESP928;92801;Introdução a Educação a Distância;;30;1;72;1
+ESP928;92802;Criatividade no Ambiente Escolar;;15;1;67;2
+ESP928;92803;Empreendedorismo em Unidades de Educação;;30;1;64;3
+ESP928;92804;Processo Decisório;;15;1;22;4
+ESP928;92805;Gestão da Informação;;30;1;70;5
+ESP928;92806;Engenharia do Conhecimento;;30;1;69;6
+ESP928;92807;Qualidade nos Sistemas de Informação;;30;2;74;7
+ESP928;92808;Interdisciplinariedade em Metodologia de Pesquisa;;15;2;79;8
+ESP928;92809;Metodologia de Pesquisa;;30;2;116;9
+ESP928;92811;Gestão da Tecnologia da Informação;;30;2;71;10
+ESP928;92812;Marketing de Relacionamento;;30;2;76;11
+ESP928;92813;Organização e Representação da Informação;;15;2;77;12
+ESP928;92814;Gestão Secretarial;;30;2;75;13
+ESP928;92815;Gestão do Conhecimento;;30;2;74;14
+ESP928;928TCC;TCC;;180;3;122;15
+ESP925;92501;Introdução à educação à distância;;35;1;;1
+ESP925;92502;Os movimentos sociais na história do Brasil;;35;1;;2
+ESP925;92503;O Brasil sob a égide da República;;35;1;;3
+ESP925;92504;Urbanização e modernidade no Brasil: leituras da cidade;;35;1;;4
+ESP925;92505;Seminário de pesquisa;;45;1;;5
+ESP925;92506;O ensino da África no ensino de história do Brasil: cultura, legislação e cidadania;;35;1;;6
+ESP925;92507;Brasil e América: relações culturais e políticas;;35;2;;7
+ESP925;92508;Estrutura sociopolítica e a formação do sistema colonial;;35;2;;8
+ESP925;92509;História e sociedade: olhares contemporâneos;;35;2;;9
+ESP925;92510;Espaço paranaense: olhares contemporâneos;;35;2;;10
+ESP925;92511;Ensino, pesquisa e história: o processo de formação docente;;35;2;;11
+ESP925;925TCC;Trabalho de conclusão de curso;;180;3;;12
+ESP926;92601;Introdução a Educação a Distância;;30;1;;1
+ESP926;92602;Fundamentos da Pedagogia Social;;40;1;;2
+ESP926;92603;Fundamentos de Pesquisa para Projetos de Intervenção;;30;1;;3
+ESP926;92609;Trânsito para a vida adulta de  jovens em dificuldade social;;30;1;;4
+ESP926;92608;Desenvolvimento Socioeducativo para adultos;;30;1;;5
+ESP926;92607;Construção da cidadania em crianças e adolescentes;;30;2;;6
+ESP926;92604;Animação sociocultural no contexto escolar;;30;2;;7
+ESP926;92610;Educação e Saúde-Pedagogia no hospital;;30;2;;8
+ESP926;92606;Sociologia e Drogadição;;30;2;;9
+ESP926;92605;Educação formal e penitenciária;;30;2;;10
+ESP926;92611;Indisciplina e violência na escola;;20;2;;11
+ESP926;92612;Projeto Prático de Intervenção Sociocultural;;60;3;;12
+ESP929;92901;Educação a distância e métodos de autoaprendizado;;40;1;;1
+ESP929;92902;Metodologia do Ensino Superior;;40;1;;2
+ESP929;92906;Metodologia do Trabalho Científico;;40;1;;3
+ESP929;92903;Educação Especial e Inclusão Escolar;;40;1;;4
+ESP929;92905;Língua Brasileira de Sinais;;40;1;;5
+ESP929;92907;Escrita de Língua de Sinais Brasileira;;40;2;;6
+ESP929;92904;Didática e Educação dos Surdos;;40;2;;7
+ESP929;92908;Intérprete de Língua de Sinais Brasileira em sala de aula;;40;2;;8
+ESP929;92909;Legislação de LIBRAS;;40;2;;9
+ESP929;929TCC;TCC;;180;3;;10

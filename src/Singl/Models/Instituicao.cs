@@ -42,6 +42,7 @@ namespace Singl.Models
 
         [Display(Name = "Histórico")]
         public string Historico { get; set; }
+        public string MensagemReitoria { get; set; }
 
         [Display(Name = "Missão")]
         public string Missao { get; set; }

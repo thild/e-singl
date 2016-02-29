@@ -18,13 +18,9 @@ namespace Singl
 
     public class DatabaseContext : IdentityDbContext<Usuario>
     {
-
         public DbSet<Instituicao> Instituicao { get; set; }
         public DbSet<Curriculo> Curriculos { get; set; }
-
-        //public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Papel> Papeis { get; set; }
-        //public DbSet<PapelUsuario> PapeisUsuarios { get; set; }
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Polo> Polos { get; set; }
         public DbSet<PoloCurso> PolosCurso { get; set; }
@@ -48,13 +44,8 @@ namespace Singl
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Docente> Docentes { get; set; }
         public DbSet<DocenteCurso> DocentesCurso { get; set; }
-
-
-        //Model metadata
         public DbSet<MetadataUI> MetadataUI { get; set; }
-
         public DbSet<Enquete> RelatoriosEvasao { get; set; }
-
         public DbSet<OfertaCurso> OfertasCurso { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -85,8 +76,6 @@ namespace Singl
         private static Usuario coordenadorUser = null;
         private static Usuario alunoUser = null;
         private static Usuario relatorUser = null;
-
-
 
 
         /// <summary>
@@ -183,116 +172,23 @@ namespace Singl
             
             DepartamentosMigration.Create(this);
             this.SaveChanges();
-
-//             var coordenador = new Pessoa { Usuario = coordenadorUser };
-//             var aluno = new Pessoa { Usuario = alunoUser };
-//             var relator = new Pessoa { Usuario = relatorUser };
-// 
-//             Pessoas.AddRange(coordenador, aluno, relator);
-
-//             //Projeto de pesquisa
-//             var pp = new ProjetoPesquisa
-//             {
-//                 Coordenador = coordenador,
-//                 Inicio = DateTime.Now,
-//                 Termino = DateTime.Now.AddYears(1),
-//                 Titulo = "Projeto de pesquisa teste",
-//                 Descricao = "Descrição do projeto de pesquisa teste",
-//                 Objetivos = "Objetivos do projeto de pesquisa teste",
-//                 Departamento = defil_g,
-//                 Tipo = TipoPesquisa.PqC,
-//             };
-//             pp.Pesquisadores.Add(aluno);
-//             pp.Pesquisadores.Add(relator);
-//             ProjetosPesquisa.Add(pp);
-// 
-//             var ppp = new PesquisadorProjetoPesquisa
-//             {
-//                 Pesquisador = coordenador,
-//                 ProjetoPesquisa = pp
-//             };
-//             PesquisadoresProjetosPesquisa.Add(ppp);
-
-          
-
-            var re = new Enquete
-            {
-                /*
-                Aluno = aluno,
-                Coordenador = coordenador,
-                Curso = curso,
-                DataRelatorio = DateTimeOffset.Now,
-                Disciplina = disciplina,
-                Relator = relator,
-                Polo = polo
-                */
-            };
-
-            RelatoriosEvasao.Add(re);
-
-
-            var q1 = new Questao
-            {
-                Enunciado = "Marque as causas de desistência evidenciadas pelo aluno:",
-                RelatorioEvasao = re
-            };
-
-            Questoes.Add(q1);
-
-            var q2 = new Questao
-            {
-                Enunciado = "Se a questão de desistência for relacionada a estrutura e funcionamento do curso, marque os motivos de tal desistência:",
-                RelatorioEvasao = re
-            };
-
-            Questoes.Add(q2);
-
-            /*
-                        var alternativas = new List<Alternativa> {
-                            new Alternativa {Texto = "Residência distante do Polo", Questao = q1},
-                            new Alternativa {Texto = "Está realizando,no momento, outro curso.", Questao = q1},
-                            new Alternativa {Texto = "O curso não atendeu as expectativas do aluno.", Questao = q1},
-                            new Alternativa {Texto = "Por motivo de doença.", Questao = q1},
-                            new Alternativa {Texto = "Mudança de cidade.", Questao = q1},
-                            new Alternativa {Texto = "Dificuldade de compatibilizar horários de trabalho e estudos.", Questao = q1},
-                            new Alternativa {Texto = "Problemas familiares.", Questao = q1},
-                            new Alternativa {Texto = "Falta de conhecimento de informática.", Questao = q1},
-                            new Alternativa {Texto = "Falta de orientação para o uso da plataforma moodle.", Questao = q1},
-                            new Alternativa {Texto = "Dificuldade de locomoção ao polo presencial.", Questao = q1},
-                            new Alternativa {Texto = "Outro", Questao = q1},
-                            new Alternativa {Texto = "Curso muito difícil", Questao = q1},
-                            new Alternativa {Texto = "A matriz curricular do curso não atendeu a expectativa dos alunos.", Questao = q1},
-                            new Alternativa {Texto = "A organização da disciplina não foi satisfatória.", Questao = q1},
-                            new Alternativa {Texto = "O cronograma das atividades do Curso não foi disponibilizado no momento da inscrição ou da matrícula.", Questao = q1},
-                            new Alternativa {Texto = "As ferramentas do moodle não são bem orientadas.", Questao = q1},
-                            new Alternativa {Texto = "Não participação no processo de imersão.", Questao = q1},
-                            new Alternativa {Texto = "O professor não dá o retorno sobre os questionamentos dos alunos", Questao = q1},
-                            new Alternativa {Texto = "Falta de respostas dos tutores.", Questao = q1},
-                            new Alternativa {Texto = "Fracasso em situações avaliativas", Questao = q1},
-                            new Alternativa {Texto = "Falta de acompanhamento da disciplina por parte dos professores e da coordenação.", Questao = q1},
-                            new Alternativa {Texto = "As transmissões de webconferência não são satisfatórias", Questao = q1},
-                            new Alternativa {Texto = "As webconferencias não atendem aos conteúdos das disciplinas", Questao = q1},
-                            new Alternativa {Texto = "O horário das webconferencias não está coerente com a disponibilidade de tempo dos alunos.", Questao = q1},
-                            new Alternativa {Texto = "As webconferências não estão articuladas com as dúvidas dos acadêmicos;", Questao = q1},
-                            new Alternativa {Texto = "Falta de estrutura do Polo para atendimento às necessidades dos alunos.", Questao = q1},
-                            new Alternativa {Texto = "Falta de acesso a internet nos laboratórios no Polo.", Questao = q1},
-                            new Alternativa {Texto = "Outro", Questao = q1},
-                        };
-
-                        Alternativas.AddRange(alternativas);
-                        */
-            Alternativas.Add(new Alternativa { Texto = "Residência distante do Polo", Questao = q1 });
-            Alternativas.Add(new Alternativa { Texto = "A organização da disciplina não foi satisfatória", Questao = q2 });
-
+            
+            PessoasMigration.Create(this);
             this.SaveChanges();
-
+            
             PolosMigration.Create(this);
             this.SaveChanges();
 
             PapeisMigration.Create(this);
             this.SaveChanges();
 
-            Curso570.Create(this);
+            // Curso570.Create(this);
+            // this.SaveChanges();
+
+            CursoESP312.Create(this);
+            this.SaveChanges();
+
+            CursoESP400.Create(this);
             this.SaveChanges();
 
             CursoESP920.Create(this);
@@ -310,7 +206,28 @@ namespace Singl
             CursoESP924.Create(this);
             this.SaveChanges();
 
+            CursoESP925.Create(this);
+            this.SaveChanges();
+
+            CursoESP926.Create(this);
+            this.SaveChanges();
+
             CursoESP927.Create(this);
+            this.SaveChanges();
+
+            CursoESP928.Create(this);
+            this.SaveChanges();
+            
+            CursoESP929.Create(this);
+            this.SaveChanges();
+            
+            DisciplinasMigration.Create(this);
+            this.SaveChanges();
+            
+            PessoasMigration.CreateDocenteCurso(this);
+            this.SaveChanges();
+
+            VinculosCursosMigration.Create(this);
             this.SaveChanges();
 
         }
@@ -580,3 +497,109 @@ namespace Singl
         }
     }
 }
+
+
+
+
+
+/*
+
+
+
+//             var coordenador = new Pessoa { Usuario = coordenadorUser };
+//             var aluno = new Pessoa { Usuario = alunoUser };
+//             var relator = new Pessoa { Usuario = relatorUser };
+// 
+//             Pessoas.AddRange(coordenador, aluno, relator);
+
+//             //Projeto de pesquisa
+//             var pp = new ProjetoPesquisa
+//             {
+//                 Coordenador = coordenador,
+//                 Inicio = DateTime.Now,
+//                 Termino = DateTime.Now.AddYears(1),
+//                 Titulo = "Projeto de pesquisa teste",
+//                 Descricao = "Descrição do projeto de pesquisa teste",
+//                 Objetivos = "Objetivos do projeto de pesquisa teste",
+//                 Departamento = defil_g,
+//                 Tipo = TipoPesquisa.PqC,
+//             };
+//             pp.Pesquisadores.Add(aluno);
+//             pp.Pesquisadores.Add(relator);
+//             ProjetosPesquisa.Add(pp);
+// 
+//             var ppp = new PesquisadorProjetoPesquisa
+//             {
+//                 Pesquisador = coordenador,
+//                 ProjetoPesquisa = pp
+//             };
+//             PesquisadoresProjetosPesquisa.Add(ppp);
+
+          
+
+            var re = new Enquete
+            {
+                Coordenador = coordenador,
+                Curso = curso,
+                DataRelatorio = DateTimeOffset.Now,
+                Disciplina = disciplina,
+                Relator = relator,
+                Polo = polo
+            };
+
+            RelatoriosEvasao.Add(re);
+
+
+            var q1 = new Questao
+            {
+                Enunciado = "Marque as causas de desistência evidenciadas pelo aluno:",
+                RelatorioEvasao = re
+            };
+
+            Questoes.Add(q1);
+
+            var q2 = new Questao
+            {
+                Enunciado = "Se a questão de desistência for relacionada a estrutura e funcionamento do curso, marque os motivos de tal desistência:",
+                RelatorioEvasao = re
+            };
+
+            Questoes.Add(q2);
+
+                        var alternativas = new List<Alternativa> {
+                            new Alternativa {Texto = "Residência distante do Polo", Questao = q1},
+                            new Alternativa {Texto = "Está realizando,no momento, outro curso.", Questao = q1},
+                            new Alternativa {Texto = "O curso não atendeu as expectativas do aluno.", Questao = q1},
+                            new Alternativa {Texto = "Por motivo de doença.", Questao = q1},
+                            new Alternativa {Texto = "Mudança de cidade.", Questao = q1},
+                            new Alternativa {Texto = "Dificuldade de compatibilizar horários de trabalho e estudos.", Questao = q1},
+                            new Alternativa {Texto = "Problemas familiares.", Questao = q1},
+                            new Alternativa {Texto = "Falta de conhecimento de informática.", Questao = q1},
+                            new Alternativa {Texto = "Falta de orientação para o uso da plataforma moodle.", Questao = q1},
+                            new Alternativa {Texto = "Dificuldade de locomoção ao polo presencial.", Questao = q1},
+                            new Alternativa {Texto = "Outro", Questao = q1},
+                            new Alternativa {Texto = "Curso muito difícil", Questao = q1},
+                            new Alternativa {Texto = "A matriz curricular do curso não atendeu a expectativa dos alunos.", Questao = q1},
+                            new Alternativa {Texto = "A organização da disciplina não foi satisfatória.", Questao = q1},
+                            new Alternativa {Texto = "O cronograma das atividades do Curso não foi disponibilizado no momento da inscrição ou da matrícula.", Questao = q1},
+                            new Alternativa {Texto = "As ferramentas do moodle não são bem orientadas.", Questao = q1},
+                            new Alternativa {Texto = "Não participação no processo de imersão.", Questao = q1},
+                            new Alternativa {Texto = "O professor não dá o retorno sobre os questionamentos dos alunos", Questao = q1},
+                            new Alternativa {Texto = "Falta de respostas dos tutores.", Questao = q1},
+                            new Alternativa {Texto = "Fracasso em situações avaliativas", Questao = q1},
+                            new Alternativa {Texto = "Falta de acompanhamento da disciplina por parte dos professores e da coordenação.", Questao = q1},
+                            new Alternativa {Texto = "As transmissões de webconferência não são satisfatórias", Questao = q1},
+                            new Alternativa {Texto = "As webconferencias não atendem aos conteúdos das disciplinas", Questao = q1},
+                            new Alternativa {Texto = "O horário das webconferencias não está coerente com a disponibilidade de tempo dos alunos.", Questao = q1},
+                            new Alternativa {Texto = "As webconferências não estão articuladas com as dúvidas dos acadêmicos;", Questao = q1},
+                            new Alternativa {Texto = "Falta de estrutura do Polo para atendimento às necessidades dos alunos.", Questao = q1},
+                            new Alternativa {Texto = "Falta de acesso a internet nos laboratórios no Polo.", Questao = q1},
+                            new Alternativa {Texto = "Outro", Questao = q1},
+                        };
+
+                        Alternativas.AddRange(alternativas);
+            Alternativas.Add(new Alternativa { Texto = "Residência distante do Polo", Questao = q1 });
+            Alternativas.Add(new Alternativa { Texto = "A organização da disciplina não foi satisfatória", Questao = q2 });
+
+            this.SaveChanges();
+*/

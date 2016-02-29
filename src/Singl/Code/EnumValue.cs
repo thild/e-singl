@@ -19,6 +19,12 @@ namespace Singl.Extensions
 
     public static class EnumHelpers
     {
+        
+        public static T ParseEnum<T>(string value)
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
+        }
+                
         public static EnumValue GetEnumValue(object value, Type enumType)
         {
             MemberInfo member = enumType.GetMember(value.ToString())[0];

@@ -127,7 +127,7 @@
     <div class="container-fluid">
         <div class="row no-gutter">
             <div class="col-lg-4 col-sm-6">
-                <a href="#" class="area-box">
+                <a href="http://www2.unicentro.br/proen" class="area-box">
                     <img src="/images/areas/1.jpg" class="img-responsive" alt="">
                     <div class="area-box-caption">
                         <div class="area-box-caption-content">
@@ -139,7 +139,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-                <a href="#" class="area-box">
+                <a href="http://www2.unicentro.br/propesp" class="area-box">
                     <img src="/images/areas/2.jpg" class="img-responsive" alt="">
                     <div class="area-box-caption">
                         <div class="area-box-caption-content">
@@ -151,7 +151,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-                <a href="#" class="area-box">
+                <a href="http://www.unicentro.br/proec" class="area-box">
                     <img src="/images/areas/3.jpg" class="img-responsive" alt="">
                     <div class="area-box-caption">
                         <div class="area-box-caption-content">
@@ -181,10 +181,13 @@
                 <h2 class="section-heading text-center">Conheça um pouco mais sobre a {{model?.Sigla}}</h2>
                 <hr class="primary">
                 <tabs>
-                    <tab title='História' active="true">
-                        <p>{{model?.Sobre}}</p>
+                    <tab title="História" active="true">
+                        <div [innerHTML]="model?.Historico"></div>
                     </tab>
-                    <tab title='Atos legais'>
+                    <tab title="Reitoria">
+                        <div [innerHTML]="model?.MensagemReitoria"></div>
+                    </tab>
+                    <tab title="Atos legais">
                         <ul>
                             <li><a href="http://www2.unicentro.br/wp-content/uploads/2014/11/Lei_9295_90_Insitui_a_UNICENTRO.pdf">Lei que institui a UNICENTRO</a></li>
                             <li><a href="http://www2.unicentro.br/wp-content/uploads/2014/11/Decreto_3444_97_Reconhecimento_da_UNICENTRO.pdf">Decreto de reconhecimento da UNICENTRO</a></li>

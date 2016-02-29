@@ -190,7 +190,7 @@ namespace Singl.Models
             dto.Polos = Polos == null ? null : Polos.Select(x => new {x.Id, x.Nome, x.Endereco, x.Cidade, x.Coordenador, x.Emails, x.Telefones });
             //TODO Se for docente retornar DocenteId
             dto.Vinculos = Vinculos == null ? null : Vinculos
-                .Select(x => new { x.PessoaId, x.Pessoa.NomeComAxionimo, x.Pessoa.Nome, Papel = x.Papel.Nome });
+                .Select(x => new { x.PessoaId, x.Pessoa.NomeComAxionimo, x.Pessoa.Nome, Papel = x.Papel.NomeGenerico });
             dto.ModalidadeEnsino = ModalidadeEnsino;
             dto.Nome = Nome;
             dto.Tags = Tags;
