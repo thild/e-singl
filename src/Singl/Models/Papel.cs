@@ -16,6 +16,8 @@ namespace Singl.Models
         [StringLength(100, MinimumLength = 5)]
         public string Nome { get; set; }
 
+        public string NomeGenerico { get; set; }
+
         string _nomeCurto = null;
         [StringLength(10, MinimumLength = 5)]
         public string NomeCurto

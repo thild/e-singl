@@ -109,7 +109,12 @@ export class AppComponent {
 
 @Component({
     selector: 'singl-app',
-    template: `<h1>Ajuda</h1>`
+    template: `
+    <h3>Singl - Educação fácil</h3>
+    <p>Em breve mais informações</p>
+    <hr />
+    <p>Desenvolvido por Tony Alexander Hild - Todos os direitos reservados</p>
+    `
 })
 export class AjudaComponent {
 
