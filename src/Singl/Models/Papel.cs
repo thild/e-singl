@@ -30,5 +30,8 @@ namespace Singl.Models
                 _nomeCurto = value;
             }
         }
+
+        public int Ordem { get;  set; }
+        public string Categoria { get;  set; }
     }
 }

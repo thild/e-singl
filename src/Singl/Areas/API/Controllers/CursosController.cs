@@ -129,6 +129,7 @@ namespace Singl.Areas.API.Controllers
                 .ToList();
                 
             curso.Vinculos = _context.VinculosCurso
+                .Include(m => m.Papel)
                 .Where(m => m.CursoId == curso.Id && m.Fim == DateTimeOffset.MaxValue)
                 .Select( m =>
                     new VinculoCurso {
@@ -141,7 +142,10 @@ namespace Singl.Areas.API.Controllers
                         PessoaId = m.PessoaId,
                         Pessoa = m.Pessoa   
                     }
-                    ).ToList();
+                    )
+                    .OrderBy(m => m.Papel.Categoria)
+                    .ThenBy(m => m.Papel.Ordem)
+                    .ToList();
 
             var dto = curso.ToDto();
             dto.MetadataUI = _context.MetadataUI.SingleOrDefault(m => m.ModelId == curso.Id);

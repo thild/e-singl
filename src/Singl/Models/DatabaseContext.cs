@@ -184,6 +184,8 @@ namespace Singl
 
             // Curso570.Create(this);
             // this.SaveChanges();
+            CursoED010AP.Create(this);
+            this.SaveChanges();
 
             CursoESP312.Create(this);
             this.SaveChanges();
@@ -206,7 +208,7 @@ namespace Singl
             CursoESP924.Create(this);
             this.SaveChanges();
 
-            CursoESP925.Create(this);
+            CursoESP925.Create(this); 
             this.SaveChanges();
 
             CursoESP926.Create(this);
