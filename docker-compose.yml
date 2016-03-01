@@ -1,0 +1,15 @@
+singl:
+  build: .
+  dockerfile: singl.dockerfile
+  container_name: singl
+  ports:
+    - "5004:5004"
+    
+http_server:
+  build: .
+  dockerfile: http_server.dockerfile
+  container_name: http_server
+  ports:
+    - "8888:80"
+  links:
+    - singl

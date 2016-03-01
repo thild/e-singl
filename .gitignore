@@ -218,3 +218,4 @@ FakesAssemblies/
 
 #Exclusivos NEAD
 docs/
+*.~lock*

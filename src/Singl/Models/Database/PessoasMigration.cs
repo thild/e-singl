@@ -42,9 +42,11 @@ namespace Singl.Database.Migrations
             var cursos = context.Cursos.ToDictionary(m => m.Codigo);
             var docentes = context.Docentes
                 .Include(m => m.Pessoa)
-                .ToDictionary(m => m.Pessoa.Nome);
+                .ToDictionary(m => {
+                    System.Console.WriteLine(m.Pessoa.Nome);
+                    return m.Pessoa.Nome;});
 
-            foreach (var item in _pessoas)
+            foreach (var item in _pessoas) 
             {
                 if (item.Docente == "1")
                 {
