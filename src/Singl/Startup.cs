@@ -164,17 +164,17 @@ namespace Singl
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             }); 
-// 
-//             if (System.IO.File.Exists("singl.sqlite"))
-//             {
-//                 System.Console.WriteLine("Deleted singl.sqlite");
-//                 System.IO.File.Delete("singl.sqlite");
-//             }
-// 
-//             using (var context = new DatabaseContext())
-//             {
-//                 context.InitializeStoreDatabaseAsync(app.ApplicationServices).Wait();
-//             }
+
+            if (System.IO.File.Exists("singl.sqlite"))
+            {
+                System.Console.WriteLine("Deleted singl.sqlite");
+                System.IO.File.Delete("singl.sqlite");
+            }
+
+            using (var context = new DatabaseContext())
+            {
+                context.InitializeStoreDatabaseAsync(app.ApplicationServices).Wait();
+            }
         }
 
         private void ConfigureMappers()
