@@ -16,7 +16,7 @@ export class FilterPipe implements PipeTransform {
 //             args[0] == null) {
 //             return value;
 //         };
-//         // /spa/models?filter=field,value
+//         // /models?filter=field,value
 //       
 //         return value.filter(m => {
 //             var prop = args[0].property.split('.').reduce((o, i) => o[i], m);

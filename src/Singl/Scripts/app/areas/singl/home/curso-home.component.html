@@ -10,7 +10,7 @@
             <h3>{{instituicao?.Nome}}</h3>
             <h4 *ngIf="model?.Tags?.indexOf('NEAD') != -1">Núcleo de Educação a Distância</h4>
             <h4>{{model?.Departamento?.Nome}}</h4>
-            <a href="/spa/cursos/{{model?.Codigo}}/home#apresentacao" class="btn btn-primary btn-xl page-scroll">Apresentação</a>
+            <a href="/cursos/{{model?.Codigo}}/home#apresentacao" class="btn btn-primary btn-xl page-scroll">Apresentação</a>
         </div>
     </div>
 </header>
@@ -26,7 +26,7 @@
                 <hr class="light">
                 <div class="text-faded text-justify text-list" [innerHTML]="model?.PerfilEgresso"></div>
                 <div style="margin-top: 20px">
-                    <a href="/spa/cursos/{{model?.Codigo}}/home#more" class="btn btn-default btn-xl page-scroll">Informações adicionais</a>
+                    <a href="/cursos/{{model?.Codigo}}/home#more" class="btn btn-default btn-xl page-scroll">Informações adicionais</a>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="container">
             <div class="row top30">
                 <div class="col-lg-12 text-center">
-                    <a href="/spa/cursos/{{model?.Codigo}}/home#areas" class="btn btn-primary btn-xl page-scroll">Comece agora!</a>
+                    <a href="/cursos/{{model?.Codigo}}/home#areas" class="btn btn-primary btn-xl page-scroll">Comece agora!</a>
                 </div>
             </div>
         </div>
