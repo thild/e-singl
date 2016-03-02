@@ -1,273 +1,244 @@
 @inject IOptions<AppSettings> AppSettings
-@model Singl.ViewModels.HomeIndexViewModel
+@inject IHostingEnvironment HostingEnvironment
 
 @{
-    ViewData["Title"] = "Página Inicial";
+    ViewBag.Title = "Singl - Educação fácil";
+    Layout = "";
 }
 
-@section Head {
-        <link asp-append-version="true" rel="stylesheet" href="~/css/animate.css" />
-        <link asp-append-version="true" rel="stylesheet" href="~/css/home.css" />
+<!doctype html>
+@* lang - The language of the page. *@
+@* no-js - The no JavaScript class is removed by modernizr if JavaScript is available. *@
+<html class="no-js" lang="pt-br">
+    <head asp-open-graph-prefix="true">
+        <base href="/">
+        @* The order of the tags in the head is important for best performance and compatibility.
+        @* charset - The character encoding of the document. *@
+        <meta charset="utf-8">
+        @* viewport - Set the scale on mobile devices (For more info see https://developer.mozilla.org/en/docs/Mozilla/Mobile/Viewport_meta_tag). *@
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
+        @* title - The title of the page which appears in the browser window title. Aim for the title to be less than 70
+            characters. The site name appears at the end for better SEO. *@
+        <title>@ViewBag.Title - @AppSettings.Value.SiteTitle</title>
+    
+    
+        @* Icons & Platform Specific Settings (See http://rehansaeed.com/internet-favicon-madness/ for detailed
+            information). The order of these icons is very important. *@
+        @* $Start-AppleIOSFavicons$ *@
+        
+        @* Apple Icons - See https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Introduction.html#//apple_ref/doc/uid/30001261-SW1 *@
+        @* apple-touch-icon-57x57.png - Android Stock Browser and non-Retina iPhone and iPod Touch *@
+        <link rel="apple-touch-icon" sizes="57x57" href="/img/icons/apple-touch-icon-57x57.png">
+        @* apple-touch-icon-60x60.png - Same as apple-touch-icon-57x57.png, for non-retina iPhone with iOS7. *@
+        <link rel="apple-touch-icon" sizes="60x60" href="/img/icons/apple-touch-icon-60x60.png">
+        @* apple-touch-icon-72x72.png - iPad mini and the first- and second-generation iPad (1× display) on iOS ≤ 6 *@
+        <link rel="apple-touch-icon" sizes="72x72" href="/img/icons/apple-touch-icon-72x72.png">
+        @* apple-touch-icon-76x76.png - iPad mini and the first- and second-generation iPad (1× display) on iOS ≥ 7 *@
+        <link rel="apple-touch-icon" sizes="76x76" href="/img/icons/apple-touch-icon-76x76.png">
+        @* apple-touch-icon-114x114.png - iPhone (with 2× display) iOS ≤ 6 *@
+        <link rel="apple-touch-icon" sizes="114x114" href="/img/icons/apple-touch-icon-114x114.png">
+        @* apple-touch-icon-120x120.png - iPhone (with 2× and 3 display) iOS ≥ 7 *@
+        <link rel="apple-touch-icon" sizes="120x120" href="/img/icons/apple-touch-icon-120x120.png">
+        @* apple-touch-icon-144x144.png - iPad (with 2× display) iOS ≤ 6 *@
+        <link rel="apple-touch-icon" sizes="144x144" href="/img/icons/apple-touch-icon-144x144.png">
+        @* apple-touch-icon-152x152.png - iPad 3+ (with 2× display) iOS ≥ 7 *@
+        <link rel="apple-touch-icon" sizes="152x152" href="/img/icons/apple-touch-icon-152x152.png">
+        @* apple-touch-icon-180x180.png - iPad and iPad mini (with 2× display) iOS ≥ 8 *@
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon-180x180.png">
+        @* $End-AppleIOSFavicons$ *@
+    
+        @* $Start-AppleMacSafariFavicon$ *@
+        @* favicon-32x32.png - For Safari on Mac OS. *@
+        <link rel="icon" type="image/png" href="/img/icons/favicon-32x32.png" sizes="32x32">
+        @* $End-AppleMacSafariFavicon$ *@
+        @* $Start-AndroidChromeM36ToM38Favicon$ *@
+        @* favicon-192x192.png - For Android Chrome M36 to M38 this icon is used. M39+ uses the manifest.json file specified below. *@
+        <link rel="icon" type="image/png" href="/img/icons/favicon-192x192.png" sizes="192x192">
+        @* $End-AndroidChromeM36ToM38Favicon$ *@
+        @* $Start-GoogleTvFavicon$ *@
+        @* favicon-96x96.png - For Google TV. *@
+        <link rel="icon" type="image/png" href="/img/icons/favicon-96x96.png" sizes="96x96">
+        @* $End-GoogleTvFavicon$ *@
+        @* favicon-16x16.png - The classic favicon, displayed in the tabs. *@
+        <link rel="icon" type="image/png" href="/img/icons/favicon-16x16.png" sizes="16x16">
+        @* $Start-WebAppCapable$ *@
+    
+        @* apple-mobile-web-app-title - The name of the application if pinned to the IOS start screen. *@
+        <meta name="apple-mobile-web-app-title" content="@AppSettings.Value.SiteShortTitle">
+        @* apple-mobile-web-app-capable - Hide the browsers user interface on IOS, when the app is run in 'stand-alone'
+            mode. Any links to other pages that are clicked whilst your app is in stand-alone mode will launch the full
+            Safari browser. *@
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        @* apple-mobile-web-app-status-bar-style - default/black/black-translucent Styles the IOS status bar. Using
+            black-translucent makes it transparent and overlays it on top of your site, so make sure you have enough margin. *@
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+        @* Apple Startup Images - These splash screen images are only shown if apple-mobile-web-app-capable is set to true.
+            See https://gist.github.com/tfausak/2222823 *@
+        @* apple-touch-startup-image-1536x2008.png - iOS 6 & 7 iPad (retina, portrait) *@
+        <link rel="apple-touch-startup-image" href="/img/icons/apple-touch-startup-image-1536x2008.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)">
+        @* apple-touch-startup-image-1496x2048.png - iOS 6 & 7 iPad (retina, landscape) *@
+        <link rel="apple-touch-startup-image" href="/img/icons/apple-touch-startup-image-1496x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)">
+        @* apple-touch-startup-image-768x1004.png - iOS 6 iPad (portrait) *@
+        <link rel="apple-touch-startup-image" href="/img/icons/apple-touch-startup-image-768x1004.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)">
+        @* apple-touch-startup-image-748x1024.png - iOS 6 iPad (landscape) *@
+        <link rel="apple-touch-startup-image" href="/img/icons/apple-touch-startup-image-748x1024.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)">
+        @* apple-touch-startup-image-640x1096.png - iOS 6 & 7 iPhone 5 *@
+        <link rel="apple-touch-startup-image" href="/img/icons/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+        @* apple-touch-startup-image-640x920.png - iOS 6 & 7 iPhone (retina) *@
+        <link rel="apple-touch-startup-image" href="/img/icons/apple-touch-startup-image-640x920.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)">
+        @* apple-touch-startup-image-320x460.png - iOS 6 iPhone *@
+        <link rel="apple-touch-startup-image" href="/img/icons/apple-touch-startup-image-320x460.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)">
+        @* $End-WebAppCapable$ *@
+        @* $Start-AndroidChromeM39Favicons$ *@
+    
+        @* Android/Chrome *@
+        @* manifest-json - The location of the browser configuration file. It contains locations of icon files, name of the
+            application and default device screen orientation. Note that the name field is mandatory.
+            See https://developer.chrome.com/multidevice/android/installtohomescreen. *@
+        <!--<link rel="manifest" href="Url.RouteUrl(HomeControllerRoute.GetManifestJson)">-->
+        @* theme-color - The colour of the toolbar in Chrome M39+
+            See http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android *@
+        <meta name="theme-color" content="#1E1E1E">
+        @* $Start-WebAppCapable$ *@
+        @* mobile-web-app-capable - Run Android/Chrome version M31 to M38 in stand-alone mode, hiding the browser chrome. *@
+        <meta name="mobile-web-app-capable" content="yes">
+        @* $End-WebAppCapable$ *@
+        @* $End-AndroidChromeM39Favicons$ *@
+    
+        @* Windows 7 Taskbar - This depends on your site, so no code here. See http://www.buildmypinnedsite.com/windows7 *@
+        @* $Start-Windows8IE10Favicon$ *@
+
+        @* Windows 8 IE10 *@
+        @* application-name - The name of the application if pinned to the start screen. *@
+        <meta name="application-name" content="@AppSettings.Value.SiteShortTitle">
+        @* msapplication-TileColor - The tile colour which shows around your tile image (msapplication-TileImage). *@
+        <meta name="msapplication-TileColor" content="#5cb95c">
+        @* msapplication-TileImage - The tile image. *@
+        <meta name="msapplication-TileImage" content="/img/icons/mstile-144x144.png">
+        @* $End-Windows8IE10Favicon$ *@
+        @* $Start-Windows81IE11EdgeFavicon$ *@
+
+        @* Windows 8.1/10 IE11/Edge - See http://www.buildmypinnedsite.com *@
+        @* msapplication-config - The location of the browser configuration file. This is not required if the
+            browserconfig.xml file is at the root of the site (Which it is). *@
+        @* <meta name="msapplication-config" content="@Url.RouteUrl(HomeControllerRoute.GetBrowserConfigXml)"> *@
+        @* $End-Windows81IE11EdgeFavicon$ *@
+
+        @* Move site.css to a content delivery network (CDN) for better performance. *@
+        <meta name="x-font-awesome-stylesheet-fallback-test" class="fa">
         <environment names="Development">
-            <link asp-append-version="true" rel="stylesheet" href="~/css/bootstrap-touch-carousel.css" />
+            <script src="/lib/modernizr.js"></script>
+            <link asp-append-version="true" rel="stylesheet" href="/css/font-awesome.css" />
+            <link asp-append-version="true" rel="stylesheet" href="/css/bootstrap.css" />
+            <link asp-append-version="true" rel="stylesheet" href="/css/animate.css" />
+            <link asp-append-version="true" rel="stylesheet" href="/css/global.css" />
+            @* Find a modernizr bower*@            
+            <!--<script asp-append-version="true" src="/lib/modernizr.js"></script>-->
         </environment>
         <environment names="Staging,Production">
-            <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/css/bootstrap-touch-carousel.css"
-                  asp-fallback-href="~/css/bootstrap-touch-carousel.css"
-                  asp-fallback-test-class="carousel-caption" asp-fallback-test-property="display" asp-fallback-test-value="none" />
+            <!--<script asp-append-version="true" src="/lib/modernizr.js"></script>-->
+            <script src="//ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+                  asp-fallback-href="/css/font-awesome.min.css"
+                  asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+            <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
+                  asp-fallback-href="/css/bootstrap.min.css"
+                  asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+            <link asp-append-version="true" rel="stylesheet" href="/css/animate.min.css" />
+            <link asp-append-version="true" rel="stylesheet" href="/css/global.min.css" />
         </environment>
+    
+        @* Description - Used by search engines. Aim for more than 160 characters. *@
+        <meta name="description" content="@ViewBag.Description">
         
-        <!-- Custom Fonts -->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+        <!--<script src="/lib/webcomponents-lite.js"></script>
+        <link rel="import" href="/lib/polymer.html">
+        <link rel="import" href="/lib/google-map.html">      -->
+        
+
+    </head>
     
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-}  
-@* nav - The main navigation for the site. *@
-<nav id="mainNav" class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span aria-hidden="true" class="sr-only">Ligar/desligar navegação</span>
-                <span aria-hidden="true" class="icon-bar"></span>
-                <span aria-hidden="true" class="icon-bar"></span>
-                <span aria-hidden="true" class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand page-scroll" href="#page-top">@AppSettings.Value.SiteTitle</a>
-        </div>
+<body id="page-top" style="padding-top: 50px;" autoscroll="true">
+        <singl-app>
+            Loading...
+        </singl-app>    
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a class="page-scroll" href="#about">Sobre</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#values">Valores</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#areas">Áreas de atuação</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#contact">Contato</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-</nav>
-
-
-<!--<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a asp-controller="Home" asp-action="Index" class="navbar-brand">Singl</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-controller="Home" asp-action="About">About</a></li>
-                <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-            </ul>
-        </div>
-    </div>
-</div>-->
-
-<header id="main">
-    <div class="header-content">
-        <div class="header-content-inner">
-            <h1>@Model.Instituicao.Nome</h1>
-            <hr>
-            <p>@Model.Instituicao.Vinculo</p>
-            <a href="#about" class="btn btn-primary btn-xl page-scroll">Saiba mais</a>
-        </div>
-    </div>
-</header>
-
-<section class="bg-primary" id="about">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <h2 class="section-heading">Sobre o NEAD!</h2>
-                <hr class="light">
-                <p class="text-faded">@Model.Instituicao.Sobre</p>
-                <a  href="#areas" class="btn btn-default btn-xl page-scroll" >Comece agora!</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="values">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Nossos valores</h2>
-                <hr class="primary">
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-certificate wow bounceIn text-primary"></i>
-                    <h3>Excelência</h3>
-                    <p class="text-muted">Cursos certificados, reconhecidos e de qualidade!</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-group wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                    <h3>Profissionalismo</h3>
-                    <p class="text-muted">Competência, comprometimento e responsabilidade no ensino!</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                    <h3>Atualização</h3>
-                    <p class="text-muted">Ensino de vanguarda e pesquisa estado da arte!</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
-                    <h3>Amor pelo que fazemos</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="no-padding" id="areas">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Áreas de atuação</h2>
-                <hr class="primary">
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row no-gutter">
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="area-box">
-                    <img src="~/images/areas/1.jpg" class="img-responsive" alt="">
-                    <div class="area-box-caption">
-                        <div class="area-box-caption-content">
-                            <div class="project-category text-faded">
-                                Ensino
-                            </div>
-                            <!--<div class="project-name">
-                                Project Name
-                            </div>-->
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="area-box">
-                    <img src="~/images/areas/2.jpg" class="img-responsive" alt="">
-                    <div class="area-box-caption">
-                        <div class="area-box-caption-content">
-                            <div class="project-category text-faded">
-                                Pesquisa
-                            </div>
-                            <!--<div class="project-name">
-                                Project Name
-                            </div>-->
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="area-box">
-                    <img src="~/images/areas/3.jpg" class="img-responsive" alt="">
-                    <div class="area-box-caption">
-                        <div class="area-box-caption-content">
-                            <div class="project-category text-faded">
-                                Extensão
-                            </div>
-                            <!--<div class="project-name">
-                                Project Name
-                            </div>-->
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<aside class="bg-dark">
-    <div class="container text-center">
-        <div class="call-to-action">
-            <!--<a asp-controller="Departamentos" class="btn btn-default btn-xl wow tada">Encontre seu curso!</a>-->
-            <a href="/cursos?filter=ModalidadeEnsino.Name,Distancia" class="btn btn-default btn-xl wow tada">Encontre seu curso!</a>
-        </div>
-    </div>
-</aside>
-
-<section id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <h2 class="section-heading">Entre em contato!</h2>
-                <hr class="primary">
-                <p>Gostaria de saber como estudar em uma das melhores universidade do país? Que ótimo! Nos telefone ou nos mande um e-mail que teremos o prazer em responder o mais breve possível!</p>
-            </div>
-            <div class="col-lg-4 col-lg-offset-2 text-center">
-                <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                <p>+55 (42) 3621-1095</p>
-            </div>
-            <div class="col-lg-4 text-center">
-                <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                <p><a href="mailto:@Model.Instituicao.Email">@Model.Instituicao.Email</a></p>
-            </div>
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <hr class="primary">
-                <address>
-                    <strong>@Model.Instituicao.Nome</strong><br>
-                    @Model.Instituicao.Endereco<br>
-                    <abbr title="Phone">Fone:</abbr>@Model.Instituicao.Telefone<br>
-                    <abbr title="Fax">Fax:</abbr>@Model.Instituicao.Fax
-                </address>                
-            </div>
-        </div>
-    </div>
-</section>
+        <hr />
+        <footer ole="contentinfo">
+            <p>&copy; @DateTime.Now.Year - @AppSettings.Value.SiteTitle</p>
+        </footer>
+            
+        <environment names="Development">
+            <script asp-append-version="true" src="/lib/jquery.js"></script>
+            <script asp-append-version="true" src="/lib/bootstrap.js"></script>
+            <script asp-append-version="true" src="/lib/hammer.js"></script>
+            <script asp-append-version="true" src="/lib/bootstrap-touch-carousel.js"></script>
+            <script asp-append-version="true" src="/lib/jquery.easing.js"></script>
+            <script asp-append-version="true" src="/lib/jquery.fittext.js"></script>
+            <script asp-append-version="true" src="/lib/wow.js"></script>
+            <script asp-append-version="true" src="/lib/system.js"></script>
+            <script asp-append-version="true" src="/lib/Rx.js"></script>
+            <script asp-append-version="true" src="/lib/angular2.js"></script>
+            <script asp-append-version="true" src="/js/site.js"></script>
+            <script asp-append-version="true" src="/js/home.js"></script>
+            <!--<script asp-append-version="true" src="/lib/jquery.validate.js"></script>-->
+            <!--<script asp-append-version="true" src="/lib/jquery.validate.unobtrusive.js"></script>                   -->
+        </environment>
+        <environment names="Staging,Production">
+            <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
+                    asp-fallback-src="/lib/jquery.min.js"
+                    asp-fallback-test="window.jQuery">
+            </script>
+            <script src="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
+                    asp-fallback-src="/lib/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+            </script>
+            <script src="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/lib/bootstrap-touch-carousel.js"
+                    asp-fallback-src="/lib/bootstrap-touch-carousel.js"
+                    asp-fallback-test="window.Hammer && window.Hammer.Instance">
+            </script>
+            <script asp-append-version="true" src="/lib/jquery.easing.min.js"></script>
+            <script asp-append-version="true" src="/lib/jquery.fittext.min.js"></script>
+            <script asp-append-version="true" src="/lib/wow.min.js"></script>
+            <script src="//ajax.aspnetcdn.com/ajax/hammer.js/2.0.4/hammer.min.js"
+                    asp-fallback-src="/lib/hammer.min.js"
+                    asp-fallback-test="window.Hammer">
+            </script>
+            <script src="/lib/system.min.js"></script>
+            <script src="/lib/Rx.min.js"></script>
+            <script src="/lib/angular2.min.js"></script>
+            <script asp-append-version="true" src="/js/site.min.js"></script>
+            <script asp-append-version="true" src="/js/home.min.js"></script>
+            <!--<script src="/lib/jquery.validate.min.js"></script>-->
+            <!--<script src="/lib/jquery.validate.unobtrusive.min.js"></script>            -->
+        </environment>
 
 
-@section Scripts {
-    
-    <environment names="Development">
-        <script asp-append-version="true" src="/lib/bootstrap-touch-carousel.js"></script>
-        <script asp-append-version="true" src="/lib/jquery.easing.js"></script>
-        <script asp-append-version="true" src="/lib/jquery.fittext.js"></script>
-        <script asp-append-version="true" src="/lib/wow.js"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script src="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/lib/bootstrap-touch-carousel.js"
-                asp-fallback-src="/lib/bootstrap-touch-carousel.js"
-                asp-fallback-test="window.Hammer && window.Hammer.Instance">
-        </script>
-        <script asp-append-version="true" src="/lib/jquery.easing.js"></script>
-        <script asp-append-version="true" src="/lib/jquery.fittext.js"></script>
-        <script asp-append-version="true" src="/lib/wow.js"></script>
-    </environment>
-    <script asp-append-version="true" src="/js/home.js"></script>
-}
+        <!--Configure Polymer - hold for now-->
+        <!--<script src="/lib/webcomponents.js"></script>
+        <script>
+            var Polymer = Polymer || {};
+            Polymer.dom = 'shadow';
+        </script>        
+        <link rel="import" href="/lib/google-map.html">-->
 
+        <!-- 2. Configure SystemJS -->
+        <script>
+            System.config({
+                packages: {        
+                    app: {
+                        format: 'register',
+                        defaultExtension: 'js'
+                    }
+                }
+            });
+            System.import('app/areas/singl/boot')
+                    .then(null, console.error.bind(console));
+        </script>     
+    </body>
+</html>

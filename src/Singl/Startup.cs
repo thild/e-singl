@@ -144,7 +144,7 @@ namespace Singl
 
                 routes.MapRoute(
                     name: "controllerActionRoute",
-                    template: "{controller=SPA}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
 
                 // routes.MapRoute(
                 //     name: "departamentos",
@@ -159,7 +159,7 @@ namespace Singl
                 routes.MapRoute(
                     "DeepLink",
                     "{*pathInfo}",
-                    defaults: new { controller = "SPA", action = "Index" });                    
+                    defaults: new { controller = "Home", action = "Index" });                    
 
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
