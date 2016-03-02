@@ -200,6 +200,7 @@ namespace Singl.Models
             dto.PerfilEgresso = PerfilEgresso;
             dto.Endereco = Endereco;
             dto.Apresentacao = Apresentacao;
+            dto.UrlDocumentoAprovacao = UrlDocumentoAprovacao;
             dto.Telefone = Telefone;
             dto.Fax = Fax;
             dto.Email = Email;
