@@ -22,7 +22,7 @@ var gulp = require("gulp"),
   // $Start-CshtmlMinification$
   minifyCshtml = require("gulp-minify-cshtml"), // Minifies CSHTML (https://www.npmjs.com/package/gulp-minify-cshtml)
   // $End-CshtmlMinification$
-  minifyCss = require("gulp-minify-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css/)
+  minifyCss = require("gulp-clean-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css/)
   plumber = require("gulp-plumber"),          // Handles Gulp errors (https://www.npmjs.com/package/gulp-plumber)
   rename = require("gulp-rename"),            // Renames file paths (https://www.npmjs.com/package/gulp-rename/)
   shell = require("gulp-shell"),            // Call shell scripts (https://www.npmjs.com/package/gulp-shell/)
