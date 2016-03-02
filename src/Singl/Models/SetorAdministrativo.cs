@@ -96,7 +96,7 @@ namespace Singl.Models
         [ScaffoldColumn(true)]
         [Display(Name = "Vínculos")]
         public IList<VinculoSetorAdministrativo> Vinculos { get; } = new List<VinculoSetorAdministrativo>();
-
+        public string Historico { get; set; }
 
         public dynamic ToDto()
         {
@@ -109,6 +109,7 @@ namespace Singl.Models
             dto.Subsetores = Subsetores == null ? null : Subsetores.Select(x => new { x.Id, x.Nome, x.Sigla, x.SiglaCampus });
             dto.Nome = Nome;
             dto.Sobre = Sobre;
+            dto.Historico = Historico;
             dto.Endereco = Endereco;
             dto.UrlFacebook = UrlFacebook;
             dto.Telefone = Telefone;

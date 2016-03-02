@@ -19,7 +19,7 @@
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <h2 class="section-heading">Sobre o NEAD!</h2>
                 <hr class="light">
-                <p class="text-faded">{{model?.Sobre}}</p>
+                <div class="text-faded text-justify" [innerHTML]="model?.Sobre"></div>
                 <a href="/setoresadministrativos/NEAD/SC/home#values" class="btn btn-default btn-xl page-scroll">Como trabalhamos</a>
             </div>
         </div>
@@ -142,12 +142,63 @@
                 <hr class="primary">
                 <tabs>
                     <tab title='História' active="true">
-                        <p class="text-justify">{{model?.Sobre}}</p>
+                        <div class="text-justify" [innerHTML]="model?.Historico"></div>
+                    </tab>
+                    <tab title='Abrangência'>
+                        <h3>As condições sociais e econômicas da região de influência da Unicentro</h3>
+                        <p>As estatísticas oficiais indicam o quão desafiador é o papel formativo da Universidade Estadual do
+                            Centro-Oeste (Unicentro) na sua região geográfica de influência direta – o Centro do Paraná –
+                            e, na sequência, nos espaços onde estão os polos em que a instituição atua. Os números são díspares:
+                            ao mesmo tempo em que se tem o Paraná como o Estado 5. colocado no ranking nacional do Índice
+                            de Desenvolvimento Humano (IDH), é possível verificar que Inácio Martins, uma cidade entre as
+                            duas sedes da Unicentro – Guarapuava e Irati -, é apenas a 394. quarta colocada entre os 399
+                            municípios do Estado quanto ao mesmo IDH. Seu patamar (dados de 2010) de 0,600 é apenas superior
+                            a apenas outros cinco municípios do PR, de acordo com o Ipardes, Instituto Paranaense de Desenvolvimento
+                            Econômico e Social.</p>
+                        <p>Cabe ressaltar que mesmo Guarapuava e Irati têm desafios neste sentido. Uma das 10 maiores áreas
+                            do PR em população, Guarapuava ostenta IDH na faixa de 0,731, o que lhe conferia, em 2010, apenas
+                            a 78. posição dentre 399, algo pouco acima de Irati – 0,726 e 94. lugar. Há mais: se voltarmos
+                            nosso olhar para outro eixo nas cercanias de Guarapuava, não veremos resultados muito melhores:
+                            Goioxim, distante 90 km da sede da Unicentro, estava na posição 368 no IDH de 2010. Cantagalo
+                            (a 80 km) é a 378, enquanto que Rebouças (a 30 km de Irati) ficou em 318. lugar em 2010. </p>
+                        <p>Trata-se, portanto, de uma espécie de bolsão social e econômico no Centro do Paraná que deve e necessita
+                            ser transformado. Ao qualificar o alunado que nela ingressa em seus cursos presenciais, a Unicentro
+                            contribui sobremaneira para o processo coletivo que almeja o desenvolvimento integrado e sustentável
+                            desse pedaço do Paraná. </p>
+                        <p>Agora, se ampliarmos o escopo do nosso olhar para os espaços geográficos abarcados pelos polos de
+                            EaD da Unicentro não necessariamente encontraremos um quadro melhor: em Flor da Serra do Sul,
+                            a 280 km de Guarapuava, o IDH de 0,682 confere à cidade apenas a 292. posição no PR. Lá, o polo
+                            de EaD atende um pedaço do Sudoeste do Estado, uma das áreas mais distantes da Capital e que,
+                            fisicamente, está mais próxima da Argentina do que dos grandes centros do Estado. Em outra ponta,
+                            mais em direção ao Norte, o polo de Engenheiro Beltrão atende localidades como Godoy Moreira,
+                            a 316. no ranking do IDH. Encravada em uma zona produtora de cana de açúcar, a cidade de Godoy
+                            Moreira está encolhendo. Em 2015, a população estimada pelo Instituto Brasileiro de Geografia
+                            e Estatística (IBGE) era de 3.245 pessoas. O censo de 2010 apontou 3.337 moradores, enquanto
+                            que dados de 2007 indicavam 3.499 habitantes. Ofertar uma graduação na modalidade de EaD para
+                            quem reside em Godoy Moreira tende a ser uma excelente oportunidade de contribuir para a qualificação
+                            da mão de obra local e, mais do que isso,desestimular o êxodo urbano e rural.</p>
+                        <p>E esse é apenas um dos exemplos do que a EaD oferecida pela Unicentro pode (e tem feito) fazer em
+                            um Estado que é, notadamente, um dos mais prósperos do País. As informações a seguir sustentam
+                            esse desenvolvimento do Estado: (inserir os links do Ipardes)</p>
                     </tab>
                     <tab title='Setores'>
-                        <model-list selectionProperty="Sigla" descriptionProperty="Nome" detailNavigationUrl="`/setoresadministrativos/${model.Sigla}/${model.SiglaCampus}`" [list]="model?.Subsetores" showFilters=false></model-list>
+                        <model-list selectionProperty="Sigla" descriptionProperty="Nome" detailNavigationUrl="`/setoresadministrativos/${model.Sigla}/${model.SiglaCampus}`"
+                        [list]="model?.Subsetores" showFilters=false></model-list>
                     </tab>
-                    <tab title='Documentos'>
+                    <tab title='Docentes'>
+                        <li><a href="/docs/uab_docentes.pdf">Extrato da Formação, Produção Científica, Tecnológica e Artístico-cultural - 2013 a 2016</a></li>
+                        <li><a href="/docs/piads.csv">carga horária em ensino/pesquisa/extensão/gestão</a></li>
+                    </tab>
+                    <tab title='Tutores'>
+                        <li><a href="/docs/uab_tutores.pdf">Extrato da Formação, Produção Científica, Tecnológica e Artístico-cultural - 2013 a 2016</a></li>
+                    </tab>
+                    <tab title='Atos oficiais/Documentos'>
+                        <h4>Atos oficiais</h4>
+                        <ul>
+                            <li><a href="/docs/nead/atos_oficiais.pdf">Atos oficiais</a></li>
+                            <li><a href="/docs/nead/resolucoes_cursos.odt">Resoluções de aprovação dos cursos</a></li>
+                        </ul>
+                        <h4>Documentos</h4>
                         <ul>
                             <li><a href="/docs/termos_fichas/ficha_cadastro_coord_curso.doc">Ficha de cadastro de coordenador de curso</a></li>
                             <li><a href="/docs/termos_fichas/ficha_cadastro_coord_tutoria.doc">Ficha de cadastro de coordenador de tutoria</a></li>
@@ -157,8 +208,6 @@
                             <li><a href="/docs/termos_fichas/termo_compromisso_tutor.doc">Termo de compromisso de tutor</a> </li>
                             <li><a href="/docs/termos_fichas/termo_direitos_autorais.doc">Termo de cessão de direitos autorais</a></li>
                         </ul>
-                    </tab>
-                    <tab title='Atos oficiais'>
                     </tab>
                     <tab title='Links'>
                         <h4>Sites institucionais</h4>
@@ -185,10 +234,39 @@
                             <li><a href="http://wiki.unicentro.br/Lyceum">Lyceum</a></li>
                             <li><a href="http://www.unicentro.br/donline/">Acesso Docente Online</a></li>
                         </ul>
-                        <h4>Materiais de apoio</h4>
+                    </tab>
+                    <tab title='Materiais/tutoriais'>
+                        <h4>Materiais didáticos</h4>
                         <ul>
-                            <li><a href="http://sites.unicentro.br/nead/tutoriais-2/">Tutoriais</a></li>
+                            <li><a href="/docs/pedagogico/ebook_acessibilidade_nead_uab_unicentro.pdf">Ebook Acessibilidade</a></li>
+                            <li><a href="/docs/pedagogico/acessibilidade_nead.docx">Acessibilidade</a></li>
+                            <li><a href="/docs/pedagogico/ferramentas.zip">Ferramentas do setor pedagógico</a></li>
+                            <li><a href="/docs/pedagogico/passo_a_passo_do_professor.pdf">Passo a passo do professor</a></li>
                         </ul>
+                        <h4>Tutoriais</h4>
+                        <h5>Tutoriais gerais</h5>
+                        <ul>
+                            <li><a href="https://www.youtube.com/watch?v=MhEmO17SbNo">Imersão faqs</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=-NzKmvhnH1Y">Moodle 2.6</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=19AdL2ky8Nk">Tutorial Videoaula</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=pWCUnXsTPeM">Tutorial ISSU</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=1_pBXVufEu4">Tutorial Prezi</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=Z2CPaIoOvpQ">Vídeo Institucional NEAD</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=G9Mo7KOVCHc">Acessibilidade Ead</a></li>
+                        </ul>
+                        <h5>Tutoriais Moodle</h5>
+                        <ul>
+                            <li><a href="https://www.youtube.com/watch?v=ov1hSx0YQqM">Tutorial moodle - CRESOL</a></li>
+                            <li><a href="http://moodle.unicentro.br/moodle/mod/resource/view.php?id=12874">Tutorial Feedback</a></li>
+                            <li><a href="http://moodle.unicentro.br/moodle/mod/resource/view.php?id=12839">Tutorial Como corrigir uma tarefa</a></li>
+                            <li><a href="http://moodle.unicentro.br/moodle/mod/resource/view.php?id=12838">Tutorial Como corrigir um questionário</a></li>
+                            <li><a href="http://moodle.unicentro.br/moodle/mod/resource/view.php?id=12837">Tutorial Como corrigir um glossário</a></li>
+                            <li><a href="http://moodle.unicentro.br/moodle/mod/resource/view.php?id=12827">Tutorial Fórum</a></li>
+                            <li><a href="http://moodle.unicentro.br/moodle/mod/resource/view.php?id=12828">Tutorial Mensagens</a></li>
+                            <li><a href="http://moodle.unicentro.br/moodle/mod/resource/view.php?id=12829">Tutorial Envio de arquivos</a></li>
+                            <li><a href="http://moodle.unicentro.br/moodle/mod/resource/view.php?id=12859">Tutorial Voki</a></li>
+                        </ul>
+
                     </tab>
                     <tab title='Convênios'>
                         <ul>
@@ -213,10 +291,7 @@
 
 
 
-<contato-fragment telefone={{model?.Telefone}}
-                  facebook={{model?.UrlFacebook}}
-                  email={{model?.Email}} 
-                  mensagem="Gostaria de saber como estudar em uma das melhores universidade do país? Que ótimo! Nos telefone ou nos mande
+<contato-fragment telefone={{model?.Telefone}} facebook={{model?.UrlFacebook}} email={{model?.Email}} mensagem="Gostaria de saber como estudar em uma das melhores universidade do país? Que ótimo! Nos telefone ou nos mande
                     um e-mail que teremos o prazer em responder o mais breve possível!"></contato-fragment>
 
 <!--<section id="contact">

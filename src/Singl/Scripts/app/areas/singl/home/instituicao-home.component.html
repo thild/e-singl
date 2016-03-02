@@ -31,7 +31,8 @@
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <h2 class="section-heading">Sobre a {{model?.Sigla}}</h2>
                 <hr class="light">
-                <p class="text-faded text-justify">{{model?.Sobre}}</p>
+                <div class="text-faded text-justify" [innerHTML]="model?.Sobre"></div>
+
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -187,13 +188,34 @@
                     <tab title="Reitoria">
                         <div [innerHTML]="model?.MensagemReitoria"></div>
                     </tab>
-                    <tab title="Atos legais">
+                    <tab title="Atos legais/oficiais e documentos">
                         <ul>
                             <li><a href="http://www2.unicentro.br/wp-content/uploads/2014/11/Lei_9295_90_Insitui_a_UNICENTRO.pdf">Lei que institui a UNICENTRO</a></li>
                             <li><a href="http://www2.unicentro.br/wp-content/uploads/2014/11/Decreto_3444_97_Reconhecimento_da_UNICENTRO.pdf">Decreto de reconhecimento da UNICENTRO</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2014/11/Decreto_3444.pdf">Decreto de reconhecimento da UNICENTRO - Diário Oficial</a></li>
                             <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/Estatuto.pdf">Estatuto da UNICENTRO</a></li>
                             <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/res_estatuto2010.pdf">Resolução - altera anexo I do estatuto</a></li>
                             <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/regimento2010.pdf">Regimento da UNICENTRO</a></li>
+                            <li><a href="http://emec.mec.gov.br/emec/consulta-cadastro/detalhamento/d96957f455f6405d14c6542552b0f6eb/MTEyNg==">Situação do credenciamento da UNICENTRO (portal e-MEC)</a></li>
+                            <li><a href="http://portal.mec.gov.br/index.php?option=com_docman&view=download&alias=3532-port-646-2008&Itemid=30192">Portaria de credenciamento em EAD</a></li>
+                            <li><a href="/docs/legal/declaracao_nomenclatura_cedeteg.pdf">Declaração da nomenclatura do CEDETEG</a></li>
+                            <li><a href="http://sguweb.unicentro.br/pesquisaatooficiais">Atos Oficiais da UNICENTRO</a></li>
+                            <li><a href="http://www2.unicentro.br/unidades-administrativas/">Unidade Administrativas</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/Estatuto.pdf">Organograma (pag. 25 do estatuto)</a></li>
+                            <li><a href="http://www.unicentro.br/proplan/PDI_2013_2017_COM_REVIS_O_FINAL_MAR_O_2015_5591982159eda.pdf">PDI - Plano de Desenvolvimento Institucional 2013-2017</a></li>
+                            <li><a href="http://transparencia.unicentro.br/">Outras informações no Portal da Transparência</a></li>
+                        </ul>
+                        
+                    </tab>
+                    <tab title="Legislação dos servidores">
+                        <ul>
+                            <li><a href="http://www.legislacao.pr.gov.br/legislacao/pesquisarAto.do?action=exibir&codAto=5808&indice=1&totalRegistros=1">Lei 11.713/1997: a Lei Estadual trata do Plano de Carreira dos docentes e também dos agentes universitários.</a></li>
+                            <li><a href="http://www.unicentro.br/atos/201011241726186099.pdf">Plano de Capacitação Docentes: Resolução 71/2010-CEPE/UNICENTRO</a></li>
+                            <li><a href="http://www.unicentro.br/atos/200804251623424981.pdf">Plano de Capacitação dos Agentes: Resolução 74/2008-CAD/UNICENTRO</a></li>
+                            <li><a href="http://www.legislacao.pr.gov.br/legislacao/pesquisarAto.do?action=exibir&codAto=7352&indice=1&totalRegistros=2">Modalidade de contratação dos colaboradores: Lei Complementar 108/2005.</a></li>
+                            <li><a href="http://www.unicentro.br/prorh/legislacao.asp">Detalhes da legislação - PRORH</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/regimento2010.pdf">Regimento da UNICENTRO</a></li>
+                            <li><a href="http://transparencia.unicentro.br/">Outras informações no Portal da Transparência</a></li>
                         </ul>
                     </tab>
                 </tabs>
