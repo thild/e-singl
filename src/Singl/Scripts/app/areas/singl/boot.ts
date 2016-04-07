@@ -1,3 +1,4 @@
+///<reference path="../../../../node_modules/angular2/typings/browser.d.ts"/>
 /// <reference path="../../../../node_modules/angular2/core.d.ts" />
 
 import {bootstrap}      from 'angular2/platform/browser';
@@ -30,6 +31,9 @@ const ROUTER_PROVIDERS: Array<any> = [
 	})
 ];
 
+import {DynamicRouteConfigurator} from './components/routing/dynamic-route-configuration.component';
+
+
 import {ModelMetadataService} from './model-metadata.service'
 import {UnidadeUniversitariaService} from './unidade-universitaria.service'
 import {CampusService} from './campus.service'
@@ -41,7 +45,8 @@ import {PoloService} from './polo.service'
 import {DocenteService} from './docente.service'
 import {InstituicaoService} from './instituicao.service'
 import {DisciplinaService} from './disciplina.service'
-import {FilterService}  from './filter-service';
+import {FilterService}  from './filter.service';
+import {RoutesService}  from './routes.service';
 
 const SERVICE_PROVIDERS: Array<any> = [
     ModelMetadataService,
@@ -55,7 +60,8 @@ const SERVICE_PROVIDERS: Array<any> = [
     DocenteService,
     DisciplinaService,
     InstituicaoService,
-    FilterService
+    FilterService,
+    RoutesService
 ];
 
 const APP_PROVIDERS: Array<any> = [
@@ -63,7 +69,8 @@ const APP_PROVIDERS: Array<any> = [
 	FORM_PROVIDERS,
 	ROUTER_PROVIDERS,
     Logger,
-    SERVICE_PROVIDERS
+    SERVICE_PROVIDERS,
+    DynamicRouteConfigurator
 ];
 
 enableProdMode();

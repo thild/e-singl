@@ -31,6 +31,8 @@ namespace Singl.Models
         public Usuario Usuario { get; set; }
         public string UsuarioId { get; set; }
         public string Axionimo { get; set; }
+        
+        public string Cpf { get; set; }
 
         [NotMapped]
         public string NomeComAxionimo

@@ -16,7 +16,7 @@ import {ModelMetadataService}   from './model-metadata.service';
 import {ServiceBase} from './service-base.service';
 import {FilterPipe} from './filter.pipe';
 import {ModelListComponent} from './model-list.component';
-import {FilterService}  from './filter-service';
+import {FilterService}  from './filter.service';
 
 
 //        <button *ngIf="selectedFilters.length > 0" (click)="clean()" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>

@@ -9,7 +9,7 @@ import {ModelMetadataService} from './model-metadata.service';
 
 @Component({
     selector: 'unidade-universitaria-list',
-    templateUrl: 'app/areas/singl/unidade-universitaria-list.component.html',
+    templateUrl: './app/areas/singl/unidade-universitaria-list.component.html',
     directives: [ROUTER_DIRECTIVES, ModelListComponent]
 })
 @CanActivate(() => ModelMetadataService.load('Singl.Models.UnidadeUniversitaria'))
