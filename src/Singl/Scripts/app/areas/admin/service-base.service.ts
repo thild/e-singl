@@ -7,7 +7,6 @@
 //https://github.com/opencredo/angular2-boilerplate
 
 import {Injectable} from 'angular2/core';
-import {UnidadeUniversitaria} from './unidade-universitaria';
 import {Http} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -32,8 +31,8 @@ export class ServiceBase implements IServiceBase {
         list: Array<any>
     };
 
-    constructor(private _http: Http, public id: string, 
-                public baseUrl: string, public getUrl: string) {
+    constructor(private _http: Http, public id: string,
+        public baseUrl: string, public getUrl: string) {
         // Create Observable Stream to output our data
         this.observableList$ = new Observable(observer =>
             this._observerList = observer).share();
@@ -46,7 +45,7 @@ export class ServiceBase implements IServiceBase {
         if (this._dataStore.list.length > 0) {
             //console.log("find");
             var model = this._dataStore.list.filter(m => {
-                    return m[this.id] == params[this.id.toLowerCase()];
+                return m[this.id] == params[this.id.toLowerCase()];
             });
             if (model != null) {
                 //console.log("model != null");
@@ -90,18 +89,17 @@ export class ServiceBase implements IServiceBase {
                 }
                 if (this._observerModel) {
                     this._dataStore.list.forEach(
-                        (item) => this._observerModel.next(data) 
+                        (item) => this._observerModel.next(data)
                     );
-                }                
+                }
                 this._gotList = true;
             },
             error => console.log('Could not load.', error));
     }
-    
+
     getInfo(params: any) {
         let apiUrl = this.baseUrl + (this.getUrl ? eval(this.getUrl) : '') + '/info';
         return this._http.get(apiUrl)
             .map(response => response.json());
     }
-    
 }

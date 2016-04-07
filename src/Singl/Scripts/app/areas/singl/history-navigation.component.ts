@@ -1,5 +1,4 @@
 import {Component} from 'angular2/core';
-import {View} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {Router, RouteParams} from 'angular2/router';
 

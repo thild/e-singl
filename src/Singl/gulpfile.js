@@ -331,6 +331,15 @@ var sources = {
                 paths.scripts + "app/areas/**/singl/**/*.*"
             ]
         }
+    ],    
+    admin: [
+        {
+            name: "admin.js",
+            area: "admin",
+            paths: [
+                paths.scripts + "app/areas/**/admin/**/*.*"
+            ]
+        }
     ]
 };
 

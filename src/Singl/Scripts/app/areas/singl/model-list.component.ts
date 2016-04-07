@@ -16,7 +16,7 @@ import {ModelMetadataService}   from './model-metadata.service';
 import {ServiceBase} from './service-base.service';
 import {FilterPipe} from './filter.pipe';
 import {ModelListFilterComponent} from './model-list-filter.component';
-import {FilterService}  from './filter-service';
+import {FilterService}  from './filter.service';
 
 
 @Component({

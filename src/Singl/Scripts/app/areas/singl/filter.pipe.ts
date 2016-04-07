@@ -1,5 +1,5 @@
 import {Component, Pipe, PipeTransform}  from 'angular2/core';
-import {FilterService}  from './filter-service';
+import {FilterService}  from './filter.service';
 
 // We use the @Pipe decorator to register the name of the pipe
 @Pipe({

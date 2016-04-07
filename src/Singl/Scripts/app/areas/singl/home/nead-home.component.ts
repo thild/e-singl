@@ -14,6 +14,7 @@ import {ModelListComponent} from './../model-list.component';
 import {UiTabs, UiPane} from './../components/tabs/ui_tabs';
 import {Tabs} from './../components/tabs/tabs';
 import {Tab} from './../components/tabs/tab';
+import {DynamicComponent} from './../components/dynamic-component.component';
 import {InstituicaoFooterComponent} from './../components/fragments/instituicao-footer.component';
 import {ContatoFragmentComponent} from './../components/fragments/contato-fragment.component';
 
@@ -28,7 +29,7 @@ import {ContatoFragmentComponent} from './../components/fragments/contato-fragme
     templateUrl: 'app/areas/singl/home/nead-home.component.html',
     directives: [ROUTER_DIRECTIVES, UiTabs, UiPane, ModelListComponent, 
                  InstituicaoFooterComponent, ContatoFragmentComponent, 
-                 Tab, Tabs],
+                 Tab, Tabs, DynamicComponent],
     styleUrls: ['./css/home.css']
 })
 @CanActivate(() => ModelMetadataService.load('Singl.Models.SetorAdministrativo'))

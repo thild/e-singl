@@ -45,6 +45,7 @@ namespace Singl
         public DbSet<Docente> Docentes { get; set; }
         public DbSet<DocenteCurso> DocentesCurso { get; set; }
         public DbSet<MetadataUI> MetadataUI { get; set; }
+        public DbSet<Template> Templates { get; set; }
         public DbSet<Enquete> RelatoriosEvasao { get; set; }
         public DbSet<OfertaCurso> OfertasCurso { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
