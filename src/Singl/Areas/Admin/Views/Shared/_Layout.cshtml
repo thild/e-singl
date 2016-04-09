@@ -126,7 +126,6 @@
 
         @* Move site.css to a content delivery network (CDN) for better performance. *@
         <link asp-append-version="true" rel="stylesheet" href="~/css/site.css" />
-        <link asp-append-version="true" rel="stylesheet" href="~/css/admin.css" />
         <meta name="x-font-awesome-stylesheet-fallback-test" class="fa">
         <environment names="Development">
             <link asp-append-version="true" rel="stylesheet" href="~/css/font-awesome.css" />
@@ -172,42 +171,11 @@
 
     </head>
     
-    <body id="page-top" style="padding-top: 50px;">
+    <body id="page-top">
     
         @* Skip to main content link for people who use screen readers. sr-only makes this only visible to screen readers.
             See http://a11yproject.com/posts/skip-nav-links/. *@
         <a href="#main" class="sr-only sr-only-focusable">Pular para o conteúdo principal</a>
-        
-        @* nav - The main navigation for the site. *@
-        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span aria-hidden="true" class="sr-only">Ligar/desligar navegação</span>
-                    </button>
-                    <a class="navbar-brand page-scroll" href="#page-top">@AppSettings.Value.SiteTitle</a>
-                </div>
-        
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a class="page-scroll" href="#about">Ajuda</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
-        </nav>
-        
-        <header id="main">
-            <div class="header-content">
-                <div class="header-content-inner">
-                </div>
-            </div>
-        </header>        
 
         @RenderBody()
         <hr />
@@ -216,25 +184,25 @@
         </footer>
 
         <environment names="Development">
-            <script asp-append-version="true" src="~/js/site.js"></script>
             <script asp-append-version="true" src="~/lib/jquery.js"></script>
             <script asp-append-version="true" src="~/lib/bootstrap.js"></script>
             <script asp-append-version="true" src="~/lib/hammer.js"></script>
+            <script asp-append-version="true" src="~/js/site.js"></script>
         </environment>
         <environment names="Staging,Production">
-            <script asp-append-version="true" src="~/js/site.min.js"></script>
             <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
-                    asp-fallback-src="~/lib/jquery.js"
+                    asp-fallback-src="/lib/jquery.min.js"
                     asp-fallback-test="window.jQuery">
             </script>
             <script src="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap.js"
+                    asp-fallback-src="/lib/bootstrap.min.js"
                     asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
             </script>
             <script src="//ajax.aspnetcdn.com/ajax/hammer.js/2.0.4/hammer.min.js"
-                    asp-fallback-src="~/lib/hammer.js"
+                    asp-fallback-src="/lib/hammer.min.js"
                     asp-fallback-test="window.Hammer">
             </script>
+            <script asp-append-version="true" src="/js/site.min.js"></script>
         </environment>
 
         @RenderSection("scripts", required: false)

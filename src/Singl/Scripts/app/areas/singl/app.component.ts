@@ -44,7 +44,7 @@ import {componentProxyFactory} from './component-proxy';
     //styleUrls: ['./css/animate.css', './css/home.css']
 })
 @RouteConfig([
-    new AsyncRoute({ useAsDefault: true, path: '/', name: 'Home', loader: () => System.import('./app/areas/singl/home/instituicao-home.component').then(m => m.InstituicaoHomeComponent) }),
+    new AsyncRoute({ useAsDefault: true, path: '/', name: 'Home', loader: () => Promise.resolve(HomeComponent) }),
     // {
     // path: '/',
     // component: componentProxyFactory({
@@ -174,4 +174,18 @@ export class AppComponent implements OnInit {
             this.hashHack = true;
         }
     }
+}
+
+
+@Component({
+    selector: 'home',
+    template: `
+    <h3>Aguarde... carregando...</h3>
+    `
+})
+export class HomeComponent {
+
+    constructor() {
+    }
+
 }

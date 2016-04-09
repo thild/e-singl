@@ -516,8 +516,44 @@ gulp.task("build-app-views", ["clean-app-views"], function () {
 /*
  * Builds the JavaScript files for the site.
  */
-gulp.task("build-app", ["clean-app"], function () {
+gulp.task("build-app", [], function () {
     var tasks = sources.app.map(function (source) { // For each set of source files in the sources.
+        return gulp                             // Return the stream.
+            .src(source.paths)                  // Start with the source paths.
+            .pipe(plumber({
+                handleError: function (err) {
+                    console.log(err);
+                    this.emit('end');
+                }
+            }))
+            .pipe(debug())
+            .pipe(gulpif(
+                environment.isDevelopment(),    // If running in the development environment.
+                sourcemaps.init()))             // Set up the generation of .map source files for the JavaScript.
+            // $Start-TypeScript$
+            .pipe(gulpif(                       // If the file is a TypeScript (.ts) file.
+                "**/*.ts",
+                typescript(getTypeScriptProject(source)))) // Compile TypeScript (.ts) to JavaScript (.js) using the specified options.
+            // $End-TypeScript$
+            .pipe(sizeBefore(source.name))      // Write the size of the file to the console before minification.
+            .pipe(gulpif(
+                !environment.isDevelopment(),   // If running in the staging or production environment.
+                uglify()))                      // Minifies the JavaScript.
+            .pipe(sizeAfter(source.name))       // Write the size of the file to the console after minification.
+            .pipe(gulpif(
+                environment.isDevelopment(),    // If running in the development environment.
+                sourcemaps.write(".")))         // Generates source .map files for the JavaScript.
+            .pipe(gulp.dest(paths.app));         // Saves the JavaScript file to the specified destination path.
+    });
+    return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
+});
+
+
+/*
+ * Builds the JavaScript files for the site.
+ */
+gulp.task("build-admin", [], function () {
+    var tasks = sources.admin.map(function (source) { // For each set of source files in the sources.
         return gulp                             // Return the stream.
             .src(source.paths)                  // Start with the source paths.
             .pipe(plumber({

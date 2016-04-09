@@ -9,7 +9,7 @@ declare var System: any;
 
 @Component({
     selector: 'singl-admin-app',
-    templateUrl: 'app/areas/singl/app.component.html',
+    templateUrl: 'app/areas/admin/app.component.html',
     directives: [ROUTER_DIRECTIVES],
     //styleUrls: ['./css/animate.css', './css/home.css']
 })
