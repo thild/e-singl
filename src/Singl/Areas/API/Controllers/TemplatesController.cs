@@ -37,7 +37,9 @@ namespace Singl.Areas.API.Controllers
             switch (routeName)
             {
                 case "NEADEnsino":
-                    html = "<h1>Ensino</h1>";
+                    html = @"<h1>
+                        Cursos | Materiais Didáticos | Bibliotecas | Área do Professor | Área do Aluno
+                    </h1>";
                     break;
                 case "NEADPesquisa":
                     html = "<h1>Pesquisa</h1>";
