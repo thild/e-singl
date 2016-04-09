@@ -27,7 +27,7 @@ const ROUTER_PROVIDERS: Array<any> = [
 //		useClass: HashLocationStrategy
 	}),
 	provide(APP_BASE_HREF, {
-		useValue: '/'
+		useValue: '/admin'
 	})
 ];
 
