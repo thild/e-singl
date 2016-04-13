@@ -1,0 +1,174 @@
+::001
+::Com relação às diferenças e similaridades entre as linguagens de programação e as linguagens naturais, marque a(s) alternativa(s) correta(s):
+{
+~%25%As linguagens de programação facilitam a expressão e comunicação de ideias entre as pessoas.
+~%25%As linguagens de programação permitem a comunicação de ideias entre pessoas e computadores.
+~%25%As linguagens de programação têm um domínio expressivo menos abrangente do que as linguagens naturais, apenas permitindo a comunicação de ideias computacionais.
+~%25%Uma linguagem de programação deve cumprir exigências diferentes de uma linguagem natural.
+~%-100%Linguagens naturais e de programação não possuem características em comum, pois a forma como o computador entende uma linguagem de programação é totalmente diferente da forma como nosso cérebro entende uma linguagem natural.
+}
+
+::002
+::Marque os principais paradigmas de linguagens de programação.
+{
+~%25%Imperativo
+~%25%Orientado a objetos
+~%25%Funcional
+~%-50%Paralelo
+~%-50%Orientado a aspectos
+~%25%Lógico
+}
+
+::003
+::Assinale a(s) alternativa(s) correta(s).
+{
+~%20%Acredita-se que a profundidade com que as pessoas podem pensar é influenciada pelo poder expressivo da linguagem em que elas comunicam seus pensamentos.
+~%20%Muitos programadores profissionais têm tido pouca educação formal em ciência da computação. Em vez disso, eles desenvolveram suas habilidades de programação de forma independente ou através de programas de treinamento internos.
+~%20%Programação de computadores ainda é uma disciplina relativamente nova, e metodologias de projeto, ferramentas de desenvolvimento de software e linguagens de programação ainda estão em um estado de evolução contínua.
+~%20%O processo de aprender uma nova linguagem de programação pode ser demorado e difícil, especialmente para alguém que está confortável com apenas uma ou duas linguagens e nunca examinou conceitos da linguagens de programação em geral.
+~%20%Muitas linguagens de programação contemporâneas são grandes e complexas.
+}
+
+
+::004
+::Analise as seguintes afirmações e assinale a alternativa correta.
+<ol type="I">
+  <li>
+    As linguagens de máquina de baixo nível descrevem, de forma decimal, as operações e os mecanismos de cálculo da própria máquina.
+  </li>
+  <li>
+    Programas escritos em linguagem de montagem são traduzidos em linguagem de máquina por um programa chamado montador (assembler).
+  </li>
+  <li>
+    As primeiras versões do Fortran eram semelhantes à linguagens de máquina.
+  </li>
+  <li>
+    Não havia linguagens de programação de alto nível, ou mesmo linguagens de montagem para os computadores de 50-60.
+  </li>
+</ol>
+{
+  =Somente a II está correta.
+  ~Todas as afirmações estão incorretas.
+  ~Todas as afirmações estão corretas.
+  ~I e II estão corretas.
+  ~I e IV estão incorretas.
+}
+
+
+::005
+::Sobre o Fortran é incorreto afirmar:
+{
+=Refletia a arquitetura de um determinado tipo de máquina, contendo as declarações de controle estruturados e estruturas de dados.
+~Considerada a primeira linguagem de alto nível.
+~Acrônimo para FORmula TRANslation.
+~Desenvolvido pelo grupo de John Backus no início de 1950 para o computador IBM 704.
+~As primeiras versões do Fortran eram semelhantes à linguagens assembly.
+~Atraiu cientistas e engenheiros, que apreciaram o seu suporte para notação algébrica e números ponto flutuante.
+}
+
+::006
+::Marque a(s) alternativa(s) que refletem o ambiente de desenvolvimento da década de 50:
+{
+~%25%Computadores com memórias pequenas e não confiáveis.
+~%25%Aplicações científicas.
+~%25%Não havia maneiras eficientes de programar computadores.
+~%25%Velocidade do código objeto era o objetivo principal.
+~%-100%A portabilidade do código era importante nos projetos de linguagens de programação.
+}
+
+::007
+::Qual das linguagens de programação abaixo é conciderada a <em>lingua franca</em> do mundo da computação:
+{
+=Fortran
+~Algol
+~C
+~C++
+~ADA
+~Simula
+~Pascal
+~Java
+~Cobol
+}
+
+
+::008
+::Relacione:
+{
+=As primeiras versão ofereciam somente alocação estática -> Fortran
+=Linguagem dominante em IA -> LISP
+=Sintaxe baseada em <em>lambda calculus</em> -> LISP
+=Pioneira em programação funcional -> LISP
+=Esforço para projetar uma linguagem de programação universal -> ALGOL
+=Um dos requisitos era facilitar a descrição de algoritmos em publicações impressas -> ALGOL
+=Provavelmente a linguagem mais utilizada até hoje -> COBOL
+=Utilizava amplamente o inglês nas declarações -> COBOL
+=Ser de fácil utilização por estudantes de quaisquer áreas -> BASIC
+=Considerava o tempo do usuário mais importante do que o tempo do computador -> BASIC
+=Caracterizadas por tipagem dinâmica e alocação dinâmica -> SNOBOL
+=Classes, objetos e herança -> SIMULA
+=Influenciou Pascal, C e ADA -> ALGOL
+=Impactou o ensino da programação -> Pascal
+=Poderoso conjunto de operadores, mas verificação de tipos pobre -> C
+=Baseada em lógica formal -> Prolog
+=Grande esforço de projeto mas com pouca aceitação -> ADA
+=Primeira linguagem de programação a oferecer suporte completo à programação orientada a objetos -> Smalltalk
+=Linguagem grande e complexa, em parte porque suporta programação procedural e orientada a objetos -> C++
+}
+
+::009
+::Sobre os critérios de avaliação das linguagens de programação, relacione:
+{
+=A facilidade com a qual os programas podem ser movidos de uma implementação (compilador) para outra. -> Portabilidade
+=A aplicabilidade a uma vasta área de domínios de problemas. -> Generalidade
+=Em relação à completude e à precisão do documento oficial que define a linguagem. -> Bem definida (well-definedness )
+=Refere-se a consistência da aparência e comportamento das construções da linguagem. -> Uniformidade
+=Medida de quão facilmente uma linguagem pode ser usada para criar programas para um determinado domínio de problema. -> Facilidade de escrita
+=Facilidade com a qual os programas podem ser lidos e entendidos. -> Legibilidade
+=Conformidade com as especificações. -> Confiabilidade
+}
+
+::010
+::Marque as alternativas contendo as características que correspondem às linguagens imperativas influenciadas pela arquitetura von Neumann:
+{
+~%20%Possuem variáveis que modelam as células de memória.
+~%20%Sentenças de atribuição baseadas em operações de envio de dados e instruções.
+~%20%Instruções são armazenadas em células de memória adjacentes e repetir a execução de uma seção de código requer apenas uma instrução de desvio.
+~%20%A execução de um código de máquina em um computador de arquitetura von Neumann ocorre em processo chamado ciclo de busca-execução (fetch-execute cycle).
+~%20%O endereço da próxima instrução é mantida em um registrador chamado program counter (PC).
+}
+
+::011
+::Sobre os fatores que influenciaram os projetos de linguagens de programação, relacione:
+{
+=Aplicações simples. -> Anos 1950 e começo dos 1960
+=Preocupação com a eficiência da máquina. -> Anos 1950 e começo dos 1960
+=Programação estruturada. -> Final dos anos 60 início dos 70
+=Custo de software > custo de hardware. -> Final dos anos 60 início dos 70
+=Legibilidade, melhores estruturas de controle. -> Final dos anos 60 início dos 70
+=Linguagens sem verificação de tipo e declarações de controle inadequadas (GOTO hell!). -> Final dos anos 60 início dos 70
+=Da orientação a procedimentos para orientação a dados. -> Final dos anos 70
+=Métodos orientados a dados enfatizavam o projeto de dados, focando no uso de abstração de tipos de dados para resolver problemas. -> Final dos anos 70
+=Programação orientada a objetos. -> Meados dos anos 80
+=Abstração de dados. -> Meados dos anos 80
+=Aumento do reuso e consequentemente da produtividade. -> Meados dos anos 80
+}
+
+::012
+::Sobre os métodos de implementação, relacione:
+{
+=Traduz programas em linguagem de fonte para código ou linguagem de máquina. -> Compilação
+=Execução rápida. -> Compilação
+=Tradução lenta. -> Compilação
+=C, C++, COBOL, ADA. -> Compilação
+=Sem tradução. -> Interpretação pura
+=Trata o ciclo de busca-execução em declarações de linguagem de alto nível ao invés de instruções de máquina. -> Interpretação pura
+=Fácil implementação de depuradores, pois mensagens de erro em tempo de execução podem referenciar unidades de código fonte; -> Interpretação pura
+=Execução mais lenta. -> Interpretação pura
+=Raramente utilizada em linguagens de alto nível. -> Interpretação pura
+=JavaScript ; PHP; Ruby, Python. -> Interpretação pura
+=Inicialmente traduz os programas para uma linguagem intermediária. -> Interpretação híbrida
+=Durante a execução, compila os métodos da linguagem intermediária para linguagem de máquina quando esses são chamados. -> Interpretação híbrida
+=A versão em código de máquina é mantida para chamadas subsequentes. -> Interpretação híbrida
+=Compilação Just-in-Time. -> Interpretação híbrida
+=Java, .Net, Perl -> Interpretação híbrida
+}

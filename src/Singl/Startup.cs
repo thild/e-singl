@@ -157,6 +157,11 @@ namespace Singl
                     
                 // After all your routes
                 routes.MapRoute(
+                    "DeepLinkAreas",
+                    "{area:exists}/{*pathInfo}",
+                    defaults: new { controller = "Home", action = "Index" });                    
+
+                routes.MapRoute(
                     "DeepLink",
                     "{*pathInfo}",
                     defaults: new { controller = "Home", action = "Index" });                    

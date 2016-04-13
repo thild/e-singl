@@ -1,0 +1,8 @@
+  <after css:theme="#mainnavigation" css:content="#portal-searchbox" />
+
+  <!-- <drop css:theme="#portal-top" />      
+  <after css:theme="#portal-top" css:content="#portal-logo" />-->
+
+  <!-- full-width breadcrumb -->
+  <!-- <drop css:content="#portal-logo" />
+  <replace css:theme="#logo-container" css:content="#portal-logo" method="raw" />-->

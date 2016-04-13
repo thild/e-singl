@@ -1,0 +1,85 @@
+::lexama,token
+::Marque verdadeiro ou falso.
+{
+=Um programa pode ser visto como uma cadeia de lexemas ao invés de uma cadeia de caracteres. -> Verdadeiro
+=Os lexemas são separados em grupos. -> Verdadeiro
+=Cada grupo de tokens é representado por um nome ou lexema. -> Falso
+=Na expressão: indice \= 2 * cont + 17; "indice" é um token. -> Falso
+=Uma gramática é ambígua se gera uma forma sentencial com duas ou mais árvores de análise sintática distintas. -> Verdadeiro
+=Para remover a ambiguidade de uma gramática livre deve-se explicitar a nível de precedência dos operadores. -> Verdadeiro
+}
+
+::tipos de semântica
+::Relacione:
+{
+=Descreve o significado de uma sentença ou programa pela especificação dos efeitos de rodá-lo em uma máquina; A mudança no estado de máquina (memória, registradores, etc.) define o significado da sentença. -> Semântica operacional
+=Baseada na teoria de funções recursivas; O método de descrição semântica mais abstrato. -> Semântica denotacional
+=Baseada em lógica matemática; Não há estado de máquina ou programa; Baseado no relacionamento de variáveis e constantes. -> Semântica axiomática
+}
+
+
+::nomes,vinculacoes,escopo
+::Marque verdadeiro ou falso.
+{
+=As linguagens de programação imperativas são abstrações da arquitetura de von Neumann. -> Verdadeiro
+=Um nome é uma sequência de caracteres usada para identificar alguma entidade em um programa. -> Verdadeiro
+=O nome é um atributo secundário em uma variável, pois podem existir variáveis sem nome. -> Falso
+=Um nome também é conhecido como token. -> Falso
+=Os seguintes nomes estão no formatos "Pascal Case" e "Camel Case", respectivamente: backColor, IndexOutOfBoundsException. -> Falso
+=Na maioria das linguagens, palavras reservadas não podem ser redefinidas pelo programador. -> Verdadeiro
+=Uma variável é uma abstração de uma célula de memória ou coleção de células. -> Verdadeiro
+}
+
+::atributos variávies
+::Quais dos seguintes atributos não é um atributo de variável?
+{
+=Precisão
+~Nome
+~Endereço
+~Tipo
+~Valor
+~Tempo de vida
+~Escopo
+}
+
+::tempo de vinculação
+::Associe:
+{
+=Símbolos de operadores a operações são vinculados em ... -> Tempo de projeto
+=Um tipo de dados, como int em C é vinculado a um intervalo de valores possíveis em ... -> Tempo de implementação
+=Uma variável de um programa Java é vinculado a um tipo de dados em particular em ... -> Tempo de compilação
+=Uma variável pode ser vinculada a uma célula de armazenamento quando o programa é carregado para a memória em ... -> Tempo de carregamento
+=Uma chamada a um subprograma de uma biblioteca é vinculada ao código do subprograma em ... -> Tempo de ligação
+}
+
+::escopo
+::<ol type="I">
+  <li>O escopo de uma variável é o intervalo de declarações em que a variável pode ser modificada;</li>
+  <li>Uma variável é visível em uma declaração se puder ser referenciada nessa declaração;</li>
+  <li>As regras de escopo de uma linguagem determinam como uma ocorrência de um nome em particular está associada a uma variável, ou com uma expressão, no caso de uma linguagem funcional;</li>
+  <li>Regras de escopo determinam como referências a variáveis declaradas fora do subprograma ou bloco atualmente em execução estão associados com as suas declarações e, portanto, seus atributos;</li>
+  <li>O escopo é um fator secundário na compreensão de variáveis.</li>
+</ol>
+Marque a alternativa correta:
+{
+  =I e V estão incorretas
+  ~Todas as afirmações estão corretas
+  ~I, II, III e IV estão corretas
+  ~Apenas I está incorreta
+  ~Apenas V está incorreta
+}
+
+::tipos
+::Com relação a tipos, marque verdadeiro ou falso:
+{
+=Um tipo de dados define uma coleção de valores de dados e um conjunto de operações pré-definidas sobre eles; -> Verdadeiro
+=Uma união é um tipo cujas variáveis podem armazenar diferentes valores de tipos em diferentes momentos durante a execução de um programa; -> Verdadeiro
+=Tipos de dados primitivos são aqueles definidos em termos de outros tipos; -> Falso
+=Todos os tipos primitivos são meramente reflexos de hardware; -> Falso
+=O tipo cadeia de caracteres (string) é primitivo em algumas linguagens; -> Verdadeiro    
+=Um tipo ponteiro é um tipo no qual as variáveis possuem um intervalo de valores que consistem em endereços de memória e um valor especial, nil, que indica que o ponteiro não aponta para nenhum endereço; -> Verdadeiro
+=Os ponteiros permitem gerenciar armazenamento estático -> Falso;
+=Um ponteiro pode ser usado para acessar uma posição em uma área dinamicamente alocada chamada stack; -> Falso  
+=Dangling pointers é um ponteiro que contém o endereço de uma variável dinâmica da heap que já foi liberada. -> Verdadeiro
+=Memory leak é uma variável dinâmica alocada na heap que não está mais acessível para os programas de usuário (geralmente chamadas de lixo) -> Verdadeiro
+}

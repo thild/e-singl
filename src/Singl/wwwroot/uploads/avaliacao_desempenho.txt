@@ -1,0 +1,76 @@
+::001
+::Os tipos de dados que não são definidos em termos de outros tipos são chamados de tipos de dados {=Primitivos ~Especiais ~Compostos ~Definidos pelo usuário}.
+
+
+::002
+::Marque os principais paradigmas de linguagens de programação
+{
+~%25%Imperativo
+~%25%Orientado a objetos
+~%25%Funcional
+~%-50%Paralelo
+~%-50%Orientado a aspectos
+~%25%Lógico
+}
+
+
+::003
+::Na ligação dinâmica de tipo, o tipo de uma variável não é especificado por uma instrução de declaração, nem pode ser determinado pelo nome da variável
+{T}
+
+
+::004
+::______ é o comando básico que permite a modificação dos valores associados às variáveis modificáveis.
+{
+=Atribuição
+}
+
+
+::005
+::Uma função é de ordem superior quando aceita uma função como parâmetro ou retorna outra função seu resultado.
+{T}
+
+
+::006
+::Qual é este algoritmo de ordenação?
+<pre>
+f [] = []
+f (x:xs) = f ys ++ [x] ++ f zs
+            where
+              ys = [ a | a <- xs, a <= x ]
+              zs = [ b | b <- xs, b  > x ]
+</pre>
+{
+=quicksort
+}
+
+
+::007
+::Quais destas qualidades dizem respeito à linguagens funcionais?
+{
+~%20%Todos os procedimentos são funções e claramente distinguem os valores de entrada (parâmetros) dos valores de saída (resultados).
+~%20%Na programação funcional pura não há atribuições. Uma vez que uma variável está vinculada a um valor, ela se comporta como uma constante.
+~%20%Na programação funcional pura não há laços. Em vez disso laços são substituídos por chamadas recursivas.
+~%20%O valor de uma função depende apenas do valor dos seus parâmetros e não na ordem de avaliação ou a caminho de execução que levou à chamada.
+~%20%As funções são valores de dados de primeira classe.
+}
+
+
+::008
+::{=Variável ~Função ~Atribuição ~Constante ~Vetor} é uma abstração de uma célula ou coleção de células de memória de computador.
+
+
+
+::009
+::Programas lógicos são declarativas em vez de procedurais, o que significa que apenas as especificações dos resultados desejados são demonstrados ao invés dos procedimentos detalhados para produzi-los.
+{T}
+
+
+::010
+::Cálculo de predicados tem relação com o paradigma:
+{
+=Lógico
+~Funcional
+~Imperativo
+~Orientado a objetos
+}

@@ -1,0 +1,104 @@
+http://migre.me/sdJV6
+
+
+
+
+
+
+
+
+
+
+
+3) Pré-processamento
+  Histograma:
+    http://homepages.inf.ed.ac.uk/rbf/HIPR2/histgram.htm
+    http://homepages.inf.ed.ac.uk/rbf/HIPR2/histdemo.htm
+  Equalização:
+    http://homepages.inf.ed.ac.uk/rbf/HIPR2/histeq.htm  
+    http://homepages.inf.ed.ac.uk/rbf/HIPR2/histeqdemo.htm
+
+  Operações:
+    Pontuais:
+      Expansão de contraste:
+        http://homepages.inf.ed.ac.uk/rbf/HIPR2/stretch.htm
+        http://homepages.inf.ed.ac.uk/rbf/HIPR2/contrastdemo.htm
+      Algébricas
+        Adição:
+          http://homepages.inf.ed.ac.uk/rbf/HIPR2/pixadd.htm
+          http://homepages.inf.ed.ac.uk/rbf/HIPR2/adddemo.htm
+        Subtração:
+          http://homepages.inf.ed.ac.uk/rbf/HIPR2/pixsub.htm
+          http://homepages.inf.ed.ac.uk/rbf/HIPR2/subdemo.htm
+        Multiplicação:
+          http://homepages.inf.ed.ac.uk/rbf/HIPR2/pixmult.htm
+          http://homepages.inf.ed.ac.uk/rbf/HIPR2/multdemo.htm
+        Divisão:
+          http://homepages.inf.ed.ac.uk/rbf/HIPR2/pixdiv.htm
+          http://homepages.inf.ed.ac.uk/rbf/HIPR2/divdemo.htm
+        Mistura:
+          http://homepages.inf.ed.ac.uk/rbf/HIPR2/blend.htm
+          http://homepages.inf.ed.ac.uk/rbf/HIPR2/blenddemo.htm
+        Operadores lógicos:
+          And:
+            http://homepages.inf.ed.ac.uk/rbf/HIPR2/and.htm
+            http://homepages.inf.ed.ac.uk/rbf/HIPR2/anddemo.htm
+          Or:
+            http://homepages.inf.ed.ac.uk/rbf/HIPR2/or.htm
+            http://homepages.inf.ed.ac.uk/rbf/HIPR2/ordemo.htm
+          Not:
+            http://homepages.inf.ed.ac.uk/rbf/HIPR2/not.htm
+            http://homepages.inf.ed.ac.uk/rbf/HIPR2/notdemo.htm
+          Xor:
+            http://homepages.inf.ed.ac.uk/rbf/HIPR2/xor.htm
+            http://homepages.inf.ed.ac.uk/rbf/HIPR2/xordemo.htm
+  Filtros - realce e restauração
+    Mediana:
+      http://homepages.inf.ed.ac.uk/rbf/HIPR2/median.htm
+      http://homepages.inf.ed.ac.uk/rbf/HIPR2/mediandemo.htm
+    Gaussiano:
+      http://homepages.inf.ed.ac.uk/rbf/HIPR2/gsmooth.htm
+      http://homepages.inf.ed.ac.uk/rbf/HIPR2/gaussiandemo.htm
+
+
+
+4) Segmentação
+-  Limiarização:
+      http://homepages.inf.ed.ac.uk/rbf/HIPR2/threshld.htm
+      http://homepages.inf.ed.ac.uk/rbf/HIPR2/threshdemo.htm
+
+-  Detecção de bordas
+    Sobel:
+      http://homepages.inf.ed.ac.uk/rbf/HIPR2/sobel.htm
+      http://homepages.inf.ed.ac.uk/rbf/HIPR2/sobeldemo.htm
+    Canny:
+      http://homepages.inf.ed.ac.uk/rbf/HIPR2/canny.htm
+      http://homepages.inf.ed.ac.uk/rbf/HIPR2/cannydemo.htm
+
+
+
+An image histogram is a type of histogram that acts as a graphical representation of the tonal distribution in a digital image.[1] It plots the number of pixels for each tonal value
+
+Um histograma de imagem é uma representação gráfica da distribuição de tons numa imagem digital.
+Representa graficamente o número de pixels para cada valor tonal.
+
+
+
+
+Histogram equalization is a technique for adjusting image intensities to enhance contrast.
+
+
+
+
+    It is a graphical representation of the intensity distribution of an image.
+    It quantifies the number of pixels for each intensity value considered.
+
+
+
+    It is a method that improves the contrast in an image, in order to stretch out the intensity range.
+    To make it clearer, from the image above, you can see that the pixels seem clustered around the middle of the available range of intensities. What Histogram Equalization does is to stretch out this range. Take a look at the figure below: The green circles indicate the underpopulated intensities. After applying the equalization, we get an histogram like the figure in the center. The resulting image is shown in the picture at right.
+    
+Para uma imagem em tons de cinza de 8 bits existem 256 possíveis diferentes intensidades, e de modo que o histograma mostra graficamente 256 números que mostram a distribuição de pixeis em escala de cinzentos entre esses valores    
+
+
+

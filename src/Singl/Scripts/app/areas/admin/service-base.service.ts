@@ -32,7 +32,7 @@ export class ServiceBase implements IServiceBase {
     };
 
     constructor(private _http: Http, public id: string,
-        public baseUrl: string, public getUrl: string) {
+        public baseUrl: string, public getUrl: string, public postUrl: string) {
         // Create Observable Stream to output our data
         this.observableList$ = new Observable(observer =>
             this._observerList = observer).share();
