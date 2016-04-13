@@ -489,6 +489,14 @@ namespace Singl
             builder.Entity<MetadataUI>()
                 .HasKey(m => m.Id);
 
+            //Templates
+            builder.Entity<Template>()
+                .HasKey(m => m.Name);
+
+            builder.Entity<Template>()
+                .HasIndex(m => m.Path)
+                .IsUnique();
+
 
             //              builder.Entity<PapelUsuario>()
             //                 .Property(k => k.Usuario);

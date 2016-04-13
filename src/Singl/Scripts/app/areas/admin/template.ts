@@ -1,6 +1,7 @@
     export class Template {
       constructor(
-        public id: string,
+        public name: string,
+        public path: string,
         public html: string
       ) {  }
     }

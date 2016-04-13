@@ -181,9 +181,13 @@
             <script asp-append-version="true" src="/lib/jquery.easing.js"></script>
             <script asp-append-version="true" src="/lib/jquery.fittext.js"></script>
             <script asp-append-version="true" src="/lib/wow.js"></script>
+            <script asp-append-version="true" src="/lib/es6-shim.js"></script>
             <script asp-append-version="true" src="/lib/system.js"></script>
             <script asp-append-version="true" src="/lib/Rx.js"></script>
             <script asp-append-version="true" src="/lib/angular2.js"></script>
+            <!--<script asp-append-version="true" src="/lib/ng2-ckeditor.js"></script>-->
+            <!--<script asp-append-version="true" src="/lib/ng2-file-upload.js"></script>-->
+            <script src="//cdn.ckeditor.com/4.5.8/standard/ckeditor.js"></script>            
             <script asp-append-version="true" src="/js/site.js"></script>
             <script asp-append-version="true" src="/js/home.js"></script>
             <!--<script asp-append-version="true" src="/lib/jquery.validate.js"></script>-->
@@ -209,9 +213,13 @@
                     asp-fallback-src="/lib/hammer.min.js"
                     asp-fallback-test="window.Hammer">
             </script>
+            <script src="/lib/es6-shim.min.js"></script>
             <script src="/lib/system.min.js"></script>
             <script src="/lib/Rx.min.js"></script>
             <script src="/lib/angular2.min.js"></script>
+            <!--<script asp-append-version="true" src="/lib/ng2-ckeditor.min.js"></script>-->
+            <!--<script asp-append-version="true" src="/lib/ng2-file-upload.min.js"></script>-->
+            <script src="//cdn.ckeditor.com/4.5.8/standard/ckeditor.js"></script>            
             <script asp-append-version="true" src="/js/site.min.js"></script>
             <script asp-append-version="true" src="/js/home.min.js"></script>
             <!--<script src="/lib/jquery.validate.min.js"></script>-->
@@ -235,7 +243,10 @@
                         format: 'register',
                         defaultExtension: 'js'
                     }
-                }
+                },
+                // map: {
+                //     'ng2-file-upload': '/lib/ng2-file-upload.js'
+                // }
             });
             System.import('app/areas/admin/boot')
                     .then(null, console.error.bind(console));
