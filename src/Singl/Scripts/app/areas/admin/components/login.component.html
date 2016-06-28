@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>Login</h1>
+
+    <form [ngFormModel]="form" (ngSubmit)="onSubmit()" class="form">
+        <div class="form-group">
+            <label for="email">Usuário</label>
+            <input type="text" [(ngModel)]="model.userName" ngControl="userName" class="form-control" id="email">
+        </div>
+        <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">
+            E-mail é obrigatório
+        </div>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" [(ngModel)]="model.password" ngControl="password" class="form-control" id="password">
+        </div>
+        <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+            Senha é obrigatória
+        </div>
+
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Login</button>
+    </form>
+</div>

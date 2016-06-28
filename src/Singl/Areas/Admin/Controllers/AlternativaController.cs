@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Singl.Models;
 

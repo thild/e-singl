@@ -54,8 +54,8 @@ namespace Singl
         }
 
         const string imgUrl = "~/Images/placeholder.png";
-        const string defaultAdminUserName = "DefaultAdminUserName";
-        const string defaultAdminPassword = "DefaultAdminPassword";
+        const string DEFAULT_ADMIN_USER_NAME = "admin";
+        const string DEFAULT_ADMIN_USER_PASSWORD = "Admin!@#123";
 
         public async Task InitializeStoreDatabaseAsync(IServiceProvider serviceProvider, bool createUsers = true)
         {
@@ -104,11 +104,12 @@ namespace Singl
             //    await roleManager.CreateAsync(new IdentityRole(adminRole));
             //}
 
-            var user = await userManager.FindByNameAsync("admin"/*configuration[defaultAdminUserName]*/);
+            var user = await userManager.FindByNameAsync(DEFAULT_ADMIN_USER_NAME/*configuration[defaultAdminUserName]*/);
+            
             if (user == null)
             {
-                user = new Usuario { UserName = "admin"/*configuration[defaultAdminUserName]*/ };
-                await userManager.CreateAsync(user, "Admin!@#123" /*configuration[defaultAdminPassword]*/);
+                user = new Usuario { UserName = DEFAULT_ADMIN_USER_NAME/*configuration[defaultAdminUserName]*/ };
+                await userManager.CreateAsync(user, DEFAULT_ADMIN_USER_PASSWORD /*configuration[defaultAdminPassword]*/);
                 //await userManager.AddToRoleAsync(user, adminRole);
                 //await userManager.AddClaimAsync(user, new Claim("ManageStore", "Allowed"));
             }

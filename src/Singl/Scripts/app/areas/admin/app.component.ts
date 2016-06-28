@@ -18,6 +18,7 @@ declare var System: any;
     new AsyncRoute({ useAsDefault: true, path: '/', name: 'Home', loader: () => System.import('./app/areas/admin/home.component').then(m => m.HomeComponent) }),
     new AsyncRoute({ path: '/templates', name: 'TemplateForm', loader: () => System.import('./app/areas/admin/forms/template-form.component').then(m => m.TemplateFormComponent) }),
     new AsyncRoute({ path: '/upload', name: 'FileUploadForm', loader: () => System.import('./app/areas/admin/forms/file-upload-form.component').then(m => m.FileUploadFormComponent) }),
+    new AsyncRoute({ path: '/login', name: 'Login', loader: () => System.import('./app/areas/admin/components/login.component').then(m => m.LoginComponent) }),
 ])
 export class AppComponent {
 

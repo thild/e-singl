@@ -20,6 +20,7 @@ export interface IServiceBase {
 }
 
 //TODO: cache the results
+@Injectable()
 export class ServiceBase implements IServiceBase {
 
     observableList$: Observable<Array<any>>;

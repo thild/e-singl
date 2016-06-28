@@ -1,4 +1,7 @@
 import {Component} from 'angular2/core';
+import {RouteConfig, ROUTER_DIRECTIVES, CanActivate, ComponentInstruction} from 'angular2/router';
+import {isLoggedIn} from '../components/login.component'
+
 import {NgForm, FormBuilder, Control, Validators, ControlGroup, FORM_DIRECTIVES}    from 'angular2/common';
 import {Template}    from './../template';
 import {TemplateService}    from './../template.service';
@@ -8,6 +11,9 @@ import {CKEditor} from './ckeditor.component';
     selector: 'template-form',
     templateUrl: 'app/areas/admin/forms/template-form.component.html',
     directives: [FORM_DIRECTIVES, CKEditor]
+})
+@CanActivate((next: ComponentInstruction, previous: ComponentInstruction) => {
+  return isLoggedIn(next, previous);
 })
 export class TemplateFormComponent {
 

@@ -11,7 +11,7 @@ namespace Singl.Areas.API.Controllers
 
         List<RouteDefinition> dynamicRoutes = new List<RouteDefinition> {
             new RouteDefinition { Path= "/", Name= "Home", ComponentPath = "./app/areas/singl/home/nead-home.component", Component= "NeadHomeComponent"},
-            //new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/ensino", Name = "NEADEnsino", ComponentPath = "./app/areas/singl/components/dynamic-component.component", Component= "DynamicComponent"},
+            new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/ensino", Name = "NEADEnsino", ComponentPath = "./app/areas/singl/components/dynamic-component.component", Component= "DynamicComponent"},
             new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/pesquisa", Name = "NEADPesquisa"},
             new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/extensao", Name = "NEADExtensao"},
             new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/administrativo", Name = "NEADAdministrativo"},

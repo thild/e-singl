@@ -1,4 +1,5 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -14,6 +15,7 @@ using AM = AutoMapper;
 
 namespace Singl
 {
+
     public class Startup
     {
         public IConfiguration Configuration { get; set; }
@@ -45,7 +47,14 @@ namespace Singl
                 .AddSqlite()
                 .AddDbContext<DatabaseContext>();
 
+            services.AddDataProtection();
+            services.ConfigureDataProtection(configure =>
+            {
+                configure.SetDefaultKeyLifetime(TimeSpan.FromDays(14));
+            });
+
             // Add Identity services to the services container
+            //http://wildermuth.com/2015/09/10/ASP_NET_5_Identity_and_REST_APIs
             services.AddIdentity<Usuario, IdentityRole>(options =>
                     {
                         options.Cookies.ApplicationCookie.AccessDeniedPath = "/Home/AccessDenied";
@@ -53,16 +62,17 @@ namespace Singl
                     .AddEntityFrameworkStores<DatabaseContext>()
                     .AddDefaultTokenProviders();
 
+            //services.AddTransient<IEmailSender, AuthMessageSender>();
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy", builder =>
-                {
-                    builder.WithOrigins("http://example.com");
-                });
-            });
+            // services.AddCors(options =>
+            // {
+            //     options.AddPolicy("CorsPolicy", builder =>
+            //     {
+            //         builder.WithOrigins("http://example.com");
+            //     });
+            // });
             // Add MVC services to the services container.
-            services.AddMvc().AddMvcOptions(option => 
+            services.AddMvc().AddMvcOptions(option =>
             {
                 //Clear all existing output formatters
                 option.OutputFormatters.Clear();
@@ -71,7 +81,7 @@ namespace Singl
                 //jsonOutputFormatter.SerializerSettings.MaxDepth = 3;
                 jsonOutputFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 //jsonOutputFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
-                
+
                 //Insert above jsonOutputFormatter as the first formatter, you can insert other formatters.
                 option.OutputFormatters.Insert(0, jsonOutputFormatter);
             });
@@ -128,11 +138,16 @@ namespace Singl
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            //app.UseCors("CorsPolicy");
+
             // Add static files to the request pipeline.
             app.UseStaticFiles();
 
-            // Add cookie-based authentication to the request pipeline
-            app.UseIdentity();
+            //https://damienbod.com/2016/03/14/secure-file-download-using-identityserver4-angular2-and-asp-net-core/
+
+            //app.UseOAuthBearerAuthentication();
+
+            ConfigureAuthentication(app);
 
             // Add MVC to the request pipeline.
             app.UseMvc(routes =>
@@ -154,21 +169,21 @@ namespace Singl
                     "controllerRoute",
                     "{controller}",
                     new { controller = "Home" });
-                    
+
                 // After all your routes
                 routes.MapRoute(
                     "DeepLinkAreas",
                     "{area:exists}/{*pathInfo}",
-                    defaults: new { controller = "Home", action = "Index" });                    
+                    defaults: new { controller = "Home", action = "Index" });
 
                 routes.MapRoute(
                     "DeepLink",
                     "{*pathInfo}",
-                    defaults: new { controller = "Home", action = "Index" });                    
+                    defaults: new { controller = "Home", action = "Index" });
 
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
-            }); 
+            });
 
             // if (System.IO.File.Exists("singl.sqlite"))
             // {
@@ -182,6 +197,65 @@ namespace Singl
             // }
         }
 
+        private void ConfigureAuthentication(IApplicationBuilder app)
+        {
+
+            // app.UseCors(policy =>
+            // {
+            //     policy.WithOrigins("http://localhost:28895", "http://localhost:7017");
+            //     policy.AllowAnyHeader();
+            //     policy.AllowAnyMethod();
+            // });
+
+            // JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            // app.UseIdentityServerAuthentication(options =>
+            // {
+            //     options.Authority = "http://localhost:22530/";
+            //     options.ScopeName = "api1";
+            //     options.ScopeSecret = "secret";
+
+            //     options.AutomaticAuthenticate = true;
+            //     options.AutomaticChallenge = true;
+            // });
+            
+            app.UseIdentity();
+            
+            // app.UseOpenIdConnectServer(options =>
+            // {
+            //     options.TokenEndpointPath = "/api/v1/token";
+            //     options.AllowInsecureHttp = true;
+            //     options.AuthorizationEndpointPath = PathString.Empty;
+            //     options.Provider = new OpenIdConnectServerProvider
+            //     {
+            //         OnValidateClientAuthentication = context =>
+            //         {
+            //             context.Skipped();
+            //             return Task.FromResult<Object>(null);
+            //         },
+            //         OnGrantResourceOwnerCredentials = async context =>
+            //         {
+            //             var usersService = app.ApplicationServices.GetService<IUsersService>();
+
+            //             User user = usersService.getUser(context.Username, context.Password);
+
+            //             var identity = new ClaimsIdentity(new List<Claim>(), OpenIdConnectServerDefaults.AuthenticationScheme);
+            //             identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
+            //             identity.AddClaim(new Claim(ClaimTypes.Name, user.Id.ToString()));
+            //             identity.AddClaim(new Claim("myclaim", "4815162342"));
+
+            //             var ticket = new AuthenticationTicket(
+            //                 new ClaimsPrincipal(identity),
+            //                 new AuthenticationProperties(),
+            //                 context.Options.AuthenticationScheme);
+
+            //             ticket.SetResources(new[] { "http://localhost:53844" });
+            //             ticket.SetAudiences(new[] { "http://localhost:53844" });
+            //             ticket.SetScopes(new[] { "email", "offline_access" });
+            //             context.Validated(ticket);
+            //         }
+            //     };
+            // });
+        }
         private void ConfigureMappers()
         {
             AM.Mapper.CreateMap<Disciplina, DisciplinaEditViewModel>();
