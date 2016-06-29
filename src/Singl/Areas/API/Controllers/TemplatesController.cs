@@ -14,25 +14,29 @@ namespace Singl.Areas.API.Controllers
         {
             _context = context;
         }
-        
+
         //[HttpGet()]
         [HttpGet("{routeName}")]
         public IActionResult Get(string routeName)
         {
-            
+
             if (string.IsNullOrEmpty(routeName))
             {
                 return new HttpNotFoundResult();
             }
 
             var obj = _context.Templates
-                .SingleOrDefault(m => m.Id == routeName);
-                
+                .SingleOrDefault(m => m.Name == routeName);
+
             if (obj == null)
             {
                 //return new HttpNotFoundResult();
             }
-            
+            else
+            {
+                return Content(obj.Html, "text/html"); ;
+            }
+
             var html = "";
             switch (routeName)
             {
@@ -60,12 +64,30 @@ namespace Singl.Areas.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(template.Id))
+                //TODO: remover if quando a validação estiver correta
+                if (!string.IsNullOrEmpty(template.Name))
                 {
-                    var original = _context.Templates.Single(m => m.Id == template.Id);
-                    original.Html = template.Html;
-                    _context.SaveChanges();
-                    return new ObjectResult(original);
+                    var original = _context.Templates.SingleOrDefault(m => m.Name == template.Name);
+                    if (original == null)
+                    {
+                        _context.Templates.Add(template);
+
+                    }
+                    else
+                    {
+                        original.Path = template.Path;
+                        original.Html = template.Html;
+                    }
+                    try
+                    {
+                        _context.SaveChanges();
+                    }
+                    catch (System.Exception)
+                    {
+                        //System.Console.WriteLine(ex);
+                        return new BadRequestObjectResult(ModelState);
+                    }
+                    return new ObjectResult(template);
                 }
             }
 

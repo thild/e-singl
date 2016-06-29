@@ -218,26 +218,50 @@ var sources = {
             // minified to create a file with the above file name.
             paths: [
                 paths.node + "angular2/bundles/angular2-polyfills.js",
-                paths.node + "/angular2/bundles/angular2.dev.js",
-                paths.node + "/angular2/bundles/router.dev.js",
-                paths.node + "/angular2/bundles/http.dev.js"
+                paths.node + "angular2/bundles/angular2.dev.js",
+                paths.node + "angular2/bundles/router.dev.js",
+                paths.node + "angular2/bundles/http.dev.js"
             ]
         },
         {
             name: "system.js",
             paths: [
+                paths.node + "systemjs/dist/system-polyfills.src.js",
                 paths.node + "systemjs/dist/system.src.js"
             ]
         },
         {
-            // name - The name of the final JavaScript file to build.
             name: "Rx.js",
-            // paths - A single or array of paths to JavaScript or TypeScript files which will be concatenated and 
-            // minified to create a file with the above file name.
             paths: [
                 paths.node + "rxjs/bundles/Rx.js"                
             ]
         },
+        {
+            name: "es6-shim.js",
+            paths: [
+                paths.node + "es6-shim/es6-shim.js"                
+            ]
+        },
+        // {
+        //     // name - The name of the final JavaScript file to build.
+        //     name: "ng2-ckeditor.js",
+        //     // paths - A single or array of paths to JavaScript or TypeScript files which will be concatenated and 
+        //     // minified to create a file with the above file name.
+        //     paths: [
+        //         // Feel free to remove any parts of Bootstrap you don't use.
+        //         paths.node + "ng2-ckeditor/lib/CKEditor.js",
+        //     ]
+        // },
+        // {
+        //     // name - The name of the final JavaScript file to build.
+        //     name: "ng2-file-upload.js",
+        //     // paths - A single or array of paths to JavaScript or TypeScript files which will be concatenated and 
+        //     // minified to create a file with the above file name.
+        //     paths: [
+        //         // paths.node + "ng2-file-upload/ng2-file-upload.js",
+        //         paths.node + "ng2-file-upload/components/file-upload/*.js",
+        //     ]
+        // },        
         {
             // name - The name of the final JavaScript file to build.
             name: "bootstrap.js",
@@ -247,7 +271,7 @@ var sources = {
                 // Feel free to remove any parts of Bootstrap you don't use.
                 paths.bower + "bootstrap/dist/js/bootstrap.js",
             ]
-        },
+        }, 
         {
             name: "modernizr.js",
             paths: paths.bower + "modernizr/modernizr.js"
@@ -717,7 +741,7 @@ gulp.task("watch-js", function () {
 
 gulp.task("watch-app", function () {
     return gulp
-        .watch(paths.scripts + "app/**/*.{ts,html}", ["build-app"])     // Watch the scripts folder for file changes.
+        .watch(paths.scripts + "app/**/*.{ts,html}", ["build-app", "build-admin"])     // Watch the scripts folder for file changes.
         .on("change", function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-app task started."));
         });

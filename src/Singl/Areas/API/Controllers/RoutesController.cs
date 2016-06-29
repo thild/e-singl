@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNet.Mvc;
 
 namespace Singl.Areas.API.Controllers
@@ -7,12 +9,12 @@ namespace Singl.Areas.API.Controllers
     public class RoutesController : Controller
     {
 
-        RouteDefinition[] dynamicRoutes = {
+        List<RouteDefinition> dynamicRoutes = new List<RouteDefinition> {
             new RouteDefinition { Path= "/", Name= "Home", ComponentPath = "./app/areas/singl/home/nead-home.component", Component= "NeadHomeComponent"},
             new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/ensino", Name = "NEADEnsino", ComponentPath = "./app/areas/singl/components/dynamic-component.component", Component= "DynamicComponent"},
-            new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/pesquisa", Name = "NEADPesquisa", ComponentPath = "./app/areas/singl/components/dynamic-component.component", Component= "DynamicComponent"},
-            new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/extensao", Name = "NEADExtensao", ComponentPath = "./app/areas/singl/components/dynamic-component.component", Component= "DynamicComponent"},
-            new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/administrativo", Name = "NEADAdministrativo", ComponentPath = "./app/areas/singl/components/dynamic-component.component", Component= "DynamicComponent"},
+            new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/pesquisa", Name = "NEADPesquisa"},
+            new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/extensao", Name = "NEADExtensao"},
+            new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/administrativo", Name = "NEADAdministrativo"},
             // new RouteDefinition { Path= "/unidadesuniversitarias", Name= "UnidadeUniversitariaList", Loader= "UnidadeUniversitariaListComponent", Text = "Unidades Universitárias", ShowInNav = true},
             // new RouteDefinition { Path= "/unidadesuniversitarias/:sigla", Name= "UnidadeUniversitariaDetail", Loader= "UnidadeUniversitariaDetailComponent" },
             // new RouteDefinition { Path= "/campi", Name= "CampusList", Loader= "CampusListComponent", Text = "Campi" , ShowInNav = true},
@@ -42,10 +44,27 @@ namespace Singl.Areas.API.Controllers
             new NavRoute { Name= "SetorConhecimentoList", Text = "Setores de Conhecimento"},
         };
 
+        private DatabaseContext _context;
+
+        public RoutesController(DatabaseContext context)
+        {
+            _context = context;
+        }
+
         //[HttpGet()]
         [HttpGet("getdynamicroutes")]
         public IActionResult GetDynamicRoutes()
         {
+            var routes = dynamicRoutes;
+            var templatesRoutes = _context.Templates.Select(m => new {m.Name, m.Path});
+
+            foreach (var tr in templatesRoutes)
+            {
+                routes.Add(
+                    new RouteDefinition { Path= tr.Path, Name = tr.Name}
+                );                
+            }
+            
             return new ObjectResult(dynamicRoutes);
         }
 
@@ -65,9 +84,9 @@ namespace Singl.Areas.API.Controllers
         private class RouteDefinition
         {
             public string Path { get; set; }
-            public string ComponentPath { get; set; }
+            public string ComponentPath { get; set; } = "./app/areas/singl/components/dynamic-component.component";
             public string Name { get; set; }
-            public string Component { get; set; }
+            public string Component { get; set; } = "DynamicComponent";
         }
 
 
