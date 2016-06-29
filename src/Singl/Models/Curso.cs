@@ -5,14 +5,9 @@ using System;
 using System.Linq;
 using Singl.Models.Validators;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Singl.Extensions;
 using Singl.Core.Scaffolding;
 using System.Dynamic;
-using System.Dynamic;
-using System.ComponentModel;
-using System.Reflection;
-using Microsoft.AspNet.Mvc.Formatters;
 
 namespace Singl.Models
 {

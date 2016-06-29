@@ -1,16 +1,14 @@
 ﻿//http://mvc.readthedocs.org/en/latest/tutorials/mvc-with-entity-framework.html
 using System;
-using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
-using Singl.Models;
-using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
-using System.Collections.Generic;
 using Singl.Database.Migrations;
+using Singl.Models;
 
 namespace Singl
 {
