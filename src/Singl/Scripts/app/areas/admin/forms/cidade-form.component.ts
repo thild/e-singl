@@ -3,27 +3,26 @@ import {RouteConfig, ROUTER_DIRECTIVES, CanActivate, ComponentInstruction} from 
 import {isLoggedIn} from '../components/login.component'
 
 import {NgForm, FormBuilder, Control, Validators, ControlGroup, FORM_DIRECTIVES}    from 'angular2/common';
-import {Template}    from './../template';
-import {TemplateService}    from './../template.service';
+import {Cidade}    from './../cidade';
+import {CidadeService}    from './../cidade.service';
 import {CKEditor} from './ckeditor.component';
 
 @Component({
-    selector: 'template-form',
-    templateUrl: 'app/areas/admin/forms/template-form.component.html',
+    selector: 'cidade-form',
+    templateUrl: 'app/areas/admin/forms/cidade-form.component.html',
     directives: [FORM_DIRECTIVES, CKEditor]
 })
 @CanActivate((next: ComponentInstruction, previous: ComponentInstruction) => {
   return isLoggedIn(next, previous);
 })
-export class TemplateFormComponent {
+export class CidadeFormComponent {
 
     form: ControlGroup;
 
-    name: Control = new Control('', Validators.required);
-    path: Control = new Control('', Validators.required);
-    html: Control = new Control('', Validators.required);
+    id: Control = new Control('00000000-0000-0000-0000-000000000000');
+    nome: Control = new Control('', Validators.required);
 
-    model: Template = new Template('', '', '');
+    model: Cidade = new Cidade('00000000-0000-0000-0000-000000000000', '');
 
     submitted = false;
 
@@ -33,24 +32,15 @@ export class TemplateFormComponent {
     // TODO: Workaround until NgForm has a reset method (#6822)
     active = true;
 
-    constructor(fb: FormBuilder, public service: TemplateService) {
+    constructor(fb: FormBuilder, public service: CidadeService) {
         this.form = fb.group({
-            "name": this.name,
-            "path": this.path,
-            "html": this.html
+            "id": this.id,
+            "nome": this.nome
         });
     }
 
     onSubmit() {
-        //this.submitted = true;
-        console.log('teste');
-        
         this.service.post(this.model).subscribe(m => console.log('foisimbora'));
-        // this.form.controls.forEach((name, control) => {
-        //     control.updateValue('');
-        //     control.setErrors(null);
-        // });
-
     }
 
     // TODO: Remove this when we're done
@@ -58,10 +48,9 @@ export class TemplateFormComponent {
 
 
 
-    newTemplate() {
-        this.model.name = '';
-        this.model.path = '';
-        this.model.html = '';
+    newCidade() {
+        this.model.id = '00000000-0000-0000-0000-000000000000';
+        this.model.nome = '';
         this.active = false;
         setTimeout(() => this.active = true, 0);
     }

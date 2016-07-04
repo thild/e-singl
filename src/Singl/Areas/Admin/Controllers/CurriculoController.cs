@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Singl.Models;
 using Singl.ViewModels;
 
@@ -32,7 +32,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             var curriculo = _context.Curriculos
@@ -41,7 +41,7 @@ namespace Singl.Areas.Admin.Controllers
                 .Single(m => m.Id == id);
             if (curriculo == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             return View(curriculo);
@@ -75,13 +75,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             var curriculo = _context.Curriculos.Include(m => m.Curso).Single(m => m.Id == id);
             if (curriculo == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
             return View(curriculo);
         }
@@ -106,13 +106,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             var curriculo = _context.Curriculos.Single(m => m.Id == id);
             if (curriculo == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             return View(curriculo);

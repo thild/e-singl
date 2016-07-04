@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Singl.Models;
 
 namespace Singl.Areas.API.Controllers
@@ -34,7 +33,7 @@ namespace Singl.Areas.API.Controllers
             
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var uu = _context.UnidadesUniversitarias
@@ -49,7 +48,7 @@ namespace Singl.Areas.API.Controllers
                 
             if (uu == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
                         
             return new ObjectResult(uu);
@@ -88,16 +87,16 @@ namespace Singl.Areas.API.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
             var obj = _context.UnidadesUniversitarias.Single(m => m.Sigla == sigla.ToUpper());
             if (obj == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }            
             _context.UnidadesUniversitarias.Remove(obj);
             _context.SaveChanges();
-            return new HttpOkResult();
+            return Ok();
         }        
     }
 }

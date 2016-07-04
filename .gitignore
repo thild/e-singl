@@ -221,3 +221,7 @@ FakesAssemblies/
 #Exclusivos NEAD
 docs/
 *.~lock*
+
+#Enviroment setup
+home-dev.sh
+unicentro-dev.sh

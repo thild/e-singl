@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
 using Singl.Areas.Admin.ViewModels;
 using Singl.Models;
 
@@ -21,7 +19,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (modelId == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var list = db.MetadataUI.Where(m => m.ModelId == modelId);
@@ -48,7 +46,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var metadataUI = db.MetadataUI
@@ -56,7 +54,7 @@ namespace Singl.Areas.Admin.Controllers
 
             if (metadataUI == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(metadataUI);
@@ -68,7 +66,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (modelId == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
             return View(new MetadataUI { ModelId = modelId.Value });
         }
@@ -101,14 +99,14 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var metadataUI = db.MetadataUI
                 .Single(m => m.Id == id);
             if (metadataUI == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(metadataUI);
@@ -138,7 +136,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (modelId == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
             var metadataUI = db.MetadataUI.Single(m => m.Id == id);
             db.MetadataUI.Remove(metadataUI);

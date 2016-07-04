@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Singl.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -24,13 +24,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             Papel Papel = db.Papeis.Single(m => m.Id == id.Value);
             if (Papel == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(Papel);
@@ -63,13 +63,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             Papel Papel = db.Papeis.Single(m => m.Id == id);
             if (Papel == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(Papel);
@@ -96,13 +96,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             Papel Papel = db.Papeis.Single(m => m.Id == id);
             if (Papel == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(Papel);

@@ -1,5 +1,5 @@
 using System.Linq;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Singl.Models;
 
 namespace Singl.Areas.Admin.Controllers
@@ -27,7 +27,7 @@ namespace Singl.Areas.Admin.Controllers
             Instituicao instituicao = _context.Instituicao.Single();
             if (instituicao == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
             return View(instituicao);
         }

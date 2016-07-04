@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Singl.Models;
 
 namespace Singl.Database.Migrations

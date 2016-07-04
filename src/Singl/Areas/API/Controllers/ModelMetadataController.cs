@@ -5,9 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Dynamic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Singl.Core.Scaffolding;
 using Singl.Extensions;
 
@@ -23,7 +22,7 @@ namespace Singl.Areas.API.Controllers
 
             if (string.IsNullOrEmpty(modelName))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             //var model = Activator.CreateInstanceFrom();

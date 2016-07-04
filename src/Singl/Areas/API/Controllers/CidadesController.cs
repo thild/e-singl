@@ -9,11 +9,11 @@ namespace Singl.Areas.API.Controllers
 {
     [Area("API")]
     [Route("[area]/[controller]")]
-    public class PolosController : Controller
+    public class CidadesController : Controller
     {
         private DatabaseContext _context;
 
-        public PolosController(DatabaseContext context)
+        public CidadesController(DatabaseContext context)
         {
             _context = context;
         }
@@ -21,7 +21,7 @@ namespace Singl.Areas.API.Controllers
         [HttpGet]
         public IEnumerable<dynamic> Get()
         {
-            var list = _context.Polos
+            var list = _context.Cidades
                 .OrderBy(m => m.Nome)
                 .ToList();
 
@@ -46,15 +46,15 @@ namespace Singl.Areas.API.Controllers
                 return new NotFoundResult();
             }
 
-            var polo = _context.Polos
+            var Cidade = _context.Cidades
                 .Single(m => m.Id == id);
 
-            if (polo == null)
+            if (Cidade == null)
             {
                 return new NotFoundResult();
             }
 
-            return new ObjectResult(polo.ToDto());
+            return new ObjectResult(Cidade.ToDto());
         }
 
         [HttpGet("{id}/info")]
@@ -65,44 +65,39 @@ namespace Singl.Areas.API.Controllers
                 return new NotFoundResult();
             }
 
-            var polo = _context.Polos
+            var cidade = _context.Cidades
               .Single(m => m.Id == id);
 
-            if (polo == null)
+            if (cidade == null)
             {
                 return new NotFoundResult();
             }
             
-            polo.Cursos = _context.PolosCurso
-                .Where(m => m.PoloId == polo.Id)
-                .Select(m => m.Curso)
-                .OrderBy(m => m.Nome)
-                .ToList();            
-
-            var dto = polo.ToDto();
+            var dto = cidade.ToDto();
             dto.MetadataUI = _context
                 .MetadataUI
-                .SingleOrDefault(m => m.ModelId == polo.Id);
+                .SingleOrDefault(m => m.ModelId == cidade.Id);
 
             return new ObjectResult(dto);
         }
 
         [HttpPost]
         //[Authorize("CanEdit", "true")]
-        public IActionResult Post([FromBody]Polo polo)
+        public IActionResult Post([FromBody]Cidade cidade)
         {
+            System.Console.WriteLine("Cidade");
             if (ModelState.IsValid)
             {
-                if (polo.Id == Guid.Empty)
+                if (cidade.Id == Guid.Empty)
                 {
-                    _context.Polos.Add(polo);
+                    _context.Cidades.Add(cidade);
                     _context.SaveChanges();
-                    return new ObjectResult(polo);
+                    return new ObjectResult(cidade);
                 }
                 else
                 {
-                    var original = _context.Polos.Single(m => m.Id == polo.Id);
-                    original.Fill(polo);
+                    var original = _context.Cidades.Single(m => m.Id == cidade.Id);
+                    original.Fill(cidade);
                     _context.SaveChanges();
                     return new ObjectResult(original);
                 }
@@ -121,12 +116,12 @@ namespace Singl.Areas.API.Controllers
             {
                 return new NotFoundResult();
             }
-            var obj = _context.Polos.Single(m => m.Id == id);
+            var obj = _context.Cidades.Single(m => m.Id == id);
             if (obj == null)
             {
                 return new NotFoundResult();
             }
-            _context.Polos.Remove(obj);
+            _context.Cidades.Remove(obj);
             _context.SaveChanges();
             return Ok();
         }

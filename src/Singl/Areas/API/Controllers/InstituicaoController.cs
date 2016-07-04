@@ -1,6 +1,5 @@
 using System.Linq;
-using Microsoft.AspNet.Mvc;
-using Singl.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Singl.Areas.API.Controllers
 {
@@ -29,7 +28,7 @@ namespace Singl.Areas.API.Controllers
                 
             if (instituicao == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
 
             var dto = instituicao.ToDto();
@@ -46,7 +45,7 @@ namespace Singl.Areas.API.Controllers
 //             Instituicao instituicao = _context.Instituicao.Single();
 //             if (instituicao == null)
 //             {
-//                 return HttpNotFound();
+//                 return NotFound();
 //             }
 //             return View(instituicao);
 //         }

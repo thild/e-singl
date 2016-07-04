@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Singl.Models;
 
 namespace Singl.Areas.API.Controllers
@@ -35,7 +34,7 @@ namespace Singl.Areas.API.Controllers
             if (string.IsNullOrEmpty(sigla) || 
                 string.IsNullOrEmpty(unidadeUniversitaria))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
 
             var setoresConhecimento = _context.SetoresConhecimento
@@ -48,7 +47,7 @@ namespace Singl.Areas.API.Controllers
                                 
             if (setorConhecimento == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
             
             setorConhecimento.Departamentos = setorConhecimento.Departamentos.OrderBy(m => m.Nome).ToList();
@@ -94,7 +93,7 @@ namespace Singl.Areas.API.Controllers
             if (string.IsNullOrEmpty(sigla) || 
                 string.IsNullOrEmpty(unidadeUniversitaria))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
 
             var setoresConhecimento = _context.SetoresConhecimento
@@ -107,9 +106,9 @@ namespace Singl.Areas.API.Controllers
 
             if (obj == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
-            return new HttpOkResult();
+            return Ok();
         }        
     }
 }

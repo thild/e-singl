@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using AutoMapper;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Singl.Models;
 using Singl.ViewModels;
 
@@ -23,13 +23,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var disciplina = db.Disciplinas.Single(m => m.Id == id);
             if (disciplina == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(disciplina);
@@ -67,14 +67,14 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             //var disciplina = db.Disciplinas.Project().To<DisciplinaEditViewModel>().Single(m => m.Id == id);
             var disciplina = db.Disciplinas.Single(m => m.Id == id);
             if (disciplina == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
             return View(disciplina);
         }
@@ -100,13 +100,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var disciplina = db.Disciplinas.Single(m => m.Id == id);
             if (disciplina == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(disciplina);

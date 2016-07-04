@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Singl.Models;
 
 namespace Singl.Areas.API.Controllers
@@ -38,7 +37,7 @@ namespace Singl.Areas.API.Controllers
             
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var campus = _context.Campi
@@ -61,7 +60,7 @@ namespace Singl.Areas.API.Controllers
                 
             if (campus == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
                         
             return new ObjectResult(campus);
@@ -100,16 +99,16 @@ namespace Singl.Areas.API.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
             var obj = _context.Campi.Single(m => m.Sigla == sigla.ToUpper());
             if (obj == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }            
             _context.Campi.Remove(obj);
             _context.SaveChanges();
-            return new HttpOkResult();
+            return Ok();
         }        
     }
 }

@@ -33,12 +33,14 @@ const ROUTER_PROVIDERS: Array<any> = [
 ];
 
 import {TemplateService}  from './template.service';
+import {CidadeService}  from './cidade.service';
 import {AuthService}  from './services/auth.service';
 import {AuthStorageService}  from './services/auth-storage.service';
 import {LOCAL_STORAGE_SERVICE_PROVIDERS}  from './services/local-storage.service';
 
 const SERVICE_PROVIDERS: Array<any> = [
     TemplateService,
+    CidadeService,
 	AuthStorageService,
 	AuthService
 ];

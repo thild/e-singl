@@ -1,11 +1,10 @@
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using IOExtensions;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Singl.Areas.API.Controllers
 {
@@ -24,10 +23,19 @@ namespace Singl.Areas.API.Controllers
         public async Task<IActionResult> Post(IFormFile file)
         {
             var path = Path.Combine(_environment.WebRootPath, "uploads");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            System.Console.WriteLine(path);
             if (file.Length > 0)
             {
-                var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                await file.SaveAsAsync(Path.Combine(path, fileName));
+                var fileName = Path.Combine(path, ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"'));
+                System.Console.WriteLine(fileName);
+                using (var fs = new FileStream(fileName, FileMode.Create))
+                {
+                    await file.CopyToAsync(fs);
+                }
             }
             return new JsonResult(new { message = "Ok" }) { StatusCode = 200 };
         }

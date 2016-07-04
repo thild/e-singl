@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Singl.Models;
 
 namespace Singl.Areas.Admin.Controllers
@@ -25,7 +25,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var campus = db.Campi
@@ -35,7 +35,7 @@ namespace Singl.Areas.Admin.Controllers
                 
             if (campus == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(campus);
@@ -71,7 +71,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var campus = db.Campi
@@ -80,7 +80,7 @@ namespace Singl.Areas.Admin.Controllers
                 .Single(m => m.Sigla == sigla);
             if (campus == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(campus);
@@ -109,13 +109,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var campus = db.Campi.Single(m => m.Sigla == sigla);
             if (campus == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(campus);

@@ -1,13 +1,15 @@
 using System;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Mvc.Formatters;
+using System.Buffers;
+using System.IO;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.PlatformAbstractions;
 using Singl.Models;
 using Singl.Settings;
 using Singl.ViewModels;
@@ -20,11 +22,11 @@ namespace Singl
     {
         public IConfiguration Configuration { get; set; }
 
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment env)
         {
             // Setup configuration sources.
             var builder = new ConfigurationBuilder()
-                .SetBasePath(appEnv.ApplicationBasePath)
+                .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("config.json")
                 .AddJsonFile($"config.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
@@ -37,32 +39,35 @@ namespace Singl
 
 
         // This method gets called by the runtime.
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
+
 
             ConfigureOptionsServices(services, this.Configuration);
 
             // Register Entity Framework
             services.AddEntityFramework()
-                .AddSqlite()
+                .AddEntityFrameworkSqlite()
                 .AddDbContext<DatabaseContext>();
 
-            services.AddDataProtection();
-            services.ConfigureDataProtection(configure =>
-            {
-                configure.SetDefaultKeyLifetime(TimeSpan.FromDays(14));
-            });
+            services.AddDataProtection().SetDefaultKeyLifetime(TimeSpan.FromDays(14));
 
             // Add Identity services to the services container
             //http://wildermuth.com/2015/09/10/ASP_NET_5_Identity_and_REST_APIs
             services.AddIdentity<Usuario, IdentityRole>(options =>
                     {
                         options.Cookies.ApplicationCookie.AccessDeniedPath = "/Home/AccessDenied";
+                        options.User.RequireUniqueEmail = true;
+                        options.Password.RequiredLength = 5;
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.Password.RequireDigit = false;
+                        options.Password.RequireUppercase = false;
+                        options.Cookies.ApplicationCookie.LoginPath = "/Admin/Login";
+                        options.SignIn.RequireConfirmedEmail = false;
+                        options.SignIn.RequireConfirmedPhoneNumber = false;
                     })
                     .AddEntityFrameworkStores<DatabaseContext>()
                     .AddDefaultTokenProviders();
-
-            //services.AddTransient<IEmailSender, AuthMessageSender>();
 
             // services.AddCors(options =>
             // {
@@ -76,10 +81,14 @@ namespace Singl
             {
                 //Clear all existing output formatters
                 option.OutputFormatters.Clear();
-                var jsonOutputFormatter = new JsonOutputFormatter();
+                var jsonOutputFormatter = new JsonOutputFormatter(
+                    new Newtonsoft.Json.JsonSerializerSettings
+                    {
+                        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    }, ArrayPool<char>.Shared
+                );
                 //Set ReferenceLoopHandling
                 //jsonOutputFormatter.SerializerSettings.MaxDepth = 3;
-                jsonOutputFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 //jsonOutputFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
 
                 //Insert above jsonOutputFormatter as the first formatter, you can insert other formatters.
@@ -94,23 +103,22 @@ namespace Singl
             services.AddTransient<Singl.Services.IUnidadeUniversitariaService, Singl.Services.UnidadeUniversitariaService>();
 
             // Uncomment the following line to add Web API services which makes it easier to port Web API 2 controllers.
-            // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
+            // You will also need to add the Microsoft.AspNetCore.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
             // services.AddWebApiConventions();
 
 
 
             // Configure Auth
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(
-                    "ManageStore",
-                    authBuilder =>
-                    {
-                        authBuilder.RequireClaim("ManageStore", "Allowed");
-                    });
-            });
+            // services.AddAuthorization(options =>
+            // {
+            //     options.AddPolicy(
+            //         "ManageStore",
+            //         authBuilder =>
+            //         {
+            //             authBuilder.RequireClaim("ManageStore", "Allowed");
+            //         });
+            // });
 
-            return services.BuildServiceProvider();
         }
 
         // Configure is called after ConfigureServices is called.
@@ -119,9 +127,8 @@ namespace Singl
 
             ConfigureMappers();
 
-            loggerFactory.MinimumLevel = LogLevel.Information;
-            loggerFactory.AddConsole(LogLevel.Verbose);
-            loggerFactory.AddDebug(LogLevel.Verbose);
+            loggerFactory.AddConsole(LogLevel.Debug);
+            loggerFactory.AddDebug(LogLevel.Debug);
 
 
             // Configure the HTTP request pipeline.
@@ -130,6 +137,7 @@ namespace Singl
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -142,6 +150,8 @@ namespace Singl
 
             // Add static files to the request pipeline.
             app.UseStaticFiles();
+
+
 
             //https://damienbod.com/2016/03/14/secure-file-download-using-identityserver4-angular2-and-asp-net-core/
 
@@ -185,10 +195,11 @@ namespace Singl
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
 
-            // if (System.IO.File.Exists("singl.sqlite"))
+            // var dbfile = $"{Directory.GetCurrentDirectory()}/singl.sqlite";
+            // if (System.IO.File.Exists(dbfile))
             // {
             //     System.Console.WriteLine("Deleted singl.sqlite");
-            //     System.IO.File.Delete("singl.sqlite");
+            //     System.IO.File.Delete(dbfile);
             // }
 
             // using (var context = new DatabaseContext())
@@ -217,9 +228,9 @@ namespace Singl
             //     options.AutomaticAuthenticate = true;
             //     options.AutomaticChallenge = true;
             // });
-            
+
             app.UseIdentity();
-            
+
             // app.UseOpenIdConnectServer(options =>
             // {
             //     options.TokenEndpointPath = "/api/v1/token";
@@ -258,10 +269,13 @@ namespace Singl
         }
         private void ConfigureMappers()
         {
-            AM.Mapper.CreateMap<Disciplina, DisciplinaEditViewModel>();
-            AM.Mapper.CreateMap<DisciplinaEditViewModel, Disciplina>();
-            AM.Mapper.CreateMap<Disciplina, DisciplinaCreateViewModel>();
-            AM.Mapper.CreateMap<DisciplinaCreateViewModel, Disciplina>();
+            var config = new AM.MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Disciplina, DisciplinaEditViewModel>();
+                cfg.CreateMap<DisciplinaEditViewModel, Disciplina>();
+                cfg.CreateMap<Disciplina, DisciplinaCreateViewModel>();
+                cfg.CreateMap<DisciplinaCreateViewModel, Disciplina>();
+            });
         }
 
         /// <summary>
@@ -273,11 +287,13 @@ namespace Singl
         /// stored.</param>
         private void ConfigureOptionsServices(IServiceCollection services, IConfiguration configuration)
         {
-            // Adds IOptions<AppSettings> to the services container.
-            services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
+            // Setup options with DI
+            services.AddOptions();
 
-            // Adds IOptions<CacheProfileSettings> to the services container.
-            //  services.Configure<CacheProfileSettings>(configuration.GetSection(nameof(CacheProfileSettings)));
+            // Configure MyOptions using code
+            services.Configure<AppSettings>(myOptions =>
+            {
+            });
         }
 
     }

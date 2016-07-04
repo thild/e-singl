@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Singl.Models;
 
 namespace Singl.Areas.Admin.Controllers
@@ -21,13 +21,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             Questao questao = db.Set<Questao>().Single(m => m.Id == id);
             if (questao == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(questao);
@@ -60,13 +60,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             Questao questao = db.Set<Questao>().Single(m => m.Id == id);
             if (questao == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(questao);
@@ -93,13 +93,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             Questao questao = db.Set<Questao>().Single(m => m.Id == id);
             if (questao == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(questao);

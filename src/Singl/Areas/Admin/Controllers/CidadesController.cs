@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Singl.Models;
 
 namespace Singl.Areas.Admin.Controllers
@@ -24,7 +24,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var Cidade = db.Cidades
@@ -32,7 +32,7 @@ namespace Singl.Areas.Admin.Controllers
                 
             if (Cidade == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(Cidade);
@@ -68,14 +68,14 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var Cidade = db.Cidades
                 .Single(m => m.Id == id);
             if (Cidade == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(Cidade);
@@ -104,13 +104,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var Cidade = db.Cidades.Single(m => m.Id == id);
             if (Cidade == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(Cidade);

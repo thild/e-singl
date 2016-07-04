@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
-using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Singl.Models;
 
 namespace Singl.Areas.API.Controllers
@@ -50,7 +48,7 @@ namespace Singl.Areas.API.Controllers
             
             if (string.IsNullOrEmpty(codigo))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
 
             var curso = _context.Cursos
@@ -71,7 +69,7 @@ namespace Singl.Areas.API.Controllers
                 
             if (curso == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
                           
             return new ObjectResult(curso.ToDto());
@@ -82,7 +80,7 @@ namespace Singl.Areas.API.Controllers
         {
             if (string.IsNullOrEmpty(codigo))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
 
               var curso = _context.Cursos
@@ -95,7 +93,7 @@ namespace Singl.Areas.API.Controllers
                 
             if (curso == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
             //TODO: Gambiarra master. Descobrir porque o Theninclude (Pessoa) não é retornado em 1 
             var docentesCurso = _context.DocentesCurso
@@ -186,16 +184,16 @@ namespace Singl.Areas.API.Controllers
         {
             if (string.IsNullOrEmpty(codigo))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
             var obj = _context.Cursos.Single(m => m.Codigo == codigo.ToUpper());
             if (obj == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }            
             _context.Cursos.Remove(obj);
             _context.SaveChanges();
-            return new HttpOkResult();
+            return Ok();
         }        
     }
 }

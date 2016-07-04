@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Singl.Models;
 
 namespace Singl.Areas.Admin.Controllers
@@ -31,7 +31,7 @@ namespace Singl.Areas.Admin.Controllers
             if (string.IsNullOrEmpty(sigla) || 
                 string.IsNullOrEmpty(unidadeUniversitaria))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
 
             //TODO: Verificar se na versao final do EF ainda throw "Specified cast is not valid" com a query
@@ -51,7 +51,7 @@ namespace Singl.Areas.Admin.Controllers
                                 
             if (setorConhecimento == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(setorConhecimento);
@@ -87,7 +87,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var setoresConhecimento = db.SetoresConhecimento
@@ -100,7 +100,7 @@ namespace Singl.Areas.Admin.Controllers
                 
             if (setorConhecimento == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(setorConhecimento);
@@ -129,7 +129,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var setoresConhecimento = db.SetoresConhecimento
@@ -142,7 +142,7 @@ namespace Singl.Areas.Admin.Controllers
 
             if (setorConhecimento == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(setorConhecimento);

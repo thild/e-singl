@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Singl.Models;
 
 namespace Singl.Areas.Admin.Controllers
@@ -25,7 +25,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var departamento = db.Departamentos
@@ -34,7 +34,7 @@ namespace Singl.Areas.Admin.Controllers
                 
             if (departamento == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(departamento);
@@ -70,7 +70,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var departamento = db.Departamentos
@@ -78,7 +78,7 @@ namespace Singl.Areas.Admin.Controllers
                 .Single(m => m.Sigla == sigla);
             if (departamento == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(departamento);
@@ -107,13 +107,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var departamento = db.Departamentos.Single(m => m.Sigla == sigla);
             if (departamento == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(departamento);

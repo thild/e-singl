@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Singl.Models;
 
 namespace Singl.Areas.API.Controllers
@@ -48,7 +47,7 @@ namespace Singl.Areas.API.Controllers
             if (string.IsNullOrEmpty(sigla) || 
                 string.IsNullOrEmpty(unidadeUniversitaria))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
 
             var departamentos = _context.Departamentos
@@ -66,7 +65,7 @@ namespace Singl.Areas.API.Controllers
                             
             if (item == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
                         
             return new ObjectResult(item.ToDto());
@@ -107,7 +106,7 @@ namespace Singl.Areas.API.Controllers
             if (string.IsNullOrEmpty(sigla) || 
                 string.IsNullOrEmpty(unidadeUniversitaria))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
 
             var departamentos = _context.Departamentos
@@ -119,9 +118,9 @@ namespace Singl.Areas.API.Controllers
 
             if (obj == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
-            return new HttpOkResult();
+            return Ok();
         }        
     }
 }

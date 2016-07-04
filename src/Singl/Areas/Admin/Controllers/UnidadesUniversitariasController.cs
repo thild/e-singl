@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Singl.Models;
 
 namespace Singl.Areas.Admin.Controllers
@@ -27,19 +27,19 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
-            var UnidadeUniversitaria = db.UnidadesUniversitarias
+            var unidadeUniversitaria = db.UnidadesUniversitarias
                 .Include(m => m.Campi)
                 .Single(m => m.Sigla == sigla);
                 
-            if (UnidadeUniversitaria == null)
+            if (unidadeUniversitaria == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
-            return View(UnidadeUniversitaria);
+            return View(unidadeUniversitaria);
         }
 
         // GET: UnidadeUniversitaria/Create
@@ -72,14 +72,14 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var UnidadeUniversitaria = db.UnidadesUniversitarias
                 .Single(m => m.Sigla == sigla);
             if (UnidadeUniversitaria == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(UnidadeUniversitaria);
@@ -108,13 +108,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var UnidadeUniversitaria = db.UnidadesUniversitarias.Single(m => m.Sigla == sigla);
             if (UnidadeUniversitaria == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(UnidadeUniversitaria);

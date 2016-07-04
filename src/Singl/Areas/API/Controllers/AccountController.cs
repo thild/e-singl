@@ -1,16 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.DataProtection;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Singl.Models;
 
 //https://github.com/damienbod/AspNet5IdentityServerAngularImplicitFlow/tree/secureDownloadWithAccessTokenInURL/src/IdentityServerAspNet5
@@ -44,7 +43,6 @@ namespace Singl.Areas.API.Controllers
         // private readonly IEmailSender _emailSender;
         // private readonly ISmsSender _smsSender;
         private readonly DatabaseContext _applicationDbContext;
-        private static bool _databaseChecked;
 
         private IDataProtector _protector;
         private readonly ILogger _logger;
@@ -115,7 +113,7 @@ namespace Singl.Areas.API.Controllers
 
                 //var authToken = await _userManager.GenerateUserTokenAsync(user,, "auth_token");
 
-
+                System.Console.WriteLine(result.IsNotAllowed);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
@@ -166,7 +164,7 @@ namespace Singl.Areas.API.Controllers
         //     }
         //     return new { authenticated = false };
         // }
-        
+
         private const string ISSUER = "localhost";
 
         [HttpGet("gettoken/{userName}")]
@@ -184,11 +182,13 @@ namespace Singl.Areas.API.Controllers
             var identity = new ClaimsIdentity(new GenericIdentity(userName, "TokenAuth"), new[] { new Claim(JwtRegisteredClaimNames.Aud, ISSUER) });
 
             var securityToken = handler.CreateToken(
-                issuer: ISSUER,
-                // audience: tokenOptions.Audience,
-                // signingCredentials: tokenOptions.SigningCredentials,
-                subject: identity,
-                expires: expires
+                new SecurityTokenDescriptor(
+                // issuer: ISSUER,
+                // // audience: tokenOptions.Audience,
+                // // signingCredentials: tokenOptions.SigningCredentials,
+                // subject: identity,
+                // expires: expires
+                )
                 );
             return handler.WriteToken(securityToken);
         }

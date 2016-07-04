@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
 using Singl.Models;
 
 namespace Singl.Areas.API.Controllers
@@ -36,7 +34,7 @@ namespace Singl.Areas.API.Controllers
             
             if (string.IsNullOrEmpty(codigo))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
 
             var obj = _context.Disciplinas
@@ -44,7 +42,7 @@ namespace Singl.Areas.API.Controllers
                 
             if (obj == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
                         
             return new ObjectResult(obj);
@@ -83,16 +81,16 @@ namespace Singl.Areas.API.Controllers
         {
             if (string.IsNullOrEmpty(codigo))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
             var obj = _context.Disciplinas.Single(m => m.Codigo == codigo.ToUpper());
             if (obj == null)
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }            
             _context.Disciplinas.Remove(obj);
             _context.SaveChanges();
-            return new HttpOkResult();
+            return Ok();
         }        
     }
 }

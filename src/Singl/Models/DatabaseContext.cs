@@ -1,12 +1,13 @@
 ﻿//http://mvc.readthedocs.org/en/latest/tutorials/mvc-with-entity-framework.html
 using System;
+using System.IO;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.PlatformAbstractions;
 using Singl.Database.Migrations;
 using Singl.Models;
 
@@ -48,26 +49,26 @@ namespace Singl
         public DbSet<OfertaCurso> OfertasCurso { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=singl.sqlite");
+            System.Console.WriteLine(Directory.GetCurrentDirectory());
+            optionsBuilder.UseSqlite($"Data Source={Directory.GetCurrentDirectory()}/singl.sqlite");
         }
 
         const string imgUrl = "~/Images/placeholder.png";
         const string DEFAULT_ADMIN_USER_NAME = "admin";
-        const string DEFAULT_ADMIN_USER_PASSWORD = "Admin!@#123";
+        const string DEFAULT_ADMIN_USER_PASSWORD = "admin";
 
         public async Task InitializeStoreDatabaseAsync(IServiceProvider serviceProvider, bool createUsers = true)
         {
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var db = serviceScope.ServiceProvider.GetService<DatabaseContext>();
-
                 if (await db.Database.EnsureCreatedAsync())
                 {
                     if (createUsers)
                     {
                         await CreateAdminUser(serviceProvider);
                     }
-                    Populate();
+                    await Populate();
                 }
             }
         }
@@ -84,10 +85,10 @@ namespace Singl
         /// <returns></returns>
         private async Task CreateAdminUser(IServiceProvider serviceProvider)
         {
-            var appEnv = serviceProvider.GetService<IApplicationEnvironment>();
+            var appEnv = serviceProvider.GetService<IHostingEnvironment>();
 
             var builder = new ConfigurationBuilder()
-                .SetBasePath(appEnv.ApplicationBasePath)
+                .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("config.json")
                 .AddEnvironmentVariables();
             var configuration = builder.Build();
@@ -103,10 +104,14 @@ namespace Singl
             //}
 
             var user = await userManager.FindByNameAsync(DEFAULT_ADMIN_USER_NAME/*configuration[defaultAdminUserName]*/);
-            
+
             if (user == null)
             {
-                user = new Usuario { UserName = DEFAULT_ADMIN_USER_NAME/*configuration[defaultAdminUserName]*/ };
+                user = new Usuario
+                {
+                    UserName = DEFAULT_ADMIN_USER_NAME/*configuration[defaultAdminUserName]*/,
+                    Email = "admin@singl.com",
+                };
                 await userManager.CreateAsync(user, DEFAULT_ADMIN_USER_PASSWORD /*configuration[defaultAdminPassword]*/);
                 //await userManager.AddToRoleAsync(user, adminRole);
                 //await userManager.AddClaimAsync(user, new Claim("ManageStore", "Allowed"));
@@ -148,89 +153,89 @@ namespace Singl
             await this.SaveChangesAsync();
         }
 
-        private void Populate()
+        private async Task Populate()
         {
 
 
             InstituicaoMigration.Create(this);
-            this.SaveChanges();
-            
+            await this.SaveChangesAsync();
+
             CidadesMigration.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             UnidadesUniversitariasMigration.Create(this);
-            this.SaveChanges();
-            
+            await this.SaveChangesAsync();
+
             CampiMigration.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             SetoresAdministrativosMigration.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             SetoresConhecimentoMigration.Create(this);
-            this.SaveChanges();
-            
+            await this.SaveChangesAsync();
+
             DepartamentosMigration.Create(this);
-            this.SaveChanges();
-            
+            await this.SaveChangesAsync();
+
             PessoasMigration.Create(this);
-            this.SaveChanges();
-            
+            await this.SaveChangesAsync();
+
             PolosMigration.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             PapeisMigration.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             // Curso570.Create(this);
             // this.SaveChanges();
             CursoED010AP.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             CursoESP312.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             CursoESP400.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             CursoESP920.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             CursoESP921.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             CursoESP922.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             CursoESP923.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             CursoESP924.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
-            CursoESP925.Create(this); 
-            this.SaveChanges();
+            CursoESP925.Create(this);
+            await this.SaveChangesAsync();
 
             CursoESP926.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             CursoESP927.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             CursoESP928.Create(this);
-            this.SaveChanges();
-            
+            await this.SaveChangesAsync();
+
             CursoESP929.Create(this);
-            this.SaveChanges();
-            
+            await this.SaveChangesAsync();
+
             DisciplinasMigration.Create(this);
-            this.SaveChanges();
-            
+            await this.SaveChangesAsync();
+
             PessoasMigration.CreateDocenteCurso(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
             VinculosCursosMigration.Create(this);
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
         }
 
@@ -335,7 +340,7 @@ namespace Singl
             //DocenteCurso
             builder.Entity<DocenteCurso>()
                 .HasKey(m => new { m.DocenteId, m.CursoId });
-                
+
             //PoloCurso
             builder.Entity<PoloCurso>()
                 .HasKey(m => new { m.PoloId, m.CursoId });
@@ -408,7 +413,7 @@ namespace Singl
             builder.Entity<Curso>()
                 .HasMany(m => m.Curriculos)
                 .WithOne(m => m.Curso);
-                
+
             //Curriculo
             builder.Entity<Curriculo>()
                 .HasOne(m => m.Curso)

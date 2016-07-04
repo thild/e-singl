@@ -59,7 +59,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="#item of uploader.queue">
-                        <td><strong></strong></td>
+                        <td *ngIf="uploader.isHTML5"><strong>{{item.file.name}}</strong></td>
                         <td *ngIf="uploader.isHTML5" nowrap>{{item.file.getHumanReadableSize()}}</td>
                         <td *ngIf="uploader.isHTML5">
                             <div class="progress" style="margin-bottom: 0;">

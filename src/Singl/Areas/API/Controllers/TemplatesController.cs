@@ -1,5 +1,5 @@
 using System.Linq;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Singl.Models;
 
 namespace Singl.Areas.API.Controllers
@@ -22,7 +22,7 @@ namespace Singl.Areas.API.Controllers
 
             if (string.IsNullOrEmpty(routeName))
             {
-                return new HttpNotFoundResult();
+                return new NotFoundResult();
             }
 
             var obj = _context.Templates
@@ -30,7 +30,7 @@ namespace Singl.Areas.API.Controllers
 
             if (obj == null)
             {
-                //return new HttpNotFoundResult();
+                //return new NotFoundResult();
             }
             else
             {
@@ -87,7 +87,7 @@ namespace Singl.Areas.API.Controllers
                         //System.Console.WriteLine(ex);
                         return new BadRequestObjectResult(ModelState);
                     }
-                    return new ObjectResult(template);
+                    return new OkObjectResult(template);
                 }
             }
 

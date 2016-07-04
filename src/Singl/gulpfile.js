@@ -755,12 +755,12 @@ gulp.task("watch-app-views", function () {
         });
 });
 
-gulp.task("dnx-watch", shell.task(["dnx-watch kestrel"]));
+gulp.task("dotnet-watch", shell.task(["ASPNETCORE_ENVIRONMENT=Development dotnet watch run"]));
 
 /*
  * Watch the styles and scripts folders for changes. Build the CSS and JavaScript if something changes.
  */
-gulp.task("watch", ["watch-css", "watch-js", "watch-app", "dnx-watch"]);
+gulp.task("watch", ["watch-css", "watch-js", "watch-app", "dotnet-watch"]);
 
 function pageSpeed(strategy, cb) {
     if (siteUrl === undefined) {

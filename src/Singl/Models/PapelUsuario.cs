@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Singl.Models
 {
     // public class PapelUsuario : IModel<Guid>

@@ -1,7 +1,7 @@
 ﻿namespace Singl.Settings
 {
     using System.Collections.Generic;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
     /// The caching settings for the application.

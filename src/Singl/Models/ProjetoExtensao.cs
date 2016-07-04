@@ -1,8 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System;
-using System.Linq;
 
 // I - Informações do pesquisador: PqI (      ) PqE (      )
 // Nome do pesquisador:

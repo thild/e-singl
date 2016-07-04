@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Singl.Models;
 
 namespace Singl.Areas.Admin.Controllers
@@ -29,13 +29,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             var ofertaCurso = _context.OfertasCurso.Single(m => m.Id == id);
             if (ofertaCurso == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             return View(ofertaCurso);
@@ -69,13 +69,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             OfertaCurso ofertaCurso = _context.OfertasCurso.Single(m => m.Id == id);
             if (ofertaCurso == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
             ViewData["CursoId"] = new SelectList(_context.Cursos, "Id", "Curso", ofertaCurso.CursoId);
             return View(ofertaCurso);
@@ -102,13 +102,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             OfertaCurso ofertaCurso = _context.OfertasCurso.Single(m => m.Id == id);
             if (ofertaCurso == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             return View(ofertaCurso);

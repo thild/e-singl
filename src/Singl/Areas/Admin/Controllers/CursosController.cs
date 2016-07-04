@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Singl.Models;
 
 namespace Singl.Areas.Admin.Controllers
@@ -18,7 +18,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(departamento))
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
             
             return View(db.Departamentos
@@ -32,7 +32,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (codigo == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var curso = db.Cursos
@@ -42,7 +42,7 @@ namespace Singl.Areas.Admin.Controllers
                 
             if (curso == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(curso);
@@ -78,7 +78,7 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (codigo == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             var curso = db.Cursos
@@ -87,7 +87,7 @@ namespace Singl.Areas.Admin.Controllers
                 .Single(m => m.Codigo == codigo);
             if (curso == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(curso);
@@ -119,13 +119,13 @@ namespace Singl.Areas.Admin.Controllers
         {
             if (codigo == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             Curso curso = db.Cursos.Single(m => m.Codigo == codigo);
             if (curso == null)
             {
-                return new HttpStatusCodeResult(404);
+                return new StatusCodeResult(404);
             }
 
             return View(curso);
