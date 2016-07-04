@@ -7,7 +7,6 @@
 //https://github.com/opencredo/angular2-boilerplate
 
 import {Injectable} from 'angular2/core';
-import {UnidadeUniversitaria} from './unidade-universitaria';
 import {Http} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';

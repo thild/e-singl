@@ -7,9 +7,7 @@
 
 // TODO SOMEDAY: Feature Componetized like CrisisCenter
 import {Component, OnInit, Input, Output, Host}   from 'angular2/core';
-import {UnidadeUniversitariaService}   from './unidade-universitaria.service';
 import {IServiceBase}   from './service-base.service';
-import {UnidadeUniversitaria} from './unidade-universitaria';
 import {Router, RouteParams} from 'angular2/router';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {ModelMetadataService}   from './model-metadata.service';

@@ -195,17 +195,17 @@ namespace Singl
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
 
-            // var dbfile = $"{Directory.GetCurrentDirectory()}/singl.sqlite";
-            // if (System.IO.File.Exists(dbfile))
-            // {
-            //     System.Console.WriteLine("Deleted singl.sqlite");
-            //     System.IO.File.Delete(dbfile);
-            // }
+            var dbfile = $"{Directory.GetCurrentDirectory()}/singl.sqlite";
+            if (System.IO.File.Exists(dbfile))
+            {
+                System.Console.WriteLine("Deleted singl.sqlite");
+                System.IO.File.Delete(dbfile);
+            }
 
-            // using (var context = new DatabaseContext())
-            // {
-            //     context.InitializeStoreDatabaseAsync(app.ApplicationServices).Wait();
-            // }
+            using (var context = new DatabaseContext())
+            {
+                context.InitializeStoreDatabaseAsync(app.ApplicationServices).Wait();
+            }
         }
 
         private void ConfigureAuthentication(IApplicationBuilder app)
