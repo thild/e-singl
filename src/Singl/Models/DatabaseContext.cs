@@ -495,11 +495,9 @@ namespace Singl
 
             //Templates
             builder.Entity<Template>()
-                .HasKey(m => m.Name);
+                .HasKey(m => m.Path);
 
-            builder.Entity<Template>()
-                .HasIndex(m => m.Path)
-                .IsUnique();
+
 
 
             //              builder.Entity<PapelUsuario>()

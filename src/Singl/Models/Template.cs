@@ -10,9 +10,6 @@ namespace Singl.Models
             
         }
         
-        [Display(Name = "Nome da rota")]
-        public string Name {get; set;}
-        
         [Display(Name = "Caminho da rota")]
         public string Path {get; set;}
 

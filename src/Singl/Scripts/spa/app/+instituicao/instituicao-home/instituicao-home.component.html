@@ -1,0 +1,255 @@
+<style>
+    header {
+        background-image: url('/images/instituicao-home.jpg') !important;
+    }
+</style>
+<header id="main">
+    <div class="header-content">
+        <div class="header-content-inner">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <img src="/images/instituicao-logo.png" style="width: 150px;" alt="Logo tipo da instituição" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h1>{{model?.NomeSigla}}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="/#about" class="btn btn-primary btn-xl page-scroll">Saiba mais</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="bg-primary" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Sobre a {{model?.Sigla}}</h2>
+                <hr class="light">
+                <div class="text-faded text-justify" [innerHTML]="model?.Sobre"></div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <style>
+                        .video-container {
+                            position: relative;
+                            width: 100%;
+                            height: 0;
+                            padding-bottom: 56.25%;
+                            margin-bottom: 20px;
+                        }
+                        
+                        .video {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    </style>
+                    <div class="video-container">
+                        <iframe class="video" src="https://www.youtube.com/embed/GjI-SXoeo_w" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 text-center">
+                        <a href="/#values" class="btn btn-default btn-xl page-scroll">Como trabalhamos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="values">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Nossos valores</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-certificate wow bounceIn text-primary"></i>
+                    <h3>Excelência</h3>
+                    <p class="text-muted">Cursos certificados, reconhecidos e de qualidade!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-group wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                    <h3>Profissionalismo</h3>
+                    <p class="text-muted">Competência, comprometimento e responsabilidade no ensino!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                    <h3>Atualização</h3>
+                    <p class="text-muted">Ensino de vanguarda e pesquisa estado da arte!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                    <h3>Amor pelo que fazemos</h3>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row top30">
+                <div class="col-lg-12 text-center">
+                    <a href="/#areas" class="btn btn-primary btn-xl page-scroll">Comece agora!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="areas">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Áreas de atuação</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="col-lg-4 col-sm-6">
+                <a href="http://www2.unicentro.br/proen" class="area-box">
+                    <img src="/images/areas/1.jpg" class="img-responsive" alt="">
+                    <div class="area-box-caption">
+                        <div class="area-box-caption-content">
+                            <div class="project-category text-faded">
+                                Ensino
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="http://www2.unicentro.br/propesp" class="area-box">
+                    <img src="/images/areas/2.jpg" class="img-responsive" alt="">
+                    <div class="area-box-caption">
+                        <div class="area-box-caption-content">
+                            <div class="project-category text-faded">
+                                Pesquisa
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="http://www.unicentro.br/proec" class="area-box">
+                    <img src="/images/areas/3.jpg" class="img-responsive" alt="">
+                    <div class="area-box-caption">
+                        <div class="area-box-caption-content">
+                            <div class="project-category text-faded">
+                                Extensão
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<aside class="bg-dark">
+    <div class="container text-center">
+        <div class="call-to-action">
+            <a [routerLink]="['/CursoList',{filter:'CursosNead'}]" class="btn btn-default btn-xl wow tada">Encontre seu curso!</a>
+        </div>
+    </div>
+</aside>
+
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2 class="section-heading text-center">Conheça um pouco mais sobre a {{model?.Sigla}}</h2>
+                <hr class="primary">
+                <tabs>
+                    <tab title="História" active="true">
+                        <div [innerHTML]="model?.Historico"></div>
+                    </tab>
+                    <tab title="Reitoria">
+                        <div [innerHTML]="model?.MensagemReitoria"></div>
+                    </tab>
+                    <tab title="Atos legais/oficiais e documentos">
+                        <ul>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2014/11/Lei_9295_90_Insitui_a_UNICENTRO.pdf">Lei que institui a UNICENTRO</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2014/11/Decreto_3444_97_Reconhecimento_da_UNICENTRO.pdf">Decreto de reconhecimento da UNICENTRO</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2014/11/Decreto_3444.pdf">Decreto de reconhecimento da UNICENTRO - Diário Oficial</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/Estatuto.pdf">Estatuto da UNICENTRO</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/res_estatuto2010.pdf">Resolução - altera anexo I do estatuto</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/regimento2010.pdf">Regimento da UNICENTRO</a></li>
+                            <li><a href="http://emec.mec.gov.br/emec/consulta-cadastro/detalhamento/d96957f455f6405d14c6542552b0f6eb/MTEyNg==">Situação do credenciamento da UNICENTRO (portal e-MEC)</a></li>
+                            <li><a href="http://portal.mec.gov.br/index.php?option=com_docman&view=download&alias=3532-port-646-2008&Itemid=30192">Portaria de credenciamento em EAD</a></li>
+                            <li><a href="/docs/legal/declaracao_nomenclatura_cedeteg.pdf">Declaração da nomenclatura do CEDETEG</a></li>
+                            <li><a href="http://sguweb.unicentro.br/pesquisaatooficiais">Atos Oficiais da UNICENTRO</a></li>
+                            <li><a href="http://www2.unicentro.br/unidades-administrativas/">Unidade Administrativas</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/Estatuto.pdf">Organograma (pag. 25 do estatuto)</a></li>
+                            <li><a href="http://www.unicentro.br/proplan/PDI_2013_2017_COM_REVIS_O_FINAL_MAR_O_2015_5591982159eda.pdf">PDI - Plano de Desenvolvimento Institucional 2013-2017</a></li>
+                            <li><a href="http://transparencia.unicentro.br/">Outras informações no Portal da Transparência</a></li>
+                        </ul>
+                        
+                    </tab>
+                    <tab title="Legislação dos servidores">
+                        <ul>
+                            <li><a href="http://www.legislacao.pr.gov.br/legislacao/pesquisarAto.do?action=exibir&codAto=5808&indice=1&totalRegistros=1">Lei 11.713/1997: a Lei Estadual trata do Plano de Carreira dos docentes e também dos agentes universitários.</a></li>
+                            <li><a href="http://www.unicentro.br/atos/201011241726186099.pdf">Plano de Capacitação Docentes: Resolução 71/2010-CEPE/UNICENTRO</a></li>
+                            <li><a href="http://www.unicentro.br/atos/200804251623424981.pdf">Plano de Capacitação dos Agentes: Resolução 74/2008-CAD/UNICENTRO</a></li>
+                            <li><a href="http://www.legislacao.pr.gov.br/legislacao/pesquisarAto.do?action=exibir&codAto=7352&indice=1&totalRegistros=2">Modalidade de contratação dos colaboradores: Lei Complementar 108/2005.</a></li>
+                            <li><a href="http://www.unicentro.br/prorh/legislacao.asp">Detalhes da legislação - PRORH</a></li>
+                            <li><a href="http://www2.unicentro.br/wp-content/uploads/2013/02/regimento2010.pdf">Regimento da UNICENTRO</a></li>
+                            <li><a href="http://transparencia.unicentro.br/">Outras informações no Portal da Transparência</a></li>
+                        </ul>
+                    </tab>
+                </tabs>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Entre em contato!</h2>
+                <hr class="primary">
+                <p>Gostaria de saber como estudar em uma das melhores universidade do país? Que ótimo! Nos telefone ou nos mande
+                    um e-mail que teremos o prazer em responder o mais breve possível!</p>
+            </div>
+            <div class="col-lg-4 col-lg-offset-2 text-center">
+                <i class="fa fa-phone fa-3x wow bounceIn"></i>
+                <p><span itemprop="telephone"><a href="tel:{{model?.Telefone}}">{{model?.Telefone}}</a></span></p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                <p><a href="mailto:{{model?.Email}}">{{model?.Email}}</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<aside class="bg-primary">
+    <div class="container text-center">
+        <div class="call-to-action">
+            <a class="btn btn-default btn-xl wow tada" href="http://www.unicentro.br/">Site instituicional</a>
+        </div>
+    </div>
+</aside>
+<instituicao-footer></instituicao-footer>

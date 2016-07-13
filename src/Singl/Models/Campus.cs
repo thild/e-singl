@@ -8,14 +8,14 @@ namespace Singl.Models
 {
     [ModelMetadataAttribute(
                     DisplayName = "Campus",
-                    DetailNavigationUrl = "`/campi/${model.Sigla}`",
-                    DescriptionProperty = "Nome",
-                    SelectionProperty = "Sigla",
-                    DetailRouteName = "CampusDetail",
-                    DetailRouteParams = @"`{""sigla"":""${model.Sigla}""}`",
+                    DetailNavigationUrl = "`/campi/${model.sigla}`",
+                    DescriptionProperty = "nome",
+                    SelectionProperty = "sigla",
+                    DetailRouteName = "campusDetail",
+                    DetailRouteParams = @"`{""sigla"":""${model.sigla}""}`",
                     ListNavigationUrl = "`/campi`",
-                    ListRouteName = "CampusList",
-                    ListRouteParams = @"`{""sigla"":""${model.Sigla}""}`"
+                    ListRouteName = "campusList",
+                    ListRouteParams = @"`{""sigla"":""${model.sigla}""}`"
         )]
     public class Campus : IModel<Guid>
     {

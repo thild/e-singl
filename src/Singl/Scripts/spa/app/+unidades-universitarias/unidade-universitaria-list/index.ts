@@ -1,0 +1,1 @@
+    export * from './unidade-universitaria-list.component';

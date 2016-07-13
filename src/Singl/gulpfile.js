@@ -79,8 +79,9 @@ var paths = {
     img: "./" + project.webroot + "/images/",
     js: "./" + project.webroot + "/js/",
     lib: "./" + project.webroot + "/lib/",
-    app: "./" + project.webroot + "/app/areas/",
-    app_views: "./" + project.webroot + "/app/areas/"
+    spa: "./" + project.webroot,
+    app: "./" + project.webroot,
+    app_views: "./" + project.webroot + "/app/"
 };
 
 // $Start-TypeScript$
@@ -187,9 +188,9 @@ var sources = {
     // An array of paths to views to be optimized.
     app_views: [
         {
-            name: "app-views-singl",
+            name: "app-views",
             paths: [
-                paths.scripts + "app/areas/**/singl/**/*.html"
+                paths.scripts + "spa/**/*.html"
             ]
         }
     ],
@@ -213,16 +214,40 @@ var sources = {
     lib: [
         {
             // name - The name of the final JavaScript file to build.
-            name: "angular2.js",
+            name: "@angular.js",
             // paths - A single or array of paths to JavaScript or TypeScript files which will be concatenated and 
             // minified to create a file with the above file name.
             paths: [
-                paths.node + "angular2/bundles/angular2-polyfills.js",
-                paths.node + "angular2/bundles/angular2.dev.js",
-                paths.node + "angular2/bundles/router.dev.js",
-                paths.node + "angular2/bundles/http.dev.js"
+                paths.node + "@angular/common/bundles/common.umd.js",
+                paths.node + "@angular/compiler/bundles/compiler.umd.js",
+                paths.node + "@angular/core/bundles/core.umd.js",
+                paths.node + "@angular/forms/bundles/forms.umd.js",
+                paths.node + "@angular/http/bundles/http.umd.js",
+                paths.node + "@angular/plataform-browser/bundles/plataform-browser.umd.js",
+                paths.node + "@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js",
+                paths.node + "@angular/router/bundles/router.umd.js",
+                paths.node + "@angular/router-deprecated/bundles/router-deprecated.umd.js",
+                paths.node + "@angular/upgrade/bundles/upgrade.umd.js",
             ]
         },
+        {
+            name: "shim.js",
+            paths: [
+                paths.node + "core-js/client/shim.js"                
+            ]
+        },        
+        {
+            name: "zone.js",
+            paths: [
+                paths.node + "zone.js/dist/zone.js"                
+            ]
+        },        
+        {
+            name: "Reflect.js",
+            paths: [
+                paths.node + "reflect-metadata/Reflect.js"                
+            ]
+        },        
         {
             name: "system.js",
             paths: [
@@ -233,15 +258,11 @@ var sources = {
         {
             name: "Rx.js",
             paths: [
+                paths.node + "rx/dist/rx.all.js",                
                 paths.node + "rxjs/bundles/Rx.js"                
             ]
         },
-        {
-            name: "es6-shim.js",
-            paths: [
-                paths.node + "es6-shim/es6-shim.js"                
-            ]
-        },
+
         // {
         //     // name - The name of the final JavaScript file to build.
         //     name: "ng2-ckeditor.js",
@@ -346,22 +367,26 @@ var sources = {
                 paths.bower + "webcomponentsjs/webcomponents.min.js"
             ]
         }        
+    ],
+    main: [
+        {
+            name: "main.js",
+            area: "spa",
+            paths: [
+                "./typings/index.d.ts",
+                paths.scripts + "spa/main.ts"
+            ]
+        }
     ],    
     app: [
         {
             name: "app.js",
-            area: "singl",
+            area: "app",
             paths: [
-                paths.scripts + "app/areas/**/singl/**/*.*"
-            ]
-        }
-    ],    
-    admin: [
-        {
-            name: "admin.js",
-            area: "admin",
-            paths: [
-                paths.scripts + "app/areas/**/admin/**/*.*"
+                "./typings/index.d.ts",
+                paths.scripts + "spa/systemjs.config.js",
+                paths.scripts + "spa/**/app/**/*.*",
+                paths.scripts + "spa/**/admin/**/*.*"
             ]
         }
     ]
@@ -567,7 +592,7 @@ gulp.task("build-app", [], function () {
             .pipe(gulpif(
                 environment.isDevelopment(),    // If running in the development environment.
                 sourcemaps.write(".")))         // Generates source .map files for the JavaScript.
-            .pipe(gulp.dest(paths.app));         // Saves the JavaScript file to the specified destination path.
+            .pipe(gulp.dest(paths.spa));         // Saves the JavaScript file to the specified destination path.
     });
     return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
 });
@@ -741,7 +766,7 @@ gulp.task("watch-js", function () {
 
 gulp.task("watch-app", function () {
     return gulp
-        .watch(paths.scripts + "app/**/*.{ts,html}", ["build-app", "build-admin"])     // Watch the scripts folder for file changes.
+        .watch(paths.scripts + "/spa/app/**/*.{ts,html}", ["build-app", "build-admin"])     // Watch the scripts folder for file changes.
         .on("change", function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-app task started."));
         });
@@ -749,7 +774,7 @@ gulp.task("watch-app", function () {
 
 gulp.task("watch-app-views", function () {
     return gulp
-        .watch(paths.scripts + "app/**/*.html", ["build-app-views"])     // Watch the scripts folder for file changes.
+        .watch(paths.scripts + "/spa/app/**/*.html", ["build-app-views"])     // Watch the scripts folder for file changes.
         .on("change", function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-app-views task started."));
         });

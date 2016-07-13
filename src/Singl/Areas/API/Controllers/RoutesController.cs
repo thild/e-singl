@@ -9,12 +9,13 @@ namespace Singl.Areas.API.Controllers
     public class RoutesController : Controller
     {
 
-        List<RouteDefinition> dynamicRoutes = new List<RouteDefinition> {
-            new RouteDefinition { Path= "/", Name= "Home", ComponentPath = "./app/areas/singl/home/nead-home.component", Component= "NeadHomeComponent"},
-            new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/ensino", Name = "NEADEnsino", ComponentPath = "./app/areas/singl/components/dynamic-component.component", Component= "DynamicComponent"},
-            new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/pesquisa", Name = "NEADPesquisa"},
-            new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/extensao", Name = "NEADExtensao"},
-            new RouteDefinition { Path= "/setoresadministrativos/NEAD/SC/administrativo", Name = "NEADAdministrativo"},
+        List<RouteContig> dynamicRoutes = new List<RouteContig> {
+            //new RouteContig { Path= "", ComponentPath = "./app/+nead/nead-home/nead-home.component", Component= "NeadHomeComponent"},
+            //new RouteContig { Path= "", ComponentPath = "./app/+home/home.component", Component= "HomeComponent"},
+            new RouteContig { Path= "setoresadministrativos/NEAD/SC/ensino"},
+            new RouteContig { Path= "setoresadministrativos/NEAD/SC/pesquisa"},
+            new RouteContig { Path= "setoresadministrativos/NEAD/SC/extensao"},
+            new RouteContig { Path= "setoresadministrativos/NEAD/SC/administrativo"},
             // new RouteDefinition { Path= "/unidadesuniversitarias", Name= "UnidadeUniversitariaList", Loader= "UnidadeUniversitariaListComponent", Text = "Unidades Universitárias", ShowInNav = true},
             // new RouteDefinition { Path= "/unidadesuniversitarias/:sigla", Name= "UnidadeUniversitariaDetail", Loader= "UnidadeUniversitariaDetailComponent" },
             // new RouteDefinition { Path= "/campi", Name= "CampusList", Loader= "CampusListComponent", Text = "Campi" , ShowInNav = true},
@@ -38,10 +39,10 @@ namespace Singl.Areas.API.Controllers
         };
 
         NavRoute[] navRoutes = {
-            new NavRoute { Name= "UnidadeUniversitariaList", Text = "Unidades Universitárias"},
-            new NavRoute { Name= "CampusList", Text = "Campi"},
-            new NavRoute { Name= "SetorAdministrativoList", Text = "Setores Administrativos"},
-            new NavRoute { Name= "SetorConhecimentoList", Text = "Setores de Conhecimento"},
+            new NavRoute { Path= "/unidadesuniversitarias", Text = "Unidades Universitárias"},
+            new NavRoute { Path= "/campi", Text = "Campi"},
+            new NavRoute { Path= "/setoresadministrativos", Text = "Setores Administrativos"},
+            new NavRoute { Path= "/setoresconhecimentos", Text = "Setores de Conhecimento"},
         };
 
         private DatabaseContext _context;
@@ -56,16 +57,16 @@ namespace Singl.Areas.API.Controllers
         public IActionResult GetDynamicRoutes()
         {
             var routes = dynamicRoutes;
-            var templatesRoutes = _context.Templates.Select(m => new {m.Name, m.Path});
+            var templatesRoutes = _context.Templates.Select(m => new {m.Path});
 
             foreach (var tr in templatesRoutes)
             {
                 routes.Add(
-                    new RouteDefinition { Path= tr.Path, Name = tr.Name}
+                    new RouteContig { Path= tr.Path }
                 );                
             }
             
-            return new ObjectResult(dynamicRoutes);
+            return Json(dynamicRoutes);
         }
 
         [HttpGet()]
@@ -78,21 +79,20 @@ namespace Singl.Areas.API.Controllers
         [HttpGet("getnavroutes")]
         public IActionResult GetNavRoutes()
         {
-            return new ObjectResult(navRoutes);
+            return Json(navRoutes);
         }
 
-        private class RouteDefinition
+        private class RouteContig
         {
             public string Path { get; set; }
-            public string ComponentPath { get; set; } = "./app/areas/singl/components/dynamic-component.component";
-            public string Name { get; set; }
+            public string ComponentPath { get; set; } = "./app/shared/dynamic-component.component";
             public string Component { get; set; } = "DynamicComponent";
         }
 
 
         private class NavRoute
         {
-            public string Name { get; set; }
+            public string Path { get; set; }
             public string Text { get; set; }
 
         }

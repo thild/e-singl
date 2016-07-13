@@ -1,0 +1,64 @@
+<section class="spa">
+    <div class="container-fluid">
+        <h4 *ngIf="showHeading">{{headingMessage}}</h4>
+        <div *ngIf="showFilters==true">
+            <model-list-filter (check)="onCheck($event)">
+            </model-list-filter>
+            <hr />
+        </div>
+        <div *ngIf="hasSelectedItems()">
+            <style type="text/css">
+                li {
+                    line-height: 3em;
+                    vertical-align: middle;
+                }
+                
+                @media (max-width: 360px) {
+                    .model-list-description {
+                        /*display: inline-block;
+                        width: 50%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;*/
+                    }
+                    
+                    /* Make it a marquee */
+                    .marquee {
+                        vertical-align: middle;
+                        display: inline-block;
+                        width: 50%;
+                        margin: 0 auto;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        box-sizing: border-box;
+                        animation: marquee 10s linear infinite;
+                    }
+
+                    .marquee:hover {
+                        /*animation-play-state: paused*/
+                    }
+
+                    /* Make it move */
+                    @keyframes marquee {
+                        0%   { text-indent: 50% }
+                        100% { text-indent: -150% }
+                    }
+                    
+                }
+            </style>
+            <ul>
+                <li class="model-navigation" *ngFor="let item of filteredList" [class.selected]="isSelected(item)">
+                    <span class="id-description" (click)="onSelect(item)">
+                        <span class="id-badge">
+                            {{item[selectionProperty]}}
+                        </span> <span class="model-list-description marquee">{{item[descriptionProperty]}}</span> <i class="fa fa-arrow-right fa-2x"></i>
+                    </span><span class="home" (click)="gotoHome(item)"> <i class="fa fa-home fa-2x"></i></span>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="!hasSelectedItems()">
+            Nenhum item encontrado
+        </div>
+    </div>
+</section>

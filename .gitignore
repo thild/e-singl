@@ -21,15 +21,8 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
-**/wwwroot/app/
-**/wwwroot/images/
-**/wwwroot/fonts/
-**/wwwroot/lib/
-**/wwwroot/css/
-**/wwwroot/js/
+**/wwwroot
 **/typings
-**/wwwroot/uploads
-**/wwwroot/docs
 
 # Visual Studio 2015 cache/options directory
 .vs/

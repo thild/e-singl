@@ -16,46 +16,23 @@ namespace Singl.Areas.API.Controllers
         }
 
         //[HttpGet()]
-        [HttpGet("{routeName}")]
-        public IActionResult Get(string routeName)
+        [HttpGet("{*path}")]
+        public IActionResult Get(string path)
         {
-
-            if (string.IsNullOrEmpty(routeName))
+            if (string.IsNullOrEmpty(path))
             {
-                return new NotFoundResult();
+                return NotFound();
             }
 
             var obj = _context.Templates
-                .SingleOrDefault(m => m.Name == routeName);
+                .SingleOrDefault(m => m.Path == path);
 
             if (obj == null)
             {
-                //return new NotFoundResult();
+                return NotFound();
             }
-            else
-            {
-                return Content(obj.Html, "text/html"); ;
-            }
+            return Content(obj.Html, "text/html");
 
-            var html = "";
-            switch (routeName)
-            {
-                case "NEADEnsino":
-                    html = @"<h1>
-                        Cursos | Materiais Didáticos | Bibliotecas | Área do Professor | Área do Aluno
-                    </h1>";
-                    break;
-                case "NEADPesquisa":
-                    html = "<h1>Pesquisa</h1>";
-                    break;
-                case "NEADExtensao":
-                    html = "<h1>Extensão</h1>";
-                    break;
-                case "NEADAdministrativo":
-                    html = "<h1>Administrativo</h1>";
-                    break;
-            }
-            return Content(html, "text/html"); ;
         }
 
         [HttpPost]
@@ -65,9 +42,9 @@ namespace Singl.Areas.API.Controllers
             if (ModelState.IsValid)
             {
                 //TODO: remover if quando a validação estiver correta
-                if (!string.IsNullOrEmpty(template.Name))
+                if (!string.IsNullOrEmpty(template.Path))
                 {
-                    var original = _context.Templates.SingleOrDefault(m => m.Name == template.Name);
+                    var original = _context.Templates.SingleOrDefault(m => m.Path == template.Path);
                     if (original == null)
                     {
                         _context.Templates.Add(template);
@@ -84,15 +61,14 @@ namespace Singl.Areas.API.Controllers
                     }
                     catch (System.Exception)
                     {
-                        //System.Console.WriteLine(ex);
-                        return new BadRequestObjectResult(ModelState);
+                        return BadRequest(ModelState);
                     }
-                    return new OkObjectResult(template);
+                    return Ok();
                 }
             }
 
             // This will work in later versions of ASP.NET 5
-            return new BadRequestObjectResult(ModelState);
+            return BadRequest(ModelState);
         }
     }
 }

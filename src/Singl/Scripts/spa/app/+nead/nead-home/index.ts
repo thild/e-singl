@@ -1,0 +1,1 @@
+    export * from './nead-home.component';

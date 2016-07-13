@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Dynamic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
@@ -22,13 +23,13 @@ namespace Singl.Areas.API.Controllers
 
             if (string.IsNullOrEmpty(modelName))
             {
-                return new StatusCodeResult(404);
+                return NotFound();
             }
 
             //var model = Activator.CreateInstanceFrom();
             string assemblyName = typeof(ModelMetadataController).AssemblyQualifiedName;
             var type = Type.GetType(modelName);
-            return new ObjectResult(new ModelMetadata(type));
+            return Ok(new ModelMetadata(type));
         }
 
         //  public static Type GetType(string typeName)
@@ -57,6 +58,7 @@ namespace Singl.Core.Scaffolding
 
     public class ModelMetadata
     {
+
 
         public ModelMetadata(Type modelType)
         {
@@ -124,7 +126,7 @@ namespace Singl.Core.Scaffolding
 
         public PropertyMetadata(PropertyInfo propertyInfo)
         {
-            PropertyName = propertyInfo.Name;
+            PropertyName = propertyInfo.Name.ToCamelCase();
             var displayAttr = propertyInfo.GetAttribute<DisplayAttribute>();
             if (displayAttr != null)
             {
@@ -133,7 +135,7 @@ namespace Singl.Core.Scaffolding
             }
             else
             {
-                DisplayName = PropertyName;
+                DisplayName = propertyInfo.Name;
                 Description = string.Empty;
             }
 
@@ -311,6 +313,20 @@ namespace Singl.Core.Scaffolding
 
 namespace Singl.Extensions
 {
+
+    public static class StringExtensions
+    {
+        public static string ToCamelCase(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return str;
+            }
+            TextInfo textInfo = new System.Globalization.CultureInfo("pt-BR").TextInfo;
+            return str[0].ToString().ToLower() + str.Substring(1); //textInfo.ToTitleCase(str);
+        }
+
+    }
     public static class TypeExtensions
     {
         private static readonly HashSet<Type> NumericTypes = new HashSet<Type>
@@ -395,21 +411,21 @@ namespace Singl.Extensions
                 ++i;
                 if (!(p.CanWrite || props[i].CanWrite)) continue;
 
-//                 //We query if the fiels support the ICloneable interface.
-//                 var cloneType = p.PropertyType.GetInterface("ICloneable", true);
-// 
-//                 if (cloneType != null)
-//                 {
-//                     //Getting the ICloneable interface from the object.
-//                     var clone = (ICloneable)p.GetValue(source, null);
-//                     //We use the clone method to set the new value to the field.
-//                     props[i].SetValue(dest, clone == null ? default(T) : clone.Clone(), null);
-//                 }
-//                 else
-//                 {
-                    // If the field doesn't support the ICloneable 
-                    // interface then just set it.
-                    props[i].SetValue(dest, p.GetValue(source, null), null);
+                //                 //We query if the fiels support the ICloneable interface.
+                //                 var cloneType = p.PropertyType.GetInterface("ICloneable", true);
+                // 
+                //                 if (cloneType != null)
+                //                 {
+                //                     //Getting the ICloneable interface from the object.
+                //                     var clone = (ICloneable)p.GetValue(source, null);
+                //                     //We use the clone method to set the new value to the field.
+                //                     props[i].SetValue(dest, clone == null ? default(T) : clone.Clone(), null);
+                //                 }
+                //                 else
+                //                 {
+                // If the field doesn't support the ICloneable 
+                // interface then just set it.
+                props[i].SetValue(dest, p.GetValue(source, null), null);
                 // }
             }
         }

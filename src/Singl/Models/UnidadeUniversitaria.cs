@@ -7,14 +7,14 @@ namespace Singl.Models
 {
     [ModelMetadataAttribute(
                 DisplayName = "Unidade universitária",
-                DescriptionProperty="Nome",
-                SelectionProperty="Sigla",
+                DescriptionProperty="nome",
+                SelectionProperty="sigla",
                 ListNavigationUrl="`/unidadesuniversitarias`", 
-                ListRouteName="UnidadeUniversitariaList",
-                ListRouteParams=@"`{""sigla"":""${model.Sigla}""}`",
-                DetailRouteName="UnidadeUniversitariaDetail",
-                DetailNavigationUrl="`/unidadesuniversitarias/${model.Sigla}`", 
-                DetailRouteParams=@"`{""sigla"":""${model.Sigla}""}`"
+                ListRouteName="unidadeUniversitariaList",
+                ListRouteParams=@"`{""sigla"":""${model.sigla}""}`",
+                DetailRouteName="unidadeUniversitariaDetail",
+                DetailNavigationUrl="`/unidadesuniversitarias/${model.sigla}`", 
+                DetailRouteParams=@"`{""sigla"":""${model.sigla}""}`"
                 )]
     public class UnidadeUniversitaria : IModel<Guid>
     {

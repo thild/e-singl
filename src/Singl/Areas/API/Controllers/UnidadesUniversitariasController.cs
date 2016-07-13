@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,12 +18,12 @@ namespace Singl.Areas.API.Controllers
         }
         // GET: api/values
         [HttpGet]
-        public IEnumerable<UnidadeUniversitaria> Get()
+        public IActionResult Get()
         {
-            return _context.UnidadesUniversitarias
+            return Ok(_context.UnidadesUniversitarias
                 .Include(m => m.Campi)
                 .OrderBy(m => m.Nome)
-                .ToList();
+                .ToList());
         }
  
         [HttpGet("{sigla}")]
@@ -51,7 +50,7 @@ namespace Singl.Areas.API.Controllers
                 return new NotFoundResult();
             }
                         
-            return new ObjectResult(uu);
+            return Ok(uu);
 		} 
         
         [HttpPost]
@@ -64,7 +63,7 @@ namespace Singl.Areas.API.Controllers
 				{
 					_context.UnidadesUniversitarias.Add(unidadeUniversitaria);
 					_context.SaveChanges();
-					return new ObjectResult(unidadeUniversitaria);
+					return Ok(unidadeUniversitaria);
 				}
 				else
 				{
@@ -72,12 +71,12 @@ namespace Singl.Areas.API.Controllers
 					original.Nome = unidadeUniversitaria.Nome;
 					original.Sigla = unidadeUniversitaria.Sigla;
 					_context.SaveChanges();
-					return new ObjectResult(original);
+					return Ok(original);
 				}
 			}
 
 			// This will work in later versions of ASP.NET 5
-			return new BadRequestObjectResult(ModelState);
+			return BadRequest(ModelState);
 		}
 
 
@@ -87,12 +86,12 @@ namespace Singl.Areas.API.Controllers
         {
             if (string.IsNullOrEmpty(sigla))
             {
-                return new NotFoundResult();
+                return NotFound();
             }
             var obj = _context.UnidadesUniversitarias.Single(m => m.Sigla == sigla.ToUpper());
             if (obj == null)
             {
-                return new NotFoundResult();
+                return NotFound();
             }            
             _context.UnidadesUniversitarias.Remove(obj);
             _context.SaveChanges();

@@ -2,7 +2,7 @@
 @inject IHostingEnvironment HostingEnvironment
 
 @{
-    ViewBag.Title = "Singl - Educação fácil";
+    ViewBag.Title = "Singl - Educação fácil 2";
     Layout = "";
 }
 
@@ -181,11 +181,16 @@
             <script asp-append-version="true" src="/lib/jquery.easing.js"></script>
             <script asp-append-version="true" src="/lib/jquery.fittext.js"></script>
             <script asp-append-version="true" src="/lib/wow.js"></script>
+            <script asp-append-version="true" src="/lib/shim.js"></script>
             <script asp-append-version="true" src="/lib/system.js"></script>
+            <script asp-append-version="true" src="/lib/zone.js"></script>
+            <script asp-append-version="true" src="/lib/Reflect.js"></script>
             <script asp-append-version="true" src="/lib/Rx.js"></script>
-            <script asp-append-version="true" src="/lib/angular2.js"></script>
+            <!--<script asp-append-version="true" src="/lib/angular2.js"></script>-->
+            <script src="systemjs.config.js"></script>
             <script asp-append-version="true" src="/js/site.js"></script>
             <script asp-append-version="true" src="/js/home.js"></script>
+            
             <!--<script asp-append-version="true" src="/lib/jquery.validate.js"></script>-->
             <!--<script asp-append-version="true" src="/lib/jquery.validate.unobtrusive.js"></script>                   -->
         </environment>
@@ -217,28 +222,8 @@
             <!--<script src="/lib/jquery.validate.min.js"></script>-->
             <!--<script src="/lib/jquery.validate.unobtrusive.min.js"></script>            -->
         </environment>
-
-
-        <!--Configure Polymer - hold for now-->
-        <!--<script src="/lib/webcomponents.js"></script>
         <script>
-            var Polymer = Polymer || {};
-            Polymer.dom = 'shadow';
+            System.import('app').catch(function(err){ console.error(err); });
         </script>        
-        <link rel="import" href="/lib/google-map.html">-->
-
-        <!-- 2. Configure SystemJS -->
-        <script>
-            System.config({
-                packages: {        
-                    app: {
-                        format: 'register',
-                        defaultExtension: 'js'
-                    }
-                }
-            });
-            System.import('app/areas/singl/boot')
-                    .then(null, console.error.bind(console));
-        </script>     
     </body>
 </html>

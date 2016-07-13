@@ -1,0 +1,115 @@
+<section class="spa">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div *ngIf="!model">
+                    {{notFoundMessage}}
+                </div>
+                <div *ngIf="model">
+                    <h4 class="section-heading">{{headingMessage}} "{{model[modelMetadata?.descriptionProperty]}}"</h4>
+                    <hr class="hard" />
+                    <div>
+                        <dl class="dl-horizontal">
+                            <template ngFor let-property [ngForOf]="properties | async">
+                                <template [ngIf]="property.scaffold">
+                                    <dt>
+                                        {{property.displayName}}
+                                    </dt>
+                                    <dd [ngSwitch]="property.clientType">
+                                        <template ngSwitchCase="string">
+                                            <template [ngIf]="property.isUrl">
+                                                <a href="{{model[property.propertyName]}}">Acesse <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
+                                            </template>
+                                            <template [ngIf]="!property.isUrl">
+                                                {{model[property.propertyName]}}
+                                            </template>
+                                        </template>
+                                        <template ngSwitchCase="enum">{{model[property.propertyName].Label}}</template>
+                                        <template ngSwitchCase="number">{{model[property.propertyName]}}</template>
+                                        <template ngSwitchCase="boolean">
+                                            <template [ngIf]="model[property.propertyName]">
+                                                <span class="glyphicon glyphicon-check" aria-label="model[property.propertyName]"></span>
+                                            </template>
+                                            <template [ngIf]="!model[property.propertyName]">
+                                                <span class="glyphicon glyphicon-unchecked" aria-label="model[property.propertyName]"></span>
+                                            </template>
+                                        </template>
+                                        <template ngSwitchCase="array">
+                                            <div *ngIf="model[property.propertyName] && model[property.propertyName].length > 0">
+                                                <model-list selectionProperty="{{property.selectionProperty}}" 
+                                                descriptionProperty="{{property.descriptionProperty}}" detailNavigationUrl="{{property.detailNavigationUrl}}"
+                                                [list]="model[property.propertyName]" showFilters=false></model-list>
+                                            </div>
+                                            <div *ngIf="!model[property.propertyName]">
+                                                -
+                                            </div>
+                                        </template>
+                                        <template ngSwitchCase="any">
+                                            <template [ngIf]="model[property.propertyName]">
+                                                <style type="text/css">
+                                                    li {
+                                                        line-height: 3em;
+                                                        vertical-align: middle;
+                                                    }
+                                                    @media (max-width: 360px) {
+                                                        .model-list-description {
+                                                            /*display: inline-block;
+                                                            width: 50%;
+                                                            overflow: hidden;
+                                                            text-overflow: ellipsis;
+                                                            white-space: nowrap;*/
+                                                        }
+                                                        
+                                                        /* Make it a marquee */
+                                                        .marquee {
+                                                            vertical-align: middle;
+                                                            display: inline-block;
+                                                            width: 50%;
+                                                            margin: 0 auto;
+                                                            overflow: hidden;
+                                                            white-space: nowrap;
+                                                            text-overflow: ellipsis;
+                                                            box-sizing: border-box;
+                                                            animation: marquee 10s linear infinite;
+                                                        }
+
+                                                        .marquee:hover {
+                                                            /*animation-play-state: paused*/
+                                                        }
+
+                                                        /* Make it move */
+                                                        @keyframes marquee {
+                                                            0%   { text-indent: 50% }
+                                                            100% { text-indent: -150% }
+                                                        }
+                                                        
+                                                    }
+                                                </style>                                                
+                                                <div class="model-navigation">
+                                                    <span class="id-description" (click)="onSelect(model[property.propertyName], property)">
+                                                        <span class="id-badge">
+                                                            {{model[property.propertyName][property.selectionProperty]}}
+                                                        </span> <span class="model-list-description marquee">{{getModelNavigationDescription(model, property)}}</span> <i class="fa fa-arrow-right fa-2x"></i>
+                                                    </span><span class="home" (click)="gotoHome(model[property.propertyName])"> <i class="fa fa-home fa-2x"></i></span>
+                                                </div>
+                                            </template>
+                                            <template [ngIf]="!model[property.propertyName]">
+                                                -
+                                            </template>
+                                            <!--<a href="" (click)="onSelect(model[property.propertyName], property)">{{getModelNavigationDescription(model, property)}}</a>-->
+                                        </template>
+                                    </dd>
+                                </template>
+                            </template>
+                        </dl>
+                    </div>
+                    <hr class="hard" />
+                    <div>
+                        <button class="btn btn-default" (click)="gotoList()"><i class="fa fa-list fa-2x"></i></button>
+                        <button class="btn btn-home" (click)="gotoHome(model)"><i class="fa fa-home fa-2x"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
